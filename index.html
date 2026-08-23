@@ -7,18 +7,18 @@
     <title>Shieldora – Content Guardian</title>
     <!-- Open Graph / Social preview -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://sh-eld.app" />
+    <meta property="og:url" content="https://shieldora.app" />
     <meta property="og:title" content="Shieldora — Content Guardian" />
     <meta property="og:description" content="your shield against harmful content" />
-    <meta property="og:image" content="https://sh-eld.app/og-image.png" />
+    <meta property="og:image" content="https://shieldora.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Shieldora logo on a green background" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Shieldora — Content Guardian" />
     <meta name="twitter:description" content="your shield against harmful content" />
-    <meta name="twitter:image" content="https://sh-eld.app/og-image.png" />
-    <link rel="image_src" href="https://sh-eld.app/og-image.png" />
+    <meta name="twitter:image" content="https://shieldora.app/og-image.png" />
+    <link rel="image_src" href="https://shieldora.app/og-image.png" />
     <style>
       :root {
         --bg: #070b08;
@@ -157,6 +157,82 @@
         color: var(--muted);
         max-width: 640px;
         margin: 0 auto 16px;
+      }
+
+      /* Headline promise: instant alerts */
+      .alert-promise {
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        text-align: left;
+        max-width: 700px;
+        margin: 0 auto 20px;
+        padding: 18px 22px;
+        border-radius: 16px;
+        border: 1px solid var(--edge-strong);
+        background: linear-gradient(
+            180deg,
+            rgba(63, 161, 90, 0.14),
+            rgba(63, 161, 90, 0.03) 60%,
+            rgba(63, 161, 90, 0) 100%
+          ),
+          linear-gradient(180deg, var(--panel-2), var(--panel));
+        box-shadow: var(--shadow);
+      }
+
+      /* soft green bloom from the top edge, same family as the cards */
+      .alert-promise::before {
+        content: "";
+        position: absolute;
+        inset: 0 0 auto 0;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          rgba(220, 185, 120, 0),
+          rgba(220, 185, 120, 0.55),
+          rgba(220, 185, 120, 0)
+        );
+      }
+
+      .alert-promise .alert-icon {
+        flex: 0 0 auto;
+        width: 26px;
+        height: 26px;
+        margin-top: 2px;
+      }
+
+      .alert-promise .alert-icon svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .alert-promise .alert-text {
+        min-width: 0;
+      }
+
+      .alert-promise .alert-eyebrow {
+        display: block;
+        color: var(--gold);
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin-bottom: 6px;
+      }
+
+      .alert-promise .alert-copy {
+        color: var(--ink);
+        font-size: 17px;
+        line-height: 1.45;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .alert-promise .alert-copy .hl {
+        color: var(--green-bright);
       }
 
       .hero-note {
@@ -489,6 +565,13 @@
         .hero h1 {
           font-size: 34px;
         }
+        .alert-promise {
+          padding: 16px 18px;
+          gap: 12px;
+        }
+        .alert-promise .alert-copy {
+          font-size: 16px;
+        }
         .features {
           grid-template-columns: 1fr;
         }
@@ -527,6 +610,25 @@
           child's device, and is designed to be hard for them to switch off or
           remove. We're building toward protection that goes even further.
         </p>
+        <div class="alert-promise">
+          <span class="alert-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.6 2 6.5H4c.8-.9 2-2.5 2-6.5Z"
+                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+              <path d="M10 19a2 2 0 0 0 4 0" stroke="#4fbf6c"
+                stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="18" cy="5.5" r="3" fill="#dcb978" />
+            </svg>
+          </span>
+          <div class="alert-text">
+            <span class="alert-eyebrow">Instant alerts</span>
+            <p class="alert-copy">
+              Get an <span class="hl">instant alert</span> the moment your child
+              tries to disable protection, switch on a VPN, or search for
+              something explicit — so nothing happens quietly.
+            </p>
+          </div>
+        </div>
         <div class="hero-note">
           Unlike most filters, Shieldora is built to resist VPN bypass — the trick
           most kids use to get around blocks.
