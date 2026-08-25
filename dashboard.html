@@ -201,56 +201,12 @@
         color: var(--muted);
       }
 
-      /* three rings row */
-      .rings {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        align-items: start;
-        gap: 6px;
-      }
-
-      .ring-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .ring {
-        position: relative;
-        width: 92px;
-        height: 92px;
-      }
-
-      .ring svg {
-        width: 100%;
-        height: 100%;
-        transform: rotate(-90deg);
-      }
-
-      .ring .prog {
-        stroke-dashoffset: 263.9;
-        transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-          stroke 0.3s ease;
-      }
-
       .ring-center {
         position: absolute;
         inset: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .ring-center .val {
-        font-size: 26px;
-        font-weight: 800;
-        line-height: 1;
-      }
-
-      .ring-center .check {
-        width: 30px;
-        height: 30px;
-        transform: none;
       }
 
       /* app logo above the date control */
@@ -262,27 +218,88 @@
         margin-bottom: 16px;
       }
 
-      .app-logo .dot {
-        display: inline-block;
-        width: 0.21em;
-        height: 0.21em;
-        border-radius: 50%;
-        background: var(--green-bright);
-        vertical-align: 0.48em;
-        margin: 0 0.07em;
+      /* status-first hero: one big protection ring */
+      .status-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
       }
 
-      .ring-label {
-        margin-top: 12px;
+      .status-ring {
+        position: relative;
+        width: 132px;
+        height: 132px;
+      }
+
+      .status-ring svg.dial {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+
+      .status-ring .prog {
+        stroke-dashoffset: 263.9;
+        transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          stroke 0.3s ease;
+      }
+
+      .status-ring .ring-center .shield {
+        width: 46px;
+        height: 46px;
+        transform: none;
+      }
+
+      .status-title {
+        margin-top: 16px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--green-bright);
+      }
+
+      .status-sub {
+        margin-top: 6px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--muted);
+        max-width: 250px;
+      }
+
+      /* compact counts under the status */
+      .mini-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .mini {
+        text-align: center;
+        padding: 12px 8px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+      }
+
+      .mini .m-val {
+        display: block;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .mini .m-lab {
+        display: block;
+        margin-top: 6px;
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--muted);
-        text-align: center;
       }
 
-      /* WHOOP-style status blurb */
+      /* status blurb under the hero */
       .blurb {
         margin-top: 22px;
         padding-top: 20px;
@@ -435,6 +452,9 @@
         font-size: 12.5px;
         color: var(--muted);
         margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .alert .a-right {
@@ -579,7 +599,7 @@
         color: var(--green-bright);
       }
 
-      /* Top sources */
+      /* Blocked-by-category rows */
       .sources {
         display: flex;
         flex-direction: column;
@@ -1032,6 +1052,20 @@
         line-height: 1.3;
       }
 
+      /* strip turns amber when protection is not running */
+      .prot-strip.off {
+        background: rgba(229, 169, 78, 0.08);
+        border-color: rgba(229, 169, 78, 0.28);
+      }
+
+      .prot-strip.off .p-text {
+        color: #e5a94e;
+      }
+
+      .prot-strip.off svg [stroke] {
+        stroke: #e5a94e;
+      }
+
       /* Last active line */
       .last-active {
         display: flex;
@@ -1174,7 +1208,7 @@
             <div class="attn-body">
               <div class="attn-title">1 alert needs your review</div>
               <div class="attn-sub" id="attnReason">
-                Repeated explicit searches · TikTok
+                Protection was turned off · 4:47 PM
               </div>
             </div>
             <span class="attn-chev">
@@ -1186,22 +1220,21 @@
           </div>
 
           <!-- Protection status strip -->
-          <div class="prot-strip">
+          <div class="prot-strip" id="protStrip">
             <svg viewBox="0 0 24 24" fill="none">
               <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
                 stroke="#4fbf6c" stroke-width="1.7" />
               <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#4fbf6c"
                 stroke-width="1.7" stroke-linecap="round" />
             </svg>
-            <span class="p-text"
-              >Protection active · can't be disabled by
-              <span id="protName">Adam</span></span
+            <span class="p-text" id="protText"
+              >Protection active on Adam's device</span
             >
           </div>
 
-          <!-- WHOOP-style three-ring hero -->
+          <!-- Status-first hero -->
           <div class="hero">
-            <div class="app-logo">sh<span class="dot"></span>eld</div>
+            <div class="app-logo">Shieldora</div>
             <div class="date-nav">
               <button aria-label="Previous day">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
@@ -1229,72 +1262,57 @@
               </defs>
             </svg>
 
-            <div class="rings">
-              <!-- Connected -->
-              <div class="ring-item">
-                <div class="ring">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="42" fill="none"
-                      stroke="#24272d" stroke-width="8" />
-                    <circle class="prog" id="ringConnected" cx="50" cy="50"
-                      r="42" fill="none" stroke="url(#ringGrad)"
-                      stroke-width="8" stroke-linecap="round"
-                      stroke-dasharray="263.9" />
+            <!-- protection status: the main focus of the screen -->
+            <div class="status-block">
+              <div class="status-ring">
+                <svg class="dial" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none"
+                    stroke="#24272d" stroke-width="8" />
+                  <circle class="prog" id="ringStatus" cx="50" cy="50"
+                    r="42" fill="none" stroke="url(#ringGrad)"
+                    stroke-width="8" stroke-linecap="round"
+                    stroke-dasharray="263.9" />
+                </svg>
+                <div class="ring-center">
+                  <svg class="shield" viewBox="0 0 24 24" fill="none">
+                    <path id="statusOutline"
+                      d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                      stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                    <path id="statusOk" d="m8.6 12 2.4 2.4 4.4-4.8"
+                      stroke="#4fbf6c" stroke-width="1.9" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <g id="statusWarn" style="display: none">
+                      <path d="M12 8.4v4" stroke="#e5a94e" stroke-width="1.9"
+                        stroke-linecap="round" />
+                      <circle cx="12" cy="15.4" r="1.05" fill="#e5a94e" />
+                    </g>
                   </svg>
-                  <div class="ring-center">
-                    <svg class="check" viewBox="0 0 24 24" fill="none">
-                      <path d="m6 12.5 3.5 3.5 8.5-9" stroke="#4fbf6c"
-                        stroke-width="2.4" stroke-linecap="round"
-                        stroke-linejoin="round" />
-                    </svg>
-                  </div>
                 </div>
-                <div class="ring-label">Connected</div>
               </div>
-
-              <!-- Blurred -->
-              <div class="ring-item">
-                <div class="ring">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="42" fill="none"
-                      stroke="#24272d" stroke-width="8" />
-                    <circle class="prog" id="ringBlurred" cx="50" cy="50"
-                      r="42" fill="none" stroke="url(#ringGrad)"
-                      stroke-width="8" stroke-linecap="round"
-                      stroke-dasharray="263.9" />
-                  </svg>
-                  <div class="ring-center">
-                    <span class="val" id="valBlurred">27</span>
-                  </div>
-                </div>
-                <div class="ring-label">Blurred</div>
+              <div class="status-title" id="statusTitle">Protection active</div>
+              <div class="status-sub" id="statusSub">
+                You'll be told instantly if it stops on Adam's device.
               </div>
+            </div>
 
-              <!-- Attempts -->
-              <div class="ring-item">
-                <div class="ring">
-                  <svg viewBox="0 0 100 100">
-                    <circle cx="50" cy="50" r="42" fill="none"
-                      stroke="#24272d" stroke-width="8" />
-                    <circle class="prog" id="ringAttempts" cx="50" cy="50"
-                      r="42" fill="none" stroke="url(#ringGrad)"
-                      stroke-width="8" stroke-linecap="round"
-                      stroke-dasharray="263.9" />
-                  </svg>
-                  <div class="ring-center">
-                    <span class="val" id="valAttempts">3</span>
-                  </div>
-                </div>
-                <div class="ring-label">Attempts</div>
+            <!-- compact counts -->
+            <div class="mini-stats">
+              <div class="mini">
+                <span class="m-val" id="valAttempts">3</span>
+                <span class="m-lab">Blocked today</span>
+              </div>
+              <div class="mini">
+                <span class="m-val" id="valAlerts">2</span>
+                <span class="m-lab">Alerts today</span>
               </div>
             </div>
 
             <!-- status blurb -->
             <div class="blurb">
-              <div class="b-title" id="blurbTitle">Fully Protected</div>
+              <div class="b-title" id="blurbTitle">Web filtering on</div>
               <div class="b-text" id="blurbText">
-                All filters are active on Adam's device. Today Shieldora blurred
-                27 items and blocked 3 attempts to reach explicit content.
+                Adult and explicit sites and searches are being blocked in
+                Adam's browsers. Today Shieldora blocked 3 attempts.
               </div>
             </div>
           </div>
@@ -1415,22 +1433,21 @@
             <div class="alert sev-high">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="11" cy="11" r="6.5" stroke="#f0685f"
-                    stroke-width="1.8" />
-                  <path d="m16 16 4 4" stroke="#f0685f" stroke-width="1.8"
-                    stroke-linecap="round" />
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
+                    stroke-width="1.8" stroke-linecap="round" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Explicit search blocked</div>
-                <div class="a-meta">TikTok</div>
+                <div class="a-title">Protection was turned off</div>
+                <div class="a-meta">Shieldora stopped running</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
                 <span class="a-time">2:14 PM</span>
               </div>
             </div>
-
             <div class="alert sev-high">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
@@ -1442,48 +1459,44 @@
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Adult site blocked</div>
-                <div class="a-meta">Safari</div>
+                <div class="a-title">A VPN was switched on</div>
+                <div class="a-meta">May bypass web filtering</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
                 <span class="a-time">1:02 PM</span>
               </div>
             </div>
-
             <div class="alert sev-med">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <rect x="3.5" y="4.5" width="17" height="15" rx="2.5"
-                    stroke="#e5a94e" stroke-width="1.7" />
-                  <circle cx="9" cy="10" r="1.6" fill="#e5a94e" />
-                  <path d="m5 17 4.5-4.5 3.5 3.5 3-2.5 3 3" stroke="#e5a94e"
-                    stroke-width="1.7" stroke-linecap="round"
-                    stroke-linejoin="round" />
+                  <circle cx="11" cy="11" r="6.5" stroke="#e5a94e"
+                    stroke-width="1.8" />
+                  <path d="m16 16 4 4" stroke="#e5a94e" stroke-width="1.8"
+                    stroke-linecap="round" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Explicit image blurred</div>
-                <div class="a-meta">Instagram</div>
+                <div class="a-title">Explicit search blocked</div>
+                <div class="a-meta">Browser search</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
                 <span class="a-time">11:47 AM</span>
               </div>
             </div>
-
             <div class="alert sev-high">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="11" cy="11" r="6.5" stroke="#f0685f"
-                    stroke-width="1.8" />
-                  <path d="m16 16 4 4" stroke="#f0685f" stroke-width="1.8"
-                    stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                    stroke-width="1.7" stroke-linecap="round" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Explicit search blocked</div>
-                <div class="a-meta">Chrome</div>
+                <div class="a-title">Adult site blocked</div>
+                <div class="a-meta">Web browser</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
@@ -1500,9 +1513,8 @@
                 <svg viewBox="0 0 24 24" fill="none">
                   <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
                     stroke-width="1.7" />
-                  <path
-                    d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17"
-                    stroke="#f0685f" stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                    stroke-width="1.7" stroke-linecap="round" />
                 </svg>
               </div>
               <div class="a-body">
@@ -1514,57 +1526,56 @@
                 <span class="a-time">8:58 PM</span>
               </div>
             </div>
-
             <div class="alert sev-med">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <rect x="3.5" y="4.5" width="17" height="15" rx="2.5"
-                    stroke="#e5a94e" stroke-width="1.7" />
-                  <circle cx="9" cy="10" r="1.6" fill="#e5a94e" />
-                  <path d="m5 17 4.5-4.5 3.5 3.5 3-2.5 3 3" stroke="#e5a94e"
-                    stroke-width="1.7" stroke-linecap="round"
-                    stroke-linejoin="round" />
+                  <circle cx="11" cy="11" r="6.5" stroke="#e5a94e"
+                    stroke-width="1.8" />
+                  <path d="m16 16 4 4" stroke="#e5a94e" stroke-width="1.8"
+                    stroke-linecap="round" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Explicit image blurred</div>
-                <div class="a-meta">TikTok</div>
+                <div class="a-title">Explicit search blocked</div>
+                <div class="a-meta">Browser search</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
                 <span class="a-time">7:32 PM</span>
               </div>
             </div>
-
             <div class="alert sev-low">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M4 5.5h16v11H8l-4 3.5V5.5Z" stroke="#4fbf6c"
-                    stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
+                    stroke-width="1.9" stroke-linecap="round"
+                    stroke-linejoin="round" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Profanity filtered</div>
-                <div class="a-meta">YouTube</div>
+                <div class="a-title">Protection turned back on</div>
+                <div class="a-meta">Web filtering resumed</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
                 <span class="a-time">5:20 PM</span>
               </div>
             </div>
-
             <div class="alert sev-high">
               <div class="a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="11" cy="11" r="6.5" stroke="#f0685f"
-                    stroke-width="1.8" />
-                  <path d="m16 16 4 4" stroke="#f0685f" stroke-width="1.8"
-                    stroke-linecap="round" />
+                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                    stroke-width="1.7" />
+                  <path
+                    d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17"
+                    stroke="#f0685f" stroke-width="1.7" />
                 </svg>
               </div>
               <div class="a-body">
-                <div class="a-title">Explicit search blocked</div>
-                <div class="a-meta">Safari</div>
+                <div class="a-title">A VPN was switched on</div>
+                <div class="a-meta">May bypass web filtering</div>
               </div>
               <div class="a-right">
                 <span class="sev-dot"></span>
@@ -1663,8 +1674,8 @@
               <span class="s-delta down">↓ 12% from last week</span>
             </div>
             <div class="sum-card">
-              <div class="s-num">142</div>
-              <div class="s-label">Blurred this week</div>
+              <div class="s-num">9</div>
+              <div class="s-label">Alerts sent this week</div>
               <span class="s-delta down">↓ 8% from last week</span>
             </div>
           </div>
@@ -1725,13 +1736,13 @@
             </div>
           </div>
 
-          <!-- Top sources -->
-          <div class="day-head">Top sources</div>
+          <!-- Blocked by category -->
+          <div class="day-head">Blocked by category</div>
           <div class="card-block">
             <div class="sources">
               <div class="source-row">
                 <div class="src-top">
-                  <span class="src-name">TikTok</span>
+                  <span class="src-name">Adult content</span>
                   <span class="src-count">21 blocked</span>
                 </div>
                 <div class="src-bar">
@@ -1740,7 +1751,7 @@
               </div>
               <div class="source-row">
                 <div class="src-top">
-                  <span class="src-name">Instagram</span>
+                  <span class="src-name">Explicit searches</span>
                   <span class="src-count">14 blocked</span>
                 </div>
                 <div class="src-bar">
@@ -1749,7 +1760,7 @@
               </div>
               <div class="source-row">
                 <div class="src-top">
-                  <span class="src-name">Safari</span>
+                  <span class="src-name">Violence &amp; gore</span>
                   <span class="src-count">11 blocked</span>
                 </div>
                 <div class="src-bar">
@@ -1758,7 +1769,7 @@
               </div>
               <div class="source-row">
                 <div class="src-top">
-                  <span class="src-name">YouTube</span>
+                  <span class="src-name">Gambling</span>
                   <span class="src-count">6 blocked</span>
                 </div>
                 <div class="src-bar">
@@ -1767,7 +1778,7 @@
               </div>
               <div class="source-row">
                 <div class="src-top">
-                  <span class="src-name">Snapchat</span>
+                  <span class="src-name">Other blocked sites</span>
                   <span class="src-count">4 blocked</span>
                 </div>
                 <div class="src-bar">
@@ -1874,12 +1885,13 @@
               </div>
               <div>
                 <div class="lock-title">Protection Active</div>
-                <div class="lock-status">Locked &amp; tamper-proof</div>
+                <div class="lock-status">Tamper-aware</div>
               </div>
             </div>
             <div class="lock-text" id="settingsLockText">
-              Shieldora cannot be turned off, deleted, or bypassed by Emma. Only
-              you, as the parent, can change these settings with your PIN.
+              Shieldora is running on Emma's device. If it's turned off or
+              removed, or a VPN is switched on, you'll get an alert straight
+              away. Settings are protected by your PIN.
             </div>
             <span class="lock-pill">
               <svg viewBox="0 0 24 24" fill="none">
@@ -1888,7 +1900,7 @@
                 <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#fff"
                   stroke-width="1.8" stroke-linecap="round" />
               </svg>
-              Child cannot disable
+              You're alerted if it stops
             </span>
           </div>
 
@@ -1908,7 +1920,7 @@
               </div>
               <div class="set-main">
                 <div class="set-name">Explicit content</div>
-                <div class="set-sub">Pornography &amp; nudity</div>
+                <div class="set-sub">Porn &amp; nudity sites and searches</div>
               </div>
               <div class="toggle on"></div>
             </div>
@@ -1931,19 +1943,6 @@
             <div class="set-row">
               <div class="set-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M4 5.5h16v11H8l-4 3.5V5.5Z" stroke="#4fbf6c"
-                    stroke-width="1.6" stroke-linejoin="round" />
-                </svg>
-              </div>
-              <div class="set-main">
-                <div class="set-name">Profanity</div>
-                <div class="set-sub">Strong language</div>
-              </div>
-              <div class="toggle on"></div>
-            </div>
-            <div class="set-row">
-              <div class="set-ico">
-                <svg viewBox="0 0 24 24" fill="none">
                   <path d="M12 3.5 21 19H3L12 3.5Z" stroke="#4fbf6c"
                     stroke-width="1.6" stroke-linejoin="round" />
                   <path d="M12 10v4" stroke="#4fbf6c" stroke-width="1.7"
@@ -1953,7 +1952,7 @@
               </div>
               <div class="set-main">
                 <div class="set-name">Violence &amp; gore</div>
-                <div class="set-sub">Graphic imagery</div>
+                <div class="set-sub">Graphic and violent sites</div>
               </div>
               <div class="toggle on"></div>
             </div>
@@ -2003,7 +2002,7 @@
               </div>
               <div class="set-main">
                 <div class="set-name">Instant alerts</div>
-                <div class="set-sub">Push me when content is blocked</div>
+                <div class="set-sub">Push me if protection stops or content is blocked</div>
               </div>
               <div class="toggle on"></div>
             </div>
@@ -2093,8 +2092,8 @@
           name: "Adam",
           initial: "A",
           device: "iPhone 13 · Age 11",
-          blurred: 27,
           attempts: 3,
+          alerts: 2,
           review: false,
           actTitle: "3 attempts blocked today",
           actSub: "Last blocked 2:14 PM · web browser",
@@ -2103,27 +2102,28 @@
           name: "Ali",
           initial: "A",
           device: "iPad · Age 9",
-          blurred: 12,
           attempts: 1,
+          alerts: 1,
           review: false,
           actTitle: "1 attempt blocked today",
-          actSub: "Last blocked 11:05 AM · YouTube",
+          actSub: "Last blocked 11:05 AM · web browser",
         },
         {
           name: "Maryam",
           initial: "M",
           device: "iPhone 12 · Age 14",
-          blurred: 41,
           attempts: 7,
+          alerts: 5,
           review: true,
           actTitle: "7 attempts blocked today",
-          actSub: "Last blocked 4:47 PM · TikTok",
-          reason: "Repeated explicit searches · TikTok",
+          actSub: "Last blocked 4:47 PM · web browser",
+          reason: "Protection was turned off · 4:47 PM",
         },
       ];
 
       const CIRC = 263.9;
       const AMBER = "#e5a94e";
+      const GREEN = "#4fbf6c";
       let current = 0;
 
       const $ = (id) => document.getElementById(id);
@@ -2174,45 +2174,60 @@
         $("pillAvatar").textContent = k.initial;
         $("pillName").textContent = k.name;
 
-        // rings
-        $("ringConnected").style.strokeDashoffset = 0;
-        $("ringBlurred").style.strokeDashoffset = offset(k.blurred, 50);
-        $("ringAttempts").style.strokeDashoffset = offset(k.attempts, 10);
-        $("valBlurred").textContent = k.blurred;
+        // counts
         $("valAttempts").textContent = k.attempts;
+        $("valAlerts").textContent = k.alerts;
 
-        // amber attempts ring when review is needed
-        $("ringAttempts").setAttribute(
+        // protection status ring is the focus: full green while running,
+        // amber and partial when protection stopped and needs review
+        $("ringStatus").style.strokeDashoffset = k.review ? offset(1, 4) : 0;
+        $("ringStatus").setAttribute(
           "stroke",
           k.review ? AMBER : "url(#ringGrad)"
         );
-        $("valAttempts").style.color = k.review ? AMBER : "";
+        $("statusOutline").setAttribute("stroke", k.review ? AMBER : GREEN);
+        $("statusOk").style.display = k.review ? "none" : "";
+        $("statusWarn").style.display = k.review ? "" : "none";
+
+        if (k.review) {
+          $("statusTitle").textContent = "Protection stopped";
+          $("statusTitle").style.color = AMBER;
+          $("statusSub").textContent =
+            `Shieldora stopped running on ${k.name}'s device at 4:47 PM. We alerted you straight away.`;
+        } else {
+          $("statusTitle").textContent = "Protection active";
+          $("statusTitle").style.color = "";
+          $("statusSub").textContent =
+            `You'll be told instantly if it stops on ${k.name}'s device.`;
+        }
 
         // status blurb
         if (k.review) {
           $("blurbTitle").textContent = "Needs review";
           $("blurbTitle").style.color = AMBER;
           $("blurbText").textContent =
-            `Shieldora blocked ${k.attempts} attempts and blurred ${k.blurred} ` +
-            `items on ${k.name}'s device today. Some activity may need your attention.`;
+            `Web filtering is not running on ${k.name}'s device right now. ` +
+            `Shieldora blocked ${k.attempts} attempts in the browser earlier today.`;
         } else {
-          $("blurbTitle").textContent = "Fully Protected";
+          $("blurbTitle").textContent = "Web filtering on";
           $("blurbTitle").style.color = "";
           $("blurbText").textContent =
-            `All filters are active on ${k.name}'s device. Today Shieldora ` +
-            `blurred ${k.blurred} items and blocked ${k.attempts} attempts ` +
-            `to reach explicit content.`;
+            `Adult and explicit sites and searches are being blocked in ` +
+            `${k.name}'s browsers. Today Shieldora blocked ${k.attempts} attempts.`;
         }
 
-        // protection strip
-        $("protName").textContent = k.name;
+        // protection strip follows the same status
+        $("protStrip").classList.toggle("off", k.review);
+        $("protText").textContent = k.review
+          ? `Protection is not running on ${k.name}'s device`
+          : `Protection active on ${k.name}'s device`;
 
         // shared child identity across screens
         $("alertsSubtitle").textContent = `${k.name}'s device`;
         $("activitySubtitle").textContent = `${k.name}'s device`;
         $("settingsSubtitle").textContent = `${k.name}'s device`;
         $("settingsLockText").textContent =
-          `Shieldora cannot be turned off, deleted, or bypassed by ${k.name}. Only you, as the parent, can change these settings with your PIN.`;
+          `Shieldora is running on ${k.name}'s device. If it's turned off or removed, or a VPN is switched on, you'll get an alert straight away. Settings are protected by your PIN.`;
         $("settingsAgeText").textContent =
           `Currently: Pre-teen (Age 11) · Filtering strictness eases as ${k.name} gets older.`;
         $("settingsChildAvatar").textContent = k.initial;
