@@ -12,3 +12,8 @@ yarn-error.log*
 
 # Python build-script caches
 __pycache__/
+
+# Internal working documents — this repo is published via GitHub Pages,
+# so anything tracked here is downloadable from the live site.
+Content-Protection-App-Strategy.docx
+Google Play Publisher Overview - Canopy-app.csv
