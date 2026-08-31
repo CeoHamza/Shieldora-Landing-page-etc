@@ -119,10 +119,10 @@
         pointer-events: none;
         left: -22%;
         right: 8%;
-        top: -48px;
-        height: 400px;
+        top: -90px;
+        height: 480px;
         background: radial-gradient(
-          540px 220px at 26% 38%,
+          540px 220px at 26% 44%,
           rgba(79, 191, 108, 0.3),
           rgba(63, 161, 90, 0.06) 55%,
           transparent 74%
@@ -132,8 +132,10 @@
       .hero::before {
         left: -20%;
         right: -20%;
+        top: -160px;
+        height: 640px;
         background: radial-gradient(
-          700px 300px at 50% 42%,
+          700px 300px at 50% 47%,
           rgba(79, 191, 108, 0.18),
           transparent 72%
         );
@@ -470,13 +472,23 @@
         margin: 0;
         padding: 0;
         display: grid;
+        grid-template-columns: 1fr;
         gap: 44px;
       }
 
       .step {
         display: grid;
-        gap: 22px;
-        align-items: center;
+        gap: 18px;
+        align-content: start;
+      }
+
+      /* screen sits above its caption, but the caption leads in the DOM */
+      .app-shot {
+        order: 1;
+      }
+
+      .step__text {
+        order: 2;
       }
 
       .step__num {
@@ -791,6 +803,29 @@
       }
 
       /* ===== Larger screens ===== */
+      @media (min-width: 600px) {
+        .steps {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 44px 28px;
+        }
+      }
+
+      @media (min-width: 980px) {
+        .steps {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0 20px;
+        }
+        .app-shot {
+          --shot-scale: 0.55;
+        }
+        .step__text h3 {
+          font-size: 17px;
+        }
+        .step__text p {
+          font-size: 14px;
+        }
+      }
+
       @media (min-width: 720px) {
         .wrap {
           padding: 0 24px;
@@ -831,16 +866,6 @@
         .features {
           grid-template-columns: repeat(3, 1fr);
           gap: 34px;
-        }
-        .steps {
-          gap: 56px;
-        }
-        .step {
-          grid-template-columns: 1fr auto;
-          gap: 48px;
-        }
-        .app-shot {
-          --shot-scale: 0.68;
         }
         .signup {
           padding: 46px 32px;
