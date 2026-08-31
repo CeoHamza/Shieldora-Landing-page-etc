@@ -4,19 +4,35 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <title>Shieldora – Content Guardian</title>
+    <title>Shieldora — Know the moment your child tries to access explicit content</title>
+    <meta
+      name="description"
+      content="Shieldora alerts you the moment your child hits blocked adult content, or the moment protection is switched off."
+    />
     <!-- Open Graph / Social preview -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://shieldora.app" />
-    <meta property="og:title" content="Shieldora — Content Guardian" />
-    <meta property="og:description" content="your shield against harmful content" />
+    <meta
+      property="og:title"
+      content="Shieldora — Know the moment your child tries to access explicit content"
+    />
+    <meta
+      property="og:description"
+      content="Shieldora alerts you the moment your child hits blocked adult content, or the moment protection is switched off."
+    />
     <meta property="og:image" content="https://shieldora.app/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Shieldora logo on a green background" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Shieldora — Content Guardian" />
-    <meta name="twitter:description" content="your shield against harmful content" />
+    <meta
+      name="twitter:title"
+      content="Shieldora — Know the moment your child tries to access explicit content"
+    />
+    <meta
+      name="twitter:description"
+      content="Shieldora alerts you the moment your child hits blocked adult content, or the moment protection is switched off."
+    />
     <meta name="twitter:image" content="https://shieldora.app/og-image.png" />
     <link rel="image_src" href="https://shieldora.app/og-image.png" />
     <style>
@@ -60,9 +76,23 @@
         );
         background-attachment: fixed;
         line-height: 1.6;
+        overflow-x: hidden;
       }
 
-      /* Ambient green glows, pinned behind the page so they don't shift on scroll */
+      /* ===== BACKGROUND TREATMENT: C - section spotlights ===== */
+      /* Flat near-black. Each section brings its own light: a green glow
+         behind the heading and a gold rule marking where it starts, so the
+         page reads as a stack of lit blocks rather than one wash. */
+      body {
+        background-image: linear-gradient(
+          180deg,
+          #0b120d 0%,
+          #070b08 40%,
+          #050806 100%
+        );
+        background-attachment: fixed;
+      }
+
       body::before {
         content: "";
         position: fixed;
@@ -70,38 +100,81 @@
         z-index: -1;
         pointer-events: none;
         background: radial-gradient(
-            1100px 620px at 50% -10%,
-            rgba(79, 191, 108, 0.15),
-            transparent 62%
-          ),
-          radial-gradient(
-            900px 700px at 50% 108%,
-            rgba(43, 112, 64, 0.14),
-            transparent 66%
-          );
+          1100px 560px at 50% -14%,
+          rgba(79, 191, 108, 0.18),
+          transparent 62%
+        );
       }
 
+      .section,
+      .hero {
+        position: relative;
+      }
+
+      .section::before,
+      .hero::before {
+        content: "";
+        position: absolute;
+        z-index: -1;
+        pointer-events: none;
+        left: -22%;
+        right: 8%;
+        top: -48px;
+        height: 400px;
+        background: radial-gradient(
+          540px 220px at 26% 38%,
+          rgba(79, 191, 108, 0.3),
+          rgba(63, 161, 90, 0.06) 55%,
+          transparent 74%
+        );
+      }
+
+      .hero::before {
+        left: -20%;
+        right: -20%;
+        background: radial-gradient(
+          700px 300px at 50% 42%,
+          rgba(79, 191, 108, 0.18),
+          transparent 72%
+        );
+      }
+
+      .section + .section::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 180px;
+        height: 1px;
+        pointer-events: none;
+        background: linear-gradient(
+          90deg,
+          rgba(220, 185, 120, 0.7),
+          transparent
+        );
+      }
+      /* ===== END BACKGROUND TREATMENT ===== */
 
       .wrap {
         max-width: 980px;
         margin: 0 auto;
-        padding: 0 24px;
+        padding: 0 20px;
       }
 
       /* Header + logo */
       header {
-        padding: 26px 0;
+        padding: 22px 0;
       }
 
       .logo {
         display: flex;
         align-items: center;
-        gap: 14px;
+        gap: 12px;
       }
 
       .logo .mark {
-        width: 46px;
-        height: 46px;
+        width: 40px;
+        height: 40px;
         border-radius: 13px;
         /* the SVG paints the tile and its gradient itself now */
         display: flex;
@@ -117,226 +190,92 @@
       }
 
       .logo .wordmark {
-        font-size: 26px;
+        font-size: 23px;
         font-weight: 800;
         letter-spacing: -0.03em;
         color: var(--ink);
       }
 
-      /* Hero */
-      .hero {
-        text-align: center;
-        padding: 48px 0 60px;
+      /* ===== Shared bits ===== */
+      .section {
+        padding: 46px 0;
       }
 
-      .badge {
-        display: inline-block;
-        background: rgba(220, 185, 120, 0.08);
-        border: 1px solid rgba(220, 185, 120, 0.35);
-        color: var(--gold);
-        font-size: 13px;
-        font-weight: 600;
-        padding: 6px 14px;
-        border-radius: 999px;
-        margin-bottom: 24px;
-      }
-
-      .hero h1 {
-        font-size: 46px;
-        line-height: 1.12;
-        letter-spacing: -0.03em;
-        margin: 0 0 20px;
-      }
-
-      .hero h1 .hl {
-        color: var(--green-bright);
-      }
-
-      .hero p.lead {
-        font-size: 19px;
-        color: var(--muted);
+      .section-head {
         max-width: 640px;
-        margin: 0 auto 16px;
+        margin: 0 0 26px;
       }
 
-      /* Headline promise: instant alerts */
-      .alert-promise {
-        position: relative;
-        overflow: hidden;
-        display: flex;
-        align-items: flex-start;
-        gap: 14px;
-        text-align: left;
-        max-width: 700px;
-        margin: 0 auto 20px;
-        padding: 18px 22px;
-        border-radius: 16px;
-        border: 1px solid var(--edge-strong);
-        background: linear-gradient(
-            180deg,
-            rgba(63, 161, 90, 0.14),
-            rgba(63, 161, 90, 0.03) 60%,
-            rgba(63, 161, 90, 0) 100%
-          ),
-          linear-gradient(180deg, var(--panel-2), var(--panel));
-        box-shadow: var(--shadow);
-      }
-
-      /* soft green bloom from the top edge, same family as the cards */
-      .alert-promise::before {
-        content: "";
-        position: absolute;
-        inset: 0 0 auto 0;
-        height: 1px;
-        background: linear-gradient(
-          90deg,
-          rgba(220, 185, 120, 0),
-          rgba(220, 185, 120, 0.55),
-          rgba(220, 185, 120, 0)
-        );
-      }
-
-      .alert-promise .alert-icon {
-        flex: 0 0 auto;
-        width: 26px;
-        height: 26px;
-        margin-top: 2px;
-      }
-
-      .alert-promise .alert-icon svg {
-        width: 100%;
-        height: 100%;
-        display: block;
-      }
-
-      .alert-promise .alert-text {
-        min-width: 0;
-      }
-
-      .alert-promise .alert-eyebrow {
+      .eyebrow {
         display: block;
         color: var(--gold);
         font-size: 12px;
         font-weight: 700;
         letter-spacing: 0.14em;
         text-transform: uppercase;
-        margin-bottom: 6px;
-      }
-
-      .alert-promise .alert-copy {
-        color: var(--ink);
-        font-size: 17px;
-        line-height: 1.45;
-        font-weight: 600;
-        margin: 0;
-      }
-
-      .alert-promise .alert-copy .hl {
-        color: var(--green-bright);
-      }
-
-      .hero-actions {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 34px;
-      }
-
-      /* Shared panel look: section blocks + feature cards, same family as .signup */
-      .section-block,
-      .card {
-        position: relative;
-        overflow: hidden;
-        background: linear-gradient(
-            180deg,
-            rgba(63, 161, 90, 0.08),
-            rgba(63, 161, 90, 0.015) 45%,
-            rgba(63, 161, 90, 0) 72%
-          ),
-          linear-gradient(180deg, var(--panel-2), var(--panel));
-        border: 1px solid var(--edge);
-        box-shadow: var(--panel-shadow);
-      }
-
-      /* soft green bloom from the top edge */
-      .section-block::before,
-      .card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        pointer-events: none;
-        background: radial-gradient(
-          620px 240px at 50% -8%,
-          rgba(63, 161, 90, 0.16),
-          transparent 70%
-        );
-      }
-
-      /* gold hairline of light along the top edge */
-      .section-block::after,
-      .card::after {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 1px;
-        pointer-events: none;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(220, 185, 120, 0.5),
-          transparent
-        );
-      }
-
-      /* keep copy above the glow layers */
-      .section-block > *,
-      .card > * {
-        position: relative;
-        z-index: 1;
-      }
-
-      .section-block {
-        border-radius: 20px;
-        padding: 28px 30px;
-        margin: 0 auto 26px;
-        max-width: 900px;
-      }
-
-      .section-block .section-title {
-        margin: 0 0 12px;
-        color: var(--ink-warm);
-        font-size: 22px;
-        letter-spacing: -0.02em;
-      }
-
-      .section-block p,
-      .section-block li {
-        color: var(--muted);
-        font-size: 16px;
-        line-height: 1.7;
-      }
-
-      .section-block ul {
-        margin: 14px 0 0;
-        padding-left: 20px;
-      }
-
-      .section-block li {
         margin-bottom: 10px;
       }
 
-      .hero-actions {
-        display: flex;
+      .section-head h2 {
+        margin: 0 0 12px;
+        font-size: 27px;
+        line-height: 1.2;
+        letter-spacing: -0.025em;
+        color: var(--ink-warm);
+      }
+
+      .section-head p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+      }
+
+      /* Body copy sits straight on the page, no panel */
+      .prose {
+        max-width: 660px;
+      }
+
+      .prose p {
+        margin: 0 0 16px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.75;
+      }
+
+      .prose p:last-child {
+        margin-bottom: 0;
+      }
+
+      .prose strong {
+        color: var(--ink-warm);
+        font-weight: 600;
+      }
+
+      .primary-btn {
+        display: inline-flex;
+        align-items: center;
         justify-content: center;
-        margin-bottom: 34px;
+        padding: 14px 24px;
+        border: none;
+        border-radius: 999px;
+        background: linear-gradient(160deg, #4aa863, #2b7040);
+        color: #fff;
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: filter 0.15s ease;
+      }
+
+      .primary-btn:hover {
+        filter: brightness(1.08);
       }
 
       .secondary-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        padding: 12px 18px;
+        padding: 13px 22px;
         border: 1px solid rgba(63, 161, 90, 0.38);
         border-radius: 999px;
         color: var(--green-bright);
@@ -352,30 +291,14 @@
         border-color: rgba(63, 161, 90, 0.6);
       }
 
-      /* Feature cards */
+      /* ===== Feature columns (no panel, copy on the background) ===== */
       .features {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin: 0 0 60px;
+        grid-template-columns: 1fr;
+        gap: 30px;
       }
 
-      .card {
-        border-radius: 16px;
-        padding: 26px 22px;
-        transition: transform 0.18s ease, border-color 0.18s ease,
-          box-shadow 0.18s ease;
-      }
-
-      .card:hover {
-        transform: translateY(-3px);
-        border-color: var(--edge-strong);
-        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.46),
-          0 0 0 1px rgba(220, 185, 120, 0.06),
-          inset 0 1px 0 rgba(255, 255, 255, 0.06);
-      }
-
-      .card .icon {
+      .feature .icon {
         width: 44px;
         height: 44px;
         border-radius: 11px;
@@ -390,27 +313,266 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 16px;
+        margin-bottom: 14px;
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--gold);
       }
 
-      .card .icon svg {
+      .feature .icon svg {
         width: 24px;
         height: 24px;
       }
 
-      .card h3 {
+      .feature h3 {
         margin: 0 0 8px;
         color: var(--ink-warm);
         font-size: 17px;
+        letter-spacing: -0.01em;
       }
 
-      .card p {
+      .feature p {
         margin: 0;
         color: var(--muted);
         font-size: 15px;
       }
 
-      /* Signup */
+      /* ===== Hero ===== */
+      .hero {
+        text-align: center;
+        padding: 30px 0 34px;
+      }
+
+      .badge {
+        display: inline-block;
+        background: rgba(220, 185, 120, 0.08);
+        border: 1px solid rgba(220, 185, 120, 0.35);
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 999px;
+        margin-bottom: 22px;
+      }
+
+      .hero h1 {
+        font-size: 33px;
+        line-height: 1.14;
+        letter-spacing: -0.03em;
+        margin: 0 0 18px;
+      }
+
+      .hero h1 .hl {
+        color: var(--green-bright);
+      }
+
+      .hero p.lead {
+        font-size: 17px;
+        color: var(--muted);
+        max-width: 640px;
+        margin: 0 auto 26px;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        max-width: 320px;
+        margin: 0 auto 16px;
+      }
+
+      .hero-note {
+        margin: 0;
+        font-size: 13px;
+        color: #737d77;
+      }
+
+      /* ===== Marquee ===== */
+      .marquee {
+        position: relative;
+        overflow: hidden;
+        padding: 14px 0;
+        border-top: 1px solid var(--border);
+        border-bottom: 1px solid var(--border);
+        -webkit-mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 12%,
+          #000 88%,
+          transparent
+        );
+        mask-image: linear-gradient(
+          90deg,
+          transparent,
+          #000 12%,
+          #000 88%,
+          transparent
+        );
+      }
+
+      .marquee__track {
+        display: flex;
+        width: max-content;
+        animation: marquee-scroll 60s linear infinite;
+        will-change: transform;
+      }
+
+      .marquee:hover .marquee__track,
+      .marquee:focus-within .marquee__track {
+        animation-play-state: paused;
+      }
+
+      .marquee__group {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin: 0;
+        padding: 0 7px;
+        list-style: none;
+      }
+
+      .marquee__group li {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        flex: 0 0 auto;
+        padding: 7px 15px;
+        border: 1px solid var(--edge);
+        border-radius: 999px;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+        white-space: nowrap;
+      }
+
+      .marquee__group li::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--green-bright);
+        box-shadow: 0 0 0 3px rgba(79, 191, 108, 0.16);
+      }
+
+      @keyframes marquee-scroll {
+        from {
+          transform: translateX(0);
+        }
+        to {
+          transform: translateX(-50%);
+        }
+      }
+
+      /* ===== Inside the app ===== */
+      .steps {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        gap: 44px;
+      }
+
+      .step {
+        display: grid;
+        gap: 22px;
+        align-items: center;
+      }
+
+      .step__num {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        margin-bottom: 12px;
+        border-radius: 50%;
+        border: 1px solid var(--edge-strong);
+        background: rgba(220, 185, 120, 0.08);
+        color: var(--gold);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .step__text h3 {
+        margin: 0 0 8px;
+        color: var(--ink-warm);
+        font-size: 19px;
+        letter-spacing: -0.015em;
+      }
+
+      .step__text p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+      }
+
+      /* A real app screen, rendered at its native 390x844 and scaled down. */
+      .app-shot {
+        --shot-scale: 0.58;
+        width: calc(390px * var(--shot-scale));
+        height: calc(844px * var(--shot-scale));
+        margin: 0 auto;
+        flex: 0 0 auto;
+        pointer-events: none;
+      }
+
+      .app-shot__inner {
+        width: 390px;
+        height: 844px;
+        transform: scale(var(--shot-scale));
+        transform-origin: top left;
+      }
+
+      .steps-footnote {
+        margin: 30px 0 0;
+        font-size: 15px;
+        color: var(--muted);
+      }
+
+      .steps-footnote a {
+        color: var(--green-bright);
+        font-weight: 600;
+      }
+
+      /* ===== What Shieldora doesn't do ===== */
+      .choices {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        max-width: 660px;
+        display: grid;
+        gap: 20px;
+      }
+
+      .choices li {
+        position: relative;
+        padding-left: 26px;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.7;
+      }
+
+      .choices li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 12px;
+        width: 12px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--gold);
+      }
+
+      .choices strong {
+        display: block;
+        color: var(--ink-warm);
+        font-size: 17px;
+        font-weight: 600;
+        margin-bottom: 2px;
+      }
+
+      /* ===== Signup (keeps its panel) ===== */
       .signup {
         position: relative;
         background: linear-gradient(
@@ -422,7 +584,7 @@
           linear-gradient(180deg, var(--panel-2), var(--panel));
         border: 1px solid var(--edge);
         border-radius: 20px;
-        padding: 46px 32px;
+        padding: 36px 22px;
         text-align: center;
         box-shadow: var(--shadow);
         overflow: hidden;
@@ -443,13 +605,13 @@
       .signup h2 {
         position: relative;
         margin: 0 0 10px;
-        font-size: 28px;
+        font-size: 25px;
         letter-spacing: -0.02em;
       }
 
       .signup p {
         position: relative;
-        margin: 0 auto 26px;
+        margin: 0 auto 24px;
         max-width: 500px;
         color: var(--muted);
         font-size: 16px;
@@ -458,6 +620,7 @@
       form {
         position: relative;
         display: flex;
+        flex-direction: column;
         gap: 10px;
         max-width: 460px;
         margin: 0 auto;
@@ -499,19 +662,16 @@
         filter: brightness(1.08);
       }
 
+      form button:disabled {
+        opacity: 0.65;
+        cursor: default;
+      }
+
       .form-note {
         position: relative;
         margin: 16px 0 0;
         font-size: 13px;
         color: #737d77;
-      }
-
-      .trust-line {
-        position: relative;
-        margin: 16px auto 0;
-        font-size: 14px;
-        font-style: italic;
-        color: #929c96;
       }
 
       .success {
@@ -532,41 +692,1212 @@
         color: #f0857a;
       }
 
-      form button:disabled {
-        opacity: 0.65;
-        cursor: default;
+      /* ===== FAQ (keeps its panel) ===== */
+      .faq {
+        max-width: 760px;
+        display: grid;
+        gap: 12px;
       }
 
-      /* Footer */
+      .faq details {
+        border: 1px solid var(--edge);
+        border-radius: 14px;
+        background: linear-gradient(180deg, var(--panel-2), var(--panel));
+        box-shadow: var(--panel-shadow);
+        overflow: hidden;
+      }
+
+      .faq summary {
+        list-style: none;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 14px;
+        padding: 17px 18px;
+        color: var(--ink-warm);
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .faq summary::-webkit-details-marker {
+        display: none;
+      }
+
+      .faq summary::after {
+        content: "";
+        flex: 0 0 auto;
+        width: 10px;
+        height: 10px;
+        margin-top: 7px;
+        border-right: 2px solid var(--gold);
+        border-bottom: 2px solid var(--gold);
+        transform: rotate(45deg);
+        transition: transform 0.2s ease;
+      }
+
+      .faq details[open] summary::after {
+        transform: rotate(-135deg);
+      }
+
+      .faq summary:focus-visible {
+        outline: 2px solid var(--green-bright);
+        outline-offset: -2px;
+      }
+
+      .faq .faq-body {
+        padding: 0 18px 18px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 15px;
+        line-height: 1.7;
+      }
+
+      /* ===== Footer ===== */
       footer {
         text-align: center;
         color: #737d77;
         font-size: 14px;
-        padding: 44px 0 48px;
+        padding: 40px 0 46px;
         border-top: 1px solid var(--border);
-        margin-top: 60px;
+        margin-top: 40px;
       }
 
-      /* Responsive */
-      @media (max-width: 720px) {
-        .hero h1 {
-          font-size: 34px;
+      /* ===== Scroll reveal =====
+         .js-reveal is set on <html> by the head script, and only when the
+         browser can actually run the reveal. Without it every .reveal stays
+         at its natural visible state, so no-JS never means a blank page. */
+      .js-reveal .reveal {
+        opacity: 0;
+        transform: translateY(16px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        transition-delay: calc(var(--i, 0) * 70ms);
+      }
+
+      .js-reveal .reveal.is-visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .js-reveal .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
         }
-        .alert-promise {
-          padding: 16px 18px;
-          gap: 12px;
-        }
-        .alert-promise .alert-copy {
-          font-size: 16px;
-        }
-        .features {
-          grid-template-columns: 1fr;
-        }
-        form {
-          flex-direction: column;
+        .marquee__track {
+          animation: none;
         }
       }
+
+      /* ===== Larger screens ===== */
+      @media (min-width: 720px) {
+        .wrap {
+          padding: 0 24px;
+        }
+        header {
+          padding: 26px 0;
+        }
+        .logo .mark {
+          width: 46px;
+          height: 46px;
+        }
+        .logo .wordmark {
+          font-size: 26px;
+        }
+        .section {
+          padding: 64px 0;
+        }
+        .section-head {
+          margin-bottom: 34px;
+        }
+        .section-head h2 {
+          font-size: 32px;
+        }
+        .hero {
+          padding: 44px 0 46px;
+        }
+        .hero h1 {
+          font-size: 46px;
+        }
+        .hero p.lead {
+          font-size: 19px;
+        }
+        .hero-actions {
+          flex-direction: row;
+          justify-content: center;
+          max-width: none;
+        }
+        .features {
+          grid-template-columns: repeat(3, 1fr);
+          gap: 34px;
+        }
+        .steps {
+          gap: 56px;
+        }
+        .step {
+          grid-template-columns: 1fr auto;
+          gap: 48px;
+        }
+        .app-shot {
+          --shot-scale: 0.68;
+        }
+        .signup {
+          padding: 46px 32px;
+        }
+        .signup h2 {
+          font-size: 28px;
+        }
+        form {
+          flex-direction: row;
+        }
+      }
+
+      /* ===== App screens, lifted from the parent-app mockup =====
+         Every rule below is scoped to .appui so the app's own palette and
+         class names cannot leak into the page around it. */
+      .appui {
+        --green: #3fa15a;
+        --green-bright: #4fbf6c;
+        --green-dark: #2b7040;
+        --bg: #0c0d0f;
+        --card: #17191d;
+        --card-2: #1e2127;
+        --ink: #f3f4f5;
+        --muted: #8b929b;
+        --line: #26292f;
+      }
+
+      .appui * {
+        box-sizing: border-box;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* ===== Phone frame ===== */
+      .appui .phone {
+        position: relative;
+        width: 390px;
+        height: 844px;
+        background: #000;
+        border-radius: 56px;
+        padding: 12px;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+      }
+
+      .appui .screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        border-radius: 46px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .appui .island {
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 122px;
+        height: 34px;
+        background: #000;
+        border-radius: 20px;
+        z-index: 20;
+      }
+
+      /* Status bar */
+      .appui .statusbar {
+        height: 54px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 26px 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink);
+        z-index: 10;
+      }
+
+      .appui .statusbar .icons {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      /* Scrollable content */
+      .appui .content {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: 8px 20px 20px;
+      }
+
+      .appui .content::-webkit-scrollbar {
+        display: none;
+      }
+
+      .appui .greeting {
+        font-size: 15px;
+        color: var(--muted);
+        margin: 6px 0 2px;
+      }
+
+      .appui .title {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0 0 18px;
+      }
+
+      /* Child profile card */
+      .appui .profile {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 14px 16px;
+        margin-top: 16px;
+      }
+
+      .appui .avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+
+      .appui .profile .info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .appui .profile .name {
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .appui .profile .device {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      .appui .profile .switch {
+        color: var(--muted);
+      }
+
+      /* ===== WHOOP-style ring hero ===== */
+      .appui .hero {
+        margin-top: 16px;
+        background: radial-gradient( 120% 80% at 50% 0%, rgba(63, 161, 90, 0.16), transparent 60% ), linear-gradient(180deg, #14161a, #0e0f12);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 26px 20px 22px;
+      }
+
+      .appui .date-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-bottom: 20px;
+      }
+
+      .appui .date-nav span {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+
+      .appui .date-nav button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        color: var(--muted);
+      }
+
+      .appui .ring-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* app logo above the date control */
+      .appui .app-logo {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+      }
+
+      /* status-first hero: one big protection ring */
+      .appui .status-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .appui .status-ring {
+        position: relative;
+        width: 132px;
+        height: 132px;
+      }
+
+      .appui .status-ring svg.dial {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+
+      .appui .status-ring .prog {
+        stroke-dashoffset: 263.9;
+        transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1), stroke 0.3s ease;
+      }
+
+      .appui .status-ring .ring-center .shield {
+        width: 46px;
+        height: 46px;
+        transform: none;
+      }
+
+      .appui .status-title {
+        margin-top: 16px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--green-bright);
+      }
+
+      .appui .status-sub {
+        margin-top: 6px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--muted);
+        max-width: 250px;
+      }
+
+      /* compact counts under the status */
+      .appui .mini-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .appui .mini {
+        text-align: center;
+        padding: 12px 8px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+      }
+
+      .appui .mini .m-val {
+        display: block;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .appui .mini .m-lab {
+        display: block;
+        margin-top: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      /* status blurb under the hero */
+      .appui .blurb {
+        margin-top: 22px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+      }
+
+      .appui .blurb .b-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--green-bright);
+        margin-bottom: 4px;
+      }
+
+      .appui .blurb .b-text {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+      }
+
+      /* Section heading */
+      .appui .section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: 24px 4px 12px;
+      }
+
+      .appui .section-head h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      .appui .section-head a {
+        font-size: 14px;
+        color: var(--green-bright);
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* Highlight row */
+      .appui .highlight {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+      }
+
+      .appui .highlight .badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(63, 161, 90, 0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+
+      .appui .highlight .badge svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      .appui .highlight .h-title {
+        font-size: 15px;
+        font-weight: 700;
+      }
+
+      .appui .highlight .h-sub {
+        font-size: 13px;
+        color: var(--muted);
+      }
+
+      /* Screen subtitle (Alerts header) */
+      .appui .subtitle {
+        font-size: 15px;
+        color: var(--muted);
+        margin: -12px 0 18px;
+      }
+
+      /* Date group header */
+      .appui .day-head {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 18px 4px 10px;
+      }
+
+      /* Alert list */
+      .appui .alerts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .appui .alert {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 13px 14px;
+      }
+
+      .appui .alert .a-ico {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+
+      .appui .alert .a-ico svg {
+        width: 21px;
+        height: 21px;
+      }
+
+      /* severity tints */
+      .appui .sev-high .a-ico {
+        background: rgba(240, 104, 95, 0.14);
+      }
+
+      .appui .sev-med .a-ico {
+        background: rgba(229, 169, 78, 0.14);
+      }
+
+      .appui .sev-low .a-ico {
+        background: rgba(63, 161, 90, 0.14);
+      }
+
+      .appui .alert .a-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .appui .alert .a-title {
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .appui .alert .a-meta {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .appui .alert .a-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+        flex: 0 0 auto;
+      }
+
+      .appui .alert .a-time {
+        font-size: 11.5px;
+        color: var(--muted);
+        white-space: nowrap;
+      }
+
+      .appui .sev-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+      }
+
+      .appui .sev-high .sev-dot {
+        background: #f0685f;
+        box-shadow: 0 0 0 4px rgba(240, 104, 95, 0.16);
+      }
+
+      .appui .sev-med .sev-dot {
+        background: #e5a94e;
+        box-shadow: 0 0 0 4px rgba(229, 169, 78, 0.16);
+      }
+
+      .appui .sev-low .sev-dot {
+        background: #4fbf6c;
+        box-shadow: 0 0 0 4px rgba(79, 191, 108, 0.16);
+      }
+
+      /* ===== Activity screen ===== */
+      .appui .card-block {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px 16px;
+      }
+
+      .appui .summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .appui .sum-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px 15px;
+      }
+
+      .appui .sum-card .s-num {
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1;
+      }
+
+      .appui .sum-card .s-label {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 6px;
+      }
+
+      .appui .s-delta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11.5px;
+        font-weight: 700;
+        margin-top: 12px;
+        padding: 3px 9px;
+        border-radius: 999px;
+      }
+
+      .appui .s-delta.down {
+        color: var(--green-bright);
+        background: rgba(79, 191, 108, 0.12);
+      }
+
+      .appui .s-delta.up {
+        color: #f0685f;
+        background: rgba(240, 104, 95, 0.12);
+      }
+
+      /* Bar chart */
+      .appui .chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 7px;
+        height: 156px;
+      }
+
+      .appui .bar-col {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .appui .bar-track {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+      }
+
+      .appui .bar-val {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+      }
+
+      .appui .bar {
+        width: 22px;
+        border-radius: 6px;
+        background: linear-gradient(180deg, #4fbf6c, #2b7040);
+      }
+
+      .appui .bar-col.today .bar {
+        box-shadow: 0 0 0 2px rgba(79, 191, 108, 0.35);
+      }
+
+      .appui .bar-col.today .bar-val {
+        color: var(--green-bright);
+      }
+
+      .appui .bar-day {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-top: 9px;
+      }
+
+      .appui .bar-col.today .bar-day {
+        color: var(--green-bright);
+      }
+
+      /* Blocked-by-category rows */
+      .appui .sources {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .appui .src-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+      }
+
+      .appui .src-name {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .appui .src-count {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+      }
+
+      .appui .src-bar {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+      }
+
+      .appui .src-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2b7040, #4fbf6c);
+      }
+
+      /* ===== Settings screen ===== */
+      .appui .lock-card {
+        background: radial-gradient( 120% 90% at 0% 0%, rgba(255, 255, 255, 0.12), transparent 55% ), linear-gradient(165deg, #3fa15a, #235d34);
+        border-radius: 22px;
+        padding: 20px;
+        box-shadow: 0 16px 36px rgba(43, 112, 64, 0.32);
+      }
+
+      .appui .lock-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .appui .lock-ring {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3);
+      }
+
+      .appui .lock-ring svg {
+        width: 26px;
+        height: 26px;
+      }
+
+      .appui .lock-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: #fff;
+      }
+
+      .appui .lock-status {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 1px;
+      }
+
+      .appui .lock-text {
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.92);
+        margin-top: 15px;
+      }
+
+      .appui .lock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        padding: 8px 13px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+      }
+
+      .appui .lock-pill svg {
+        width: 14px;
+        height: 14px;
+      }
+
+      /* Setting list rows */
+      .appui .set-list {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+
+      .appui .set-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 15px;
+      }
+
+      .appui .set-row + .set-row {
+        border-top: 1px solid var(--line);
+      }
+
+      .appui .set-ico {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: rgba(63, 161, 90, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+
+      .appui .set-ico svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .appui .set-main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .appui .set-name {
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .appui .set-sub {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+      }
+
+      /* iOS-style toggle (static) */
+      .appui .toggle {
+        width: 46px;
+        height: 28px;
+        border-radius: 999px;
+        background: #33373d;
+        position: relative;
+        flex: 0 0 auto;
+      }
+
+      .appui .toggle::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+      }
+
+      .appui .toggle.on {
+        background: var(--green);
+      }
+
+      .appui .toggle.on::after {
+        left: 21px;
+      }
+
+      /* Segmented age control */
+      .appui .segment {
+        display: flex;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 4px;
+        gap: 4px;
+      }
+
+      .appui .seg {
+        flex: 1;
+        text-align: center;
+        padding: 11px 6px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+
+      .appui .seg.active {
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+      }
+
+      .appui .seg-cap {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 11px;
+        text-align: center;
+      }
+
+      /* ===== Home header + child switcher ===== */
+      .appui .home-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .appui .switcher {
+        position: relative;
+        flex: 0 0 auto;
+      }
+
+      .appui .pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 11px 5px 5px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+
+      .appui .pill-av {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .appui .pill-name {
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .appui .pill svg {
+        width: 15px;
+        height: 15px;
+        color: var(--muted);
+      }
+
+      /* Needs-attention banner */
+      .appui .attention {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        background: rgba(229, 169, 78, 0.12);
+        border: 1px solid rgba(229, 169, 78, 0.4);
+        border-radius: 16px;
+        padding: 13px 14px;
+        margin-bottom: 12px;
+      }
+
+      .appui .attention.show {
+        display: flex;
+      }
+
+      .appui .attn-ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: rgba(229, 169, 78, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+      }
+
+      .appui .attn-ic svg {
+        width: 20px;
+        height: 20px;
+      }
+
+      .appui .attn-body {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .appui .attn-title {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #e5a94e;
+      }
+
+      .appui .attn-sub {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 1px;
+      }
+
+      .appui .attn-chev {
+        display: flex;
+        color: #e5a94e;
+        flex: 0 0 auto;
+      }
+
+      /* Protection status strip */
+      .appui .prot-strip {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(63, 161, 90, 0.08);
+        border: 1px solid rgba(63, 161, 90, 0.22);
+        border-radius: 12px;
+        padding: 9px 13px;
+      }
+
+      .appui .prot-strip svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 auto;
+      }
+
+      .appui .prot-strip .p-text {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--green-bright);
+        line-height: 1.3;
+      }
+
+      /* strip turns amber when protection is not running */
+      .appui .prot-strip.off {
+        background: rgba(229, 169, 78, 0.08);
+        border-color: rgba(229, 169, 78, 0.28);
+      }
+
+      .appui .prot-strip.off .p-text {
+        color: #e5a94e;
+      }
+
+      .appui .prot-strip.off svg [stroke] {
+        stroke: #e5a94e;
+      }
+
+      /* Last active line */
+      .appui .last-active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 16px;
+      }
+
+      .appui .last-active .la-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green-bright);
+        box-shadow: 0 0 0 3px rgba(79, 191, 108, 0.18);
+      }
+
+      /* Alerts tab dot */
+      .appui .tab {
+        position: relative;
+      }
+
+      .appui .tab-dot {
+        position: absolute;
+        top: 6px;
+        left: calc(50% + 5px);
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #e5a94e;
+        box-shadow: 0 0 0 3px rgba(12, 13, 15, 0.9);
+        display: none;
+      }
+
+      .appui .tab-dot.show {
+        display: block;
+      }
+
+      /* Bottom nav */
+      .appui .tabbar {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 8px 26px;
+        background: rgba(12, 13, 15, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-top: 1px solid var(--line);
+      }
+
+      .appui .tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        flex: 1;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+
+      .appui .tab svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .appui .tab.active {
+        color: var(--green-bright);
+      }
+
+      /* embedded screens are pictures, not working UI */
+      .appui {
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        color: var(--ink);
+      }
+
+      .appui .content {
+        overflow: hidden;
+      }
+
+      .appui .phone {
+        margin: 0;
+      }
     </style>
+    <script>
+      // Arm the scroll reveal before first paint. If this never runs — JS off,
+      // an old browser, reduced motion — the page renders fully visible.
+      if (
+        "IntersectionObserver" in window &&
+        !window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ) {
+        document.documentElement.classList.add("js-reveal");
+      }
+    </script>
   </head>
   <body>
     <div class="wrap">
@@ -589,157 +1920,1319 @@
         </div>
       </header>
 
+      <!-- ================= HERO ================= -->
       <section class="hero">
-        <span class="badge">Coming soon · Join the waitlist</span>
-        <h1>your <span class="hl">shield</span> against harmful content</h1>
-        <p class="lead">
-          Shieldora blocks adult and harmful websites and searches on your
-          child's device, and is built to resist the VPN tricks kids use to get
-          around filters. If it's ever switched off, you're alerted straight
-          away. We're building toward protection that goes even further.
+        <span class="badge reveal">Coming soon · Join the waitlist</span>
+        <h1 class="reveal" style="--i: 1">
+          Know the moment your child tries to access
+          <span class="hl">explicit content</span>.
+        </h1>
+        <p class="lead reveal" style="--i: 2">
+          Shieldora blocks adult content on your child's iPhone or iPad, and
+          alerts you the moment something's blocked or protection is switched
+          off.
         </p>
-        <div class="alert-promise">
-          <span class="alert-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.6 2 6.5H4c.8-.9 2-2.5 2-6.5Z"
-                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
-              <path d="M10 19a2 2 0 0 0 4 0" stroke="#4fbf6c"
-                stroke-width="1.6" stroke-linecap="round" />
-              <circle cx="18" cy="5.5" r="3" fill="#dcb978" />
-            </svg>
-          </span>
-          <div class="alert-text">
-            <span class="alert-eyebrow">Instant alerts</span>
-            <p class="alert-copy">
-              Get an <span class="hl">instant alert</span> the moment your child
-              tries to disable protection, switch on a VPN, or search for
-              something explicit — so nothing happens quietly.
+        <div class="hero-actions reveal" style="--i: 3">
+          <a class="primary-btn" href="#waitlist">Join the waitlist</a>
+          <a class="secondary-btn" href="#how-it-works">See how it works</a>
+        </div>
+        <p class="hero-note reveal" style="--i: 4">
+          Not released yet — the waitlist is for early access.
+        </p>
+      </section>
+    </div>
+
+    <!-- ================= ALERT MARQUEE ================= -->
+    <div class="marquee reveal">
+      <div class="marquee__track">
+        <ul class="marquee__group">
+          <li>A blocked site was hit</li>
+          <li>Protection was turned off</li>
+          <li>A blocked page was hit in Safari</li>
+          <li>Protection is back on</li>
+          <li>A blocked page was hit in private browsing</li>
+          <li>Filtering was removed from this device</li>
+          <li>Nothing to report today</li>
+        </ul>
+        <ul class="marquee__group" aria-hidden="true">
+          <li>A blocked site was hit</li>
+          <li>Protection was turned off</li>
+          <li>A blocked page was hit in Safari</li>
+          <li>Protection is back on</li>
+          <li>A blocked page was hit in private browsing</li>
+          <li>Filtering was removed from this device</li>
+          <li>Nothing to report today</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <!-- ================= THE PROBLEM ================= -->
+      <section class="section">
+        <div class="section-head reveal">
+          <span class="eyebrow">The problem</span>
+          <h2>Nothing tells you when it matters</h2>
+          <p>
+            Three things go wrong in almost every family that hands a child a
+            device.
+          </p>
+        </div>
+        <div class="features">
+          <div class="feature reveal" style="--i: 1">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.6 2 6.5H4c.8-.9 2-2.5 2-6.5Z"
+                  stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                <path d="M10 19a2 2 0 0 0 4 0" stroke="#4fbf6c"
+                  stroke-width="1.6" stroke-linecap="round" />
+                <path d="M3 3.5 21 20" stroke="#4fbf6c" stroke-width="1.6"
+                  stroke-linecap="round" />
+              </svg>
+            </div>
+            <h3>You're the last to know</h3>
+            <p>
+              Something happens on a screen in another room and nothing reaches
+              you. Most parents find out long after — if they find out at all.
+            </p>
+          </div>
+          <div class="feature reveal" style="--i: 2">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="9.5" width="16" height="10.5" rx="2.5"
+                  stroke="#4fbf6c" stroke-width="1.6" />
+                <path d="M8 9.5V7.6a4 4 0 0 1 7.4-2.1"
+                  stroke="#4fbf6c" stroke-width="1.6" stroke-linecap="round" />
+                <circle cx="12" cy="14.8" r="1.4" fill="#4fbf6c" />
+              </svg>
+            </div>
+            <h3>Protection gets switched off in silence</h3>
+            <p>
+              A filter a child can quietly disable isn't protection. It fails
+              without a sound, and nothing arrives to tell you it stopped.
+            </p>
+          </div>
+          <div class="feature reveal" style="--i: 3">
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12h4l2.5-5.5L14 17l2.2-5H21"
+                  stroke="#4fbf6c" stroke-width="1.6" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <h3>The apps either do nothing or read everything</h3>
+            <p>
+              One end of the market is a toggle that changes little. The other
+              logs messages and browsing. Neither is what most families
+              actually want.
             </p>
           </div>
         </div>
-        <div class="hero-actions">
-          <a class="secondary-btn" href="dashboard.html">Preview the app</a>
-        </div>
       </section>
 
-      <section class="section-block">
-        <h2 class="section-title">The problem we're solving</h2>
-        <p>
-          Kids are exposed to explicit content younger than ever, often by accident
-          through the apps they already use every day. It can happen in a moment,
-          and the experience may stay with them long after.
-        </p>
-        <p>
-          Early exposure can affect a developing child and, for some, grow into
-          compulsive habits that undermine focus, relationships, and wellbeing.
-        </p>
-        <p>
-          Most parental tools today — bans, basic filters, browser-only settings —
-          are easy to bypass. That leaves a real gap between the protection
-          parents want and the risk their family still faces.
-        </p>
-      </section>
-
-      <section class="features">
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2.5" y="4" width="19" height="13" rx="2"
-                stroke="#4fbf6c" stroke-width="1.6" />
-              <path d="M8 20.5h8" stroke="#4fbf6c" stroke-width="1.6"
-                stroke-linecap="round" />
-              <circle cx="12" cy="10.5" r="4.2" stroke="#4fbf6c"
-                stroke-width="1.6" />
-              <path d="m9.4 7.9 5.2 5.2" stroke="#4fbf6c" stroke-width="1.6"
-                stroke-linecap="round" />
-            </svg>
-          </div>
-          <h3>Blocks explicit content</h3>
-          <p>
-            Filters and blocks adult and harmful websites and searches across
-            your child's device — not just one browser.
-          </p>
+      <!-- ================= THE SOLUTION ================= -->
+      <section class="section">
+        <div class="section-head reveal">
+          <span class="eyebrow">The solution</span>
+          <h2>You get told. That's the whole point.</h2>
         </div>
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M6 9a6 6 0 0 1 12 0c0 4 1.2 5.6 2 6.5H4c.8-.9 2-2.5 2-6.5Z"
-                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
-              <path d="M10 19a2 2 0 0 0 4 0" stroke="#4fbf6c"
-                stroke-width="1.6" stroke-linecap="round" />
-              <circle cx="18" cy="5.5" r="3" fill="#4fbf6c" />
-            </svg>
-          </div>
-          <h3>Alerts you instantly</h3>
+        <div class="prose reveal" style="--i: 1">
           <p>
-            Get an instant alert if your child disables protection, tries to switch
-            on another VPN, or searches for something explicit — so nothing happens quietly.
+            The moment a blocked site is hit, or protection is switched off, a
+            notification lands on your phone — with the time and the device.
+            You don't go looking. You get told.
           </p>
-        </div>
-        <div class="card">
-          <div class="icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2.5 5 5.2v5.3c0 4 2.8 7 7 8.5 4.2-1.5 7-4.5 7-8.5V5.2L12 2.5Z"
-                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
-              <rect x="9" y="10.2" width="6" height="5" rx="1"
-                stroke="#4fbf6c" stroke-width="1.5" />
-              <path d="M10.2 10.2V9a1.8 1.8 0 0 1 3.6 0v1.2"
-                stroke="#4fbf6c" stroke-width="1.5" />
-            </svg>
-          </div>
-          <h3>You'll always know</h3>
           <p>
-            Protection is designed to resist the VPN tricks kids use to get
-            around filters — and if it's ever switched off, you're notified
-            straight away.
+            The blocking underneath it uses filtering built into iOS, and it
+            can't be turned off or deleted without your account password. That
+            is what makes the alerts worth trusting: protection can't be
+            quietly removed first, and if anyone tries, that's an alert too.
+          </p>
+          <p>
+            What we send is behaviour, not content — enough to start a
+            conversation, without reading over your child's shoulder.
           </p>
         </div>
       </section>
 
-      <section class="section-block">
-        <h2 class="section-title">Our vision</h2>
-        <p>
-          Today, Shieldora is focused on blocking explicit sites and searches with
-          instant alerts that let parents stay aware without watching every screen.
+      <!-- ================= INSIDE THE APP ================= -->
+      <section class="section" id="inside-the-app">
+        <div class="section-head reveal">
+          <span class="eyebrow">The parent app</span>
+          <h2>Inside the app</h2>
+        </div>
+        <ol class="steps">
+          <li class="step reveal">
+            <div class="step__text">
+              <span class="step__num" aria-hidden="true">1</span>
+              <h3>The home screen</h3>
+              <p>
+                Open the app and you see whether protection is on, on which
+                device, and how much it stopped today — so a quiet day reads as
+                a quiet day, not as a blind spot.
+              </p>
+            </div>
+            <div class="app-shot" role="img"
+              aria-label="The Shieldora home screen, showing protection active and the day's blocked count">
+              <div class="app-shot__inner appui" aria-hidden="true">
+<div class="phone">
+                  <div class="screen">
+                    <div class="island"></div>
+
+                    <!-- Status bar -->
+                    <div class="statusbar">
+                      <span>9:41</span>
+                      <span class="icons">
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                          <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+                          <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+                          <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+                          <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                          <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                            stroke-width="1.6" stroke-linecap="round" />
+                          <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                            stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+                          <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+                          <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                            stroke="#f3f4f5" stroke-opacity="0.4" />
+                          <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+                          <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                            fill="#f3f4f5" fill-opacity="0.4" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <!-- Scrollable content -->
+                    <div class="content">
+                      <div class="home-head">
+                        <div>
+                          <p class="greeting">Good morning, Sarah</p>
+                          <h1 class="title">Home</h1>
+                        </div>
+                        <div class="switcher">
+                          <span class="pill" onclick="toggleDrop(event)">
+                            <span class="pill-av">A</span>
+                            <span class="pill-name">Adam</span>
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                          </span>
+                        </div>
+                      </div>
+
+                      <!-- Needs-attention banner (only when child needs review) -->
+                      <div class="attention">
+                        <div class="attn-ic">
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <path d="M12 3.5 21 19H3L12 3.5Z" stroke="#e5a94e"
+                              stroke-width="1.7" stroke-linejoin="round" />
+                            <path d="M12 10v4" stroke="#e5a94e" stroke-width="1.8"
+                              stroke-linecap="round" />
+                            <circle cx="12" cy="16.5" r="1.1" fill="#e5a94e" />
+                          </svg>
+                        </div>
+                        <div class="attn-body">
+                          <div class="attn-title">1 alert needs your review</div>
+                          <div class="attn-sub">
+                            Protection was turned off · 4:47 PM
+                          </div>
+                        </div>
+                        <span class="attn-chev">
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                            <path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                      </div>
+
+                      <!-- Protection status strip -->
+                      <div class="prot-strip">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
+                            stroke="#4fbf6c" stroke-width="1.7" />
+                          <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#4fbf6c"
+                            stroke-width="1.7" stroke-linecap="round" />
+                        </svg>
+                        <span class="p-text"
+                          >Protection active on Adam's device</span
+                        >
+                      </div>
+
+                      <!-- Status-first hero -->
+                      <div class="hero">
+                        <div class="app-logo">Shieldora</div>
+                        <div class="date-nav">
+                          <span aria-label="Previous day">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                              <path d="m15 6-6 6 6 6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          </span>
+                          <span>Today</span>
+                          <span aria-label="Next day">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                              <path d="m9 6 6 6-6 6" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          </span>
+                        </div>
+
+                        <svg width="0" height="0" style="position: absolute">
+                          <defs>
+                            <linearGradient id="appRingGrad" x1="0" y1="0" x2="1" y2="1">
+                              <stop offset="0" stop-color="#4fbf6c" />
+                              <stop offset="1" stop-color="#2b7040" />
+                            </linearGradient>
+                          </defs>
+                        </svg>
+
+                        <!-- protection status: the main focus of the screen -->
+                        <div class="status-block">
+                          <div class="status-ring">
+                            <svg class="dial" viewBox="0 0 100 100">
+                              <circle cx="50" cy="50" r="42" fill="none"
+                                stroke="#24272d" stroke-width="8" />
+                              <circle class="prog" style="stroke-dashoffset: 0" cx="50" cy="50"
+                                r="42" fill="none" stroke="url(#appRingGrad)"
+                                stroke-width="8" stroke-linecap="round"
+                                stroke-dasharray="263.9" />
+                            </svg>
+                            <div class="ring-center">
+                              <svg class="shield" viewBox="0 0 24 24" fill="none">
+                                <path
+                                  d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                                  stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                                <path d="m8.6 12 2.4 2.4 4.4-4.8"
+                                  stroke="#4fbf6c" stroke-width="1.9" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                                <g style="display: none">
+                                  <path d="M12 8.4v4" stroke="#e5a94e" stroke-width="1.9"
+                                    stroke-linecap="round" />
+                                  <circle cx="12" cy="15.4" r="1.05" fill="#e5a94e" />
+                                </g>
+                              </svg>
+                            </div>
+                          </div>
+                          <div class="status-title">Protection active</div>
+                          <div class="status-sub">
+                            You'll be told instantly if it stops on Adam's device.
+                          </div>
+                        </div>
+
+                        <!-- compact counts -->
+                        <div class="mini-stats">
+                          <div class="mini">
+                            <span class="m-val">3</span>
+                            <span class="m-lab">Blocked today</span>
+                          </div>
+                          <div class="mini">
+                            <span class="m-val">2</span>
+                            <span class="m-lab">Alerts today</span>
+                          </div>
+                        </div>
+
+                        <!-- status blurb -->
+                        <div class="blurb">
+                          <div class="b-title">Web filtering on</div>
+                          <div class="b-text">
+                            Adult sites are being blocked in Safari on Adam's
+                            device. Today Shieldora blocked 3 attempts.
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Today's activity -->
+                      <div class="section-head">
+                        <h2>Today's activity</h2>
+                        <a href="#">See all</a>
+                      </div>
+
+                      <div class="highlight">
+                        <div class="badge">
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="9" stroke="#4fbf6c"
+                              stroke-width="1.7" />
+                            <path d="m5.6 5.6 12.8 12.8" stroke="#4fbf6c"
+                              stroke-width="1.7" stroke-linecap="round" />
+                          </svg>
+                        </div>
+                        <div>
+                          <div class="h-title">3 attempts blocked today</div>
+                          <div class="h-sub">
+                            Last blocked 2:14 PM · Safari
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="last-active">
+                        <span class="la-dot"></span> Last active 4 min ago
+                      </div>
+                    </div>
+
+                    <!-- Bottom nav -->
+                    <nav class="tabbar">
+                      <span class="tab active">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Home
+                      </span>
+                      <span class="tab">
+                        <span class="tab-dot"></span>
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                          <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        Alerts
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Activity
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="3" stroke="currentColor"
+                            stroke-width="1.8" />
+                          <path
+                            d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Settings
+                      </span>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__text">
+              <span class="step__num" aria-hidden="true">2</span>
+              <h3>The alerts screen</h3>
+              <p>
+                A blocked site was hit. Protection was turned off. Protection
+                came back on. Each one arrives as it happens, carrying the time
+                and the device — never what was searched or typed.
+              </p>
+            </div>
+            <div class="app-shot" role="img"
+              aria-label="The Shieldora alerts screen, listing blocked-site and protection-status alerts by time">
+              <div class="app-shot__inner appui" aria-hidden="true">
+<div class="phone">
+                  <div class="screen">
+                    <div class="island"></div>
+
+                    <!-- Status bar -->
+                    <div class="statusbar">
+                      <span>9:41</span>
+                      <span class="icons">
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                          <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+                          <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+                          <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+                          <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                          <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                            stroke-width="1.6" stroke-linecap="round" />
+                          <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                            stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+                          <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+                          <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                            stroke="#f3f4f5" stroke-opacity="0.4" />
+                          <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+                          <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                            fill="#f3f4f5" fill-opacity="0.4" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <!-- Scrollable content -->
+                    <div class="content">
+                      <h1 class="title">Alerts</h1>
+                      <p class="subtitle">Emma's device</p>
+
+                      <!-- Today -->
+                      <div class="day-head">Today</div>
+                      <div class="alerts">
+                        <div class="alert sev-high">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                                stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
+                              <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
+                                stroke-width="1.8" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Protection was turned off</div>
+                            <div class="a-meta">Shieldora stopped running</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">2:14 PM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-med">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                                stroke-width="1.7" />
+                              <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                                stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Adult site blocked</div>
+                            <div class="a-meta">Safari · private browsing</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">1:02 PM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-med">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                                stroke-width="1.7" />
+                              <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                                stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Blocked page in Safari</div>
+                            <div class="a-meta">Adult content</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">11:47 AM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-high">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                                stroke-width="1.7" />
+                              <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                                stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Adult site blocked</div>
+                            <div class="a-meta">Safari</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">9:15 AM</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Yesterday -->
+                      <div class="day-head">Yesterday</div>
+                      <div class="alerts">
+                        <div class="alert sev-high">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                                stroke-width="1.7" />
+                              <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                                stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Adult site blocked</div>
+                            <div class="a-meta">Safari</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">8:58 PM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-med">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                                stroke-width="1.7" />
+                              <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                                stroke-width="1.7" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Blocked page in Safari</div>
+                            <div class="a-meta">Private browsing</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">7:32 PM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-low">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                                stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
+                              <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
+                                stroke-width="1.9" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Protection turned back on</div>
+                            <div class="a-meta">Web filtering resumed</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">5:20 PM</span>
+                          </div>
+                        </div>
+                        <div class="alert sev-high">
+                          <div class="a-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                                stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
+                              <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
+                                stroke-width="1.8" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="a-body">
+                            <div class="a-title">Protection was turned off</div>
+                            <div class="a-meta">Shieldora stopped running</div>
+                          </div>
+                          <div class="a-right">
+                            <span class="sev-dot"></span>
+                            <span class="a-time">3:04 PM</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Bottom nav (Alerts active) -->
+                    <nav class="tabbar">
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Home
+                      </span>
+                      <span class="tab active">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                          <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        Alerts
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Activity
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="3" stroke="currentColor"
+                            stroke-width="1.8" />
+                          <path
+                            d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Settings
+                      </span>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__text">
+              <span class="step__num" aria-hidden="true">3</span>
+              <h3>The activity screen</h3>
+              <p>
+                Counts by day and by week, so you can tell a one-off from
+                something worth sitting down about. Counts only — never the
+                content behind them.
+              </p>
+            </div>
+            <div class="app-shot" role="img"
+              aria-label="The Shieldora activity screen, charting blocked counts by day and category">
+              <div class="app-shot__inner appui" aria-hidden="true">
+<div class="phone">
+                  <div class="screen">
+                    <div class="island"></div>
+
+                    <!-- Status bar -->
+                    <div class="statusbar">
+                      <span>9:41</span>
+                      <span class="icons">
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                          <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+                          <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+                          <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+                          <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                          <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                            stroke-width="1.6" stroke-linecap="round" />
+                          <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                            stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+                          <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+                          <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                            stroke="#f3f4f5" stroke-opacity="0.4" />
+                          <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+                          <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                            fill="#f3f4f5" fill-opacity="0.4" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <!-- Scrollable content -->
+                    <div class="content">
+                      <h1 class="title">Activity</h1>
+                      <p class="subtitle">Emma's device</p>
+
+                      <!-- Weekly summary -->
+                      <div class="summary">
+                        <div class="sum-card">
+                          <div class="s-num">56</div>
+                          <div class="s-label">Blocked this week</div>
+                          <span class="s-delta down">↓ 12% from last week</span>
+                        </div>
+                        <div class="sum-card">
+                          <div class="s-num">9</div>
+                          <div class="s-label">Alerts sent this week</div>
+                          <span class="s-delta down">↓ 8% from last week</span>
+                        </div>
+                      </div>
+
+                      <!-- Bar chart -->
+                      <div class="day-head">Blocked per day</div>
+                      <div class="card-block">
+                        <div class="chart">
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">6</span>
+                              <div class="bar" style="height: 55%"></div>
+                            </div>
+                            <div class="bar-day">Mon</div>
+                          </div>
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">9</span>
+                              <div class="bar" style="height: 82%"></div>
+                            </div>
+                            <div class="bar-day">Tue</div>
+                          </div>
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">5</span>
+                              <div class="bar" style="height: 45%"></div>
+                            </div>
+                            <div class="bar-day">Wed</div>
+                          </div>
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">11</span>
+                              <div class="bar" style="height: 100%"></div>
+                            </div>
+                            <div class="bar-day">Thu</div>
+                          </div>
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">7</span>
+                              <div class="bar" style="height: 64%"></div>
+                            </div>
+                            <div class="bar-day">Fri</div>
+                          </div>
+                          <div class="bar-col">
+                            <div class="bar-track">
+                              <span class="bar-val">8</span>
+                              <div class="bar" style="height: 73%"></div>
+                            </div>
+                            <div class="bar-day">Sat</div>
+                          </div>
+                          <div class="bar-col today">
+                            <div class="bar-track">
+                              <span class="bar-val">10</span>
+                              <div class="bar" style="height: 91%"></div>
+                            </div>
+                            <div class="bar-day">Sun</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Blocked by category -->
+                      <div class="day-head">Blocked by category</div>
+                      <div class="card-block">
+                        <div class="sources">
+                          <div class="source-row">
+                            <div class="src-top">
+                              <span class="src-name">Adult content</span>
+                              <span class="src-count">21 blocked</span>
+                            </div>
+                            <div class="src-bar">
+                              <div class="src-fill" style="width: 100%"></div>
+                            </div>
+                          </div>
+                          <div class="source-row">
+                            <div class="src-top">
+                              <span class="src-name">Explicit image sites</span>
+                              <span class="src-count">14 blocked</span>
+                            </div>
+                            <div class="src-bar">
+                              <div class="src-fill" style="width: 67%"></div>
+                            </div>
+                          </div>
+                          <div class="source-row">
+                            <div class="src-top">
+                              <span class="src-name">Violence &amp; gore</span>
+                              <span class="src-count">11 blocked</span>
+                            </div>
+                            <div class="src-bar">
+                              <div class="src-fill" style="width: 52%"></div>
+                            </div>
+                          </div>
+                          <div class="source-row">
+                            <div class="src-top">
+                              <span class="src-name">Gambling</span>
+                              <span class="src-count">6 blocked</span>
+                            </div>
+                            <div class="src-bar">
+                              <div class="src-fill" style="width: 29%"></div>
+                            </div>
+                          </div>
+                          <div class="source-row">
+                            <div class="src-top">
+                              <span class="src-name">Other blocked sites</span>
+                              <span class="src-count">4 blocked</span>
+                            </div>
+                            <div class="src-bar">
+                              <div class="src-fill" style="width: 19%"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Bottom nav (Activity active) -->
+                    <nav class="tabbar">
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Home
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                          <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        Alerts
+                      </span>
+                      <span class="tab active">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Activity
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="3" stroke="currentColor"
+                            stroke-width="1.8" />
+                          <path
+                            d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Settings
+                      </span>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+          <li class="step reveal">
+            <div class="step__text">
+              <span class="step__num" aria-hidden="true">4</span>
+              <h3>The settings screen</h3>
+              <p>
+                Turning protection off or deleting the app needs your account
+                password. Your child can't do it alone — and if it ever
+                happens, you get an alert.
+              </p>
+            </div>
+            <div class="app-shot" role="img"
+              aria-label="The Shieldora settings screen, showing protection locked and the blocked categories">
+              <div class="app-shot__inner appui" aria-hidden="true">
+<div class="phone">
+                  <div class="screen">
+                    <div class="island"></div>
+
+                    <!-- Status bar -->
+                    <div class="statusbar">
+                      <span>9:41</span>
+                      <span class="icons">
+                        <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+                          <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+                          <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+                          <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+                          <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+                          <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                            stroke-width="1.6" stroke-linecap="round" />
+                          <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                            stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+                          <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+                        </svg>
+                        <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+                          <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                            stroke="#f3f4f5" stroke-opacity="0.4" />
+                          <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+                          <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                            fill="#f3f4f5" fill-opacity="0.4" />
+                        </svg>
+                      </span>
+                    </div>
+
+                    <!-- Scrollable content -->
+                    <div class="content">
+                      <h1 class="title">Settings</h1>
+                      <p class="subtitle">Emma's device</p>
+
+                      <!-- (1) Protection status -->
+                      <div class="lock-card">
+                        <div class="lock-top">
+                          <div class="lock-ring">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
+                                fill="#fff" fill-opacity="0.16" stroke="#fff"
+                                stroke-width="1.6" />
+                              <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#fff"
+                                stroke-width="1.6" stroke-linecap="round" />
+                              <circle cx="12" cy="15.5" r="1.6" fill="#fff" />
+                            </svg>
+                          </div>
+                          <div>
+                            <div class="lock-title">Protection Active</div>
+                            <div class="lock-status">Tamper-aware</div>
+                          </div>
+                        </div>
+                        <div class="lock-text">
+                          Shieldora is running on Emma's device. If it's turned off or
+                          removed, you'll get an alert straight away. Turning it off needs
+                          your account password.
+                        </div>
+                        <span class="lock-pill">
+                          <svg viewBox="0 0 24 24" fill="none">
+                            <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
+                              stroke="#fff" stroke-width="1.8" />
+                            <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#fff"
+                              stroke-width="1.8" stroke-linecap="round" />
+                          </svg>
+                          You're alerted if it stops
+                        </span>
+                      </div>
+
+                      <!-- (2) Blocked categories -->
+                      <div class="day-head">Blocked categories</div>
+                      <div class="set-list">
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12Z"
+                                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                              <circle cx="12" cy="12" r="2.6" stroke="#4fbf6c"
+                                stroke-width="1.6" />
+                              <path d="m4 4 16 16" stroke="#4fbf6c" stroke-width="1.6"
+                                stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Explicit content</div>
+                            <div class="set-sub">Porn &amp; nudity sites</div>
+                          </div>
+                          <div class="toggle on"></div>
+                        </div>
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <circle cx="12" cy="12" r="8.5" stroke="#4fbf6c"
+                                stroke-width="1.6" />
+                              <path
+                                d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17"
+                                stroke="#4fbf6c" stroke-width="1.6" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Adult sites</div>
+                            <div class="set-sub">Known adult domains</div>
+                          </div>
+                          <div class="toggle on"></div>
+                        </div>
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M12 3.5 21 19H3L12 3.5Z" stroke="#4fbf6c"
+                                stroke-width="1.6" stroke-linejoin="round" />
+                              <path d="M12 10v4" stroke="#4fbf6c" stroke-width="1.7"
+                                stroke-linecap="round" />
+                              <circle cx="12" cy="16.5" r="1" fill="#4fbf6c" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Violence &amp; gore</div>
+                            <div class="set-sub">Graphic and violent sites</div>
+                          </div>
+                          <div class="toggle on"></div>
+                        </div>
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <rect x="4" y="4" width="16" height="16" rx="3"
+                                stroke="#4fbf6c" stroke-width="1.6" />
+                              <circle cx="9" cy="9" r="1.3" fill="#4fbf6c" />
+                              <circle cx="15" cy="15" r="1.3" fill="#4fbf6c" />
+                              <circle cx="15" cy="9" r="1.3" fill="#4fbf6c" />
+                              <circle cx="9" cy="15" r="1.3" fill="#4fbf6c" />
+                              <circle cx="12" cy="12" r="1.3" fill="#4fbf6c" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Gambling</div>
+                            <div class="set-sub">Betting &amp; casino sites</div>
+                          </div>
+                          <div class="toggle"></div>
+                        </div>
+                      </div>
+
+                      <!-- (3) Age-based trust level -->
+                      <div class="day-head">Age-based trust level</div>
+                      <div class="segment">
+                        <span class="seg">Young child</span>
+                        <span class="seg active">Pre-teen</span>
+                        <span class="seg">Teen</span>
+                      </div>
+                      <div class="seg-cap">
+                        Currently: Pre-teen (Age 11) · Filtering strictness eases as Emma
+                        gets older.
+                      </div>
+
+                      <!-- (4) Alerts -->
+                      <div class="day-head">Alerts</div>
+                      <div class="set-list">
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                                stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                              <path d="M10 19a2 2 0 0 0 4 0" stroke="#4fbf6c"
+                                stroke-width="1.6" stroke-linecap="round" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Instant alerts</div>
+                            <div class="set-sub">Push me if protection stops or content is blocked</div>
+                          </div>
+                          <div class="toggle on"></div>
+                        </div>
+                        <div class="set-row">
+                          <div class="set-ico">
+                            <svg viewBox="0 0 24 24" fill="none">
+                              <rect x="3.5" y="5.5" width="17" height="13" rx="2.5"
+                                stroke="#4fbf6c" stroke-width="1.6" />
+                              <path d="m4.5 7 7.5 5.5L19.5 7" stroke="#4fbf6c"
+                                stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                            </svg>
+                          </div>
+                          <div class="set-main">
+                            <div class="set-name">Weekly digest email</div>
+                            <div class="set-sub">Summary every Sunday</div>
+                          </div>
+                          <div class="toggle on"></div>
+                        </div>
+                      </div>
+
+                      <!-- (5) Child profile -->
+                      <div class="day-head">Child</div>
+                      <div class="profile" style="margin-top: 0">
+                        <div class="avatar">E</div>
+                        <div class="info">
+                          <div class="name">Emma</div>
+                          <div class="device">iPhone 13 · Age 11</div>
+                        </div>
+                        <span class="switch">
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <path d="m9 6 6 6-6 6" stroke="#8b929b" stroke-width="2"
+                              stroke-linecap="round" stroke-linejoin="round" />
+                          </svg>
+                        </span>
+                      </div>
+                    </div>
+
+                    <!-- Bottom nav (Settings active) -->
+                    <nav class="tabbar">
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                          <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        </svg>
+                        Home
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                            stroke="currentColor" stroke-width="1.8"
+                            stroke-linejoin="round" />
+                          <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round" />
+                        </svg>
+                        Alerts
+                      </span>
+                      <span class="tab">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                            stroke-width="1.8" stroke-linecap="round"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Activity
+                      </span>
+                      <span class="tab active">
+                        <svg viewBox="0 0 24 24" fill="none">
+                          <circle cx="12" cy="12" r="3" stroke="currentColor"
+                            stroke-width="1.8" />
+                          <path
+                            d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                            stroke="currentColor" stroke-width="1.5"
+                            stroke-linejoin="round" />
+                        </svg>
+                        Settings
+                      </span>
+                    </nav>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+        <p class="steps-footnote reveal">
+          <a href="dashboard.html">Open the interactive mockup →</a>
         </p>
-        <ul>
-          <li>Next: deeper tamper-proof device protection and filters inside apps like TikTok and Instagram.</li>
-          <li>Later: support for adults working to break free from compulsive habits too.</li>
+      </section>
+
+      <!-- ================= HOW IT WORKS ================= -->
+      <section class="section" id="how-it-works">
+        <div class="section-head reveal">
+          <span class="eyebrow">How it works</span>
+          <h2>Three steps, then we do the work</h2>
+          <p>Set it up on a weeknight and leave it alone.</p>
+        </div>
+        <div class="features">
+          <div class="feature reveal" style="--i: 1">
+            <div class="icon" aria-hidden="true">1</div>
+            <h3>Set up your parent account</h3>
+            <p>
+              You create it on your own phone. It's where every alert lands,
+              and the only place protection can be changed.
+            </p>
+          </div>
+          <div class="feature reveal" style="--i: 2">
+            <div class="icon" aria-hidden="true">2</div>
+            <h3>Link your child's device</h3>
+            <p>
+              A guided setup switches on filtering built into iOS. Safari is
+              covered, including private browsing. Other browsers are blocked
+              by default — you can allow one, with a warning.
+            </p>
+          </div>
+          <div class="feature reveal" style="--i: 3">
+            <div class="icon" aria-hidden="true">3</div>
+            <h3>The alerts start</h3>
+            <p>
+              From then on it runs quietly, and you hear from Shieldora on the
+              two things that matter: a blocked site was hit, or protection
+              changed.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= WHAT IT DOESN'T DO ================= -->
+      <section class="section">
+        <div class="section-head reveal">
+          <span class="eyebrow">Being straight with you</span>
+          <h2>What Shieldora doesn't do</h2>
+          <p>
+            None of this is missing work. Each one is a line we drew on
+            purpose.
+          </p>
+        </div>
+        <ul class="choices">
+          <li class="reveal" style="--i: 1">
+            <strong>We don't see search terms, typed text, messages or
+            browsing history.</strong>
+            An alert tells you a blocked site was hit. It never tells you what
+            your child typed to get there.
+          </li>
+          <li class="reveal" style="--i: 2">
+            <strong>We store that something was blocked, not what it
+            was.</strong>
+            The record is that a block happened, and when. The page behind it
+            isn't kept, so it can't be read back later — by you, by us, or by
+            anyone else.
+          </li>
+          <li class="reveal" style="--i: 3">
+            <strong>We don't show you your child's screen.</strong>
+            No screenshots, no live view, no scrolling through their day. If
+            that's what you're after, Shieldora is the wrong app.
+          </li>
+          <li class="reveal" style="--i: 4">
+            <strong>We don't send you everything.</strong>
+            Alerts are limited to the two things worth interrupting you for: a
+            block happened, or protection changed. Everything else stays off
+            your phone.
+          </li>
         </ul>
-        <p>
-          Shieldora is a long-term mission to protect people of all ages, not just a
-          single feature. This is just the beginning.
-        </p>
       </section>
 
-      <section class="signup">
-        <h2>Be the first to protect your family</h2>
-        <p>
-          Join the waitlist and we'll email you the moment Shieldora is ready for
-          your family's devices.
-        </p>
-        <form
-          id="waitlist-form"
-          action="https://formspree.io/f/mrewypvq"
-          method="POST"
-        >
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-            aria-label="Email address"
-          />
-          <button type="submit">Join the waitlist</button>
-        </form>
-        <p class="success" id="success">
-          ✅ You're on the list! We'll be in touch soon.
-        </p>
-        <p class="error" id="error">
-          ⚠️ Something went wrong. Please try again.
-        </p>
-        <p class="form-note">No spam. We'll only email you about Shieldora.</p>
+      <!-- ================= WAITLIST ================= -->
+      <section class="section" id="waitlist">
+        <div class="signup reveal">
+          <h2>Be the first to protect your family</h2>
+          <p>
+            Join the waitlist and we'll email you the moment Shieldora is ready
+            for your family's devices.
+          </p>
+          <form
+            id="waitlist-form"
+            action="https://formspree.io/f/mrewypvq"
+            method="POST"
+          >
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              aria-label="Email address"
+            />
+            <button type="submit">Join the waitlist</button>
+          </form>
+          <p class="success" id="success">
+            ✅ You're on the list! We'll be in touch soon.
+          </p>
+          <p class="error" id="error">
+            ⚠️ Something went wrong. Please try again.
+          </p>
+          <p class="form-note">No spam. We'll only email you about Shieldora.</p>
+        </div>
+      </section>
+
+      <!-- ================= FAQ ================= -->
+      <section class="section" id="faq">
+        <div class="section-head reveal">
+          <span class="eyebrow">FAQ</span>
+          <h2>Questions parents ask</h2>
+        </div>
+        <div class="faq">
+          <details class="reveal" style="--i: 1">
+            <summary>What exactly do the alerts tell me?</summary>
+            <p class="faq-body">
+              Behaviour, not content. That a blocked site was hit, or that
+              protection was turned off or came back on, with the time and the
+              device.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 2">
+            <summary>Do you see my child's browsing history or messages?</summary>
+            <p class="faq-body">
+              No. We don't collect search terms, typed text, messages or
+              browsing history. That's a deliberate line, not a feature we
+              haven't built yet.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 3">
+            <summary>Can my child just turn it off?</summary>
+            <p class="faq-body">
+              No. Turning off protection or deleting the app needs your account
+              password. And if protection is ever switched off, you get an
+              alert — so it can't happen quietly.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 4">
+            <summary>Will it catch everything?</summary>
+            <p class="faq-body">
+              No filter is perfect, and some content will get through. That is
+              exactly why the alerts matter: you hear what was blocked and when
+              protection changed, rather than assuming nothing ever got past.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 5">
+            <summary>How does the blocking actually work?</summary>
+            <p class="faq-body">
+              Shieldora uses filtering built into iOS, on your child's iPhone
+              or iPad. The filtering happens on the device itself.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 6">
+            <summary>Which browsers does it cover?</summary>
+            <p class="faq-body">
+              Safari, including private browsing. Other browsers are blocked by
+              default. You can allow one if your child needs it, and we'll warn
+              you that content inside it isn't filtered.
+            </p>
+          </details>
+          <details class="reveal" style="--i: 7">
+            <summary>When can I get it?</summary>
+            <p class="faq-body">
+              Shieldora isn't released yet. Join the waitlist and you'll be
+              among the first families we let in.
+            </p>
+          </details>
+        </div>
       </section>
 
       <footer>© 2026 Shieldora · Content Guardian — protecting kids online.</footer>
@@ -783,6 +3276,31 @@
           button.textContent = "Join the waitlist";
         }
       });
+    </script>
+
+    <script>
+      // Fade-and-rise on scroll. No library — one IntersectionObserver,
+      // and anything already on screen reveals on the first tick.
+      (function () {
+        // Nothing to do unless the head script armed the hidden state.
+        if (!document.documentElement.classList.contains("js-reveal")) return;
+
+        const items = document.querySelectorAll(".reveal");
+
+        const observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.12, rootMargin: "0px 0px -8% 0px" }
+        );
+
+        items.forEach((el) => observer.observe(el));
+      })();
     </script>
   </body>
 </html>
