@@ -372,7 +372,990 @@ footer a:hover{color:var(--ink)}
   .kind-head h3,.fstep h3{font-size:22px}
   .fglyph{width:92px}
 }
-</style>
+
+/* ===== Parent app preview =============================================
+   The device markup and stylesheet are lifted from dashboard.html verbatim and
+   scoped under .appdemo, rather than re-typed. An approximation drifts; this
+   cannot. Only the content is corrected — Emma throughout, the six alert
+   strings this page already uses, no content category named.
+
+   Scaled with a transform so every proportion is exactly the draft's; the
+   negative margin takes back the space the untransformed box still occupies. */
+.screens{display:grid;grid-template-columns:1fr;gap:40px;justify-items:center;margin-top:12px}
+.pscreen{margin:0;display:grid;justify-items:center;gap:16px}
+.pscreen figcaption{font-size:13.5px;color:var(--mid);text-align:center;max-width:32ch}
+/* --s is the scale; the phone's own box is 390 x 844. Origin is top-left, not
+   centre: a grid item wider than its track has its centring clamped to start,
+   which offset the phone by half the difference. From top-left the scaled box
+   lands exactly on the track. */
+.appdemo{--s:.62}
+.appdemo .pscreen{width:calc(390px * var(--s));justify-items:start}
+.appdemo .dm-phone{transform:scale(var(--s));transform-origin:top left;
+  margin-bottom:calc(-844px * (1 - var(--s)))}
+.appdemo .pscreen figcaption{justify-self:center}
+@media (min-width:760px){
+  /* auto tracks soak up the free space and push the pair to the edges;
+     justify-content keeps them content-sized and centred as a pair. */
+  .screens{grid-template-columns:repeat(2,auto);justify-content:center;
+    gap:clamp(28px,5vw,88px);align-items:start}
+}
+@media (min-width:1100px){ .appdemo{--s:.72} }
+@media (min-width:1440px){ .appdemo{--s:.8} }
+
+/* --- dashboard.html's stylesheet, scoped --- */
+
+.appdemo h1, .appdemo h2, .appdemo nav, .appdemo a,
+.appdemo form, .appdemo footer, .appdemo details, .appdemo canvas {
+  font: inherit; letter-spacing: normal; color: inherit;
+  margin: 0; padding: 0; border: 0; background: none;
+}
+.appdemo h1, .appdemo h2, .appdemo nav { display: block; }
+.appdemo a { display: inline; }
+
+.appdemo {
+        --green: #3fa15a;
+        --green-bright: #4fbf6c;
+        --green-dark: #2b7040;
+        --bg: #0c0d0f;
+        --card: #17191d;
+        --card-2: #1e2127;
+        --ink: #f3f4f5;
+        --muted: #8b929b;
+        --line: #26292f;
+}
+.appdemo { font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text",
+          "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color: var(--ink); }
+.appdemo .dm-phone {
+        position: relative;
+        width: 390px;
+        height: 844px;
+        background: #000;
+        border-radius: 56px;
+        padding: 12px;
+        box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55),
+          inset 0 0 0 2px rgba(255, 255, 255, 0.08);
+}
+.appdemo .dm-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: var(--bg);
+        border-radius: 46px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+}
+.appdemo .dm-island {
+        position: absolute;
+        top: 11px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 122px;
+        height: 34px;
+        background: #000;
+        border-radius: 20px;
+        z-index: 20;
+}
+.appdemo .dm-statusbar {
+        height: 54px;
+        flex: 0 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        padding: 0 26px 6px;
+        font-size: 15px;
+        font-weight: 600;
+        color: var(--ink);
+        z-index: 10;
+}
+.appdemo .dm-statusbar .dm-icons {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+}
+.appdemo .dm-content {
+        flex: 1 1 auto;
+        overflow-y: auto;
+        padding: 8px 20px 20px;
+}
+.appdemo .dm-content::-webkit-scrollbar {
+        display: none;
+}
+.appdemo .dm-greeting {
+        font-size: 15px;
+        color: var(--muted);
+        margin: 6px 0 2px;
+}
+.appdemo .dm-title {
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin: 0 0 18px;
+}
+.appdemo .dm-profile {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 14px 16px;
+        margin-top: 16px;
+}
+.appdemo .dm-avatar {
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+        font-size: 22px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-profile .dm-info {
+        flex: 1;
+        min-width: 0;
+}
+.appdemo .dm-profile .dm-name {
+        font-size: 18px;
+        font-weight: 700;
+}
+.appdemo .dm-profile .dm-device {
+        font-size: 13px;
+        color: var(--muted);
+}
+.appdemo .dm-profile .dm-switch {
+        color: var(--muted);
+}
+.appdemo .dm-hero {
+        margin-top: 16px;
+        background: radial-gradient(
+            120% 80% at 50% 0%,
+            rgba(63, 161, 90, 0.16),
+            transparent 60%
+          ),
+          linear-gradient(180deg, #14161a, #0e0f12);
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 26px 20px 22px;
+}
+.appdemo .dm-date-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        margin-bottom: 20px;
+}
+.appdemo .dm-date-nav span {
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.28em;
+        color: var(--muted);
+        text-transform: uppercase;
+}
+.appdemo .dm-date-nav button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        color: var(--muted);
+}
+.appdemo .dm-ring-center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+.appdemo .dm-app-logo {
+        text-align: center;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+}
+.appdemo .dm-status-block {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+}
+.appdemo .dm-status-ring {
+        position: relative;
+        width: 132px;
+        height: 132px;
+}
+.appdemo .dm-status-ring svg.dm-dial {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+}
+.appdemo .dm-status-ring .dm-prog {
+        stroke-dashoffset: 263.9;
+        transition: stroke-dashoffset 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+          stroke 0.3s ease;
+}
+.appdemo .dm-status-ring .dm-ring-center .dm-shield {
+        width: 46px;
+        height: 46px;
+        transform: none;
+}
+.appdemo .dm-status-title {
+        margin-top: 16px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--green-bright);
+}
+.appdemo .dm-status-sub {
+        margin-top: 6px;
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: var(--muted);
+        max-width: 250px;
+}
+.appdemo .dm-mini-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+        margin-top: 20px;
+}
+.appdemo .dm-mini {
+        text-align: center;
+        padding: 12px 8px;
+        border-radius: 14px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--line);
+}
+.appdemo .dm-mini .dm-m-val {
+        display: block;
+        font-size: 22px;
+        font-weight: 800;
+        line-height: 1;
+}
+.appdemo .dm-mini .dm-m-lab {
+        display: block;
+        margin-top: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+}
+.appdemo .dm-blurb {
+        margin-top: 22px;
+        padding-top: 20px;
+        border-top: 1px solid var(--line);
+}
+.appdemo .dm-blurb .dm-b-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--green-bright);
+        margin-bottom: 4px;
+}
+.appdemo .dm-blurb .dm-b-text {
+        font-size: 13px;
+        line-height: 1.5;
+        color: var(--muted);
+}
+.appdemo .dm-section-head {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        margin: 24px 4px 12px;
+}
+.appdemo .dm-section-head h2 {
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+}
+.appdemo .dm-section-head a {
+        font-size: 14px;
+        color: var(--green-bright);
+        text-decoration: none;
+        font-weight: 600;
+}
+.appdemo .dm-highlight {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px;
+}
+.appdemo .dm-highlight .dm-badge {
+        width: 44px;
+        height: 44px;
+        border-radius: 12px;
+        background: rgba(63, 161, 90, 0.14);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-highlight .dm-badge svg {
+        width: 22px;
+        height: 22px;
+}
+.appdemo .dm-highlight .dm-h-title {
+        font-size: 15px;
+        font-weight: 700;
+}
+.appdemo .dm-highlight .dm-h-sub {
+        font-size: 13px;
+        color: var(--muted);
+}
+.appdemo .dm-subtitle {
+        font-size: 15px;
+        color: var(--muted);
+        margin: -12px 0 18px;
+}
+.appdemo .dm-day-head {
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin: 18px 4px 10px;
+}
+.appdemo .dm-alerts {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+}
+.appdemo .dm-alert {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 13px 14px;
+}
+.appdemo .dm-alert .dm-a-ico {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-alert .dm-a-ico svg {
+        width: 21px;
+        height: 21px;
+}
+.appdemo .dm-sev-high .dm-a-ico {
+        background: rgba(240, 104, 95, 0.14);
+}
+.appdemo .dm-sev-med .dm-a-ico {
+        background: rgba(229, 169, 78, 0.14);
+}
+.appdemo .dm-sev-low .dm-a-ico {
+        background: rgba(63, 161, 90, 0.14);
+}
+.appdemo .dm-alert .dm-a-body {
+        flex: 1;
+        min-width: 0;
+}
+.appdemo .dm-alert .dm-a-title {
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 1.25;
+}
+.appdemo .dm-alert .dm-a-meta {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+}
+.appdemo .dm-alert .dm-a-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 7px;
+        flex: 0 0 auto;
+}
+.appdemo .dm-alert .dm-a-time {
+        font-size: 11.5px;
+        color: var(--muted);
+        white-space: nowrap;
+}
+.appdemo .dm-sev-dot {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+}
+.appdemo .dm-sev-high .dm-sev-dot {
+        background: #f0685f;
+        box-shadow: 0 0 0 4px rgba(240, 104, 95, 0.16);
+}
+.appdemo .dm-sev-med .dm-sev-dot {
+        background: #e5a94e;
+        box-shadow: 0 0 0 4px rgba(229, 169, 78, 0.16);
+}
+.appdemo .dm-sev-low .dm-sev-dot {
+        background: #4fbf6c;
+        box-shadow: 0 0 0 4px rgba(79, 191, 108, 0.16);
+}
+.appdemo .dm-card-block {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 18px 16px;
+}
+.appdemo .dm-summary {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+}
+.appdemo .dm-sum-card {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        padding: 16px 15px;
+}
+.appdemo .dm-sum-card .dm-s-num {
+        font-size: 30px;
+        font-weight: 800;
+        line-height: 1;
+}
+.appdemo .dm-sum-card .dm-s-label {
+        font-size: 13px;
+        color: var(--muted);
+        margin-top: 6px;
+}
+.appdemo .dm-s-delta {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 11.5px;
+        font-weight: 700;
+        margin-top: 12px;
+        padding: 3px 9px;
+        border-radius: 999px;
+}
+.appdemo .dm-s-delta.dm-down {
+        color: var(--green-bright);
+        background: rgba(79, 191, 108, 0.12);
+}
+.appdemo .dm-s-delta.dm-up {
+        color: #f0685f;
+        background: rgba(240, 104, 95, 0.12);
+}
+.appdemo .dm-chart {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 7px;
+        height: 156px;
+}
+.appdemo .dm-bar-col {
+        flex: 1;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+.appdemo .dm-bar-track {
+        flex: 1;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 5px;
+}
+.appdemo .dm-bar-val {
+        font-size: 11px;
+        font-weight: 700;
+        color: var(--muted);
+}
+.appdemo .dm-bar {
+        width: 22px;
+        border-radius: 6px;
+        background: linear-gradient(180deg, #4fbf6c, #2b7040);
+}
+.appdemo .dm-bar-col.dm-today .dm-bar {
+        box-shadow: 0 0 0 2px rgba(79, 191, 108, 0.35);
+}
+.appdemo .dm-bar-col.dm-today .dm-bar-val {
+        color: var(--green-bright);
+}
+.appdemo .dm-bar-day {
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        margin-top: 9px;
+}
+.appdemo .dm-bar-col.dm-today .dm-bar-day {
+        color: var(--green-bright);
+}
+.appdemo .dm-sources {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+}
+.appdemo .dm-src-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 8px;
+}
+.appdemo .dm-src-name {
+        font-size: 14px;
+        font-weight: 600;
+}
+.appdemo .dm-src-count {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+}
+.appdemo .dm-src-bar {
+        height: 8px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.06);
+        overflow: hidden;
+}
+.appdemo .dm-src-fill {
+        height: 100%;
+        border-radius: 999px;
+        background: linear-gradient(90deg, #2b7040, #4fbf6c);
+}
+.appdemo .dm-lock-card {
+        background: radial-gradient(
+            120% 90% at 0% 0%,
+            rgba(255, 255, 255, 0.12),
+            transparent 55%
+          ),
+          linear-gradient(165deg, #3fa15a, #235d34);
+        border-radius: 22px;
+        padding: 20px;
+        box-shadow: 0 16px 36px rgba(43, 112, 64, 0.32);
+}
+.appdemo .dm-lock-top {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+}
+.appdemo .dm-lock-ring {
+        width: 52px;
+        height: 52px;
+        border-radius: 15px;
+        background: rgba(255, 255, 255, 0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.3);
+}
+.appdemo .dm-lock-ring svg {
+        width: 26px;
+        height: 26px;
+}
+.appdemo .dm-lock-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: #fff;
+}
+.appdemo .dm-lock-status {
+        font-size: 13px;
+        color: rgba(255, 255, 255, 0.85);
+        margin-top: 1px;
+}
+.appdemo .dm-lock-text {
+        font-size: 13.5px;
+        line-height: 1.5;
+        color: rgba(255, 255, 255, 0.92);
+        margin-top: 15px;
+}
+.appdemo .dm-lock-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 15px;
+        background: rgba(0, 0, 0, 0.2);
+        color: #fff;
+        padding: 8px 13px;
+        border-radius: 999px;
+        font-size: 12.5px;
+        font-weight: 700;
+}
+.appdemo .dm-lock-pill svg {
+        width: 14px;
+        height: 14px;
+}
+.appdemo .dm-set-list {
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        overflow: hidden;
+}
+.appdemo .dm-set-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 13px 15px;
+}
+.appdemo .dm-set-row + .dm-set-row {
+        border-top: 1px solid var(--line);
+}
+.appdemo .dm-set-ico {
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        background: rgba(63, 161, 90, 0.12);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-set-ico svg {
+        width: 18px;
+        height: 18px;
+}
+.appdemo .dm-set-main {
+        flex: 1;
+        min-width: 0;
+}
+.appdemo .dm-set-name {
+        font-size: 15px;
+        font-weight: 600;
+}
+.appdemo .dm-set-sub {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 2px;
+}
+.appdemo .dm-toggle {
+        width: 46px;
+        height: 28px;
+        border-radius: 999px;
+        background: #33373d;
+        position: relative;
+        flex: 0 0 auto;
+}
+.appdemo .dm-toggle::after {
+        content: "";
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+.appdemo .dm-toggle.dm-on {
+        background: var(--green);
+}
+.appdemo .dm-toggle.dm-on::after {
+        left: 21px;
+}
+.appdemo .dm-segment {
+        display: flex;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 4px;
+        gap: 4px;
+}
+.appdemo .dm-seg {
+        flex: 1;
+        text-align: center;
+        padding: 11px 6px;
+        border-radius: 10px;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--muted);
+        border: none;
+        background: none;
+        cursor: pointer;
+}
+.appdemo .dm-seg.dm-active {
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+}
+.appdemo .dm-seg-cap {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 11px;
+        text-align: center;
+}
+.appdemo .dm-home-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+}
+.appdemo .dm-switcher {
+        position: relative;
+        flex: 0 0 auto;
+}
+.appdemo .dm-pill {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: var(--card);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 5px 11px 5px 5px;
+        cursor: pointer;
+        color: var(--ink);
+}
+.appdemo .dm-pill-av {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+}
+.appdemo .dm-pill-name {
+        font-size: 14px;
+        font-weight: 600;
+}
+.appdemo .dm-pill svg {
+        width: 15px;
+        height: 15px;
+        color: var(--muted);
+}
+.appdemo .dm-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        width: 236px;
+        background: #191b1f;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 6px;
+        box-shadow: 0 22px 44px rgba(0, 0, 0, 0.55);
+        z-index: 50;
+        display: none;
+}
+.appdemo .dm-dropdown.dm-open {
+        display: block;
+}
+.appdemo .dm-drop-row {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 9px 10px;
+        border-radius: 12px;
+        cursor: pointer;
+}
+.appdemo .dm-drop-row:hover {
+        background: rgba(255, 255, 255, 0.04);
+}
+.appdemo .dm-drop-row.dm-selected {
+        background: rgba(63, 161, 90, 0.12);
+}
+.appdemo .dm-drop-av {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(160deg, #4aa863, #256437);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-drop-info {
+        flex: 1;
+        min-width: 0;
+}
+.appdemo .dm-drop-name {
+        font-size: 14px;
+        font-weight: 600;
+}
+.appdemo .dm-drop-row.dm-selected .dm-drop-name {
+        color: var(--green-bright);
+}
+.appdemo .dm-drop-dev {
+        font-size: 12px;
+        color: var(--muted);
+}
+.appdemo .dm-drop-check {
+        display: flex;
+        color: var(--green-bright);
+}
+.appdemo .dm-drop-add {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        padding: 10px;
+        margin-top: 4px;
+        border-top: 1px solid var(--line);
+        border-radius: 12px;
+        cursor: pointer;
+        color: var(--muted);
+        font-size: 14px;
+        font-weight: 600;
+}
+.appdemo .dm-drop-add .dm-add-ic {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        border: 1.5px dashed #4a4f57;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-attention {
+        display: none;
+        align-items: center;
+        gap: 12px;
+        background: rgba(229, 169, 78, 0.12);
+        border: 1px solid rgba(229, 169, 78, 0.4);
+        border-radius: 16px;
+        padding: 13px 14px;
+        margin-bottom: 12px;
+}
+.appdemo .dm-attention.dm-show {
+        display: flex;
+}
+.appdemo .dm-attn-ic {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+        background: rgba(229, 169, 78, 0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+}
+.appdemo .dm-attn-ic svg {
+        width: 20px;
+        height: 20px;
+}
+.appdemo .dm-attn-body {
+        flex: 1;
+        min-width: 0;
+}
+.appdemo .dm-attn-title {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #e5a94e;
+}
+.appdemo .dm-attn-sub {
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 1px;
+}
+.appdemo .dm-attn-chev {
+        display: flex;
+        color: #e5a94e;
+        flex: 0 0 auto;
+}
+.appdemo .dm-prot-strip {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        background: rgba(63, 161, 90, 0.08);
+        border: 1px solid rgba(63, 161, 90, 0.22);
+        border-radius: 12px;
+        padding: 9px 13px;
+}
+.appdemo .dm-prot-strip svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 auto;
+}
+.appdemo .dm-prot-strip .dm-p-text {
+        font-size: 12.5px;
+        font-weight: 600;
+        color: var(--green-bright);
+        line-height: 1.3;
+}
+.appdemo .dm-prot-strip.dm-off {
+        background: rgba(229, 169, 78, 0.08);
+        border-color: rgba(229, 169, 78, 0.28);
+}
+.appdemo .dm-prot-strip.dm-off .dm-p-text {
+        color: #e5a94e;
+}
+.appdemo .dm-prot-strip.dm-off svg [stroke] {
+        stroke: #e5a94e;
+}
+.appdemo .dm-last-active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 12.5px;
+        color: var(--muted);
+        margin-top: 16px;
+}
+.appdemo .dm-last-active .dm-la-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--green-bright);
+        box-shadow: 0 0 0 3px rgba(79, 191, 108, 0.18);
+}
+.appdemo .dm-tab {
+        position: relative;
+}
+.appdemo .dm-tab-dot {
+        position: absolute;
+        top: 6px;
+        left: calc(50% + 5px);
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #e5a94e;
+        box-shadow: 0 0 0 3px rgba(12, 13, 15, 0.9);
+        display: none;
+}
+.appdemo .dm-tab-dot.dm-show {
+        display: block;
+}
+.appdemo .dm-tabbar {
+        flex: 0 0 auto;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 8px 26px;
+        background: rgba(12, 13, 15, 0.85);
+        backdrop-filter: saturate(180%) blur(20px);
+        border-top: 1px solid var(--line);
+}
+.appdemo .dm-tab {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 11px;
+        font-weight: 600;
+        color: var(--muted);
+        flex: 1;
+        cursor: pointer;
+        background: none;
+        border: none;
+}
+.appdemo .dm-tab svg {
+        width: 24px;
+        height: 24px;
+}
+.appdemo .dm-tab.dm-active {
+        color: var(--green-bright);
+}
+    </style>
 </head>
 <body>
 <div class="wrap">
@@ -487,6 +1470,500 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <!-- 2 of 4 · alternating row: argument beside the thing it describes -->
+
+  <!-- Between "Two kinds of alert" and the Apple ID section: breaks the text
+       run at its start rather than adding another block to the end of it. -->
+  <section class="preview">
+    <p class="seclabel">The parent app</p>
+    <h2>What you'll open on your own phone</h2>
+    <p class="seclead">The parent app isn't finished yet. <strong>This is the design we're building to, not a screenshot of working software</strong> — so treat it as where it's heading rather than what you'd get today. Everything on these two screens is something Shieldora actually does.</p>
+
+    <div class="screens appdemo">
+      <figure class="pscreen">
+<div class="dm-phone">
+      <div class="dm-screen">
+        <div class="dm-island"></div>
+
+        <!-- Status bar -->
+        <div class="dm-statusbar">
+          <span>9:41</span>
+          <span class="dm-icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+              <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+              <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+              <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+            </svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+            </svg>
+            <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                fill="#f3f4f5" fill-opacity="0.4" />
+            </svg>
+          </span>
+        </div>
+
+        <!-- Scrollable content -->
+        <div class="dm-content">
+          <div class="dm-home-head">
+            <div>
+              <p class="dm-greeting">Good morning, Sarah</p>
+              <h1 class="dm-title">Home</h1>
+            </div>
+            <div class="dm-switcher">
+              <button class="dm-pill">
+                <span class="dm-pill-av" id="pillAvatar">A</span>
+                <span class="dm-pill-name" id="pillName">Emma</span>
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </button>
+              <div class="dm-dropdown" id="dropdown"></div>
+            </div>
+          </div>
+
+          <!-- Needs-attention banner (only when child needs review) -->
+          <div class="dm-attention" id="attention">
+            <div class="dm-attn-ic">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path d="M12 3.5 21 19H3L12 3.5Z" stroke="#e5a94e"
+                  stroke-width="1.7" stroke-linejoin="round" />
+                <path d="M12 10v4" stroke="#e5a94e" stroke-width="1.8"
+                  stroke-linecap="round" />
+                <circle cx="12" cy="16.5" r="1.1" fill="#e5a94e" />
+              </svg>
+            </div>
+            <div class="dm-attn-body">
+              <div class="dm-attn-title">1 alert needs your review</div>
+              <div class="dm-attn-sub" id="attnReason">
+                Protection was turned off · 4:47 PM
+              </div>
+            </div>
+            <span class="dm-attn-chev">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2"
+                  stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </span>
+          </div>
+
+          <!-- Protection status strip -->
+          <div class="dm-prot-strip" id="protStrip">
+            <svg viewBox="0 0 24 24" fill="none">
+              <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
+                stroke="#4fbf6c" stroke-width="1.7" />
+              <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#4fbf6c"
+                stroke-width="1.7" stroke-linecap="round" />
+            </svg>
+            <span class="dm-p-text" id="protText"
+              >Protection active on Emma’s iPhone</span
+            >
+          </div>
+
+          <!-- Status-first hero -->
+          <div class="dm-hero">
+            <div class="dm-app-logo">Shieldora</div>
+            <div class="dm-date-nav">
+              <button aria-label="Previous day">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="m15 6-6 6 6 6" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+              <span>Today</span>
+              <button aria-label="Next day">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                  <path d="m9 6 6 6-6 6" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
+            </div>
+
+            <svg width="0" height="0" style="position: absolute">
+              <defs>
+                <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#4fbf6c" />
+                  <stop offset="1" stop-color="#2b7040" />
+                </linearGradient>
+              </defs>
+            </svg>
+
+            <!-- protection status: the main focus of the screen -->
+            <div class="dm-status-block">
+              <div class="dm-status-ring">
+                <svg class="dm-dial" viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="42" fill="none"
+                    stroke="#24272d" stroke-width="8" />
+                  <circle class="dm-prog" id="ringStatus" style="stroke-dashoffset:0" cx="50" cy="50"
+                    r="42" fill="none" stroke="url(#ringGrad)"
+                    stroke-width="8" stroke-linecap="round"
+                    stroke-dasharray="263.9" />
+                </svg>
+                <div class="dm-ring-center">
+                  <svg class="dm-shield" viewBox="0 0 24 24" fill="none">
+                    <path id="statusOutline"
+                      d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                      stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
+                    <path id="statusOk" d="m8.6 12 2.4 2.4 4.4-4.8"
+                      stroke="#4fbf6c" stroke-width="1.9" stroke-linecap="round"
+                      stroke-linejoin="round" />
+                    <g id="statusWarn" style="display: none">
+                      <path d="M12 8.4v4" stroke="#e5a94e" stroke-width="1.9"
+                        stroke-linecap="round" />
+                      <circle cx="12" cy="15.4" r="1.05" fill="#e5a94e" />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div class="dm-status-title" id="statusTitle">Protection active</div>
+              <div class="dm-status-sub" id="statusSub">You’ll be told instantly if it stops on Emma’s iPhone.</div>
+            </div>
+
+            <!-- compact counts -->
+            <div class="dm-mini-stats">
+              <div class="dm-mini">
+                <span class="dm-m-val" id="valAttempts">3</span>
+                <span class="dm-m-lab">Blocked today</span>
+              </div>
+              <div class="dm-mini">
+                <span class="dm-m-val" id="valAlerts">2</span>
+                <span class="dm-m-lab">Alerts today</span>
+              </div>
+            </div>
+
+            <!-- status blurb -->
+            <div class="dm-blurb">
+              <div class="dm-b-title" id="blurbTitle">Web filtering on</div>
+              <div class="dm-b-text" id="blurbText">Web filtering is on in Safari on Emma’s iPhone. Today Shieldora blocked 3 attempts.</div>
+            </div>
+          </div>
+
+          <!-- Today's activity -->
+          <div class="dm-section-head">
+            <h2>Today's activity</h2>
+            <a href="#">See all</a>
+          </div>
+
+          <div class="dm-highlight">
+            <div class="dm-badge">
+              <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="9" stroke="#4fbf6c"
+                  stroke-width="1.7" />
+                <path d="m5.6 5.6 12.8 12.8" stroke="#4fbf6c"
+                  stroke-width="1.7" stroke-linecap="round" />
+              </svg>
+            </div>
+            <div>
+              <div class="dm-h-title" id="actTitle">3 attempts blocked today</div>
+              <div class="dm-h-sub" id="actSub">
+                Last blocked 2:14 PM · Safari
+              </div>
+            </div>
+          </div>
+
+          <div class="dm-last-active">
+            <span class="dm-la-dot"></span> Last active 4 min ago
+          </div>
+        </div>
+
+        <!-- Bottom nav -->
+        <nav class="dm-tabbar">
+          <button class="dm-tab dm-active">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Home
+          </button>
+          <button class="dm-tab">
+            <span class="dm-tab-dot" id="alertsDot"></span>
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linejoin="round" />
+              <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            Alerts
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Activity
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="currentColor"
+                stroke-width="1.8" />
+              <path
+                d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            </svg>
+            Settings
+          </button>
+        </nav>
+      </div>
+    </div>
+        <figcaption>Is it on, and is it still running.</figcaption>
+      </figure>
+      <figure class="pscreen">
+<div class="dm-phone">
+      <div class="dm-screen">
+        <div class="dm-island"></div>
+
+        <!-- Status bar -->
+        <div class="dm-statusbar">
+          <span>9:41</span>
+          <span class="dm-icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+              <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+              <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+              <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+            </svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
+                stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
+                stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+            </svg>
+            <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
+                stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8"
+                fill="#f3f4f5" fill-opacity="0.4" />
+            </svg>
+          </span>
+        </div>
+
+        <!-- Scrollable content -->
+        <div class="dm-content">
+          <h1 class="dm-title">Alerts</h1>
+          <p class="dm-subtitle" id="alertsSubtitle">Emma’s iPhone</p>
+
+          <!-- Today -->
+          <div class="dm-day-head">Today</div>
+          <div class="dm-alerts">
+            <div class="dm-alert dm-sev-high">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
+                    stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">Protection was turned off</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">2:14 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-med">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                    stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A blocked site was hit</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">1:02 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-med">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                    stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A blocked page was hit in Safari</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">11:47 AM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-high">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                    stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A blocked site was hit</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">9:15 AM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yesterday -->
+          <div class="dm-day-head">Yesterday</div>
+          <div class="dm-alerts">
+            <div class="dm-alert dm-sev-high">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
+                    stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A blocked site was hit</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">8:58 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-med">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
+                    stroke-width="1.7" />
+                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
+                    stroke-width="1.7" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A blocked page was hit in private browsing</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">7:32 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-low">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
+                    stroke-width="1.9" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">Protection is back on</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">5:20 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-high">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
+                    stroke-width="1.8" stroke-linecap="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">Protection was turned off</div>
+                <div class="dm-a-meta">Emma’s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">3:04 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom nav (Alerts active) -->
+        <nav class="dm-tabbar">
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            Home
+          </button>
+          <button class="dm-tab dm-active">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M6 9a6 6 0 0 1 12 0c0 4 1 5.5 1.8 6.4H4.2C5 14.5 6 13 6 9Z"
+                stroke="currentColor" stroke-width="1.8"
+                stroke-linejoin="round" />
+              <path d="M10 19a2 2 0 0 0 4 0" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" />
+            </svg>
+            Alerts
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+            Activity
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="3" stroke="currentColor"
+                stroke-width="1.8" />
+              <path
+                d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
+                stroke="currentColor" stroke-width="1.5"
+                stroke-linejoin="round" />
+            </svg>
+            Settings
+          </button>
+        </nav>
+      </div>
+    </div>
+        <figcaption>What happened, and when. Never what was searched or typed.</figcaption>
+      </figure>
+    </div>
+  </section>
+
   <section class="alt">
     <div class="alt-copy">
       <p class="seclabel">Why the alerts are worth trusting</p>
