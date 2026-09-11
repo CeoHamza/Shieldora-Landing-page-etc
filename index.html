@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E8EAED">
 <title>Shieldora — You get told. That's the whole point.</title>
-<meta name="description" content="Shieldora blocks adult content on your child's iPhone or iPad, and alerts you the moment something's blocked or protection is switched off.">
+<meta name="description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
 <meta property="og:title" content="Shieldora — You get told. That's the whole point.">
-<meta property="og:description" content="Shieldora alerts you the moment your child hits blocked adult content, or the moment protection is switched off.">
+<meta property="og:description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shieldora.app">
 <meta property="og:image" content="https://shieldora.app/og-image.png">
@@ -97,6 +97,7 @@ h2{font-size:clamp(24px,4vw,36px);line-height:1.12;letter-spacing:-0.028em;font-
   background:var(--ink);color:#fff;min-height:46px}
 .gate .deny{margin:10px 0 0;font-size:13.5px;color:var(--alarm);font-weight:500;display:none}
 .gate .deny.show{display:block}
+.denynext{display:block;margin-top:8px;color:var(--mid);font-weight:400}
 
 .wire{position:relative;height:340px}
 .wire svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
@@ -289,6 +290,9 @@ footer a:hover{color:var(--ink)}
 .kind-pip{width:10px;height:10px;border-radius:50%;flex:none;background:var(--green)}
 .kind-pip.state{background:var(--alarm)}
 .kind-pip.quiet{background:#B9C0C7}
+.fx{width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;
+  font-size:15px;line-height:1;color:var(--mid);background:var(--soft);border:1px solid var(--line)}
+.frow.quiet .ftext{color:var(--mid)}
 .feed{border-top:1px solid var(--line)}
 .frow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #EDF0F2}
 .frow:last-child{border-bottom:0}
@@ -1368,7 +1372,7 @@ footer a:hover{color:var(--ink)}
   <div class="hero">
     <div class="herotext">
     <h1>You get told. That's the whole point.</h1>
-    <p class="deck">Shieldora blocks adult content on your child's iPhone or iPad, and alerts you the moment something's blocked or protection is switched off.</p>
+    <p class="deck">Shieldora blocks adult content on your child&rsquo;s iPhone or iPad &mdash; and tells you if that protection ever stops running. Most filters fail silently. That&rsquo;s the part we fixed.</p>
     <div class="herocta">
       <a class="btn" href="#waitlist">Join the waitlist</a>
       <a class="btn ghost" href="#rig">See how it works</a>
@@ -1379,7 +1383,7 @@ footer a:hover{color:var(--ink)}
     <div class="meter">
       <div class="meterhead"><b>Emma's iPhone · one day</b><span id="clock">00:00</span></div>
       <canvas id="wave" height="132" role="img"
-        aria-label="A day of one device drawn as a flat line, with one spike: protection turned off at 4:52 pm."></canvas>
+        aria-label="A day of one device drawn as a flat line, with one spike: protection went offline at 4:52 pm."></canvas>
       <div class="meterfoot"><span>6 am</span><span>10 am</span><span>2 pm</span><span>6 pm</span><span>10 pm</span></div>
       <p class="meterstate" id="meterstate">Nothing to report today</p>
     </div>
@@ -1408,7 +1412,7 @@ footer a:hover{color:var(--ink)}
               <input type="password" value="password" aria-label="Account password" id="pw">
               <button class="try" id="try">Turn off</button>
             </div>
-            <p class="deny" id="deny">Not accepted. Only the parent's Apple Account can lift this — and the attempt has already reached your phone.</p>
+            <p class="deny" id="deny">Not accepted. Only the parent&rsquo;s Apple Account can lift this, and it isn&rsquo;t a password a child can talk their way around.<span class="denynext">No alert for this one &mdash; nothing changed, so there is nothing to tell you. The next thing they try is deleting the app, and <b>that</b> you do hear about&hellip;</span></p>
           </div>
 
           <p class="tryhint"><b>Go on, try it.</b> A simulation of iOS Settings on your child's phone. There is no Shieldora screen a child can turn protection off from — the app can't be deleted, and the only way out is through here.</p>
@@ -1440,34 +1444,34 @@ footer a:hover{color:var(--ink)}
   <!-- 1 of 4 · notification chrome, not a text grid -->
   <section id="alerts">
     <p class="seclabel">What lands on your phone</p>
-    <h2>Two kinds of alert. Nothing else.</h2>
-    <p class="seclead">The phone above shows one of them. This is the whole vocabulary — Shieldora has no third category it holds back for a paid tier, and no daily digest.</p>
+    <h2>Three alerts. All about whether protection is running.</h2>
+    <p class="seclead">That is the whole vocabulary. There is no fourth kind held back for a paid tier, and no daily digest. What Shieldora watches is whether the filter is still doing its job — not what your child does.</p>
 
     <div class="kinds">
       <div class="kind">
-        <div class="kind-head"><span class="kind-pip block"></span><h3>A block happened</h3></div>
+        <div class="kind-head"><span class="kind-pip state"></span><h3>What you'll get</h3></div>
         <div class="feed">
-          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked site was hit</span><span class="ftime">9:15 am</span></div>
-          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked page was hit in Safari</span><span class="ftime">1:02 pm</span></div>
-          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked page was hit in private browsing</span><span class="ftime">8:14 pm</span></div>
+          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection went offline</span><span class="ftime">4:52 pm</span></div>
+          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection is back on</span><span class="ftime">9:03 pm</span></div>
+          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A browser was allowed</span><span class="ftime">—</span></div>
         </div>
-        <p class="kind-note">Each arrives with the time and the device — never what was searched or typed.</p>
+        <p class="kind-note"><b>Offline</b> means Shieldora stopped hearing from the device — closed, deleted, switched off, or without a connection. Any of those means protection may not be running, and only you can put it back.</p>
       </div>
 
       <div class="kind">
-        <div class="kind-head"><span class="kind-pip state"></span><h3>Protection changed</h3></div>
+        <div class="kind-head"><span class="kind-pip quiet"></span><h3>What you won't get</h3></div>
         <div class="feed">
-          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection was turned off</span><span class="ftime">4:52 pm</span></div>
-          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection is back on</span><span class="ftime">9:03 pm</span></div>
-          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Filtering was removed from this device</span><span class="ftime">—</span></div>
+          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A message every time a site is blocked</span></div>
+          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A list of what your child tried to visit</span></div>
+          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A daily or weekly digest</span></div>
         </div>
-        <p class="kind-note">The state changing in either direction is worth knowing, and only you can put it back.</p>
+        <p class="kind-note">Apple's filter runs on the device and reports individual blocks to nobody — including us. The filtering is real and it is working. We just can't watch it happen, and we won't pretend to.</p>
       </div>
     </div>
 
     <div class="quietstrip">
-      <div><span class="kind-pip quiet"></span><b>A quiet day</b> — Nothing to report today</div>
-      <p>Alerts are limited to the two things worth interrupting you for: a block happened, or protection changed. Everything else stays off your phone.</p>
+      <div><span class="kind-pip quiet"></span><b>Most days, nothing at all</b> — and that is the point</div>
+      <p>You hear from Shieldora when protection needs attention, not when it is doing its job. A filter that quietly stops working is the failure that leaves a child unprotected, and it is the one we are built to catch.</p>
     </div>
   </section>
 
@@ -1547,7 +1551,7 @@ footer a:hover{color:var(--ink)}
             <div class="dm-attn-body">
               <div class="dm-attn-title">1 alert needs your review</div>
               <div class="dm-attn-sub" id="attnReason">
-                Protection was turned off · 4:47 PM
+                Protection went offline · 4:47 PM
               </div>
             </div>
             <span class="dm-attn-chev">
@@ -1635,19 +1639,19 @@ footer a:hover{color:var(--ink)}
             <!-- compact counts -->
             <div class="dm-mini-stats">
               <div class="dm-mini">
-                <span class="dm-m-val" id="valAttempts">3</span>
-                <span class="dm-m-lab">Blocked today</span>
+                <span class="dm-m-val" id="valAttempts">0</span>
+                <span class="dm-m-lab">Alerts today</span>
               </div>
               <div class="dm-mini">
                 <span class="dm-m-val" id="valAlerts">2</span>
-                <span class="dm-m-lab">Alerts today</span>
+                <span class="dm-m-lab">This week</span>
               </div>
             </div>
 
             <!-- status blurb -->
             <div class="dm-blurb">
               <div class="dm-b-title" id="blurbTitle">Web filtering on</div>
-              <div class="dm-b-text" id="blurbText">Web filtering is on in Safari on Emma’s iPhone. Today Shieldora blocked 3 attempts.</div>
+              <div class="dm-b-text" id="blurbText">Adult content is filtered in Safari on Emma&rsquo;s iPhone. Apple&rsquo;s filter reports individual blocks to nobody, so Shieldora can&rsquo;t count them &mdash; you&rsquo;ll hear from us if filtering stops.</div>
             </div>
           </div>
 
@@ -1667,10 +1671,8 @@ footer a:hover{color:var(--ink)}
               </svg>
             </div>
             <div>
-              <div class="dm-h-title" id="actTitle">3 attempts blocked today</div>
-              <div class="dm-h-sub" id="actSub">
-                Last blocked 2:14 PM · Safari
-              </div>
+              <div class="dm-h-title" id="actTitle">Protection running</div>
+              <div class="dm-h-sub" id="actSub">Last checked in 9:41 AM</div>
             </div>
           </div>
 
@@ -1775,107 +1777,12 @@ footer a:hover{color:var(--ink)}
                 </svg>
               </div>
               <div class="dm-a-body">
-                <div class="dm-a-title">Protection was turned off</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
+                <div class="dm-a-title">Protection went offline</div>
+                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
               </div>
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
                 <span class="dm-a-time">2:14 PM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-med">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
-                    stroke-width="1.7" />
-                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
-                    stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A blocked site was hit</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">1:02 PM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-med">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
-                    stroke-width="1.7" />
-                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
-                    stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A blocked page was hit in Safari</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">11:47 AM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-high">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
-                    stroke-width="1.7" />
-                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
-                    stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A blocked site was hit</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">9:15 AM</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Yesterday -->
-          <div class="dm-day-head">Yesterday</div>
-          <div class="dm-alerts">
-            <div class="dm-alert dm-sev-high">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#f0685f"
-                    stroke-width="1.7" />
-                  <path d="m6.2 6.2 11.6 11.6" stroke="#f0685f"
-                    stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A blocked site was hit</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">8:58 PM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-med">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e"
-                    stroke-width="1.7" />
-                  <path d="m6.2 6.2 11.6 11.6" stroke="#e5a94e"
-                    stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A blocked page was hit in private browsing</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">7:32 PM</span>
               </div>
             </div>
             <div class="dm-alert dm-sev-low">
@@ -1884,17 +1791,38 @@ footer a:hover{color:var(--ink)}
                   <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
                     stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
                   <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
-                    stroke-width="1.9" stroke-linecap="round"
-                    stroke-linejoin="round" />
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
               </div>
               <div class="dm-a-body">
                 <div class="dm-a-title">Protection is back on</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
+                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
               </div>
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">5:20 PM</span>
+                <span class="dm-a-time">2:31 PM</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Yesterday -->
+          <div class="dm-day-head">Yesterday</div>
+          <div class="dm-alerts">
+            <div class="dm-alert dm-sev-med">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e" stroke-width="1.7" />
+                  <path d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17"
+                    stroke="#e5a94e" stroke-width="1.6" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">A browser was allowed</div>
+                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">7:32 PM</span>
               </div>
             </div>
             <div class="dm-alert dm-sev-high">
@@ -1907,12 +1835,30 @@ footer a:hover{color:var(--ink)}
                 </svg>
               </div>
               <div class="dm-a-body">
-                <div class="dm-a-title">Protection was turned off</div>
-                <div class="dm-a-meta">Emma’s iPhone</div>
+                <div class="dm-a-title">Protection went offline</div>
+                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
               </div>
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
                 <span class="dm-a-time">3:04 PM</span>
+              </div>
+            </div>
+            <div class="dm-alert dm-sev-low">
+              <div class="dm-a-ico">
+                <svg viewBox="0 0 24 24" fill="none">
+                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
+                    stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
+                  <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
+                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </div>
+              <div class="dm-a-body">
+                <div class="dm-a-title">Protection is back on</div>
+                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
+              </div>
+              <div class="dm-a-right">
+                <span class="dm-sev-dot"></span>
+                <span class="dm-a-time">3:20 PM</span>
               </div>
             </div>
           </div>
@@ -1961,7 +1907,7 @@ footer a:hover{color:var(--ink)}
         </nav>
       </div>
     </div>
-        <figcaption>What happened, and when. Never what was searched or typed.</figcaption>
+        <figcaption>Every time protection changed, and when. Never what was searched or typed.</figcaption>
       </figure>
     </div>
   </section>
@@ -2018,7 +1964,7 @@ footer a:hover{color:var(--ink)}
           <svg viewBox="0 0 64 88" aria-hidden="true"><rect x="6" y="4" width="52" height="80" rx="10" fill="#fff" stroke="#CDD3D9" stroke-width="2"/><rect x="13" y="26" width="38" height="20" rx="6" fill="#fff" stroke="#2F7A47" stroke-width="2"/><circle cx="21" cy="36" r="4" fill="#2F7A47"/><rect x="28" y="32" width="18" height="3.4" rx="1.7" fill="#CDD3D9"/><rect x="28" y="38" width="12" height="3.4" rx="1.7" fill="#E4E8EB"/><rect x="13" y="52" width="38" height="14" rx="5" fill="#F3F5F7" stroke="#E1E5E9" stroke-width="1.6"/></svg>
         </div>
         <h3>The alerts start</h3>
-        <p>From then on it runs quietly, and you hear from Shieldora on the two things that matter: a blocked site was hit, or protection changed.</p>
+        <p>From then on it runs quietly. The filtering happens on the device, and you hear from Shieldora on the one thing it can see: whether protection is still running.</p>
       </li>
     </ol>
   </section>
@@ -2030,15 +1976,15 @@ footer a:hover{color:var(--ink)}
     <p class="seclead">None of this is missing work. Each one is a line we drew on purpose.</p>
 
     <div class="chips" aria-hidden="true">
-      <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">that a block happened</span><span class="chip">the time</span><span class="chip">the device</span></div>
-      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
+      <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">whether protection is running</span><span class="chip">the time</span><span class="chip">the device</span></div>
+      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">what was blocked</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
     </div>
 
     <dl class="ledger">
-      <div class="lrow"><dt>We don't see search terms, typed text, messages or browsing history.</dt><dd>An alert tells you a blocked site was hit. It never tells you what your child typed to get there.</dd></div>
-      <div class="lrow"><dt>We store that something was blocked, not what it was.</dt><dd>The record is that a block happened, and when. The page behind it isn't kept, so it can't be read back later — by you, by us, or by anyone else.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t see search terms, typed text, messages or browsing history.</dt><dd>None of it is sent to us. Apple&rsquo;s filter makes its decisions on the device and tells us nothing about them.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t keep a record of what was blocked.</dt><dd>Not a redacted one, not a private one &mdash; none. Apple&rsquo;s filter reports individual blocks to nobody, so there is nothing for us to store, show you, lose, or be made to hand over.</dd></div>
       <div class="lrow"><dt>We don't show you your child's screen.</dt><dd>No screenshots, no live view, no scrolling through their day. If that's what you're after, Shieldora is the wrong app.</dd></div>
-      <div class="lrow"><dt>We don't send you everything.</dt><dd>Alerts are limited to the two things worth interrupting you for: a block happened, or protection changed. Everything else stays off your phone.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t send you everything.</dt><dd>Alerts are limited to whether protection is running: it went offline, it came back, or a browser was allowed. Everything else stays off your phone.</dd></div>
     </dl>
   </section>
 
@@ -2061,10 +2007,10 @@ footer a:hover{color:var(--ink)}
     <p class="seclabel">FAQ</p>
     <h2>Questions parents ask</h2>
     <div class="faqlist">
-    <details><summary>What exactly do the alerts tell me?</summary><p>Behaviour, not content. That a blocked site was hit, or that protection was turned off or came back on, with the time and the device.</p></details>
+    <details><summary>What exactly do the alerts tell me?</summary><p>Whether protection is running. Three things: it went offline, it came back, or a browser was allowed &mdash; each with the time and the device. Nothing about what your child did.</p></details>
     <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages or browsing history. That's a deliberate line, not a feature we haven't built yet.</p></details>
     <details><summary>Can my child just turn it off?</summary><p>No. There is no Shieldora screen that turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password — not the child's device passcode or Face ID. And if protection is ever switched off, you get an alert, so it can't happen quietly.</p></details>
-    <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. That is exactly why the alerts matter: you hear what was blocked and when protection changed, rather than assuming nothing ever got past.</p></details>
+    <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. What we can promise is different and, we think, more useful: you will know if the filter stops running &mdash; which is the failure that actually leaves a child unprotected, and the one most filters never mention.</p></details>
     <details><summary>How does the blocking actually work?</summary><p>Shieldora uses filtering built into iOS, on your child's iPhone or iPad. The filtering happens on the device itself.</p></details>
     <details><summary>Which browsers does it cover?</summary><p>Safari, including private browsing. Other browsers are blocked by default. You can allow one if your child needs it, and we'll warn you that content inside it isn't filtered.</p></details>
     <details><summary>When can I get it?</summary><p>Shieldora isn't released yet. Join the waitlist and you'll be among the first families we let in.</p></details>
@@ -2092,7 +2038,7 @@ const meter = (function(){
   const cv=document.getElementById('wave'), ctx=cv.getContext('2d'),
         clock=document.getElementById('clock'), state=document.getElementById('meterstate'),
         box=document.querySelector('.meter');
-  const EVENT={t:0.695, label:'Protection was turned off', time:'4:52 pm'};
+  const EVENT={t:0.695, label:'Protection went offline', time:'4:52 pm'};
   let W=0,H=0,p=0,auto=null,userScrolled=false;
 
   function size(){
@@ -2220,23 +2166,28 @@ const meter = (function(){
     const on=sw.getAttribute('aria-checked')==='true';
     if(on){ gate.classList.add('show'); deny.classList.remove('show'); }
     else { gate.classList.remove('show'); sw.setAttribute('aria-checked','true');
-           notify('Protection is back on','Emma’s iPhone','now'); }
+           notify('Protection is back on','Emma’s iPhone · checking in again','now'); }
   });
   tryBtn.addEventListener('click',()=>{
     interacted=true;
     deny.classList.add('show');
-    notify('Protection was turned off','Emma’s iPhone · needs your Apple Account password','4:52 pm');
+    /* Two beats. The gate held, so nothing changed and nothing fires — an alert
+       here would be a lie about a refusal. Then the honest backstop: a child who
+       cannot get through deletes the app instead, the device stops checking in,
+       and that silence is the one thing we genuinely can see. */
+    if(REDUCED){ notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); }
+    else setTimeout(()=>notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'),1700);
   });
 
   // The passive path: if the rig has been on screen and nobody has touched it,
   // show them what would have happened anyway.
-  if(REDUCED){ notify('Protection was turned off','Emma’s iPhone · needs your Apple Account password','4:52 pm'); }
+  if(REDUCED){ notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); }
   else{
     const io=new IntersectionObserver(es=>{
       es.forEach(e=>{
         if(e.isIntersecting && !autoFired && !interacted){
           autoFired=true;
-          setTimeout(()=>{ if(!interacted) notify('Protection was turned off','Emma’s iPhone · needs your Apple Account password','4:52 pm'); },1100);
+          setTimeout(()=>{ if(!interacted) notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); },1100);
           io.disconnect();
         }
       });
