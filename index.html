@@ -292,8 +292,7 @@ footer a:hover{color:var(--ink)}
 .feed{border-top:1px solid var(--line)}
 .frow{display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #EDF0F2}
 .frow:last-child{border-bottom:0}
-.fico{width:26px;height:26px;border-radius:8px;flex:none;display:grid;place-items:center;font-size:11px;
-  font-weight:700;color:#fff;background:linear-gradient(160deg,#4aa863,#256437)}
+.fico{width:26px;height:26px;border-radius:8px;flex:none;display:block}
 .ftext{font-size:15.5px;min-width:0}
 .ftime{margin-left:auto;font-size:13px;color:var(--mid);font-variant-numeric:tabular-nums;flex:none}
 .kind-note{margin:14px 0 0;font-size:14.5px;line-height:1.6;color:var(--mid)}
@@ -392,7 +391,10 @@ footer a:hover{color:var(--ink)}
 .appdemo .pscreen{width:calc(390px * var(--s));justify-items:start}
 .appdemo .dm-phone{transform:scale(var(--s));transform-origin:top left;
   margin-bottom:calc(-844px * (1 - var(--s)))}
-.appdemo .pscreen figcaption{justify-self:center}
+/* 32ch is wider than the figure at the base scale, so the caption overhung the
+   viewport by 15px on a 390px phone. Capped against the figure's own width — a
+   percentage here resolves against the grid area only intermittently. */
+.appdemo .pscreen figcaption{justify-self:center;max-width:min(32ch,calc(390px * var(--s)))}
 @media (min-width:760px){
   /* auto tracks soak up the free space and push the pair to the edges;
      justify-content keeps them content-sized and centred as a pair. */
@@ -1445,9 +1447,9 @@ footer a:hover{color:var(--ink)}
       <div class="kind">
         <div class="kind-head"><span class="kind-pip block"></span><h3>A block happened</h3></div>
         <div class="feed">
-          <div class="frow"><span class="fico">S</span><span class="ftext">A blocked site was hit</span><span class="ftime">9:15 am</span></div>
-          <div class="frow"><span class="fico">S</span><span class="ftext">A blocked page was hit in Safari</span><span class="ftime">1:02 pm</span></div>
-          <div class="frow"><span class="fico">S</span><span class="ftext">A blocked page was hit in private browsing</span><span class="ftime">8:14 pm</span></div>
+          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked site was hit</span><span class="ftime">9:15 am</span></div>
+          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked page was hit in Safari</span><span class="ftime">1:02 pm</span></div>
+          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A blocked page was hit in private browsing</span><span class="ftime">8:14 pm</span></div>
         </div>
         <p class="kind-note">Each arrives with the time and the device — never what was searched or typed.</p>
       </div>
@@ -1455,9 +1457,9 @@ footer a:hover{color:var(--ink)}
       <div class="kind">
         <div class="kind-head"><span class="kind-pip state"></span><h3>Protection changed</h3></div>
         <div class="feed">
-          <div class="frow state"><span class="fico">S</span><span class="ftext">Protection was turned off</span><span class="ftime">4:52 pm</span></div>
-          <div class="frow state"><span class="fico">S</span><span class="ftext">Protection is back on</span><span class="ftime">9:03 pm</span></div>
-          <div class="frow state"><span class="fico">S</span><span class="ftext">Filtering was removed from this device</span><span class="ftime">—</span></div>
+          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection was turned off</span><span class="ftime">4:52 pm</span></div>
+          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection is back on</span><span class="ftime">9:03 pm</span></div>
+          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Filtering was removed from this device</span><span class="ftime">—</span></div>
         </div>
         <p class="kind-note">The state changing in either direction is worth knowing, and only you can put it back.</p>
       </div>
