@@ -71,9 +71,8 @@ nav .status{text-align:right}
 /* Two panels stacked in a sticky viewport, the answer clipped from the left and
    opened as the section scrolls. A wipe rather than a fade because the point is
    that one thing *replaces* the other: silence, then being told.
-   Driven from the same scroll+rAF loop as the hero meter rather than
-   animation-timeline, which Safari only got in 26 — this has to work on the
-   phones parents actually hold. */
+   Driven from a scroll listener plus rAF rather than animation-timeline, which
+   Safari only got in 26 — this has to work on the phones parents actually hold. */
 .tsec{position:relative;height:320vh;margin:clamp(40px,6vw,80px) 0}
 .tstick{position:sticky;top:0;height:100vh;overflow:hidden}
 .tpanel{position:absolute;inset:0;display:flex;align-items:center}
@@ -198,15 +197,6 @@ h1{font-size:clamp(38px,8.2vw,76px);line-height:1.02;letter-spacing:-0.042em;fon
 .microcopy{font-size:14px;color:var(--mid);margin:12px 0 0}
 .microcopy b{color:var(--ink);font-weight:600}
 
-.meter{margin:30px 0 0;background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:16px 16px 12px}
-.meterhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:var(--mid);
-  font-variant-numeric:tabular-nums;margin-bottom:8px}
-.meterhead b{color:var(--ink);font-weight:600;font-size:13.5px}
-canvas{display:block;width:100%;height:132px;touch-action:pan-y;pointer-events:none}
-.meterfoot{display:flex;justify-content:space-between;font-size:11.5px;color:var(--mid);
-  font-variant-numeric:tabular-nums;border-top:1px solid var(--line);padding-top:8px;margin-top:6px}
-.meterstate{margin:10px 0 0;font-size:13.5px;color:var(--mid);min-height:1.5em}
-.meterstate.hit{color:var(--alarm);font-weight:600}
 
 /* ---------- the rig ---------- */
 .rigwrap{padding:64px 0 0}
@@ -329,12 +319,20 @@ footer a:hover{color:var(--ink)}
    Every text block keeps its own measure. A 1900px line of body copy is wider,
    not better — so the container grows and the *layout* absorbs it. */
 @media (min-width:1100px){
-  .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:56px;align-items:stretch;padding:34px 0 0}
-  .herotext{display:flex;flex-direction:column;justify-content:center}
-  .hero .meter{display:flex;flex-direction:column;margin:0}
-  .hero .meter canvas{flex:1;height:auto;min-height:180px}
-  .herotext{min-width:0}
-  canvas{height:180px}
+  /* The hero's right-hand column was the one-day graph. With that gone the
+     headline takes the wide column and the deck, buttons and price sit beside
+     it, so the hero still uses the width instead of trailing a blank half. */
+  .hero{padding:34px 0 0}
+  .herotext{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
+    /* h1 spans all three rows and is the taller column, so without this the
+       surplus is shared between the rows and pushes the deck, buttons and price
+       apart. Sending it to row 3 keeps the right column stacked. */
+    grid-template-rows:auto auto 1fr;
+    gap:0 clamp(36px,4.5vw,88px);align-items:start;min-width:0}
+  .herotext h1{grid-column:1;grid-row:1 / span 3;margin:0}
+  .herotext .deck{grid-column:2;grid-row:1;margin-top:0}
+  .herotext .herocta{grid-column:2;grid-row:2}
+  .herotext .microcopy{grid-column:2;grid-row:3}
   /* .lines and .rig went with the interactive rig. The old .signup grid pinned
      the form track to 420px and, being later in source than the wide-viewport
      block above, quietly beat it; the signup layout now lives there instead. */
@@ -347,8 +345,7 @@ footer a:hover{color:var(--ink)}
 @media (min-width:1440px){
   :root{--wrapmax:1600px}
   h1{font-size:clamp(46px,4.2vw,60px)}
-  .hero{gap:72px;padding:44px 0 0}
-  canvas{height:200px}
+  .hero{padding:44px 0 0}
   section:not(.device){padding:84px 0 0}
   .rigwrap{padding:84px 0 0}
   .cols{gap:44px}
@@ -359,8 +356,7 @@ footer a:hover{color:var(--ink)}
 }
 @media (min-width:1728px){
   :root{--wrapmax:1840px}
-  .hero{gap:88px}
-  canvas{height:220px}
+
   .rig{grid-template-columns:1fr 260px 1fr}
   .lines{gap:34px 72px}
 }
@@ -384,8 +380,6 @@ footer a:hover{color:var(--ink)}
   :root{--wrapmax:min(3200px, 94vw)}
   .lines{grid-template-columns:repeat(4,1fr);gap:44px}
   .faqlist{grid-template-columns:repeat(3,1fr);gap:0 48px}
-  canvas{height:250px}
-  .hero{gap:110px}
   h1{font-size:clamp(58px,3.2vw,76px)}
   .cols h3,.lines b{font-size:22px}
   section:not(.device){padding:110px 0 0}
@@ -406,13 +400,11 @@ footer a:hover{color:var(--ink)}
   .lines{grid-template-columns:1fr;gap:22px}
   section:not(.device){padding:48px 0 0}
   .rigwrap{padding:48px 0 0}
-  canvas{height:104px}
   .signup{padding:26px 20px;border-radius:16px}
   .btn{width:100%;text-align:center}
   .herocta{gap:9px}
 }
 @media (max-width:400px){
-  .meterfoot span:nth-child(2),.meterfoot span:nth-child(4){display:none}
   .plock .t{font-size:34px}
 }
 @media (prefers-reduced-motion:reduce){
@@ -550,7 +542,7 @@ footer a:hover{color:var(--ink)}
 /* --- dashboard.html's stylesheet, scoped --- */
 
 .appdemo h1, .appdemo h2, .appdemo nav, .appdemo a,
-.appdemo form, .appdemo footer, .appdemo details, .appdemo canvas {
+.appdemo form, .appdemo footer, .appdemo details {
   font: inherit; letter-spacing: normal; color: inherit;
   margin: 0; padding: 0; border: 0; background: none;
 }
@@ -1520,13 +1512,7 @@ footer a:hover{color:var(--ink)}
     <p class="microcopy"><b>$10 AUD / family / month</b> — one subscription, however many children. Not released yet; the waitlist is for early access.</p>
     </div>
 
-    <div class="meter">
-      <div class="meterhead"><b>Emma's iPhone · one day</b><span id="clock">00:00</span></div>
-      <canvas id="wave" height="132" role="img"
-        aria-label="A day of one device drawn as a flat line, with one spike: protection went offline at 4:52 pm."></canvas>
-      <div class="meterfoot"><span>6 am</span><span>10 am</span><span>2 pm</span><span>6 pm</span><span>10 pm</span></div>
-      <p class="meterstate" id="meterstate">Nothing to report today</p>
-    </div>
+
   </div>
 
 </div><!-- /.wrap — the wipe is full-bleed, so it sits outside the container -->
@@ -2049,103 +2035,6 @@ footer a:hover{color:var(--ink)}
 </div>
 
 <script>
-const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const ICON = '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.4"/></svg>';
-
-/* ------------------------------------------------------------------ *
- * 1. The silence line. A day drawn flat, scrubbed by scroll, spiking
- *    once — so a visitor who only scrolls still sees the mechanism.
- * ------------------------------------------------------------------ */
-const meter = (function(){
-  const cv=document.getElementById('wave'), ctx=cv.getContext('2d'),
-        clock=document.getElementById('clock'), state=document.getElementById('meterstate'),
-        box=document.querySelector('.meter');
-  const EVENT={t:0.695, label:'Protection went offline', time:'4:52 pm'};
-  let W=0,H=0,p=0,auto=null,userScrolled=false;
-
-  function size(){
-    const dpr=Math.min(devicePixelRatio||1,2);
-    W=cv.clientWidth; H=cv.clientHeight;
-    if(!W||!H) return false;                    // layout not settled yet
-    cv.width=Math.round(W*dpr); cv.height=Math.round(H*dpr);
-    ctx.setTransform(dpr,0,0,dpr,0,0);
-    return true;
-  }
-  function draw(){
-    if(!W && !size()) return;
-    ctx.clearRect(0,0,W,H);
-    const mid=H*0.66;
-    ctx.strokeStyle='#DDE1E5'; ctx.lineWidth=1;
-    for(let i=1;i<5;i++){const x=W*i/5;ctx.beginPath();ctx.moveTo(x,8);ctx.lineTo(x,H-4);ctx.stroke();}
-    ctx.strokeStyle='#5B6570'; ctx.lineWidth=1.6;
-    ctx.beginPath(); ctx.moveTo(0,mid); ctx.lineTo(Math.max(0,W*p),mid); ctx.stroke();
-    if(p>=EVENT.t){
-      const x=W*EVENT.t, grow=Math.min(1,(p-EVENT.t)*12), h=(mid-18)*grow;
-      ctx.strokeStyle='#8C3B23'; ctx.lineWidth=2.4;
-      ctx.beginPath(); ctx.moveTo(x,mid); ctx.lineTo(x,mid-h); ctx.stroke();
-      ctx.fillStyle='#8C3B23'; ctx.beginPath(); ctx.arc(x,mid-h,3.4,0,Math.PI*2); ctx.fill();
-    }
-  }
-  function paintText(){
-    const m=Math.round(p*24*60), h=Math.floor(m/60);
-    clock.textContent=String(h).padStart(2,'0')+':'+String(m%60).padStart(2,'0');
-    if(p>=EVENT.t){ state.textContent=EVENT.label+' · '+EVENT.time; state.classList.add('hit'); }
-    else { state.textContent='Nothing to report today'; state.classList.remove('hit'); }
-  }
-  function render(){ paintText(); draw(); }
-
-  /* Progress is measured against the METER's own travel through the viewport,
-     not the hero's height. The hero is tall on a desktop and short on a phone,
-     so keying off it meant the line barely moved before scrolling past it.
-     This version behaves the same on any screen height. */
-  function fromScroll(){
-    const r=box.getBoundingClientRect();
-    const travel=innerHeight+r.height;          // enter bottom → leave top
-    const seen=innerHeight-r.top;
-    return Math.max(0,Math.min(1,seen/travel));
-  }
-
-  function frame(){ p=Math.max(p,fromScroll()); render(); }
-
-  /* Fallback: on a short page, or if the meter is already fully in view when
-     the page loads, there may be no scroll left to drive it. Advance it once
-     so nobody is left looking at a line that never moves. */
-  function autoplay(){
-    if(auto) return;
-    let t=0;
-    auto=setInterval(()=>{
-      if(userScrolled){ clearInterval(auto); auto=null; return; }
-      t+=1/90; p=Math.max(p,Math.min(1,t)); render();
-      if(p>=1){ clearInterval(auto); auto=null; }
-    },28);
-  }
-
-  if(REDUCED){ p=1; if(size()) render(); return {}; }
-
-  let q=false;
-  addEventListener('scroll',()=>{
-    userScrolled=true;
-    if(!q){q=true;requestAnimationFrame(()=>{frame();q=false;});}
-  },{passive:true});
-
-  // ResizeObserver rather than window resize: iOS fires resize constantly as
-  // the address bar hides, and this only reacts when the canvas really changes.
-  if('ResizeObserver' in window) new ResizeObserver(()=>{ size(); render(); }).observe(cv);
-  else addEventListener('resize',()=>{ size(); render(); });
-
-  // Wait for layout + webfont before first measure, then start.
-  requestAnimationFrame(()=>{
-    size(); frame();
-    setTimeout(()=>{ size(); frame();
-      const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) autoplay(); }),{threshold:.4});
-      io.observe(box);
-    },160);
-  });
-  return {frame};
-})();
-
-
-
 /* ------------------------------------------------------------------ *
  * The problem -> answer wipe. Progress is the section's own travel
  * through its sticky range, so the panel is fully open by the time the
