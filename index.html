@@ -65,6 +65,46 @@ nav{display:flex;align-items:center;justify-content:space-between;gap:16px;
 .mk svg{width:15px;height:15px}
 nav .status{text-align:right}
 
+
+/* ---------- the problem -> answer wipe ---------- */
+/* Two panels stacked in a sticky viewport, the answer clipped from the left and
+   opened as the section scrolls. A wipe rather than a fade because the point is
+   that one thing *replaces* the other: silence, then being told.
+   Driven from the same scroll+rAF loop as the hero meter rather than
+   animation-timeline, which Safari only got in 26 — this has to work on the
+   phones parents actually hold. */
+.tsec{position:relative;height:220vh;margin:clamp(40px,6vw,80px) 0}
+.tstick{position:sticky;top:0;height:100vh;overflow:hidden;
+  box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.tpanel{position:absolute;inset:0;display:flex;align-items:center}
+.tpanel .inner{max-width:1180px;margin:0 auto;padding:0 20px;width:100%}
+.tpanel .copy{max-width:34ch}
+.tproblem{background:var(--band);color:var(--band-ink)}
+.tanswer{background:#13331F;color:#EAF3EC;
+  /* Enters from the left. The shadow carries the colour past the container —
+     the whole page sits inside a max-width wrap, so without it the panel stops
+     short of the edges and leaves a sage strip down each side at full open.
+     The clip is written in pixels by JS so the same expression can both wipe
+     and, at the end, open past both edges. */
+  box-shadow:0 0 0 100vmax #13331F;
+  clip-path:inset(0 calc(100% + 100vmax) 0 -100vmax)}
+.tanswer h2{color:#EAF3EC}
+.tanswer .seclead{color:#B9D3C1}
+.tsec h2{margin-bottom:14px}
+.tsec .seclead{font-size:clamp(16px,1.9vw,18.5px)}
+.tpill{display:inline-flex;align-items:center;gap:8px;margin-top:22px;
+  background:rgba(79,191,108,.14);border:1px solid rgba(79,191,108,.35);
+  color:#8FE3A6;border-radius:999px;padding:9px 15px;font-size:14px;font-weight:600}
+.tpill .dot{width:7px;height:7px;border-radius:50%;background:#4FBF6C;flex:none}
+@media (prefers-reduced-motion:reduce){
+  /* No wipe. Both panels are shown in order as ordinary blocks, because the
+     content is the argument — the motion is only how it is paced. */
+  .tsec{height:auto}
+  .tstick{position:static;height:auto;overflow:visible}
+  .tpanel{position:static;padding:clamp(48px,8vw,96px) 0}
+  .tanswer{clip-path:none}
+}
+
 /* ---------- hero + silence line ---------- */
 .hero{padding:14px 0 0}
 h1{font-size:clamp(38px,8.2vw,76px);line-height:1.02;letter-spacing:-0.042em;font-weight:800;margin:14px 0 20px;max-width:15ch}
@@ -1415,10 +1455,35 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 
-  <div class="rigwrap" id="rig">
+  <section class="tsec" id="rig">
+    <div class="tstick">
+      <div class="tpanel tproblem">
+        <div class="inner">
+          <div class="copy">
+            <p class="seclabel">The problem</p>
+            <h2>Protection gets switched off in silence</h2>
+            <p class="seclead">A filter a child can quietly disable isn&rsquo;t protection. It fails without a sound, and nothing arrives to tell you it stopped.</p>
+            <p class="seclead">It happens on a screen in another room, and nothing reaches you. Most parents find out long after &mdash; if at all.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tpanel tanswer" id="tanswer">
+        <div class="inner">
+          <div class="copy">
+            <p class="seclabel" style="color:#7FA98C">What Shieldora does</p>
+            <h2>You get told. That&rsquo;s the whole point.</h2>
+            <p class="seclead">When protection stops running, or a browser is allowed, a notification lands on your phone with the time and the device. You don&rsquo;t have to go and check.</p>
+            <span class="tpill"><span class="dot"></span>Protection went offline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="rigwrap">
     <p class="seclabel">Two halves of one thing</p>
-    <h2>Protection gets switched off in silence</h2>
-    <p class="seclead">It fails without a sound, and nothing arrives to tell you it stopped. So here are both ends at once — iOS Settings on your child's phone, and your phone where you find out. Try switching the restrictions off.</p>
+    <h2>Both ends at once</h2>
+    <p class="seclead">iOS Settings on your child's phone, and your phone where you find out. Try switching the restrictions off.</p>
 
     <div class="rig">
       <section class="device child" aria-label="Simulation of the child's device settings">
@@ -2234,6 +2299,46 @@ const meter = (function(){
     },{threshold:.45});
     io.observe(rig);
   }
+})();
+
+/* ------------------------------------------------------------------ *
+ * The problem -> answer wipe. Progress is the section's own travel
+ * through its sticky range, so the panel is fully open by the time the
+ * section releases and nothing is left half-wiped on screen.
+ * ------------------------------------------------------------------ */
+(function(){
+  const sec = document.getElementById('rig');
+  const answer = document.getElementById('tanswer');
+  if(!sec || !answer) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  let queued = false;
+  function frame(){
+    const r = sec.getBoundingClientRect();
+    const travel = r.height - window.innerHeight;
+    if(travel <= 0) return;
+    // 0 while the section is arriving, 1 once it has scrolled its full range.
+    // The middle 60% does the wipe, so the reader gets a beat on each state
+    // rather than the answer starting to appear the instant the panel lands.
+    const p = Math.min(1, Math.max(0, -r.top / travel));
+    const eased = Math.min(1, Math.max(0, (p - 0.2) / 0.6));
+
+    // Right inset travels from the panel's full width down past zero, so the
+    // green arrives from the left and finishes bleeding off the right edge
+    // rather than stopping at the container. Left stays bled out throughout.
+    const bleed = 2000;
+    // Closed has to hide the bleed as well as the panel, or a green strip shows
+    // down the left edge before the wipe has started.
+    const right = (1 - eased) * (answer.clientWidth + bleed) - eased * bleed;
+    answer.style.clipPath = 'inset(0 ' + right.toFixed(0) + 'px 0 -' + bleed + 'px)';
+  }
+  addEventListener('scroll', () => {
+    if(queued) return;
+    queued = true;
+    requestAnimationFrame(() => { frame(); queued = false; });
+  }, {passive:true});
+  addEventListener('resize', frame, {passive:true});
+  frame();
 })();
 </script>
 </body>
