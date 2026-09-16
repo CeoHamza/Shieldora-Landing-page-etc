@@ -33,7 +33,8 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{margin:0;overflow-x:hidden;background:var(--slate);color:var(--ink);
   font-family:Inter,-apple-system,system-ui,sans-serif;line-height:1.58;-webkit-font-smoothing:antialiased}
-.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+:root{--wrapmax:1180px}
+.wrap,.tpanel .inner{max-width:var(--wrapmax);margin:0 auto;padding:0 clamp(20px,3vw,64px);width:100%}
 .faqlist{display:block}
 /* Full-bleed colour band. The design alternates ground and sage the whole way
    down; this is the mechanism, applied only where a section earns the break. */
@@ -73,21 +74,22 @@ nav .status{text-align:right}
    Driven from the same scroll+rAF loop as the hero meter rather than
    animation-timeline, which Safari only got in 26 — this has to work on the
    phones parents actually hold. */
-.tsec{position:relative;height:220vh;margin:clamp(40px,6vw,80px) 0}
-.tstick{position:sticky;top:0;height:100vh;overflow:hidden;
-  box-shadow:0 0 0 100vmax var(--band);clip-path:inset(0 -100vmax)}
+.tsec{position:relative;height:320vh;margin:clamp(40px,6vw,80px) 0}
+.tstick{position:sticky;top:0;height:100vh;overflow:hidden}
 .tpanel{position:absolute;inset:0;display:flex;align-items:center}
-.tpanel .inner{max-width:1180px;margin:0 auto;padding:0 20px;width:100%}
+
 .tpanel .copy{max-width:34ch}
+.tanswer .copy{opacity:0;transform:translateX(26px);
+  transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.tanswer.settled .copy{opacity:1;transform:none}
 .tproblem{background:var(--band);color:var(--band-ink)}
 .tanswer{background:#13331F;color:#EAF3EC;
-  /* Enters from the left. The shadow carries the colour past the container —
-     the whole page sits inside a max-width wrap, so without it the panel stops
-     short of the edges and leaves a sage strip down each side at full open.
-     The clip is written in pixels by JS so the same expression can both wipe
-     and, at the end, open past both edges. */
-  box-shadow:0 0 0 100vmax #13331F;
-  clip-path:inset(0 calc(100% + 100vmax) 0 -100vmax)}
+  /* Enters from the left. The section sits outside .wrap, so both panels are
+     already the full viewport and need no bleed trickery — the earlier version
+     faked it with a 100vmax shadow, which .tstick's overflow:hidden then clipped
+     back to the container, leaving exactly the sage strips it meant to remove.
+     JS rewrites this inset in pixels to drive the wipe. */
+  clip-path:inset(0 100% 0 0)}
 .tanswer h2{color:#EAF3EC}
 .tanswer .seclead{color:#B9D3C1}
 .tsec h2{margin-bottom:14px}
@@ -108,6 +110,66 @@ nav .status{text-align:right}
   .tpanel{position:static;padding:clamp(48px,8vw,96px) 0}
   .tanswer{clip-path:none}
 }
+
+
+/* ---------- using the width ---------- */
+/* Past ~1100px a single centred column stops being a measure and starts being
+   dead space either side. These put the extra width into *arrangement* —
+   heading in one column, content in the other — while every paragraph keeps its
+   own max-width, so lines never stretch with the container. Width goes into
+   layout, not line length. */
+@media (min-width:1100px){
+  /* .ledgersec and .faqsec share a shape: label, heading and lead in a narrow
+     left column, the substance beside it. .signup is deliberately not in here —
+     its markup is two plain divs, so these child selectors would match nothing. */
+  .ledgersec,.faqsec,.preview{
+    display:grid;
+    grid-template-columns:minmax(260px,0.75fr) minmax(0,1.5fr);
+    /* The right column spans all four rows, so any height it has over the left
+       column gets shared out between those rows and prises the label, heading
+       and lead apart. Sending the slack to row 4 keeps the left column stacked. */
+    grid-template-rows:auto auto auto 1fr;
+    /* Column gap only. Applied to rows as well it pushed 90px between the label,
+       heading and lead, which already carry their own margins. */
+    gap:0 clamp(30px,4vw,90px);
+    align-items:start}
+  .ledgersec > .seclabel,.faqsec > .seclabel,.preview > .seclabel{grid-column:1;grid-row:1}
+  .ledgersec > h2,.faqsec > h2,.preview > h2{grid-column:1;grid-row:2}
+  .ledgersec > .seclead,.faqsec > .seclead,.preview > .seclead{grid-column:1;grid-row:3}
+  /* :not(.seclabel) matters — the label is a <p>, so p:not(.seclead) outranked
+     the `> .seclabel` rule above and threw it into the right-hand column. */
+  .ledgersec > .ledger,.ledgersec > p:not(.seclead):not(.seclabel),
+  .faqsec > .faqlist,
+  .preview > .screens{grid-column:2}
+  /* The chips belong under the lead, not opposite it. Sitting in column 2 they
+     left the left column empty beside them — the same hole the wider container
+     was meant to close. */
+  .ledgersec > .chips{grid-column:1;grid-row:4}
+  .ledgersec > .ledger{grid-row:1 / span 4}
+  .faqsec > .faqlist{grid-row:1 / span 4}
+  .preview > .screens{grid-row:1 / span 4;margin-top:0}
+
+  /* The signup's own two divs. A percentage second track, not minmax beside an
+     fr: the fr track takes all free space first, so a minmax(320px,680px) form
+     column would never grow past its content while the heading column sprawled. */
+  .signup{
+    display:grid;
+    grid-template-columns:minmax(260px,1fr) clamp(320px,34%,620px);
+    gap:clamp(30px,4vw,80px);
+    align-items:center}
+  .signup > div{min-width:0}
+  /* The form kept its global 520px cap inside a much wider track, which pushed
+     all the slack into the heading column. It fills its own track now. */
+  .signup form{max-width:none}
+}
+@media (min-width:1500px){
+  /* Two columns of questions, once the column can hold two measures. */
+  .faqlist{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,3vw,56px);align-items:start}
+}
+/* Measures, independent of the container. */
+.seclead{max-width:60ch}
+.lrow dd{max-width:58ch}
+.deck{max-width:46ch}
 
 /* ---------- hero + silence line ---------- */
 .hero{padding:14px 0 0}
@@ -259,18 +321,17 @@ footer a:hover{color:var(--ink)}
   .hero .meter canvas{flex:1;height:auto;min-height:180px}
   .herotext{min-width:0}
   canvas{height:180px}
-  .faqlist{display:grid;grid-template-columns:1fr 1fr;gap:0 52px;align-items:start}
-  .lines{gap:30px 56px}
-  .rig{grid-template-columns:1fr 220px 1fr}
-  .signup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:48px;align-items:center;padding:40px 40px}
+  /* .lines and .rig went with the interactive rig. The old .signup grid pinned
+     the form track to 420px and, being later in source than the wide-viewport
+     block above, quietly beat it; the signup layout now lives there instead. */
+  .signup{padding:40px 40px}
   .signup h2{margin-top:0}
-  .signup > div{min-width:0}
 }
 @media (min-width:1280px){
-  .wrap{max-width:1240px}
+  :root{--wrapmax:1400px}
 }
 @media (min-width:1440px){
-  .wrap{max-width:1360px}
+  :root{--wrapmax:1600px}
   h1{font-size:clamp(46px,4.2vw,60px)}
   .hero{gap:72px;padding:44px 0 0}
   canvas{height:200px}
@@ -283,14 +344,14 @@ footer a:hover{color:var(--ink)}
   .cols h3,.lines b,.alertcol h3{font-size:20px}
 }
 @media (min-width:1728px){
-  .wrap{max-width:1560px}
+  :root{--wrapmax:1840px}
   .hero{gap:88px}
   canvas{height:220px}
   .rig{grid-template-columns:1fr 260px 1fr}
   .lines{gap:34px 72px}
 }
 @media (min-width:1920px){
-  .wrap{max-width:1680px}
+  :root{--wrapmax:2040px}
   h1{font-size:clamp(52px,3.6vw,66px)}
   .cols{gap:56px}
   .alertgrid{gap:46px}
@@ -306,7 +367,7 @@ footer a:hover{color:var(--ink)}
    to four, because those are the two places where more columns genuinely read
    better rather than just filling space. */
 @media (min-width:2200px){
-  .wrap{max-width:min(2800px, 92vw)}
+  :root{--wrapmax:min(3200px, 94vw)}
   .lines{grid-template-columns:repeat(4,1fr);gap:44px}
   .faqlist{grid-template-columns:repeat(3,1fr);gap:0 48px}
   canvas{height:250px}
@@ -476,6 +537,8 @@ footer a:hover{color:var(--ink)}
 }
 @media (min-width:1100px){ .appdemo{--s:.72} }
 @media (min-width:1440px){ .appdemo{--s:.8} }
+@media (min-width:1728px){ .appdemo{--s:.88} }
+@media (min-width:2200px){ .appdemo{--s:1} }
 
 /* --- dashboard.html's stylesheet, scoped --- */
 
@@ -1459,6 +1522,8 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 
+</div><!-- /.wrap — the wipe is full-bleed, so it sits outside the container -->
+
   <section class="tsec" id="rig">
     <div class="tstick">
       <div class="tpanel tproblem">
@@ -1489,6 +1554,8 @@ footer a:hover{color:var(--ink)}
       </div>
     </div>
   </section>
+
+<div class="wrap">
 
   <section class="preview" id="preview">
     <p class="seclabel">The parent app</p>
@@ -1945,20 +2012,17 @@ footer a:hover{color:var(--ink)}
 
     <div class="chips" aria-hidden="true">
       <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">whether protection is running</span><span class="chip">the time</span><span class="chip">the device</span></div>
-      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">what was blocked</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
+      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
     </div>
 
     <dl class="ledger">
-      <div class="lrow"><dt>We won&rsquo;t tell you every time a site is blocked.</dt><dd>Apple&rsquo;s filter runs on the device and reports individual blocks to nobody &mdash; including us. The filtering is real and it is working. We just can&rsquo;t watch it happen, and we won&rsquo;t pretend to.</dd></div>
-      <div class="lrow"><dt>No list of what your child tried to visit, and no daily digest.</dt><dd>One end of this market is a toggle that changes little. The other logs messages and browsing. Neither is what most families actually want.</dd></div>
       <div class="lrow"><dt>We don&rsquo;t see search terms, typed text, messages or browsing history.</dt><dd>None of it is sent to us. Apple&rsquo;s filter makes its decisions on the device and tells us nothing about them.</dd></div>
-      <div class="lrow"><dt>We don&rsquo;t keep a record of what was blocked.</dt><dd>Not a redacted one, not a private one &mdash; none. Apple&rsquo;s filter reports individual blocks to nobody, so there is nothing for us to store, show you, lose, or be made to hand over.</dd></div>
       <div class="lrow"><dt>We don't show you your child's screen.</dt><dd>No screenshots, no live view, no scrolling through their day. If that's what you're after, Shieldora is the wrong app.</dd></div>
-      <div class="lrow"><dt>We don&rsquo;t send you everything.</dt><dd>Alerts are limited to whether protection is running: it went offline, it came back, or a browser was allowed. Everything else stays off your phone.</dd></div>
+      
     </dl>
   </section>
 
-  <section>
+  <section class="faqsec">
     <p class="seclabel">FAQ</p>
     <h2>Questions parents ask</h2>
     <div class="faqlist">
@@ -2100,16 +2164,34 @@ const meter = (function(){
     // The middle 60% does the wipe, so the reader gets a beat on each state
     // rather than the answer starting to appear the instant the panel lands.
     const p = Math.min(1, Math.max(0, -r.top / travel));
-    const eased = Math.min(1, Math.max(0, (p - 0.2) / 0.6));
+
+    // Spread across most of the runway rather than a narrow band, then eased
+    // both ends. Linear made the edge arrive at constant speed, which is what
+    // read as a switch flipping; this starts slow, travels, and lands slow.
+    const t = Math.min(1, Math.max(0, (p - 0.12) / 0.7));
+    const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
     // Right inset travels from the panel's full width down past zero, so the
     // green arrives from the left and finishes bleeding off the right edge
     // rather than stopping at the container. Left stays bled out throughout.
-    const bleed = 2000;
-    // Closed has to hide the bleed as well as the panel, or a green strip shows
-    // down the left edge before the wipe has started.
-    const right = (1 - eased) * (answer.clientWidth + bleed) - eased * bleed;
-    answer.style.clipPath = 'inset(0 ' + right.toFixed(0) + 'px 0 -' + bleed + 'px)';
+    // The edge travels exactly the width of the panel, plus a short overshoot so
+    // it finishes off the right edge rather than stopping on it. The left-hand
+    // bleed is done by the clip's negative left inset and the box-shadow, NOT by
+    // starting the edge off-screen: doing that put 2000px of dead travel at each
+    // end, so only about a fifth of the animation happened where anyone could
+    // see it and the visible part crossed the screen almost instantly.
+    // Enough overshoot to clear the viewport's right edge and no more. A fixed
+    // value is wrong: past 2200px the container is capped, so the panel stops
+    // short of the edge and a fixed 160px left a sage strip down the right at
+    // the end of the wipe. Anything much larger would just be dead travel.
+    const box = answer.getBoundingClientRect();
+    const overshoot = Math.max(160, window.innerWidth - box.right + 160);
+    const right = answer.clientWidth - eased * (answer.clientWidth + overshoot);
+    answer.style.clipPath = 'inset(0 ' + right.toFixed(0) + 'px 0 0)';
+
+    // The copy fades and slides in behind the edge rather than being carried by
+    // it, so the panel reads as arriving rather than being revealed.
+    answer.classList.toggle('settled', eased > 0.45);
   }
   addEventListener('scroll', () => {
     if(queued) return;
