@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E8EAED">
-<title>Shieldora — You get told. That's the whole point.</title>
+<title>Shieldora — The filter that tells you when it stops.</title>
 <meta name="description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
-<meta property="og:title" content="Shieldora — You get told. That's the whole point.">
+<meta property="og:title" content="Shieldora — The filter that tells you when it stops.">
 <meta property="og:description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shieldora.app">
@@ -95,6 +95,10 @@ nav .status{text-align:right}
 .tpill{display:inline-flex;align-items:center;gap:8px;margin-top:22px;
   background:rgba(79,191,108,.14);border:1px solid rgba(79,191,108,.35);
   color:#8FE3A6;border-radius:999px;padding:9px 15px;font-size:14px;font-weight:600}
+
+.decknext{display:block;margin-top:10px;color:#6C7680}
+.tstrings{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tnote{font-size:14.5px;line-height:1.55;color:#9FBFA9;max-width:46ch;margin:16px 0 0}
 .tpill .dot{width:7px;height:7px;border-radius:50%;background:#4FBF6C;flex:none}
 @media (prefers-reduced-motion:reduce){
   /* No wipe. Both panels are shown in order as ordinary blocks, because the
@@ -1437,11 +1441,11 @@ footer a:hover{color:var(--ink)}
 
   <div class="hero">
     <div class="herotext">
-    <h1>You get told. That's the whole point.</h1>
-    <p class="deck">Shieldora blocks adult content on your child&rsquo;s iPhone or iPad &mdash; and tells you if that protection ever stops running. Most filters fail silently. That&rsquo;s the part we fixed.</p>
+    <h1>The filter that tells you when it stops.</h1>
+    <p class="deck">Shieldora blocks adult content on your child&rsquo;s iPhone, using Apple&rsquo;s own filtering. If that protection ever stops, you&rsquo;ll know &mdash; most filters fail in silence. <span class="decknext">Alerting you when a site is actually blocked is coming next.</span></p>
     <div class="herocta">
       <a class="btn" href="#waitlist">Join the waitlist</a>
-      <a class="btn ghost" href="#rig">See how it works</a>
+      <a class="btn ghost" href="#preview">See the app</a>
     </div>
     <p class="microcopy"><b>$10 AUD / family / month</b> — one subscription, however many children. Not released yet; the waitlist is for early access.</p>
     </div>
@@ -1473,104 +1477,20 @@ footer a:hover{color:var(--ink)}
             <p class="seclabel" style="color:#7FA98C">What Shieldora does</p>
             <h2>You get told. That&rsquo;s the whole point.</h2>
             <p class="seclead">When protection stops running, or a browser is allowed, a notification lands on your phone with the time and the device. You don&rsquo;t have to go and check.</p>
-            <span class="tpill"><span class="dot"></span>Protection went offline</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <div class="rigwrap">
-    <p class="seclabel">Two halves of one thing</p>
-    <h2>Both ends at once</h2>
-    <p class="seclead">iOS Settings on your child's phone, and your phone where you find out. Try switching the restrictions off.</p>
-
-    <div class="rig">
-      <section class="device child" aria-label="Simulation of the child's device settings">
-        <header><b>Your child’s phone</b><span>iOS Settings · Screen Time</span></header>
-        <div class="dbody">
-          <div class="setting">
-            <div class="txt"><b>Content &amp; Privacy Restrictions</b><span>Set up by a parent, managed by Screen Time</span></div>
-            <button class="sw" id="sw" role="switch" aria-checked="true" aria-label="Content and Privacy Restrictions"></button>
-          </div>
-          <div class="setting"><div class="txt"><b>Safari, including private browsing</b><span>Covered</span></div></div>
-          <div class="setting"><div class="txt"><b>Other browsers</b><span>Blocked by default — you can allow one, with a warning</span></div></div>
-
-          <div class="gate" id="gate">
-            <h3>Apple Account Password</h3>
-            <p>Enter the password for the Apple Account used to set up Screen Time. This prompt is iOS's, not Shieldora's — we cannot change it or wave it through.</p>
-            <div class="fake">
-              <input type="password" value="password" aria-label="Account password" id="pw">
-              <button class="try" id="try">Turn off</button>
+            <div class="tstrings">
+              <span class="tpill"><span class="dot"></span>Protection went offline</span>
+              <span class="tpill"><span class="dot"></span>Protection is back on</span>
+              <span class="tpill"><span class="dot"></span>A browser was allowed</span>
             </div>
-            <p class="deny" id="deny">Not accepted. Only the parent&rsquo;s Apple Account can lift this, and it isn&rsquo;t a password a child can talk their way around.<span class="denynext">No alert for this one &mdash; nothing changed, so there is nothing to tell you. The next thing they try is deleting the app, and <b>that</b> you do hear about&hellip;</span></p>
+            <p class="tnote">Offline means Shieldora stopped hearing from the device &mdash; closed, deleted, switched off, or without a connection. Any of those means protection may not be running.</p>
+            <p class="tnote">And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password &mdash; not the child&rsquo;s passcode, not their Face ID.</p>
           </div>
-
-          <p class="tryhint"><b>Go on, try it.</b> A simulation of iOS Settings on your child's phone. There is no Shieldora screen a child can turn protection off from — the app can't be deleted, and the only way out is through here.</p>
-          <p class="rolecap">Half one — iOS Settings, where a child would have to go.</p>
         </div>
-      </section>
-
-      <div class="wire" id="wire" aria-hidden="true">
-        <svg viewBox="0 0 180 340" preserveAspectRatio="none">
-          <path d="M0 100 C 70 100, 110 170, 180 170"/>
-          <path class="live" d="M0 100 C 70 100, 110 170, 180 170"/>
-        </svg>
-        <span class="wirelabel"><span class="wire-m"></span><span id="wirelabel">one sends, one receives</span></span>
       </div>
-
-      <section class="device parent" aria-label="The parent's phone">
-        <header><b>Your phone</b><span>What you’d actually see</span></header>
-        <div class="dbody">
-          <div class="plock"><div class="t">9:41</div><div class="d">Tuesday</div></div>
-          <div class="stack" id="stack" aria-live="polite"></div>
-          <p class="empty" id="empty">Nothing to report today</p>
-          <p class="rolecap">Half two — every alert lands here, and nowhere else.</p>
-        </div>
-      </section>
-    </div>
-  </div>
-
-
-  <!-- 1 of 4 · notification chrome, not a text grid -->
-  <section id="alerts">
-    <p class="seclabel">What lands on your phone</p>
-    <h2>Three alerts. All about whether protection is running.</h2>
-    <p class="seclead">Those are the three today. No daily digest, and nothing held back for a paid tier. What Shieldora watches is whether the filter is still doing its job — not what your child does.</p>
-
-    <div class="kinds">
-      <div class="kind">
-        <div class="kind-head"><span class="kind-pip state"></span><h3>What you'll get</h3></div>
-        <div class="feed">
-          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection went offline</span><span class="ftime">4:52 pm</span></div>
-          <div class="frow"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">Protection is back on</span><span class="ftime">9:03 pm</span></div>
-          <div class="frow state"><img class="fico" src="favicon.svg" width="26" height="26" alt=""><span class="ftext">A browser was allowed</span><span class="ftime">—</span></div>
-        </div>
-        <p class="kind-note"><b>Offline</b> means Shieldora stopped hearing from the device — closed, deleted, switched off, or without a connection. Any of those means protection may not be running, and only you can put it back.</p>
-      </div>
-
-      <div class="kind">
-        <div class="kind-head"><span class="kind-pip quiet"></span><h3>What you won't get</h3></div>
-        <div class="feed">
-          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A message every time a site is blocked</span></div>
-          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A list of what your child tried to visit</span></div>
-          <div class="frow quiet"><span class="fx">&times;</span><span class="ftext">A daily or weekly digest</span></div>
-        </div>
-        <p class="kind-note">Apple's filter runs on the device and reports individual blocks to nobody — including us. The filtering is real and it is working. We just can't watch it happen, and we won't pretend to.</p>
-      </div>
-    </div>
-
-    <div class="quietstrip">
-      <div><span class="kind-pip quiet"></span><b>Most days, nothing at all</b> — and that is the point</div>
-      <p>You hear from Shieldora when protection needs attention, not when it is doing its job. A filter that quietly stops working is the failure that leaves a child unprotected, and it is the one we are built to catch.</p>
     </div>
   </section>
 
-  <!-- 2 of 4 · alternating row: argument beside the thing it describes -->
-
-  <!-- Between "Two kinds of alert" and the Apple ID section: breaks the text
-       run at its start rather than adding another block to the end of it. -->
-  <section class="preview">
+  <section class="preview" id="preview">
     <p class="seclabel">The parent app</p>
     <h2>What you'll open on your own phone</h2>
     <p class="seclead">The parent app isn't finished yet. <strong>This is the design we're building to, not a screenshot of working software</strong> — so treat it as where it's heading rather than what you'd get today. Everything on these two screens is something Shieldora actually does.</p>
@@ -2003,95 +1923,6 @@ footer a:hover{color:var(--ink)}
     </div>
   </section>
 
-  <section class="alt">
-    <div class="alt-copy">
-      <p class="seclabel">Why the alerts are worth trusting</p>
-      <h2>Locked behind your Apple ID, not a password we invented</h2>
-      <p class="body-lg">The blocking uses Family Controls, authorised in child mode. Your child can't delete the app, and there is no Shieldora screen that turns protection off. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password — not the child's passcode, not their Face ID. That is what makes the alerts worth trusting: protection can't be quietly removed first, and if anyone tries, that's an alert too.</p>
-      <div class="alt-pair">
-        <div><h3>You're the last to know</h3><p>Something happens on a screen in another room and nothing reaches you. Most parents find out long after — if they find out at all.</p></div>
-        <div><h3>The apps either do nothing or read everything</h3><p>One end of the market is a toggle that changes little. The other logs messages and browsing. Neither is what most families actually want.</p></div>
-      </div>
-    </div>
-
-    <div class="alt-visual" aria-hidden="true">
-      <div class="prompt">
-        <div class="prompt-ico"><svg viewBox="0 0 24 24" fill="none"><rect x="4.5" y="10.5" width="15" height="10" rx="2.5" stroke="#16191D" stroke-width="1.7"/><path d="M8 10.5V7.6a4 4 0 0 1 8 0v2.9" stroke="#16191D" stroke-width="1.7"/></svg></div>
-        <div class="prompt-title">Apple Account Password</div>
-        <div class="prompt-sub">iOS asks for the Apple Account that set up Screen Time before it will lift the restrictions.</div>
-        <div class="prompt-field">••••••••</div>
-        <div class="prompt-actions"><span class="pbtn ghost">Cancel</span><span class="pbtn">Turn off</span></div>
-      </div>
-      <p class="alt-cap">Locked behind your Apple ID, not a password we invented. A child's device passcode and Face ID will not open it.</p>
-    </div>
-  </section>
-
-  <!-- 3 of 4 · stepped flow, genuinely sequential -->
-  <section class="stepsec">
-    <p class="seclabel">How it works</p>
-    <h2>Three steps, then we do the work</h2>
-    <p class="seclead">Set it up on a weeknight and leave it alone.</p>
-
-    <ol class="flow">
-      <li class="fstep">
-        <div class="fnode"><span class="fnum">1</span></div>
-        <div class="fglyph">
-          <svg viewBox="0 0 64 88" aria-hidden="true"><rect x="6" y="4" width="52" height="80" rx="10" fill="#fff" stroke="#CDD3D9" stroke-width="2"/><rect x="14" y="18" width="36" height="6" rx="3" fill="#CDD3D9"/><rect x="14" y="30" width="26" height="6" rx="3" fill="#E4E8EB"/><circle cx="32" cy="58" r="11" fill="#E7F0EA" stroke="#2F7A47" stroke-width="2"/><path d="M27 58l4 4 7-8" stroke="#2F7A47" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Set up your parent account</h3>
-        <p>You create it on your own phone. It's where every alert lands, and the only place protection can be changed.</p>
-      </li>
-      <li class="fstep">
-        <div class="fnode"><span class="fnum">2</span></div>
-        <div class="fglyph">
-          <svg viewBox="0 0 64 88" aria-hidden="true"><rect x="6" y="4" width="52" height="80" rx="10" fill="#fff" stroke="#CDD3D9" stroke-width="2"/><path d="M32 22l14 5v11c0 8-6 13-14 16-8-3-14-8-14-16V27l14-5Z" fill="#E7F0EA" stroke="#2F7A47" stroke-width="2"/><path d="M27 44l4 4 8-9" stroke="#2F7A47" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </div>
-        <h3>Link your child's device</h3>
-        <p>A guided setup switches on filtering built into iOS. Safari is covered, including private browsing. Other browsers are blocked by default — you can allow one, with a warning.</p>
-      </li>
-      <li class="fstep">
-        <div class="fnode"><span class="fnum">3</span></div>
-        <div class="fglyph">
-          <svg viewBox="0 0 64 88" aria-hidden="true"><rect x="6" y="4" width="52" height="80" rx="10" fill="#fff" stroke="#CDD3D9" stroke-width="2"/><rect x="13" y="26" width="38" height="20" rx="6" fill="#fff" stroke="#2F7A47" stroke-width="2"/><circle cx="21" cy="36" r="4" fill="#2F7A47"/><rect x="28" y="32" width="18" height="3.4" rx="1.7" fill="#CDD3D9"/><rect x="28" y="38" width="12" height="3.4" rx="1.7" fill="#E4E8EB"/><rect x="13" y="52" width="38" height="14" rx="5" fill="#F3F5F7" stroke="#E1E5E9" stroke-width="1.6"/></svg>
-        </div>
-        <h3>The alerts start</h3>
-        <p>From then on it runs quietly. The filtering happens on the device, and you hear from Shieldora on the one thing it can see: whether protection is still running.</p>
-      </li>
-    </ol>
-  </section>
-
-  <!-- Forward-looking, and fenced off from everything above it. Every verb here
-       is future or negative: this is the one thing on the page that does not
-       work today, and a reader skimming must not mistake it for one that does. -->
-  <section class="band">
-    <div class="wrap">
-      <p class="seclabel">What&rsquo;s coming</p>
-      <h2>Telling you when a site is blocked</h2>
-      <p class="seclead">Today Shieldora can see when protection stops. It cannot see individual blocks &mdash; Apple&rsquo;s filter runs on the device and reports them to nobody, including us.</p>
-      <p class="seclead">Changing that means adding a DNS filtering layer through a third-party provider. Nothing is signed and nothing is built, and it may not happen in this form.</p>
-      <p class="seclead">It is here because you should know what we are working on, not because you should count on it.</p>
-    </div>
-  </section>
-
-  <!-- 4 of 4 · ledger rows, wide, with a recorded/never anchor -->
-  <section class="ledgersec">
-    <p class="seclabel">Being straight with you</p>
-    <h2>What Shieldora doesn't do</h2>
-    <p class="seclead">None of this is missing work. Each one is a line we drew on purpose.</p>
-
-    <div class="chips" aria-hidden="true">
-      <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">whether protection is running</span><span class="chip">the time</span><span class="chip">the device</span></div>
-      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">what was blocked</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
-    </div>
-
-    <dl class="ledger">
-      <div class="lrow"><dt>We don&rsquo;t see search terms, typed text, messages or browsing history.</dt><dd>None of it is sent to us. Apple&rsquo;s filter makes its decisions on the device and tells us nothing about them.</dd></div>
-      <div class="lrow"><dt>We don&rsquo;t keep a record of what was blocked.</dt><dd>Not a redacted one, not a private one &mdash; none. Apple&rsquo;s filter reports individual blocks to nobody, so there is nothing for us to store, show you, lose, or be made to hand over.</dd></div>
-      <div class="lrow"><dt>We don't show you your child's screen.</dt><dd>No screenshots, no live view, no scrolling through their day. If that's what you're after, Shieldora is the wrong app.</dd></div>
-      <div class="lrow"><dt>We don&rsquo;t send you everything.</dt><dd>Alerts are limited to whether protection is running: it went offline, it came back, or a browser was allowed. Everything else stays off your phone.</dd></div>
-    </dl>
-  </section>
-
   <div class="signup" id="waitlist">
     <div>
       <h2>Be the first to protect your family</h2>
@@ -2106,6 +1937,26 @@ footer a:hover{color:var(--ink)}
     <p class="collect">We collect your email address, and use it for one thing: telling you when Shieldora is ready. We don't sell it or pass it on. <a href="privacy.html">How we handle your information</a>.</p>
     </div>
   </div>
+
+  <section class="ledgersec">
+    <p class="seclabel">Being straight with you</p>
+    <h2>What Shieldora doesn't do</h2>
+    <p class="seclead">None of this is missing work. Each one is a line we drew on purpose.</p>
+
+    <div class="chips" aria-hidden="true">
+      <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">whether protection is running</span><span class="chip">the time</span><span class="chip">the device</span></div>
+      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">what was blocked</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
+    </div>
+
+    <dl class="ledger">
+      <div class="lrow"><dt>We won&rsquo;t tell you every time a site is blocked.</dt><dd>Apple&rsquo;s filter runs on the device and reports individual blocks to nobody &mdash; including us. The filtering is real and it is working. We just can&rsquo;t watch it happen, and we won&rsquo;t pretend to.</dd></div>
+      <div class="lrow"><dt>No list of what your child tried to visit, and no daily digest.</dt><dd>One end of this market is a toggle that changes little. The other logs messages and browsing. Neither is what most families actually want.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t see search terms, typed text, messages or browsing history.</dt><dd>None of it is sent to us. Apple&rsquo;s filter makes its decisions on the device and tells us nothing about them.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t keep a record of what was blocked.</dt><dd>Not a redacted one, not a private one &mdash; none. Apple&rsquo;s filter reports individual blocks to nobody, so there is nothing for us to store, show you, lose, or be made to hand over.</dd></div>
+      <div class="lrow"><dt>We don't show you your child's screen.</dt><dd>No screenshots, no live view, no scrolling through their day. If that's what you're after, Shieldora is the wrong app.</dd></div>
+      <div class="lrow"><dt>We don&rsquo;t send you everything.</dt><dd>Alerts are limited to whether protection is running: it went offline, it came back, or a browser was allowed. Everything else stays off your phone.</dd></div>
+    </dl>
+  </section>
 
   <section>
     <p class="seclabel">FAQ</p>
@@ -2227,79 +2078,7 @@ const meter = (function(){
   return {frame};
 })();
 
-/* ------------------------------------------------------------------ *
- * 2. The rig. Scroll fires the alert once for people who never touch
- *    anything; the switch lets anyone who does touch it try the exact
- *    thing a child would, and be refused.
- * ------------------------------------------------------------------ */
-(function(){
-  const sw=document.getElementById('sw'), gate=document.getElementById('gate'),
-        tryBtn=document.getElementById('try'), deny=document.getElementById('deny'),
-        stack=document.getElementById('stack'), empty=document.getElementById('empty'),
-        wire=document.getElementById('wire'), wirelabel=document.getElementById('wirelabel'),
-        rig=document.getElementById('rig');
-  let interacted=false, autoFired=false;
 
-  /* The phone deliberately starts empty and receives exactly one alert. Three
-     near-identical "a blocked page was hit" lines read as placeholder text, and
-     stacking them here also made the phone look busier than the product is. The
-     full range of messages is set out in its own section below. */
-  function card(headline, sub, when, earlier){
-    const el=document.createElement('div');
-    el.className='n'+(earlier?' earlier':'');
-    el.innerHTML='<span class="ic">'+ICON+'</span><div><div class="app">SHIELDORA</div>'+
-      '<div class="hl">'+headline+'</div><div class="sub">'+sub+'</div></div><span class="when">'+when+'</span>';
-    return el;
-  }
-
-  function notify(headline, sub, when){
-    empty.style.display='none';
-    const el=card(headline, sub, when, false);
-    stack.prepend(el);
-    wirelabel.textContent=headline;
-    wire.classList.add('firing');
-    setTimeout(()=>wire.classList.remove('firing'),950);
-    if(REDUCED) el.classList.add('in');
-    else requestAnimationFrame(()=>requestAnimationFrame(()=>el.classList.add('in')));
-    // Keep the stack readable rather than endless. Oldest drops off, as it would.
-    while(stack.children.length>2) stack.lastElementChild.remove();
-  }
-
-
-  sw.addEventListener('click',()=>{
-    interacted=true;
-    const on=sw.getAttribute('aria-checked')==='true';
-    if(on){ gate.classList.add('show'); deny.classList.remove('show'); }
-    else { gate.classList.remove('show'); sw.setAttribute('aria-checked','true');
-           notify('Protection is back on','Emma’s iPhone · checking in again','now'); }
-  });
-  tryBtn.addEventListener('click',()=>{
-    interacted=true;
-    deny.classList.add('show');
-    /* Two beats. The gate held, so nothing changed and nothing fires — an alert
-       here would be a lie about a refusal. Then the honest backstop: a child who
-       cannot get through deletes the app instead, the device stops checking in,
-       and that silence is the one thing we genuinely can see. */
-    if(REDUCED){ notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); }
-    else setTimeout(()=>notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'),1700);
-  });
-
-  // The passive path: if the rig has been on screen and nobody has touched it,
-  // show them what would have happened anyway.
-  if(REDUCED){ notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); }
-  else{
-    const io=new IntersectionObserver(es=>{
-      es.forEach(e=>{
-        if(e.isIntersecting && !autoFired && !interacted){
-          autoFired=true;
-          setTimeout(()=>{ if(!interacted) notify('Protection went offline','Emma’s iPhone · Shieldora stopped hearing from it','4:52 pm'); },1100);
-          io.disconnect();
-        }
-      });
-    },{threshold:.45});
-    io.observe(rig);
-  }
-})();
 
 /* ------------------------------------------------------------------ *
  * The problem -> answer wipe. Progress is the section's own travel
