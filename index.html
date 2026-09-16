@@ -78,8 +78,15 @@ nav .status{text-align:right}
 .tstick{position:sticky;top:0;height:100vh;overflow:hidden}
 .tpanel{position:absolute;inset:0;display:flex;align-items:center}
 
-.tpanel .copy{max-width:34ch}
-.tanswer .copy{opacity:0;transform:translateX(26px);
+ /* Both panels put their copy in the SAME centred column, so the two states sit
+    exactly on top of each other and nothing moves sideways as the green arrives. */
+.tpanel .copy{max-width:min(58ch,100%);margin-inline:auto;text-align:center}
+.tpanel h2{max-width:20ch;margin-left:auto;margin-right:auto}
+.tpanel .seclead,.tpanel .tnote{margin-left:auto;margin-right:auto}
+/* Settles vertically. The old translateX(26px) put the green copy 26px right of
+   the sage copy for the whole transition — the column visibly jumped sideways
+   as the panel arrived, and only lined up once it had settled. */
+.tanswer .copy{opacity:0;transform:translateY(16px);
   transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
 .tanswer.settled .copy{opacity:1;transform:none}
 .tproblem{background:var(--band);color:var(--band-ink)}
@@ -92,15 +99,27 @@ nav .status{text-align:right}
   clip-path:inset(0 100% 0 0)}
 .tanswer h2{color:#EAF3EC}
 .tanswer .seclead{color:#B9D3C1}
-.tsec h2{margin-bottom:14px}
-.tsec .seclead{font-size:clamp(16px,1.9vw,18.5px)}
-.tpill{display:inline-flex;align-items:center;gap:8px;margin-top:22px;
+/* The panel is exactly 100vh and clips what does not fit, so every size here is
+   bounded by vh as well as vw. Un-maximising a window shortens it as well as
+   narrowing it, and the green panel's copy is twice the sage panel's: at 813px
+   of height it overflowed by 8px, at 713px by 108px, at 513px by 230px, and the
+   bottom of it was simply cut off. */
+.tsec h2{font-size:clamp(26px,min(5.2vw,7vh),52px);margin-bottom:clamp(8px,1.5vh,14px)}
+.tsec .seclead{font-size:clamp(15px,min(1.9vw,2.3vh),18.5px);margin-bottom:clamp(12px,2.6vh,26px)}
+.tsec .seclabel{margin-bottom:clamp(3px,0.8vh,6px)}
+.tpill{display:inline-flex;align-items:center;gap:8px;margin-top:0;
   background:rgba(79,191,108,.14);border:1px solid rgba(79,191,108,.35);
-  color:#8FE3A6;border-radius:999px;padding:9px 15px;font-size:14px;font-weight:600}
+  color:#8FE3A6;border-radius:999px;font-weight:600;
+  padding:clamp(6px,1vh,9px) clamp(11px,1.5vw,15px);font-size:clamp(12.5px,1.7vh,14px)}
 
 .decknext{display:block;margin-top:10px;color:#6C7680}
-.tstrings{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
-.tnote{font-size:14.5px;line-height:1.55;color:#9FBFA9;max-width:46ch;margin:16px 0 0}
+/* justify-content:center to match the centred column. The pills also used to
+   carry margin-top:22px EACH — at a 34ch measure they wrapped onto three rows
+   and paid it three times, which was 66px of the overflow on its own. */
+.tstrings{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;
+  margin-top:clamp(10px,2.2vh,22px)}
+.tnote{font-size:clamp(12.5px,min(1.2vw,1.7vh),14.5px);line-height:1.55;
+  color:#9FBFA9;max-width:46ch;margin:clamp(8px,1.6vh,16px) 0 0}
 .tpill .dot{width:7px;height:7px;border-radius:50%;background:#4FBF6C;flex:none}
 @media (prefers-reduced-motion:reduce){
   /* No wipe. Both panels are shown in order as ordinary blocks, because the
@@ -138,14 +157,10 @@ nav .status{text-align:right}
   .ledgersec > .seclead,.faqsec > .seclead,.preview > .seclead{grid-column:1;grid-row:3}
   /* :not(.seclabel) matters — the label is a <p>, so p:not(.seclead) outranked
      the `> .seclabel` rule above and threw it into the right-hand column. */
-  .ledgersec > .ledger,.ledgersec > p:not(.seclead):not(.seclabel),
+  .ledgersec > .chips,.ledgersec > p:not(.seclead):not(.seclabel),
   .faqsec > .faqlist,
   .preview > .screens{grid-column:2}
-  /* The chips belong under the lead, not opposite it. Sitting in column 2 they
-     left the left column empty beside them — the same hole the wider container
-     was meant to close. */
-  .ledgersec > .chips{grid-column:1;grid-row:4}
-  .ledgersec > .ledger{grid-row:1 / span 4}
+  .ledgersec > .chips{grid-row:1 / span 4}
   .faqsec > .faqlist{grid-row:1 / span 4}
   .preview > .screens{grid-row:1 / span 4;margin-top:0}
 
@@ -168,7 +183,6 @@ nav .status{text-align:right}
 }
 /* Measures, independent of the container. */
 .seclead{max-width:60ch}
-.lrow dd{max-width:58ch}
 .deck{max-width:46ch}
 
 /* ---------- hero + silence line ---------- */
@@ -467,7 +481,7 @@ footer a:hover{color:var(--ink)}
 .fstep h3{margin:0 0 8px;font-size:19px;font-weight:600;letter-spacing:-0.012em}
 .fstep p{margin:0;font-size:15.5px;line-height:1.65;color:var(--mid)}
 
-/* 4 · ledger */
+/* 4 · what we don't record */
 .chips{display:grid;grid-template-columns:1fr;gap:14px;margin:6px 0 26px}
 .chipcol{border:1px solid var(--line);border-radius:14px;padding:16px 18px;background:var(--panel)}
 .chipcol.never{background:var(--soft)}
@@ -475,16 +489,11 @@ footer a:hover{color:var(--ink)}
 .chip{display:inline-block;font-size:14px;padding:6px 11px;border-radius:8px;margin:0 6px 6px 0;
   background:#E7F0EA;color:#1F5B34}
 .chipcol.never .chip{background:#EFE3DF;color:#7A3620;text-decoration:line-through;text-decoration-thickness:1px}
-.ledger{margin:0;border-top:2px solid var(--ink)}
-.lrow{display:grid;grid-template-columns:1fr;gap:6px;padding:22px 0;border-bottom:1px solid var(--line)}
-.lrow dt{font-size:19px;font-weight:600;letter-spacing:-0.012em;line-height:1.3}
-.lrow dd{margin:0;font-size:15.5px;line-height:1.65;color:var(--mid)}
 
 @media (min-width:900px){
   .kinds{grid-template-columns:1fr 1fr;gap:24px}
   .alt-pair{grid-template-columns:1fr 1fr;gap:34px}
   .chips{grid-template-columns:0.8fr 1.2fr;gap:18px}
-  .lrow{grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);gap:36px;align-items:baseline}
 }
 @media (min-width:1100px){
   .alt{grid-template-columns:minmax(0,1.25fr) minmax(0,0.75fr);gap:64px;align-items:center}
@@ -495,13 +504,11 @@ footer a:hover{color:var(--ink)}
   .fstep:last-child::after{display:none}
 }
 @media (min-width:1440px){
-  .lrow dt{font-size:21px}
   .kind-head h3,.fstep h3{font-size:21px}
   .flow{gap:52px}
   .fstep::after{right:-52px}
 }
 @media (min-width:1920px){
-  .lrow dt{font-size:22px}
   .kind-head h3,.fstep h3{font-size:22px}
   .fglyph{width:92px}
 }
@@ -2015,11 +2022,6 @@ footer a:hover{color:var(--ink)}
       <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
     </div>
 
-    <dl class="ledger">
-      <div class="lrow"><dt>We don&rsquo;t see search terms, typed text, messages or browsing history.</dt><dd>None of it is sent to us. Apple&rsquo;s filter makes its decisions on the device and tells us nothing about them.</dd></div>
-      <div class="lrow"><dt>We don't show you your child's screen.</dt><dd>No screenshots, no live view, no scrolling through their day. If that's what you're after, Shieldora is the wrong app.</dd></div>
-      
-    </dl>
   </section>
 
   <section class="faqsec">
