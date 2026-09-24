@@ -56,7 +56,7 @@ footer a{color:var(--mid)}
   </nav>
 
   <h1>Privacy Policy</h1>
-  <p class="status">Version 0.1 · Australia · Last updated 17 August 2026</p>
+  <p class="status">Version 0.1 · Australia · Last updated 24 September 2026</p>
 
   <div class="draftbox">
     <h2>This is a draft, and we would rather say so</h2>
@@ -128,14 +128,15 @@ footer a{color:var(--mid)}
 <h2>9. Where data is stored, and international transfers</h2>
 <p>Data is stored in <strong>Australia</strong> (Sydney) — the database on <strong>Supabase</strong> (Postgres, Sydney region), and the application on <strong>Fly.io</strong>&#x27;s Sydney region.</p>
 <p><strong>One exception, which we would rather state than have you discover.</strong> Fly.io stores the operational logs and metrics its machines produce in the <strong>United States</strong>, not in Australia, regardless of where the machine itself runs. Fly has confirmed this to us in writing. Logs are kept <strong>7 days</strong> and metrics <strong>15 days</strong>, the storage region <strong>cannot be changed</strong>, and the log sink cannot be switched off. These are operational records — request timing, errors, IP addresses — not the database, and they do not contain alert history or account contents. But they are personal information leaving Australia, and this policy would be wrong not to say so.</p>
+<p><strong>Resend</strong>, which sends our alert and account emails, keeps a log of each message — the recipient&#x27;s email address and the message content — for <strong>30 days</strong>, and offers no way to delete a sent message early. An alert email names the child (the name the parent set) and the device type, such as &quot;Emma&#x27;s iPhone&quot;, so a parent can tell their children&#x27;s devices apart; it never carries what was blocked, browsed or searched, which stay in the app behind the login. So a child&#x27;s first name and device type sit in Resend&#x27;s logs for up to 30 days from when a message was sent. That is personal information, and after an account is deleted it is the longest-lived copy of anything about that account — the live data goes at deletion, and a Resend message clears 30 days after it was sent, on Resend&#x27;s own clock, which we cannot bring forward.</p>
 <hr>
 <h2>10. How we protect data</h2>
 <ul><li>All data is encrypted in transit.</li><li>Data is encrypted at rest by our infrastructure providers.</li><li>Passwords are stored only as cryptographic hashes, never in readable form.</li><li>Parent accounts require two-factor authentication, and every change that <strong>reduces</strong> protection — turning protection off, unblocking a category, unlinking a device — requires a fresh two-factor code. Changes that increase protection do not, so that a parent who cannot reach their authenticator can always restore it.</li><li>Child devices hold limited credentials that cannot read the parent dashboard or change settings.</li><li>Access to production data is restricted to <strong>one person — the founder, who operates the service</strong> — and is logged. Shieldora is run by one person, and we would rather say that plainly than imply a team and an approval process that do not exist. If that changes, this section changes with it.</li></ul>
 <p>No service can promise perfect security, and we do not.</p>
 <hr>
 <h2>11. How long we keep data</h2>
-<table><tr><td>Data</td><td>Retention</td></tr><tr><td>Parent account</td><td>While the account is open</td></tr><tr><td>Child profiles and device records</td><td>While linked to an open account</td></tr><tr><td>Protection events (offline, restored, browser allowed)</td><td><span class="todo">not yet decided</span>, then deleted</td></tr><tr><td>Alert emails sent</td><td><span class="todo">not yet decided</span></td></tr><tr><td>Backups</td><td><span class="todo">not yet decided</span></td></tr></table>
-<p>When an account is deleted, we delete the associated data within <span class="todo">not yet decided</span>, except where we must keep something to meet a legal obligation.</p>
+<table><tr><td>Data</td><td>Retention</td></tr><tr><td>Parent account</td><td>While the account is open</td></tr><tr><td>Child profiles and device records</td><td>While linked to an open account</td></tr><tr><td>Protection events (offline, restored, browser allowed)</td><td><span class="todo">not yet decided</span>, then deleted</td></tr><tr><td>Alert emails sent</td><td><span class="todo">not yet decided</span></td></tr><tr><td>Backups</td><td>Cleared within 7 days, once database backups are enabled</td></tr></table>
+<p>When an account is deleted, we delete the associated data within <strong>30 days</strong> (the cancellable grace period). Copies then persist in backups and provider logs and clear as those expire: database backups within 7 days, and our email provider&#x27;s message logs within 30 days, which is the longest-lived copy of any personal data after deletion. We keep something beyond this only where a legal obligation requires it.</p>
 <hr>
 <h2>12. Your rights, and how to use them</h2>
 <p>A parent may:</p>
