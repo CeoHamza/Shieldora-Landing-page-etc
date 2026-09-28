@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#E8EAED">
-<title>Shieldora — A filter that talks back.</title>
-<meta name="description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
-<meta property="og:title" content="Shieldora — A filter that talks back.">
-<meta property="og:description" content="Shieldora blocks adult content on your child's iPhone or iPad — and tells you if that protection ever stops running.">
+<title>Shieldora: Know when an adult site is blocked. Know when protection breaks.</title>
+<meta name="description" content="Shieldora blocks adult sites on your child's iPhone or iPad, tells you when an adult site is blocked, and tells you if that protection ever stops running.">
+<meta property="og:title" content="Shieldora: Know when an adult site is blocked. Know when protection breaks.">
+<meta property="og:description" content="Shieldora blocks adult sites on your child's iPhone or iPad, tells you when an adult site is blocked, and tells you if that protection ever stops running.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://shieldora.app">
 <meta property="og:image" content="https://shieldora.app/og-image.png">
@@ -75,6 +75,10 @@ nav .status{text-align:right}
    Safari only got in 26 — this has to work on the phones parents actually hold. */
 .tsec{position:relative;height:320vh;margin:clamp(40px,6vw,80px) 0}
 .tstick{position:sticky;top:0;height:100vh;overflow:hidden}
+/* Content centred in the full-height sticky panel, so the empty space is
+   balanced above and below it at every screen size — and both the problem and
+   answer panels sit in exactly the same place, so nothing jumps sideways or up
+   and down as the transition cross-fades. */
 .tpanel{position:absolute;inset:0;display:flex;align-items:center}
 
  /* Both panels put their copy in the SAME centred column, so the two states sit
@@ -137,31 +141,20 @@ nav .status{text-align:right}
    own max-width, so lines never stretch with the container. Width goes into
    layout, not line length. */
 @media (min-width:1100px){
-  /* .ledgersec and .faqsec share a shape: label, heading and lead in a narrow
-     left column, the substance beside it. .signup is deliberately not in here —
-     its markup is two plain divs, so these child selectors would match nothing. */
-  .ledgersec,.faqsec,.preview{
+  /* The preview keeps the label/heading/lead in a narrow left column with the
+     phone screens beside it. The FAQ no longer shares this shape — a narrow
+     left column of just a label and heading left a large empty band — so its
+     heading sits on top and the questions run full width in two columns below. */
+  .preview{
     display:grid;
     grid-template-columns:minmax(260px,0.75fr) minmax(0,1.5fr);
-    /* The right column spans all four rows, so any height it has over the left
-       column gets shared out between those rows and prises the label, heading
-       and lead apart. Sending the slack to row 4 keeps the left column stacked. */
     grid-template-rows:auto auto auto 1fr;
-    /* Column gap only. Applied to rows as well it pushed 90px between the label,
-       heading and lead, which already carry their own margins. */
     gap:0 clamp(30px,4vw,90px);
     align-items:start}
-  .ledgersec > .seclabel,.faqsec > .seclabel,.preview > .seclabel{grid-column:1;grid-row:1}
-  .ledgersec > h2,.faqsec > h2,.preview > h2{grid-column:1;grid-row:2}
-  .ledgersec > .seclead,.faqsec > .seclead,.preview > .seclead{grid-column:1;grid-row:3}
-  /* :not(.seclabel) matters — the label is a <p>, so p:not(.seclead) outranked
-     the `> .seclabel` rule above and threw it into the right-hand column. */
-  .ledgersec > .chips,.ledgersec > p:not(.seclead):not(.seclabel),
-  .faqsec > .faqlist,
-  .preview > .screens{grid-column:2}
-  .ledgersec > .chips{grid-row:1 / span 4}
-  .faqsec > .faqlist{grid-row:1 / span 4}
-  .preview > .screens{grid-row:1 / span 4;margin-top:0}
+  .preview > .seclabel{grid-column:1;grid-row:1}
+  .preview > h2{grid-column:1;grid-row:2}
+  .preview > .seclead{grid-column:1;grid-row:3}
+  .preview > .screens{grid-column:2;grid-row:1 / span 4;margin-top:0}
 
   /* The signup's own two divs. A percentage second track, not minmax beside an
      fr: the fr track takes all free space first, so a minmax(320px,680px) form
@@ -176,9 +169,10 @@ nav .status{text-align:right}
      all the slack into the heading column. It fills its own track now. */
   .signup form{max-width:none}
 }
-@media (min-width:1500px){
-  /* Two columns of questions, once the column can hold two measures. */
-  .faqlist{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(30px,3vw,56px);align-items:start}
+@media (min-width:820px){
+  /* Two columns of questions across the full width, so the section fills its
+     space instead of leaving a tall gap beside a single column. */
+  .faqlist{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(28px,3vw,56px);align-items:start}
 }
 /* Measures, independent of the container. */
 .seclead{max-width:60ch}
@@ -186,9 +180,42 @@ nav .status{text-align:right}
 
 /* ---------- hero + silence line ---------- */
 .hero{padding:14px 0 0}
-h1{font-size:clamp(38px,8.2vw,76px);line-height:1.02;letter-spacing:-0.042em;font-weight:800;margin:14px 0 20px;max-width:15ch}
+h1{font-size:clamp(29px,5.4vw,46px);line-height:1.05;letter-spacing:-0.03em;font-weight:800;margin:6px 0 16px;max-width:19ch}
 .deck{font-size:clamp(16.5px,2.1vw,19px);color:var(--mid);max-width:44ch;margin:0}
 .herocta{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0 0}
+
+/* Hero: the lede (headline, line, inline waitlist) beside a phone showing a
+   notification arriving. Single column on phones, so the sign-up sits above the
+   fold; two columns from ~900px up. */
+.herogrid{display:flex;flex-direction:column;gap:clamp(24px,4vw,40px)}
+.herolede{min-width:0}
+.heroform{display:flex;gap:10px;flex-wrap:wrap;max-width:480px;margin:20px 0 0}
+.heroform input{flex:1 1 200px;padding:14px 15px;border:1px solid var(--line);border-radius:11px;font:inherit;font-size:16px;background:#fff;min-height:48px}
+.heroform .btn{flex:none}
+.herophone{display:flex;justify-content:center}
+.lockphone{width:min(290px,86%);aspect-ratio:9/18.5;border-radius:38px;background:linear-gradient(165deg,#20302650,#0f171370),radial-gradient(120% 80% at 50% 0,#2c4636,#0e1611);
+  border:8px solid #0a0e0c;box-shadow:0 24px 54px -22px rgba(15,25,20,.6);padding:26px 15px 30px;color:#fff;
+  display:flex;flex-direction:column;align-items:center;position:relative;overflow:hidden}
+.lp-clock{text-align:center;margin:16px 0 24px}
+.lp-time{display:block;font-size:56px;font-weight:600;letter-spacing:-0.03em;line-height:1}
+.lp-date{display:block;font-size:13px;color:rgba(255,255,255,.72);margin-top:3px}
+.lp-stack{width:100%;display:flex;flex-direction:column;gap:9px}
+.lp-notif{width:100%;background:rgba(255,255,255,.15);border-radius:15px;padding:10px 12px;
+  display:flex;gap:10px;align-items:flex-start;animation:lpdrop .7s cubic-bezier(.2,.8,.3,1) both}
+/* They land in sequence — blocked, then turned off, then back on — the same
+   three the alert section shows. */
+.lp-stack .lp-notif:nth-child(1){animation-delay:.35s}
+.lp-stack .lp-notif:nth-child(2){animation-delay:.6s}
+.lp-stack .lp-notif:nth-child(3){animation-delay:.85s}
+@keyframes lpdrop{from{opacity:0;transform:translateY(-16px) scale(.96)}to{opacity:1;transform:none}}
+.lp-ic{width:34px;height:34px;border-radius:9px;background:rgba(255,255,255,.12);flex:none;display:grid;place-items:center}
+.lp-ic svg{width:22px;height:22px}
+.lp-body{min-width:0;display:flex;flex-direction:column;flex:1}
+.lp-app{font-size:11px;font-weight:700;letter-spacing:.05em;color:rgba(255,255,255,.74);display:flex;justify-content:space-between}
+.lp-when{font-weight:500;letter-spacing:0}
+.lp-hl{font-size:14px;font-weight:600;line-height:1.32;margin-top:2px}
+.lp-sub{font-size:12.5px;color:rgba(255,255,255,.72);margin-top:3px}
+@media (prefers-reduced-motion:reduce){.lp-notif{animation:none;opacity:1}}
 .btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:600;font-size:16px;
   padding:14px 24px;border-radius:11px;border:0;cursor:pointer;min-height:48px}
 .btn:hover{background:var(--green-dk)}
@@ -309,6 +336,42 @@ footer a:hover{color:var(--ink)}
 .collect{margin:10px 0 0;font-size:13.5px;line-height:1.6;color:var(--mid);max-width:62ch}
 .collect a{color:var(--green);font-weight:500}
 
+/* Example-alert section: two real notifications, with the child / device / time
+   colour-keyed, and a line on what is and isn't recorded. */
+.alertx .seclead{max-width:62ch}
+.axcards{display:flex;flex-direction:column;gap:14px;max-width:560px;margin:0 auto}
+.axnotif{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;box-shadow:0 1px 3px rgba(22,25,29,.06)}
+.axn-ic{width:38px;height:38px;border-radius:10px;background:#12281c;flex:none;display:grid;place-items:center}
+.axn-ic svg{width:24px;height:24px}
+.axn-body{min-width:0;display:flex;flex-direction:column;flex:1}
+.axn-app{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--mid)}
+.axn-when{font-weight:500}
+.axn-hl{font-size:16px;font-weight:600;line-height:1.4;margin-top:3px;color:var(--ink)}
+.axn-sub{font-size:13px;color:var(--mid);margin-top:4px}
+.mk-child{border-bottom:2.5px solid #35a85b}
+.mk-device{border-bottom:2.5px solid #4f8fd0}
+.mk-time{border-bottom:2.5px solid #d99a3c;font-weight:600;color:var(--ink)}
+.axlegend{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 20px;margin:16px 0 0;font-size:14px;color:var(--mid)}
+.axkey{display:inline-flex;align-items:center;gap:7px}
+.axdot{width:11px;height:11px;border-radius:3px;flex:none}
+.axdot.child{background:#35a85b}
+.axdot.device{background:#4f8fd0}
+.axdot.time{background:#d99a3c}
+.axnever{margin:22px 0 0;font-size:15px;line-height:1.62;color:var(--mid);max-width:56ch}
+.axnever b{color:var(--ink);font-weight:600}
+.ax-demo{min-width:0}
+/* From ~900px: the copy on the left, the example notifications on the right, so
+   the section fills the width instead of leaving a blank half. */
+@media (min-width:900px){
+  /* Vertically centre the notifications against the text block so they align
+     with its middle rather than sitting high; the cards and legend centre
+     horizontally within their column (margin:auto / justify-content above). */
+  .alertx{display:flex;align-items:center;gap:clamp(40px,5vw,90px)}
+  .ax-lede{flex:1 1 0;min-width:0}
+  .ax-demo{flex:1 1 0;min-width:0}
+  .ax-lede .axnever{max-width:46ch}
+}
+
 /* ---------- wide viewports ----------
    The container was pinned at 1180px above that width, so a 1920 display
    showed a strip with ~370px of dead margin each side. These widen it in
@@ -322,17 +385,10 @@ footer a:hover{color:var(--ink)}
   /* The hero's right-hand column was the one-day graph. With that gone the
      headline takes the wide column and the deck, buttons and price sit beside
      it, so the hero still uses the width instead of trailing a blank half. */
-  .hero{padding:34px 0 0}
-  .herotext{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr);
-    /* h1 spans all three rows and is the taller column, so without this the
-       surplus is shared between the rows and pushes the deck, buttons and price
-       apart. Sending it to row 3 keeps the right column stacked. */
-    grid-template-rows:auto auto 1fr;
-    gap:0 clamp(36px,4.5vw,88px);align-items:start;min-width:0}
-  .herotext h1{grid-column:1;grid-row:1 / span 3;margin:0}
-  .herotext .deck{grid-column:2;grid-row:1;margin-top:0}
-  .herotext .herocta{grid-column:2;grid-row:2}
-  .herotext .microcopy{grid-column:2;grid-row:3}
+  .hero{padding:30px 0 0}
+  .herogrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,0.95fr);
+    gap:clamp(34px,4.5vw,80px);align-items:center}
+  .herophone{justify-content:flex-end}
   /* .lines and .rig went with the interactive rig. The old .signup grid pinned
      the form track to 420px and, being later in source than the wide-viewport
      block above, quietly beat it; the signup layout now lives there instead. */
@@ -344,8 +400,8 @@ footer a:hover{color:var(--ink)}
 }
 @media (min-width:1440px){
   :root{--wrapmax:1600px}
-  h1{font-size:clamp(46px,4.2vw,60px)}
-  .hero{padding:44px 0 0}
+  h1{font-size:clamp(40px,3.2vw,52px)}
+  .hero{padding:40px 0 0}
   section:not(.device){padding:84px 0 0}
   .rigwrap{padding:84px 0 0}
   .cols{gap:44px}
@@ -1502,17 +1558,45 @@ footer a:hover{color:var(--ink)}
   </nav>
 
   <div class="hero">
-    <div class="herotext">
-    <h1>A filter that talks back.</h1>
-    <p class="deck">Shieldora blocks adult content on your child&rsquo;s iPhone, using Apple&rsquo;s own filtering. If that protection ever stops, you&rsquo;ll know &mdash; most filters fail in silence. <span class="decknext">Alerting you when a site is actually blocked is coming next.</span></p>
-    <div class="herocta">
-      <a class="btn" href="#waitlist">Join the waitlist</a>
-      <a class="btn ghost" href="#preview">See the app</a>
+    <div class="herogrid">
+      <div class="herolede">
+        <h1>Know when an adult site is blocked.<br>Know when protection breaks.</h1>
+        <p class="deck">Shieldora blocks adult sites on your child&rsquo;s iPhone, and tells you when one is blocked or when protection is turned off.</p>
+        <form class="heroform" onsubmit="return false">
+          <input type="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+          <button class="btn" type="submit">Join the waitlist</button>
+        </form>
+        <p class="microcopy"><b>Coming soon.</b> $10 AUD / family / month, one subscription for however many children. The waitlist is for early access.</p>
+      </div>
+      <div class="herophone" aria-hidden="true">
+        <div class="lockphone">
+          <div class="lp-clock"><span class="lp-time">9:41</span><span class="lp-date">Tuesday, 3 June</span></div>
+          <div class="lp-stack">
+            <div class="lp-notif">
+              <span class="lp-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="lp-body">
+                <span class="lp-app">SHIELDORA<span class="lp-when">now</span></span>
+                <span class="lp-hl">An adult site was blocked on Emma&rsquo;s iPhone</span>
+              </span>
+            </div>
+            <div class="lp-notif">
+              <span class="lp-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="lp-body">
+                <span class="lp-app">SHIELDORA<span class="lp-when">20m ago</span></span>
+                <span class="lp-hl">Protection is back on Emma&rsquo;s iPhone</span>
+              </span>
+            </div>
+            <div class="lp-notif">
+              <span class="lp-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="lp-body">
+                <span class="lp-app">SHIELDORA<span class="lp-when">30m ago</span></span>
+                <span class="lp-hl">Protection was turned off on Emma&rsquo;s iPhone</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <p class="microcopy"><b>$10 AUD / family / month</b> — one subscription, however many children. Not released yet; the waitlist is for early access.</p>
-    </div>
-
-
   </div>
 
 </div><!-- /.wrap — the wipe is full-bleed, so it sits outside the container -->
@@ -1525,7 +1609,7 @@ footer a:hover{color:var(--ink)}
             <p class="seclabel">The problem</p>
             <h2>Protection gets switched off in silence</h2>
             <p class="seclead">A filter a child can quietly disable isn&rsquo;t protection. It fails without a sound, and nothing arrives to tell you it stopped.</p>
-            <p class="seclead">It happens on a screen in another room, and nothing reaches you. Most parents find out long after &mdash; if at all.</p>
+            <p class="seclead">It happens on a screen in another room, and nothing reaches you. Most parents find out long after, if at all.</p>
           </div>
         </div>
       </div>
@@ -1534,14 +1618,14 @@ footer a:hover{color:var(--ink)}
           <div class="copy">
             <p class="seclabel" style="color:#7FA98C">What Shieldora does</p>
             <h2>You get told. That&rsquo;s the whole point.</h2>
-            <p class="seclead">When protection stops running, or a browser is allowed, a notification lands on your phone with the time and the device. You don&rsquo;t have to go and check.</p>
+            <p class="seclead">When an adult site is blocked, when protection stops running, or when a browser is allowed, a notification lands on your phone with the time and the device. You don&rsquo;t have to go and check.</p>
             <div class="tstrings">
-              <span class="tpill"><span class="dot"></span>Protection went offline</span>
-              <span class="tpill"><span class="dot"></span>Protection is back on</span>
+              <span class="tpill"><span class="dot"></span>An adult site was blocked</span>
+              <span class="tpill"><span class="dot"></span>Screen Time was turned off</span>
               <span class="tpill"><span class="dot"></span>A browser was allowed</span>
             </div>
-            <p class="tnote">A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks &mdash; so that one is a gentle heads-up after about a day, not an alarm. The alert that comes straight away is Screen Time being turned off.</p>
-            <p class="tnote">And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password &mdash; not the child&rsquo;s passcode, not their Face ID.</p>
+            <p class="tnote">A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks, so that one is a gentle heads-up after about a day, not an alarm. Screen Time being turned off is the alert that matters, and Shieldora tells you when it happens.</p>
+            <p class="tnote">And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password, not the child&rsquo;s passcode, not their Face ID.</p>
           </div>
         </div>
       </div>
@@ -1553,7 +1637,7 @@ footer a:hover{color:var(--ink)}
   <section class="preview" id="preview">
     <p class="seclabel">The parent app</p>
     <h2>What you'll open on your own phone</h2>
-    <p class="seclead">The parent app isn't finished yet. <strong>This is the design we're building to, not a screenshot of working software</strong> — so treat it as where it's heading rather than what you'd get today. Everything on these two screens is something Shieldora actually does.</p>
+    <p class="seclead">The parent app isn't finished yet. <strong>This is the design we're building to, not a screenshot of working software</strong>, so treat it as where it's heading rather than what you'd get today. Everything on these two screens is something Shieldora actually does.</p>
 
     <div class="screens appdemo">
       <figure class="pscreen">
@@ -1620,9 +1704,9 @@ footer a:hover{color:var(--ink)}
               </svg>
             </div>
             <div class="dm-attn-body">
-              <div class="dm-attn-title">1 alert needs your review</div>
+              <div class="dm-attn-title">1 new alert</div>
               <div class="dm-attn-sub" id="attnReason">
-                Protection went offline · 4:47 PM
+                An adult site was blocked · 4:52 PM
               </div>
             </div>
             <span class="dm-attn-chev">
@@ -1710,7 +1794,7 @@ footer a:hover{color:var(--ink)}
             <!-- compact counts -->
             <div class="dm-mini-stats">
               <div class="dm-mini">
-                <span class="dm-m-val" id="valAttempts">0</span>
+                <span class="dm-m-val" id="valAttempts">2</span>
                 <span class="dm-m-lab">Alerts today</span>
               </div>
               <div class="dm-mini">
@@ -1722,7 +1806,7 @@ footer a:hover{color:var(--ink)}
             <!-- status blurb -->
             <div class="dm-blurb">
               <div class="dm-b-title" id="blurbTitle">Web filtering on</div>
-              <div class="dm-b-text" id="blurbText">Adult content is filtered in Safari on Emma&rsquo;s iPhone. Apple&rsquo;s filter reports individual blocks to nobody, so Shieldora can&rsquo;t count them &mdash; you&rsquo;ll hear from us if filtering stops.</div>
+              <div class="dm-b-text" id="blurbText">Adult content is filtered in Safari on Emma&rsquo;s iPhone. When an adult site is blocked you get an alert, and you&rsquo;ll hear from us if filtering stops.</div>
             </div>
           </div>
 
@@ -1848,30 +1932,28 @@ footer a:hover{color:var(--ink)}
                 </svg>
               </div>
               <div class="dm-a-body">
-                <div class="dm-a-title">Protection went offline</div>
+                <div class="dm-a-title">Protection was turned off</div>
                 <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
               </div>
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">2:14 PM</span>
+                <span class="dm-a-time">9:10 PM</span>
               </div>
             </div>
             <div class="dm-alert dm-sev-low">
               <div class="dm-a-ico">
                 <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
-                    stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
-                  <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
-                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
+                  <circle cx="12" cy="12" r="8.6" stroke="#4fbf6c" stroke-width="1.7" />
+                  <path d="m6.7 6.7 10.6 10.6" stroke="#4fbf6c" stroke-width="1.7" stroke-linecap="round" />
                 </svg>
               </div>
               <div class="dm-a-body">
-                <div class="dm-a-title">Protection is back on</div>
+                <div class="dm-a-title">An adult site was blocked</div>
                 <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
               </div>
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">2:31 PM</span>
+                <span class="dm-a-time">4:52 PM</span>
               </div>
             </div>
           </div>
@@ -1894,42 +1976,6 @@ footer a:hover{color:var(--ink)}
               <div class="dm-a-right">
                 <span class="dm-sev-dot"></span>
                 <span class="dm-a-time">7:32 PM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-high">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
-                    stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
-                  <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
-                    stroke-width="1.8" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">Protection went offline</div>
-                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">3:04 PM</span>
-              </div>
-            </div>
-            <div class="dm-alert dm-sev-low">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
-                    stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
-                  <path d="m8.6 12 2.4 2.4 4.4-4.8" stroke="#4fbf6c"
-                    stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">Protection is back on</div>
-                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">3:20 PM</span>
               </div>
             </div>
           </div>
@@ -1978,7 +2024,7 @@ footer a:hover{color:var(--ink)}
         </nav>
       </div>
     </div>
-        <figcaption>Every time protection changed, and when. Never what was searched or typed.</figcaption>
+        <figcaption>Every alert, with the time and the device. Never what was searched or typed.</figcaption>
       </figure>
     </div>
   </section>
@@ -1998,36 +2044,67 @@ footer a:hover{color:var(--ink)}
     </div>
   </div>
 
-  <section class="ledgersec">
-    <p class="seclabel">Being straight with you</p>
-    <h2>What Shieldora doesn't do</h2>
-    <p class="seclead">None of this is missing work. Each one is a line we drew on purpose.</p>
-
-    <div class="chips" aria-hidden="true">
-      <div class="chipcol keep"><span class="chiphead">Recorded</span><span class="chip">whether protection is running</span><span class="chip">the time</span><span class="chip">the device</span></div>
-      <div class="chipcol never"><span class="chiphead">Never recorded</span><span class="chip">search terms</span><span class="chip">typed text</span><span class="chip">messages</span><span class="chip">browsing history</span><span class="chip">screenshots</span></div>
+  <section class="alertx">
+    <div class="ax-lede">
+    <p class="seclabel">What you'll see</p>
+    <h2>What an alert tells you, and what it doesn't</h2>
+    <p class="seclead">Every alert names three things: the child, the device, and the time. The blocked adult site itself is only ever shown inside the app, behind your login, never in the notification.</p>
+    <p class="axnever"><b>What's never recorded:</b> search terms, typed text, messages, browsing history (sites that weren't blocked), or screenshots. When an adult site is blocked, Shieldora records that site, the time and the device, and nothing else. Sites that weren't blocked are never recorded.</p>
+    </div>
+    <div class="ax-demo">
+    <div class="axcards">
+      <div class="axnotif">
+        <span class="axn-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="axn-body">
+          <span class="axn-app">SHIELDORA <span class="axn-when">now</span></span>
+          <span class="axn-hl">An adult site was blocked on <span class="mk-child">Emma&rsquo;s</span> <span class="mk-device">iPhone</span></span>
+          <span class="axn-sub"><span class="mk-time">4:52pm</span></span>
+        </span>
+      </div>
+      <div class="axnotif">
+        <span class="axn-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="axn-body">
+          <span class="axn-app">SHIELDORA <span class="axn-when">now</span></span>
+          <span class="axn-hl">Protection was turned off on <span class="mk-child">Emma&rsquo;s</span> <span class="mk-device">iPhone</span></span>
+          <span class="axn-sub"><span class="mk-time">9:10pm</span></span>
+        </span>
+      </div>
+      <div class="axnotif">
+        <span class="axn-ic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="axn-body">
+          <span class="axn-app">SHIELDORA <span class="axn-when">now</span></span>
+          <span class="axn-hl">Protection is back on <span class="mk-child">Emma&rsquo;s</span> <span class="mk-device">iPhone</span></span>
+          <span class="axn-sub"><span class="mk-time">9:24pm</span></span>
+        </span>
+      </div>
     </div>
 
+    <div class="axlegend">
+      <span class="axkey"><span class="axdot child"></span>the child</span>
+      <span class="axkey"><span class="axdot device"></span>the device</span>
+      <span class="axkey"><span class="axdot time"></span>the time</span>
+    </div>
+    </div>
   </section>
 
   <section class="faqsec">
     <p class="seclabel">FAQ</p>
     <h2>Questions parents ask</h2>
     <div class="faqlist">
-    <details><summary>What exactly do the alerts tell me?</summary><p>Whether protection is running. The exceptions that matter: if Screen Time is turned off on your child&rsquo;s phone, if the phone stops checking in for about a day, or if you allow a non-Safari browser &mdash; each with the time and the device. Nothing about what your child did.</p></details>
-    <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages or browsing history. That's a deliberate line, not a feature we haven't built yet.</p></details>
-    <details><summary>Can my child just turn it off?</summary><p>No. There is no Shieldora screen that turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password — not the child's device passcode or Face ID. And if protection is ever switched off, you get an alert, so it can't happen quietly.</p></details>
-    <details><summary>Will you tell me what my child tried to visit?</summary><p>Not today, and possibly not ever. Apple&rsquo;s filter doesn&rsquo;t report individual blocks to us, so there is nothing to tell you. If that changes it will be because we added a filtering layer of our own, and we&rsquo;d say so plainly here first.</p></details>
-    <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. What we can promise is different and, we think, more useful: you will know if the filter stops running &mdash; which is the failure that actually leaves a child unprotected, and the one most filters never mention.</p></details>
+    <details><summary>What exactly do the alerts tell me?</summary><p>The exceptions that matter: an adult site being blocked, Screen Time being turned off, the phone going quiet for about a day, or you allowing a non-Safari browser. Each comes with the child, the device and the time. Nothing about what your child searched or typed.</p></details>
+    <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages, or a history of sites that weren't blocked. That's a deliberate line, not a feature we haven't built yet.</p></details>
+    <details><summary>Can my child just turn it off?</summary><p>No. There is no Shieldora screen that turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password, not the child's device passcode or Face ID. And if protection is ever switched off, you get an alert, so it can't happen quietly.</p></details>
+    <details><summary>Will you tell me what my child tried to visit?</summary><p>When an adult site is blocked, the alert names the child, the device and the time, and the site itself is shown inside the app, behind your login. What we never build is a browsing history: sites that weren&rsquo;t blocked are not recorded, so there is nothing of that kind to hand over.</p></details>
+    <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. What we can promise is different and, we think, more useful: you will know if the filter stops running, which is the failure that actually leaves a child unprotected, and the one most filters never mention.</p></details>
     <details><summary>How does the blocking actually work?</summary><p>Shieldora uses filtering built into iOS, on your child's iPhone or iPad. The filtering happens on the device itself.</p></details>
     <details><summary>Which browsers does it cover?</summary><p>Safari, including private browsing. Other browsers are blocked by default. You can allow one if your child needs it, and we'll warn you that content inside it isn't filtered.</p></details>
-    <details><summary>What do I need to use it?</summary><p>Your child&rsquo;s iPhone or iPad needs to be on iOS 26.5 or later &mdash; that&rsquo;s what lets Shieldora reliably tell you if protection is ever turned off. Your own phone can be on an older version. If your child&rsquo;s device is behind, Shieldora asks you to update it before setting it up, rather than protect it in a way it can&rsquo;t stand behind.</p></details>
+    <details><summary>What do I need to use it?</summary><p>Your child&rsquo;s iPhone or iPad needs to be on iOS 26.5 or later. That&rsquo;s what lets Shieldora reliably tell you if protection is ever turned off. Your own phone can be on an older version. If your child&rsquo;s device is behind, Shieldora asks you to update it before setting it up, rather than protect it in a way it can&rsquo;t stand behind.</p></details>
     <details><summary>When can I get it?</summary><p>Shieldora isn't released yet. Join the waitlist and you'll be among the first families we let in.</p></details>
     </div>
   </section>
 
   <footer>
-    <span>© 2026 Shieldora · Content Guardian — protecting kids online.</span>
+    <span>© 2026 Shieldora · Content Guardian · protecting kids online.</span>
     <nav class="footlinks" aria-label="Footer">
       <a href="privacy.html">Privacy policy</a>
       <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
