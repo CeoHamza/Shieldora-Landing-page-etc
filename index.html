@@ -192,6 +192,10 @@ h1{font-size:clamp(29px,5.4vw,46px);line-height:1.05;letter-spacing:-0.03em;font
 .heroform{display:flex;gap:10px;flex-wrap:wrap;max-width:480px;margin:20px 0 0}
 .heroform input{flex:1 1 200px;padding:14px 15px;border:1px solid var(--line);border-radius:11px;font:inherit;font-size:16px;background:#fff;min-height:48px}
 .heroform .btn{flex:none}
+/* Waitlist: honeypot (off-screen, not display:none so bots still fill it) and the result lines. */
+.wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wl-done{color:#7FA98C;font-weight:600;margin:16px 0 0}
+.wl-error{color:#e08a84;font-size:13.5px;margin:10px 0 0}
 .herophone{display:flex;justify-content:center}
 .lockphone{width:min(290px,86%);aspect-ratio:9/18.5;border-radius:38px;background:linear-gradient(165deg,#20302650,#0f171370),radial-gradient(120% 80% at 50% 0,#2c4636,#0e1611);
   border:8px solid #0a0e0c;box-shadow:0 24px 54px -22px rgba(15,25,20,.6);padding:26px 15px 30px;color:#fff;
@@ -1560,10 +1564,11 @@ footer a:hover{color:var(--ink)}
   <div class="hero">
     <div class="herogrid">
       <div class="herolede">
-        <h1>Know when an adult site is blocked.<br>Know when protection breaks.</h1>
-        <p class="deck">Shieldora blocks adult sites on your child&rsquo;s iPhone, and tells you when one is blocked or when protection is turned off.</p>
-        <form class="heroform" onsubmit="return false">
-          <input type="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+        <h1>You get told.<br>That&rsquo;s the whole point.</h1>
+        <p class="deck">Most filters fail silently. Shieldora blocks adult sites on your child&rsquo;s iPhone, and tells you when a site is blocked, when a browser is allowed, or when the phone stops checking in or reports that protection was turned off.</p>
+        <form class="heroform wl-form" onsubmit="return false">
+          <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+          <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
           <button class="btn" type="submit">Join the waitlist</button>
         </form>
         <p class="microcopy"><b>Coming soon.</b> $10 AUD / family / month, one subscription for however many children. The waitlist is for early access.</p>
@@ -1617,8 +1622,8 @@ footer a:hover{color:var(--ink)}
         <div class="inner">
           <div class="copy">
             <p class="seclabel" style="color:#7FA98C">What Shieldora does</p>
-            <h2>You get told. That&rsquo;s the whole point.</h2>
-            <p class="seclead">When an adult site is blocked, when protection stops running, or when a browser is allowed, a notification lands on your phone with the time and the device. You don&rsquo;t have to go and check.</p>
+            <h2>A notification lands on your phone.</h2>
+            <p class="seclead">When an adult site is blocked, when a browser is allowed, or when your child&rsquo;s phone stops checking in or reports that protection was turned off, a notification lands on your phone with the child, the device and the time. You don&rsquo;t have to go and check.</p>
             <div class="tstrings">
               <span class="tpill"><span class="dot"></span>An adult site was blocked</span>
               <span class="tpill"><span class="dot"></span>Screen Time was turned off</span>
@@ -2032,15 +2037,16 @@ footer a:hover{color:var(--ink)}
   <div class="signup" id="waitlist">
     <div>
       <h2>Be the first to protect your family</h2>
-      <p>Join the waitlist and we'll email you the moment Shieldora is ready for your family's devices.</p>
+      <p>Join the waitlist and we&rsquo;ll email you when Shieldora is ready for your family&rsquo;s devices.</p>
     </div>
     <div>
-    <form onsubmit="return false">
-      <input type="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+    <form class="wl-form" onsubmit="return false">
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn" type="submit">Join the waitlist</button>
     </form>
-    <p class="fine">No spam. We'll only email you about Shieldora.</p>
-    <p class="collect">We collect your email address, and use it for one thing: telling you when Shieldora is ready. We don't sell it or pass it on. <a href="privacy.html">How we handle your information</a>.</p>
+    <p class="fine">No spam. We&rsquo;ll only email you about Shieldora.</p>
+    <p class="collect">We collect your email address, the date, and the page and link you arrived from. We use it for one thing: to email you when Shieldora is ready. We don&rsquo;t sell it or pass it on. <a href="privacy.html">How we handle your information</a>.</p>
     </div>
   </div>
 
@@ -2169,6 +2175,69 @@ footer a:hover{color:var(--ink)}
   }, {passive:true});
   addEventListener('resize', frame, {passive:true});
   frame();
+})();
+</script>
+<script>
+// Waitlist: POST both forms to the Shieldora API. No dependencies.
+(function () {
+  var ENDPOINT = "https://shieldora-server.fly.dev/v1/waitlist";
+  var ref = new URLSearchParams(location.search).get("ref") || "";
+
+  function message(cls, text) {
+    var p = document.createElement("p");
+    p.className = cls;
+    p.textContent = text;
+    return p;
+  }
+  function showError(form, text) {
+    var box = form.parentNode;
+    var existing = box.querySelector(".wl-error");
+    if (existing) { existing.textContent = text; return; }
+    box.insertBefore(message("wl-error", text), form.nextSibling);
+  }
+
+  function wire(form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var emailField = form.querySelector('input[type="email"]');
+      var honeypot = form.querySelector('input[name="website"]');
+      var email = (emailField && emailField.value || "").trim();
+      if (!email) { showError(form, "Enter your email to join the waitlist."); return; }
+
+      var button = form.querySelector('button[type="submit"]');
+      if (button) { button.disabled = true; }
+      var oldError = form.parentNode.querySelector(".wl-error");
+      if (oldError) { oldError.remove(); }
+
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          ref: ref,
+          page: location.pathname,
+          website: honeypot ? honeypot.value : ""
+        })
+      }).then(function (res) {
+        if (res.ok) {
+          form.parentNode.replaceChild(
+            message("wl-done", "You’re on the list. We’ll email you when Shieldora is ready."),
+            form
+          );
+          return;
+        }
+        if (button) { button.disabled = false; }
+        if (res.status === 400) { showError(form, "That email doesn’t look right. Check it and try again."); }
+        else if (res.status === 429) { showError(form, "Too many tries from here. Give it a little while and try again."); }
+        else { showError(form, "Something went wrong. Please try again."); }
+      }).catch(function () {
+        if (button) { button.disabled = false; }
+        showError(form, "We couldn’t reach the server. Please try again.");
+      });
+    });
+  }
+
+  document.querySelectorAll("form.wl-form").forEach(wire);
 })();
 </script>
 </body>
