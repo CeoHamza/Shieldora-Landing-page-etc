@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#E8EAED">
+<meta name="robots" content="noindex">
+<title>Set up Screen Time in 10 minutes &middot; Shieldora</title>
+<meta name="description" content="A plain, vendor-neutral guide to setting up Apple Screen Time on a child's iPhone or iPad, step by step, in about ten minutes.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--slate:#E8EAED;--panel:#FFFFFF;--ink:#16191D;--mid:#5B6570;--line:#CDD3D9;--green:#2F7A47;--soft:#F3F5F7;--warn:#8A5B12;--warnbg:#FBF3E3}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--slate);color:var(--ink);font-family:Inter,-apple-system,system-ui,sans-serif;line-height:1.65;font-size:16.5px}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+a{color:var(--green)}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+nav{display:flex;align-items:center;gap:10px;padding:18px 0}
+.mk{width:26px;height:26px;border-radius:8px;background:linear-gradient(160deg,#4aa863,#256437);display:grid;place-items:center;flex:none}
+.mk svg{width:15px;height:15px}
+.brand{font-weight:700;font-size:15.5px;color:var(--ink);text-decoration:none}
+h1{font-size:clamp(28px,5vw,40px);line-height:1.12;letter-spacing:-0.03em;margin:18px 0 10px}
+.lede{color:var(--mid);margin:0 0 26px;font-size:17.5px;max-width:60ch}
+.before{background:var(--soft);border:1px solid var(--line);border-radius:14px;padding:18px 22px;margin:0 0 30px}
+.before h2{margin:0 0 8px;font-size:16px;letter-spacing:.01em;text-transform:uppercase;color:var(--mid)}
+.before ul{margin:0;padding-left:20px}
+.before li{margin:6px 0}
+ol.steps{list-style:none;counter-reset:step;margin:0;padding:0}
+ol.steps>li{counter-increment:step;position:relative;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px 22px 18px 60px;margin:0 0 12px}
+ol.steps>li::before{content:counter(step);position:absolute;left:16px;top:17px;width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-weight:600;font-size:15px;display:grid;place-items:center}
+ol.steps h3{margin:0 0 4px;font-size:17.5px;letter-spacing:-0.01em}
+ol.steps p{margin:0 0 4px}
+.path{display:inline-block;background:var(--soft);border:1px solid var(--line);border-radius:6px;padding:1px 7px;font-size:14px;color:#374049}
+.wont{background:var(--warnbg);border:1px solid #E6D2A8;border-left:4px solid var(--warn);border-radius:12px;padding:18px 22px;margin:30px 0}
+.wont h2{margin:0 0 8px;font-size:17px;color:var(--warn)}
+.wont ul{margin:0;padding-left:20px;color:#4A3A16}
+.wont li{margin:6px 0}
+.sd{background:#EAF3ED;border:1px solid #BFDCC8;border-radius:14px;padding:18px 22px;margin:0 0 40px}
+.sd p{margin:0}
+footer{padding:0 0 60px;font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:8px 20px}
+footer a{color:var(--mid)}
+@media (max-width:640px){ol.steps>li,.before,.wont,.sd{border-radius:11px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.3"/><path d="M8.2 12.1 10.8 14.7 15.8 9.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <a class="brand" href="/">Shieldora</a>
+  </nav>
+
+  <h1>Set up Screen Time in 10 minutes</h1>
+  <p class="lede">Screen Time is Apple&rsquo;s built-in parental control on iPhone and iPad. It is free, already on every device, and you can set it up in about ten minutes. This guide is for parents of children aged roughly 8 to 16. Do it on your child&rsquo;s device, with them or on your own.</p>
+
+  <div class="before">
+    <h2>Before you start</h2>
+    <ul>
+      <li>Your child&rsquo;s iPhone or iPad, unlocked.</li>
+      <li>A Screen Time passcode you will remember and your child will not guess. Make it different from the code that unlocks the device.</li>
+      <li>About ten minutes.</li>
+    </ul>
+  </div>
+
+  <ol class="steps">
+    <li>
+      <h3>Open Screen Time</h3>
+      <p><span class="path">Settings &rsaquo; Screen Time</span>. If it is not already on, tap to turn it on. The exact wording shifts a little between iOS versions, but the path is the same.</p>
+    </li>
+    <li>
+      <h3>Say whose device it is</h3>
+      <p>If asked, choose that this is your child&rsquo;s device. If your family uses Family Sharing, you can also set this up from your own phone and manage it from there.</p>
+    </li>
+    <li>
+      <h3>Set a Screen Time passcode</h3>
+      <p>Choose a four-digit code that is different from the device unlock code, and do not share it. You will need it to change these settings later, and so will anyone trying to undo them. When prompted, add your Apple Account so you can reset the code if you forget it.</p>
+    </li>
+    <li>
+      <h3>Turn on Content &amp; Privacy Restrictions</h3>
+      <p><span class="path">Screen Time &rsaquo; Content &amp; Privacy Restrictions</span>, then turn the switch on. This is the section that does most of the work.</p>
+    </li>
+    <li>
+      <h3>Limit adult websites</h3>
+      <p><span class="path">Content &amp; Privacy Restrictions &rsaquo; Content Restrictions &rsaquo; Web Content</span>, then choose <strong>Limit Adult Websites</strong>. This filters the web in Safari.</p>
+    </li>
+    <li>
+      <h3>Set age ratings</h3>
+      <p>Still under Content Restrictions, set the limits for apps, music, films, TV shows and books to suit your child&rsquo;s age. For an 8 year old and a 15 year old these will look quite different, so set each child&rsquo;s device to match.</p>
+    </li>
+    <li>
+      <h3>Lock the controls so they cannot be quietly undone</h3>
+      <p>Under Content &amp; Privacy Restrictions, set <strong>Account Changes</strong> and <strong>Passcode Changes</strong> to <strong>Don&rsquo;t Allow</strong>. If you want the set of apps to stay put, you can also stop app installs and deletions here.</p>
+    </li>
+    <li>
+      <h3>Add time limits, if you want them</h3>
+      <p>Optional. <span class="path">Screen Time &rsaquo; Downtime</span> sets hours the device winds down, and <span class="path">App Limits</span> caps time on categories such as games or social apps.</p>
+    </li>
+    <li>
+      <h3>Test it before you finish</h3>
+      <p>Open Safari on your child&rsquo;s device and try to visit an adult site: it should be blocked. Then try to change a locked setting: it should ask for the Screen Time passcode. If both happen, you are done.</p>
+    </li>
+  </ol>
+
+  <div class="wont">
+    <h2>What Screen Time will not do</h2>
+    <ul>
+      <li>It filters the web in Safari, not the content inside other apps.</li>
+      <li>It does not tell you if someone turns it off.</li>
+      <li>No filter catches everything, so some material will still get through.</li>
+    </ul>
+  </div>
+
+  <div class="sd">
+    <p>Shieldora builds on these same iOS controls and adds what Screen Time leaves out: if protection stops or the phone goes quiet, you will hear about it, so a switched-off setting does not pass unnoticed. It is not released yet. You can <a href="/#waitlist">join the waitlist</a> on the home page.</p>
+  </div>
+
+  <footer>
+    <span>&copy; 2026 Shieldora</span>
+    <a href="/">Home</a>
+    <a href="/limits/">What Shieldora can&rsquo;t do</a>
+    <a href="/privacy.html">Privacy policy</a>
+    <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
+  </footer>
+</div>
+</body>
+</html>
