@@ -1,12 +1,12 @@
-# She.ld – Content Guardian
+# Shieldora – Content Guardian
 
-**She.ld** is a parental safety app that blocks explicit content on a child's device and alerts parents the moment access is attempted. It's built to stay on — designed so it can't be easily disabled or uninstalled by the child.
+**Shieldora** is a parental safety app that blocks explicit content on a child's device and alerts parents when access is attempted. It's built to stay on, designed so it can't be easily disabled or uninstalled by the child.
 
 ## What it does
 
 - **Blocks explicit content** — filters and stops adult and harmful material before it reaches the screen.
-- **Alerts parents in real time** — notifies you whenever your child tries to access blocked content.
-- **Tamper-resistant** — protected so a child can't simply switch it off, uninstall it, or work around it.
+- **Alerts parents** when your child tries to access blocked content.
+- **Tamper-resistant** so a child can't simply switch it off, uninstall it, or work around it.
 - **Built for peace of mind** — quietly protects in the background so kids can use their devices safely.
 
 ## Project Structure

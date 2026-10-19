@@ -2241,7 +2241,7 @@ footer a:hover{color:var(--ink)}
   </section>
 
   <footer>
-    <span>© 2026 Shieldora · Content Guardian · protecting kids online.</span>
+    <span>© 2026 Shieldora · Content Guardian · built to help keep kids safer online.</span>
     <nav class="footlinks" aria-label="Footer">
       <a href="/limits/">What Shieldora can&rsquo;t do</a>
       <a href="/screentime/">Set up Screen Time</a>
@@ -2270,7 +2270,7 @@ footer a:hover{color:var(--ink)}
     if(travel <= 0) return;
     // 0 while the section is arriving, 1 once it has scrolled its full range.
     // The middle 60% does the wipe, so the reader gets a beat on each state
-    // rather than the answer starting to appear the instant the panel lands.
+    // rather than the answer starting to appear as the panel lands.
     const p = Math.min(1, Math.max(0, -r.top / travel));
 
     // Spread across most of the runway rather than a narrow band, then eased
@@ -2287,7 +2287,7 @@ footer a:hover{color:var(--ink)}
     // bleed is done by the clip's negative left inset and the box-shadow, NOT by
     // starting the edge off-screen: doing that put 2000px of dead travel at each
     // end, so only about a fifth of the animation happened where anyone could
-    // see it and the visible part crossed the screen almost instantly.
+    // see it and the visible part crossed the screen almost at once.
     // Enough overshoot to clear the viewport's right edge and no more. A fixed
     // value is wrong: past 2200px the container is capped, so the panel stops
     // short of the edge and a fixed 160px left a sage strip down the right at
