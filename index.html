@@ -1636,6 +1636,76 @@ footer a:hover{color:var(--ink)}
         color: var(--muted);
         text-align: center;
 }
+    
+/* ===== Four parent screens: layout, swipe on phones, 2x2 tablet, row of four desktop ===== */
+.screens.quad{display:flex;gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding:4px 2px 8px;grid-template-columns:none;justify-content:flex-start;scrollbar-width:none}
+.screens.quad::-webkit-scrollbar{display:none}
+.screens.quad .pscreen{flex:0 0 auto;scroll-snap-align:center}
+.quad.appdemo{--s:.72}
+@media (min-width:760px){
+  .screens.quad{display:grid;overflow:visible;grid-template-columns:repeat(2,auto);justify-content:center;gap:44px clamp(26px,5vw,66px);scroll-snap-type:none;padding:0}
+  .quad.appdemo{--s:.6}
+}
+@media (min-width:1100px){
+  .screens.quad{grid-template-columns:repeat(4,auto);gap:clamp(16px,1.8vw,30px);align-items:start}
+  .quad.appdemo{--s:.5}
+}
+@media (min-width:1280px){ .quad.appdemo{--s:.56} }
+@media (min-width:1440px){ .quad.appdemo{--s:.62} }
+@media (min-width:1920px){ .quad.appdemo{--s:.72} }
+/* Home */
+.appdemo .dm-fam-sub{font-size:15px;color:var(--muted);margin:4px 0 16px}
+.appdemo .dm-week{display:flex;align-items:center;gap:7px;font-size:15px;font-weight:600;color:var(--ink);margin:0 0 18px}
+.appdemo .dm-week svg{width:15px;height:15px;color:var(--muted)}
+.appdemo .dm-childcard{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:15px;margin-bottom:12px}
+.appdemo .dm-ring-sm{width:52px;height:52px;flex:none;display:block}
+.appdemo .dm-cc-body{flex:1;min-width:0}
+.appdemo .dm-cc-name{font-size:17px;font-weight:700;color:var(--ink)}
+.appdemo .dm-cc-status{font-size:14px;font-weight:600;color:var(--green-bright);margin-top:2px}
+.appdemo .dm-cc-chev{color:var(--muted);flex:none}
+.appdemo .dm-cc-chev svg{width:16px;height:16px;display:block}
+/* Child page */
+.appdemo .dm-child-head{display:flex;align-items:center;gap:14px;margin:4px 0 8px}
+.appdemo .dm-ch-name{font-size:20px;font-weight:800;letter-spacing:-0.02em;color:var(--ink)}
+.appdemo .dm-ch-status{font-size:14px;font-weight:600;color:var(--green-bright);margin-top:3px}
+.appdemo .dm-child-expl{font-size:12.5px;color:var(--muted);margin:0 2px 18px}
+.appdemo .dm-ca-row{padding:12px 0;border-bottom:1px solid var(--line)}
+.appdemo .dm-ca-row:last-child{border-bottom:0}
+.appdemo .dm-ca-title{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+.appdemo .dm-ca-meta{font-size:12.5px;color:var(--muted);margin-top:3px}
+.appdemo .dm-tog{display:flex;align-items:flex-start;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.appdemo .dm-tog:last-child{border-bottom:0}
+.appdemo .dm-tog-txt{flex:1;min-width:0}
+.appdemo .dm-tog-lab{font-size:15px;font-weight:600;color:var(--ink)}
+.appdemo .dm-tog-desc{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.45}
+.appdemo .dm-tog-ico{width:22px;height:22px;flex:none;color:var(--muted);margin-top:1px}
+.appdemo .dm-sw{width:44px;height:27px;border-radius:14px;background:var(--green);flex:none;position:relative;margin-top:2px}
+.appdemo .dm-sw::after{content:"";position:absolute;top:2.5px;left:20px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.appdemo .dm-rowlink{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid var(--line)}
+.appdemo .dm-rowlink .dm-tog-lab{flex:1}
+.appdemo .dm-foot{font-size:12px;color:var(--muted);line-height:1.5;margin:12px 2px 0}
+/* Activity rows */
+.appdemo .dm-act-row{display:flex;gap:12px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
+.appdemo .dm-act-row:last-child{border-bottom:0}
+.appdemo .dm-act-ico{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center}
+.appdemo .dm-act-ico svg{width:19px;height:19px}
+.appdemo .dm-act-ico.amber{background:rgba(229,169,78,.16);color:#e5a94e}
+.appdemo .dm-act-ico.muted{background:rgba(255,255,255,.06);color:var(--muted)}
+.appdemo .dm-act-title{font-size:14.5px;font-weight:600;color:var(--ink);line-height:1.3}
+.appdemo .dm-act-meta{font-size:12.5px;color:var(--muted);margin-top:2px}
+/* Settings form */
+.appdemo .dm-fhead{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:22px 4px 8px}
+.appdemo .dm-fgroup{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.appdemo .dm-frow{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 15px;border-bottom:1px solid var(--line)}
+.appdemo .dm-frow:last-child{border-bottom:0}
+.appdemo .dm-flab{font-size:15px;color:var(--ink)}
+.appdemo .dm-fval{font-size:15px;color:var(--muted)}
+.appdemo .dm-frow.btn .dm-flab{color:var(--green-bright);font-weight:600;display:flex;align-items:center;gap:9px}
+.appdemo .dm-frow.danger .dm-flab{color:#f0685f}
+.appdemo .dm-frow.muted .dm-flab{color:var(--muted)}
+.appdemo .dm-frow svg{width:17px;height:17px}
+.appdemo .dm-frow svg.dm-chev{width:14px;height:14px;color:var(--muted)}
+
     </style>
 </head>
 <body>
@@ -1710,8 +1780,8 @@ footer a:hover{color:var(--ink)}
             <p class="seclead">When an adult site is blocked, when a browser is allowed, or when your child&rsquo;s phone goes quiet, a notification lands on your phone with the child, the device and the time. You don&rsquo;t have to go and check.</p>
             <div class="tstrings">
               <span class="tpill"><span class="dot"></span>A site was blocked</span>
-              <span class="tpill"><span class="dot"></span>Screen Time was turned off</span>
-              <span class="tpill"><span class="dot"></span>A browser was allowed</span>
+              <span class="tpill"><span class="dot"></span>Protection was turned off</span>
+              <span class="tpill"><span class="dot"></span>Screen Time permission was restored</span>
             </div>
             <p class="tnote">A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks, so that one is a gentle heads-up after 24 hours, not an alarm. Screen Time being turned off is the one that matters. Shieldora tries to tell you straight away. If that alert can&rsquo;t get through, the phone goes quiet, and 24 hours of silence always reaches you.</p>
             <p class="tnote">And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password, not the child&rsquo;s passcode, not their Face ID.</p>
@@ -1728,13 +1798,11 @@ footer a:hover{color:var(--ink)}
     <h2>What you'll open on your own phone</h2>
     <p class="seclead">The parent app isn't finished yet. <strong>This is the design we're building to, not a screenshot of working software</strong>, so treat it as where it's heading rather than what you'd get today. It shows what Shieldora will do at launch. Some of it works now, and the rest, such as the alert when a site is blocked, lands before we open to families.</p>
 
-    <div class="screens appdemo">
+    <div class="screens appdemo quad">
       <figure class="pscreen">
 <div class="dm-phone">
       <div class="dm-screen">
         <div class="dm-island"></div>
-
-        <!-- Status bar -->
         <div class="dm-statusbar">
           <span>9:41</span>
           <span class="dm-icons">
@@ -1745,225 +1813,68 @@ footer a:hover{color:var(--ink)}
               <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
             </svg>
             <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
-              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
-                stroke-width="1.6" stroke-linecap="round" />
-              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
-                stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
               <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
             </svg>
             <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
-              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
-                stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#f3f4f5" stroke-opacity="0.4" />
               <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
-              <rect x="24" y="4" width="1.6" height="5" rx="0.8"
-                fill="#f3f4f5" fill-opacity="0.4" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8" fill="#f3f4f5" fill-opacity="0.4" />
             </svg>
           </span>
         </div>
-
-        <!-- Scrollable content -->
         <div class="dm-content">
-          <div class="dm-home-head">
-            <div>
-              <p class="dm-greeting">Good morning, Sarah</p>
-              <h1 class="dm-title">Home</h1>
-            </div>
-            <div class="dm-switcher">
-              <button class="dm-pill">
-                <span class="dm-pill-av" id="pillAvatar">A</span>
-                <span class="dm-pill-name" id="pillName">Emma</span>
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2"
-                    stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-              </button>
-              <div class="dm-dropdown" id="dropdown"></div>
-            </div>
-          </div>
-
-          <!-- Needs-attention banner (only when child needs review) -->
-          <div class="dm-attention" id="attention">
-            <div class="dm-attn-ic">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path d="M12 3.5 21 19H3L12 3.5Z" stroke="#e5a94e"
-                  stroke-width="1.7" stroke-linejoin="round" />
-                <path d="M12 10v4" stroke="#e5a94e" stroke-width="1.8"
-                  stroke-linecap="round" />
-                <circle cx="12" cy="16.5" r="1.1" fill="#e5a94e" />
-              </svg>
-            </div>
-            <div class="dm-attn-body">
-              <div class="dm-attn-title">1 new alert</div>
-              <div class="dm-attn-sub" id="attnReason">
-                A site was blocked · 4:52 PM
-              </div>
-            </div>
-            <span class="dm-attn-chev">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2"
-                  stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
-            </span>
-          </div>
-
-          <!-- Protection status strip -->
-          <div class="dm-prot-strip" id="protStrip">
-            <svg viewBox="0 0 24 24" fill="none">
-              <rect x="4.5" y="10.5" width="15" height="10" rx="2.5"
-                stroke="#4fbf6c" stroke-width="1.7" />
-              <path d="M7.5 10.5V8a4.5 4.5 0 0 1 9 0v2.5" stroke="#4fbf6c"
-                stroke-width="1.7" stroke-linecap="round" />
+          <h1 class="dm-title">Good morning, Sarah</h1>
+          <p class="dm-fam-sub">Nothing reported across your 2 children.</p>
+          <div class="dm-week">3 alerts this week <svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+          <div class="dm-childcard">
+            <svg class="dm-ring-sm" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+              <circle cx="26" cy="26" r="22" stroke="#26292f" stroke-width="4" />
+              <circle cx="26" cy="26" r="22" stroke="#4fbf6c" stroke-width="4" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="30" transform="rotate(-90 26 26)" />
+              <path d="M26 15.5 18.8 18.2v5.2c0 3.7 2.6 6.4 7.2 7.6 4.6-1.2 7.2-3.9 7.2-7.6v-5.2L26 15.5Z" stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
             </svg>
-            <span class="dm-p-text" id="protText"
-              >Adult websites filtered in Safari on Emma’s iPhone</span
-            >
-          </div>
-
-          <!-- Status-first hero -->
-          <div class="dm-hero">
-            <div class="dm-app-logo">Shieldora</div>
-            <div class="dm-date-nav">
-              <button aria-label="Previous day">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="m15 6-6 6 6 6" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </button>
-              <span>Today</span>
-              <button aria-label="Next day">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                  <path d="m9 6 6 6-6 6" stroke="currentColor"
-                    stroke-width="2" stroke-linecap="round"
-                    stroke-linejoin="round" />
-                </svg>
-              </button>
+            <div class="dm-cc-body">
+              <div class="dm-cc-name">Emma</div>
+              <div class="dm-cc-status">Last heard from 7 minutes ago</div>
             </div>
-
-            <svg width="0" height="0" style="position: absolute">
-              <defs>
-                <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stop-color="#4fbf6c" />
-                  <stop offset="1" stop-color="#2b7040" />
-                </linearGradient>
-              </defs>
+            <span class="dm-cc-chev"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+          </div>
+          <div class="dm-childcard">
+            <svg class="dm-ring-sm" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+              <circle cx="26" cy="26" r="22" stroke="#26292f" stroke-width="4" />
+              <circle cx="26" cy="26" r="22" stroke="#4fbf6c" stroke-width="4" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="30" transform="rotate(-90 26 26)" />
+              <path d="M26 15.5 18.8 18.2v5.2c0 3.7 2.6 6.4 7.2 7.6 4.6-1.2 7.2-3.9 7.2-7.6v-5.2L26 15.5Z" stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
             </svg>
-
-            <!-- protection status: the main focus of the screen -->
-            <div class="dm-status-block">
-              <div class="dm-status-ring">
-                <svg class="dm-dial" viewBox="0 0 100 100">
-                  <circle cx="50" cy="50" r="42" fill="none"
-                    stroke="#24272d" stroke-width="8" />
-                  <circle class="dm-prog" id="ringStatus" style="stroke-dashoffset:0" cx="50" cy="50"
-                    r="42" fill="none" stroke="url(#ringGrad)"
-                    stroke-width="8" stroke-linecap="round"
-                    stroke-dasharray="263.9" />
-                </svg>
-                <div class="dm-ring-center">
-                  <svg class="dm-shield" viewBox="0 0 24 24" fill="none">
-                    <path id="statusOutline"
-                      d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
-                      stroke="#4fbf6c" stroke-width="1.6" stroke-linejoin="round" />
-                    <!-- no tick: the ring means we have heard from this phone, not that protection is verified -->
-                    <g id="statusWarn" style="display: none">
-                      <path d="M12 8.4v4" stroke="#e5a94e" stroke-width="1.9"
-                        stroke-linecap="round" />
-                      <circle cx="12" cy="15.4" r="1.05" fill="#e5a94e" />
-                    </g>
-                  </svg>
-                </div>
-              </div>
-              <div class="dm-status-title" id="statusTitle">Last heard from 7 minutes ago</div>
-              <div class="dm-status-sub" id="statusSub">You’ll hear about it if protection stops or Emma’s iPhone goes quiet.</div>
+            <div class="dm-cc-body">
+              <div class="dm-cc-name">Noah</div>
+              <div class="dm-cc-status">Last heard from 2 hours ago</div>
             </div>
-
-            <!-- compact counts -->
-            <div class="dm-mini-stats">
-              <div class="dm-mini">
-                <span class="dm-m-val" id="valAttempts">2</span>
-                <span class="dm-m-lab">Alerts today</span>
-              </div>
-              <div class="dm-mini">
-                <span class="dm-m-val" id="valAlerts">2</span>
-                <span class="dm-m-lab">This week</span>
-              </div>
-            </div>
-
-            <!-- status blurb -->
-            <div class="dm-blurb">
-              <div class="dm-b-title" id="blurbTitle">Web filtering on</div>
-              <div class="dm-b-text" id="blurbText">Adult content is filtered in Safari on Emma&rsquo;s iPhone. When an adult site is blocked you get an alert, and if protection stops or the phone goes quiet, you&rsquo;ll hear about it.</div>
-            </div>
-          </div>
-
-          <!-- Today's activity -->
-          <div class="dm-section-head">
-            <h2>Today's activity</h2>
-            <a href="#">See all</a>
-          </div>
-
-          <div class="dm-highlight">
-            <div class="dm-badge">
-              <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="9" stroke="#4fbf6c"
-                  stroke-width="1.7" />
-                <path d="m5.6 5.6 12.8 12.8" stroke="#4fbf6c"
-                  stroke-width="1.7" stroke-linecap="round" />
-              </svg>
-            </div>
-            <div>
-              <div class="dm-h-title" id="actTitle">Heard from this phone</div>
-              <div class="dm-h-sub" id="actSub">Last checked in 9:41 AM</div>
-            </div>
-          </div>
-
-          <div class="dm-last-active">
-            <span class="dm-la-dot"></span> Last active 4 min ago
+            <span class="dm-cc-chev"><svg viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
           </div>
         </div>
-
-        <!-- Bottom nav -->
         <nav class="dm-tabbar">
           <button class="dm-tab dm-active">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             Home
           </button>
           <button class="dm-tab">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
-                stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" /><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             Activity
           </button>
           <button class="dm-tab">
-            <svg viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3" stroke="currentColor"
-                stroke-width="1.8" />
-              <path
-                d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
-                stroke="currentColor" stroke-width="1.5"
-                stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" /><path d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
             Settings
           </button>
         </nav>
       </div>
     </div>
-        <figcaption>Have we heard from this phone, and when.</figcaption>
+        <figcaption>Each child at a glance, and when their phone last checked in.</figcaption>
       </figure>
       <figure class="pscreen">
 <div class="dm-phone">
       <div class="dm-screen">
         <div class="dm-island"></div>
-
-        <!-- Status bar -->
         <div class="dm-statusbar">
           <span>9:41</span>
           <span class="dm-icons">
@@ -1974,123 +1885,258 @@ footer a:hover{color:var(--ink)}
               <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
             </svg>
             <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
-              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5"
-                stroke-width="1.6" stroke-linecap="round" />
-              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1"
-                stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
               <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
             </svg>
             <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
-              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5"
-                stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#f3f4f5" stroke-opacity="0.4" />
               <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
-              <rect x="24" y="4" width="1.6" height="5" rx="0.8"
-                fill="#f3f4f5" fill-opacity="0.4" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8" fill="#f3f4f5" fill-opacity="0.4" />
             </svg>
           </span>
         </div>
-
-        <!-- Scrollable content -->
+        <div class="dm-content">
+          <div class="dm-child-head">
+            <svg class="dm-ring-sm" viewBox="0 0 52 52" fill="none" aria-hidden="true">
+              <circle cx="26" cy="26" r="22" stroke="#26292f" stroke-width="4" />
+              <circle cx="26" cy="26" r="22" stroke="#4fbf6c" stroke-width="4" stroke-linecap="round" stroke-dasharray="138.2" stroke-dashoffset="30" transform="rotate(-90 26 26)" />
+              <path d="M26 15.5 18.8 18.2v5.2c0 3.7 2.6 6.4 7.2 7.6 4.6-1.2 7.2-3.9 7.2-7.6v-5.2L26 15.5Z" stroke="#4fbf6c" stroke-width="1.7" stroke-linejoin="round" />
+            </svg>
+            <div>
+              <div class="dm-ch-name">Emma</div>
+              <div class="dm-ch-status">Last heard from 7 minutes ago</div>
+            </div>
+          </div>
+          <p class="dm-child-expl">If it stops checking in, you&rsquo;ll hear.</p>
+          <div class="dm-section-head"><h2>Recent alerts</h2><a href="#">See all</a></div>
+          <div class="dm-card-block">
+            <div class="dm-ca-row">
+              <div class="dm-ca-title">A site was blocked</div>
+              <div class="dm-ca-meta">Emma&rsquo;s iPhone &middot; Today 4:52 pm</div>
+            </div>
+            <div class="dm-ca-row">
+              <div class="dm-ca-title">A browser was allowed</div>
+              <div class="dm-ca-meta">Emma&rsquo;s iPhone &middot; Yesterday 7:32 pm</div>
+            </div>
+          </div>
+          <div class="dm-section-head"><h2>On Emma&rsquo;s devices</h2></div>
+          <div class="dm-card-block">
+            <div class="dm-tog">
+              <div class="dm-tog-txt">
+                <div class="dm-tog-lab">Installing apps</div>
+                <div class="dm-tog-desc">Stops new apps being installed, including a second browser to get around filtering.</div>
+              </div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+            <div class="dm-tog">
+              <div class="dm-tog-txt">
+                <div class="dm-tog-lab">Account changes</div>
+                <div class="dm-tog-desc">Stops the Apple Account being signed out of or changed, and stops leaving Family Sharing.</div>
+              </div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+            <div class="dm-tog">
+              <div class="dm-tog-txt">
+                <div class="dm-tog-lab">Passcode changes</div>
+                <div class="dm-tog-desc">Stops the device passcode being changed or removed.</div>
+              </div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+            <div class="dm-tog">
+              <div class="dm-tog-txt">
+                <div class="dm-tog-lab">Automatic date and time</div>
+                <div class="dm-tog-desc">Keeps the clock set automatically, so time-based limits cannot be stepped around.</div>
+              </div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+            <div class="dm-tog">
+              <div class="dm-tog-txt">
+                <div class="dm-tog-lab">Explicit music, podcasts and news</div>
+                <div class="dm-tog-desc">Blocks material marked explicit in Apple Music, Podcasts and News.</div>
+              </div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+            <div class="dm-rowlink">
+              <svg class="dm-tog-ico" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" stroke-width="1.3" /></svg>
+              <span class="dm-tog-lab">Browsers</span>
+              <svg class="dm-chev" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </div>
+            <div class="dm-tog">
+              <svg class="dm-tog-ico" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.6" /><path d="m16 16 4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>
+              <div class="dm-tog-txt"><div class="dm-tog-lab">SafeSearch</div></div>
+              <span class="dm-sw" aria-hidden="true"></span>
+            </div>
+          </div>
+          <p class="dm-foot">Turning a protection on takes effect straight away. Turning one off needs a code from your authenticator app.</p>
+        </div>
+        <nav class="dm-tabbar">
+          <button class="dm-tab dm-active">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Home
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" /><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Activity
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" /><path d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            Settings
+          </button>
+        </nav>
+      </div>
+    </div>
+        <figcaption>Tap a child to see recent alerts and the protections on their devices.</figcaption>
+      </figure>
+      <figure class="pscreen">
+<div class="dm-phone">
+      <div class="dm-screen">
+        <div class="dm-island"></div>
+        <div class="dm-statusbar">
+          <span>9:41</span>
+          <span class="dm-icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+              <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+              <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+              <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+            </svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+            </svg>
+            <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8" fill="#f3f4f5" fill-opacity="0.4" />
+            </svg>
+          </span>
+        </div>
         <div class="dm-content">
           <h1 class="dm-title">Activity</h1>
-          <p class="dm-subtitle" id="alertsSubtitle">Emma’s iPhone</p>
-
-          <!-- Today -->
           <div class="dm-day-head">Today</div>
-          <div class="dm-alerts">
-            <div class="dm-alert dm-sev-high">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <path d="M12 2.8 4.8 5.5v6c0 4.2 2.9 7.2 7.2 8.6 4.3-1.4 7.2-4.4 7.2-8.6v-6L12 2.8Z"
-                    stroke="#f0685f" stroke-width="1.7" stroke-linejoin="round" />
-                  <path d="m9.4 9.4 5.2 5.2M14.6 9.4l-5.2 5.2" stroke="#f0685f"
-                    stroke-width="1.8" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">Protection was turned off</div>
-                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">9:10 PM</span>
+          <div class="dm-card-block">
+            <div class="dm-act-row">
+              <span class="dm-act-ico amber"><svg viewBox="0 0 24 24" fill="none"><path d="M7 13V7.6a1.3 1.3 0 0 1 2.6 0V12m0-.4V5.9a1.3 1.3 0 0 1 2.6 0V12m0 0V6.5a1.3 1.3 0 0 1 2.6 0V13m0-1.1a1.3 1.3 0 0 1 2.6 0V15a5 5 0 0 1-5 5h-1.1a4.5 4.5 0 0 1-3.6-1.8l-2-2.7a1.4 1.4 0 0 1 2.1-1.8L7 14.6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+              <div class="dm-act-body">
+                <div class="dm-act-title">A site was blocked</div>
+                <div class="dm-act-meta">Emma&rsquo;s iPhone &middot; 4:52 pm</div>
               </div>
             </div>
-            <div class="dm-alert dm-sev-low">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.6" stroke="#4fbf6c" stroke-width="1.7" />
-                  <path d="m6.7 6.7 10.6 10.6" stroke="#4fbf6c" stroke-width="1.7" stroke-linecap="round" />
-                </svg>
-              </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A site was blocked</div>
-                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">4:52 PM</span>
+            <div class="dm-act-row">
+              <span class="dm-act-ico amber"><svg viewBox="0 0 24 24" fill="none"><rect x="5" y="11" width="14" height="9" rx="2.2" stroke="currentColor" stroke-width="1.7" /><path d="M8 11V8a4 4 0 0 1 7.6-1.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg></span>
+              <div class="dm-act-body">
+                <div class="dm-act-title">Protection was turned off</div>
+                <div class="dm-act-meta">Noah&rsquo;s iPhone &middot; 9:10 pm</div>
               </div>
             </div>
           </div>
-
-          <!-- Yesterday -->
           <div class="dm-day-head">Yesterday</div>
-          <div class="dm-alerts">
-            <div class="dm-alert dm-sev-med">
-              <div class="dm-a-ico">
-                <svg viewBox="0 0 24 24" fill="none">
-                  <circle cx="12" cy="12" r="8.5" stroke="#e5a94e" stroke-width="1.7" />
-                  <path d="M3.5 12h17M12 3.5c2.5 2.4 2.5 14.6 0 17M12 3.5c-2.5 2.4-2.5 14.6 0 17"
-                    stroke="#e5a94e" stroke-width="1.6" />
-                </svg>
+          <div class="dm-card-block">
+            <div class="dm-act-row">
+              <span class="dm-act-ico amber"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6" /><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18" stroke="currentColor" stroke-width="1.4" /></svg></span>
+              <div class="dm-act-body">
+                <div class="dm-act-title">A browser was allowed</div>
+                <div class="dm-act-meta">Emma&rsquo;s iPhone &middot; 7:32 pm</div>
               </div>
-              <div class="dm-a-body">
-                <div class="dm-a-title">A browser was allowed</div>
-                <div class="dm-a-meta">Emma&rsquo;s iPhone</div>
-              </div>
-              <div class="dm-a-right">
-                <span class="dm-sev-dot"></span>
-                <span class="dm-a-time">7:32 PM</span>
+            </div>
+            <div class="dm-act-row">
+              <span class="dm-act-ico muted"><svg viewBox="0 0 24 24" fill="none"><path d="M20 12a8 8 0 1 1-2.4-5.7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /><path d="M20 4v4h-4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
+              <div class="dm-act-body">
+                <div class="dm-act-title">Screen Time permission was restored</div>
+                <div class="dm-act-meta">Emma&rsquo;s iPhone &middot; 9:24 pm</div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- Bottom nav (Alerts active) -->
         <nav class="dm-tabbar">
           <button class="dm-tab">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" />
-              <path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8"
-                stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             Home
           </button>
           <button class="dm-tab dm-active">
-            <svg viewBox="0 0 24 24" fill="none">
-              <path d="M4 15l4-4 3 3 5-6 4 4" stroke="currentColor"
-                stroke-width="1.8" stroke-linecap="round"
-                stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" /><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             Activity
           </button>
           <button class="dm-tab">
-            <svg viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="3" stroke="currentColor"
-                stroke-width="1.8" />
-              <path
-                d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z"
-                stroke="currentColor" stroke-width="1.5"
-                stroke-linejoin="round" />
-            </svg>
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" /><path d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
             Settings
           </button>
         </nav>
       </div>
     </div>
         <figcaption>Each alert shows the time and the device. Never what was searched or typed.</figcaption>
+      </figure>
+      <figure class="pscreen">
+<div class="dm-phone">
+      <div class="dm-screen">
+        <div class="dm-island"></div>
+        <div class="dm-statusbar">
+          <span>9:41</span>
+          <span class="dm-icons">
+            <svg width="18" height="12" viewBox="0 0 18 12" fill="none">
+              <rect x="0" y="7" width="3" height="5" rx="1" fill="#f3f4f5" />
+              <rect x="5" y="4.5" width="3" height="7.5" rx="1" fill="#f3f4f5" />
+              <rect x="10" y="2" width="3" height="10" rx="1" fill="#f3f4f5" />
+              <rect x="15" y="0" width="3" height="12" rx="1" fill="#f3f4f5" />
+            </svg>
+            <svg width="17" height="12" viewBox="0 0 17 12" fill="none">
+              <path d="M8.5 2C11.6 2 14.4 3.2 16.4 5.2" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <path d="M3.6 6.3C4.9 5 6.6 4.2 8.5 4.2s3.6.8 4.9 2.1" stroke="#f3f4f5" stroke-width="1.6" stroke-linecap="round" />
+              <circle cx="8.5" cy="9.6" r="1.4" fill="#f3f4f5" />
+            </svg>
+            <svg width="26" height="13" viewBox="0 0 26 13" fill="none">
+              <rect x="0.5" y="0.5" width="22" height="12" rx="3.5" stroke="#f3f4f5" stroke-opacity="0.4" />
+              <rect x="2.5" y="2.5" width="15" height="8" rx="2" fill="#f3f4f5" />
+              <rect x="24" y="4" width="1.6" height="5" rx="0.8" fill="#f3f4f5" fill-opacity="0.4" />
+            </svg>
+          </span>
+        </div>
+        <div class="dm-content">
+          <h1 class="dm-title">Settings</h1>
+          <div class="dm-fhead">Account</div>
+          <div class="dm-fgroup">
+            <div class="dm-frow"><span class="dm-flab">Name</span><span class="dm-fval">Sarah</span></div>
+            <div class="dm-frow"><span class="dm-flab">Email</span><span class="dm-fval">sarah@example.com</span></div>
+            <div class="dm-frow"><span class="dm-flab">Role</span><span class="dm-fval">Owner</span></div>
+          </div>
+          <div class="dm-fgroup">
+            <div class="dm-frow"><span class="dm-flab">Two-factor authentication</span><span class="dm-fval">On</span></div>
+          </div>
+          <p class="dm-foot">Required to turn protections off and to delete the account.</p>
+          <div class="dm-fgroup">
+            <div class="dm-frow btn"><span class="dm-flab"><svg viewBox="0 0 24 24" fill="none"><path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2H4.5L6 16Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /><path d="M10 18a2 2 0 0 0 4 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" /></svg>Check alerts reach you</span></div>
+          </div>
+          <p class="dm-foot">Send yourself a test alert to confirm Shieldora&rsquo;s alerts reach your inbox, and learn how to keep them there.</p>
+          <div class="dm-fgroup">
+            <div class="dm-frow btn"><span class="dm-flab"><svg viewBox="0 0 24 24" fill="none"><path d="M7 3h7l4 4v14H7V3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" /><path d="M9.5 12h6M9.5 15.5h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" /></svg>Privacy policy</span><svg class="dm-chev" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+          </div>
+          <div class="dm-fgroup">
+            <div class="dm-frow danger"><span class="dm-flab">Delete account</span><svg class="dm-chev" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div>
+          </div>
+          <p class="dm-foot">Deletes your account and everything on it. You&rsquo;ll be asked to confirm before anything happens.</p>
+          <div class="dm-fgroup">
+            <div class="dm-frow muted"><span class="dm-flab">Sign out</span></div>
+          </div>
+        </div>
+        <nav class="dm-tabbar">
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 11 12 4l8 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /><path d="M6 10v9h12v-9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Home
+          </button>
+          <button class="dm-tab">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.8" /><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            Activity
+          </button>
+          <button class="dm-tab dm-active">
+            <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8" /><path d="M19 12a7 7 0 0 0-.1-1.2l1.9-1.5-2-3.4-2.3.9a7 7 0 0 0-2-1.2l-.3-2.4H8.8l-.3 2.4a7 7 0 0 0-2 1.2l-2.3-.9-2 3.4L4 10.8a7 7 0 0 0 0 2.4l-1.9 1.5 2 3.4 2.3-.9a7 7 0 0 0 2 1.2l.3 2.4h4.4l.3-2.4a7 7 0 0 0 2-1.2l2.3.9 2-3.4-1.9-1.5c.1-.4.1-.8.1-1.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" /></svg>
+            Settings
+          </button>
+        </nav>
+      </div>
+    </div>
+        <figcaption>Your account, two-factor, and a test to check alerts reach you.</figcaption>
       </figure>
     </div>
   </section>
