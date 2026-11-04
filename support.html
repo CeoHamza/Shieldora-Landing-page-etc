@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EFEFED">
+<title>Support: report a problem with Shieldora</title>
+<meta name="description" content="Report a problem with Shieldora. One person reads every report and usually replies within a day.">
+<meta name="robots" content="index,follow">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--slate:#EFEFED;--panel:#FFFFFF;--ink:#16191D;--mid:#5B6570;--line:#D6D6D1;--green:#2F7A47;--green-dk:#245F38;--alarm:#8C3B23;--soft:#F6F6F4}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--slate);color:var(--ink);font-family:Inter,-apple-system,system-ui,sans-serif;line-height:1.58;-webkit-font-smoothing:antialiased}
+.wrap{max-width:760px;margin:0 auto;padding:0 clamp(20px,3vw,40px);width:100%}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:4px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 0;font-size:13.5px;color:var(--mid)}
+.brand{display:flex;align-items:center;gap:9px;color:var(--ink);font-weight:700;font-size:15.5px;text-decoration:none}
+.mk{width:26px;height:26px;border-radius:8px;background:#2F7A47;display:grid;place-items:center;flex:none}
+.mk svg{width:15px;height:15px}
+nav a.back{color:var(--ink);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+h1{font-size:clamp(30px,5vw,42px);line-height:1.08;letter-spacing:-0.025em;font-weight:800;margin:28px 0 10px}
+h2{font-size:22px;line-height:1.25;letter-spacing:-0.015em;font-weight:700;margin:48px 0 10px}
+p{margin:0 0 14px;max-width:62ch}
+.lead{font-size:17px;color:var(--mid)}
+form{margin:26px 0 0;display:grid;gap:16px;max-width:560px}
+label{display:block;font-weight:600;font-size:15px;margin-bottom:6px}
+label small{display:block;font-weight:400;color:var(--mid);font-size:13.5px;margin-top:2px}
+input[type=email],input[type=text],textarea,select{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:11px;font:inherit;font-size:16px;background:#fff;min-height:48px;color:var(--ink)}
+textarea{min-height:160px;resize:vertical;line-height:1.5}
+fieldset{border:0;padding:0;margin:0}
+legend{font-weight:600;font-size:15px;margin-bottom:8px;padding:0}
+.radios{display:flex;gap:18px;flex-wrap:wrap}
+.radios label{display:inline-flex;align-items:center;gap:8px;font-weight:500;margin:0;min-height:44px}
+.radios input{width:20px;height:20px;accent-color:var(--green)}
+.count{font-size:13px;color:var(--mid);text-align:right;margin-top:4px}
+.btn{display:inline-block;background:var(--green);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:14px 24px;border-radius:11px;border:0;cursor:pointer;min-height:48px}
+.btn:hover{background:var(--green-dk)}
+.btn[disabled]{opacity:.6;cursor:default}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.done{display:none;margin:26px 0 0;padding:18px 20px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}
+.done.show{display:block}
+.done b{display:block;margin-bottom:4px}
+.error{display:none;color:var(--alarm);font-weight:500;margin:12px 0 0}
+.error.show{display:block}
+.note{margin:22px 0 0;padding:14px 16px;border-left:3px solid var(--green);background:var(--soft);font-size:15px;max-width:560px}
+.issue{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--panel);max-width:62ch}
+.issue b{display:block;margin-bottom:4px}
+.person{font-size:15.5px;color:var(--mid);margin-top:28px}
+footer{padding:48px 0 60px;font-size:13px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center;border-top:1px solid var(--line);margin-top:64px}
+.footlinks{display:flex;flex-wrap:wrap;gap:10px 20px}
+footer a{color:var(--mid)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="brand" href="/"><span class="mk"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.3"/><path d="M8.2 12.1 10.8 14.7 15.8 9.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Shieldora</a>
+    <a class="back" href="/">Back to the site</a>
+  </nav>
+
+  <main>
+    <h1>Report a problem</h1>
+    <p class="lead">Tell me what happened and I&rsquo;ll look into it. Your email is only used to reply.</p>
+
+    <form id="report" novalidate>
+      <div>
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@example.com">
+      </div>
+      <fieldset>
+        <legend>Which phone is the problem on?</legend>
+        <div class="radios">
+          <label><input type="radio" name="phone" value="parent" checked> My phone (the parent app)</label>
+          <label><input type="radio" name="phone" value="child"> My child&rsquo;s phone</label>
+        </div>
+      </fieldset>
+      <div>
+        <label for="ios">iOS version <small>Optional. Settings &gt; General &gt; About on that phone.</small></label>
+        <input id="ios" name="ios_version" type="text" maxlength="40" placeholder="e.g. 27.0.1" autocomplete="off">
+      </div>
+      <div>
+        <label for="message">What happened? <small>What you did, what you expected, and what you saw instead.</small></label>
+        <textarea id="message" name="message" required maxlength="2000"></textarea>
+        <div class="count"><span id="count">0</span> / 2000</div>
+      </div>
+      <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <div>
+        <button class="btn" type="submit">Send the report</button>
+        <p class="error" id="error" role="alert"></p>
+      </div>
+    </form>
+    <div class="done" id="done" role="status"><b>Thanks, it&rsquo;s sent.</b>I&rsquo;ll reply to the email you gave, usually within a day.</div>
+
+    <p class="note">Please don&rsquo;t paste or attach screenshots of your child&rsquo;s browsing. We don&rsquo;t need them and we don&rsquo;t want them.</p>
+
+    <h2>Known issues</h2>
+    <div class="issue">
+      <b>iOS 27: the web filter can switch itself off after an update</b>
+      On iOS 27, after an update the web filter can switch itself off until you re-tick Shieldora under Settings &gt; General &gt; VPN &amp; Device Management &gt; DNS. The app alerts you when this happens.
+    </div>
+
+    <p class="person">Shieldora is run by one person. I read every report and usually reply within a day.</p>
+  </main>
+
+  <footer>
+    <span>&copy; 2026 Shieldora. Built in Perth to help keep kids safer online.</span>
+    <nav class="footlinks" aria-label="Footer">
+      <a href="/limits/">What Shieldora can&rsquo;t do</a>
+      <a href="/screentime/">Set up Screen Time</a>
+      <a href="privacy.html">Privacy policy</a>
+      <a href="/support">Support</a>
+      <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
+    </nav>
+  </footer>
+</div>
+
+<script>
+// Posts to the Shieldora API the same way the waitlist form does. No
+// dependencies, no redirect: success and error states render in the page.
+// ?api=test points the form at the TEST server for checking the page.
+(function () {
+  var params = new URLSearchParams(location.search);
+  var HOST = params.get("api") === "test" ? "https://shieldora-server-test.fly.dev" : "https://shieldora-server.fly.dev";
+  var ENDPOINT = HOST + "/v1/support/report";
+  var form = document.getElementById("report");
+  var error = document.getElementById("error");
+  var done = document.getElementById("done");
+  var message = document.getElementById("message");
+  var count = document.getElementById("count");
+  message.addEventListener("input", function () { count.textContent = String(message.value.length); });
+
+  function fail(text) { error.textContent = text; error.classList.add("show"); }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    error.classList.remove("show");
+    var email = (form.email.value || "").trim();
+    var text = (message.value || "").trim();
+    if (!email || email.indexOf("@") < 1) { fail("Enter the email address you want the reply sent to."); return; }
+    if (!text) { fail("Tell me what happened, even briefly."); return; }
+    if (text.length > 2000) { fail("Please keep it under 2000 characters."); return; }
+    var button = form.querySelector('button[type="submit"]');
+    button.disabled = true;
+    fetch(ENDPOINT, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        email: email,
+        phone: form.phone.value,
+        ios_version: (form.ios_version.value || "").trim(),
+        message: text,
+        website: form.website.value || ""
+      })
+    }).then(function (res) {
+      if (res.ok) { form.hidden = true; done.classList.add("show"); return; }
+      button.disabled = false;
+      if (res.status === 400) { fail("Something in the form doesn’t look right. Check the email and the message and try again."); }
+      else if (res.status === 429) { fail("Too many reports from here for now. Give it an hour and try again, or email contact@shieldora.app."); }
+      else { fail("Something went wrong on our side. Please try again, or email contact@shieldora.app."); }
+    }).catch(function () {
+      button.disabled = false;
+      fail("We couldn’t reach the server. Please try again, or email contact@shieldora.app.");
+    });
+  });
+})();
+</script>
+</body>
+</html>

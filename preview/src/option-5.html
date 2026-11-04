@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en-AU" id="top">
+<head>
+{{META}}
+<meta name="theme-color" content="#F4F2ED">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+/* Option 5, the pick: a page that reads like one person wrote it. Cream
+   paper, a serif for the headings and the founder's note, the system face
+   for the rest, one column at a reading measure, no cards anywhere, no
+   motion. The alerts are shown once, on one phone, with the three things an
+   alert names annotated beneath it. */
+:root{--deep:#16261F;--green:#348C52;--cream:#F4F2ED;--ink:#16261F;--mid:#4A5751;--line:#D9D5CC}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.col{max-width:66ch}
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:700;font-size:16px;text-decoration:none}
+.mk{width:26px;height:26px;border-radius:7px;background:var(--green);display:grid;place-items:center}
+.mk svg{width:15px;height:15px}
+.btn{display:inline-block;background:var(--deep);color:var(--cream);text-decoration:none;font-weight:600;font-size:16px;padding:13px 22px;border-radius:6px;border:0;cursor:pointer;min-height:48px}
+.btn:hover{background:#0f1a14}
+.navbtn{padding:10px 16px;min-height:40px;font-size:14.5px}
+h1,h2,.founder p{font-family:"Source Serif 4",Georgia,"Times New Roman",serif}
+h1{font-size:clamp(40px,6.4vw,70px);line-height:1.02;letter-spacing:-0.015em;font-weight:600;margin:0 0 20px;max-width:16ch}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12;letter-spacing:-0.01em;font-weight:600;margin:0 0 14px;max-width:24ch}
+p{margin:0 0 16px}
+.lead{font-size:clamp(18px,1.7vw,20px);color:var(--mid);max-width:58ch}
+/* hero: words only, a short rule, then the form */
+.hero{padding:clamp(40px,7vw,96px) 0 clamp(24px,4vw,48px)}
+.heroform{display:flex;gap:10px;flex-wrap:wrap;max-width:480px;margin:26px 0 0}
+.heroform input,.signup input{flex:1 1 200px;padding:13px 14px;border:1px solid var(--line);border-radius:6px;font:inherit;font-size:16px;background:#fff;min-height:48px}
+.wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wl-done{color:var(--green);font-weight:600;margin:16px 0 0}
+.wl-error{color:#8C3B23;font-size:14px;margin:10px 0 0}
+.micro{font-size:15px;color:var(--mid);margin:14px 0 0;max-width:54ch}
+.micro b{color:var(--ink);font-weight:600}
+.rule{border:0;border-top:2px solid var(--deep);width:64px;margin:clamp(32px,5vw,56px) 0}
+/* the problem: a quiet paragraph pair, then the answer with the three
+   strings run into prose */
+.problem,.answer,.alerts,.founder,.faq{padding:clamp(28px,4vw,48px) 0 0}
+.problem p,.answer p,.founder p{max-width:62ch}
+.answer .strings{margin:16px 0 20px;padding-left:18px;border-left:2px solid var(--green);font-weight:600}
+.answer .strings div{padding:4px 0}
+.answer .note{font-size:15.5px;color:var(--mid)}
+.preview{padding:clamp(40px,6vw,72px) 0 0}
+.childapp{padding:clamp(32px,5vw,56px) 0 0}
+.pscreen figcaption{color:var(--mid)}
+.signup{margin:clamp(48px,7vw,88px) 0 0;padding:clamp(28px,4vw,44px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:640px}
+.signup form{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.fine{font-size:14px;color:var(--mid);margin:12px 0 0}
+.collect{font-size:14px;color:var(--mid);margin:8px 0 0;line-height:1.55}
+.collect a{color:var(--deep)}
+/* alerts: one phone, three annotations */
+.alertrow{display:grid;gap:32px;align-items:start;margin-top:8px}
+@media (min-width:860px){.alertrow{grid-template-columns:minmax(0,1fr) 320px;gap:64px}}
+.annot{list-style:none;margin:20px 0 0;padding:0;max-width:56ch}
+.annot li{padding:12px 0;border-top:1px solid var(--line)}
+.annot li:last-child{border-bottom:1px solid var(--line)}
+.annot b{display:block;font-weight:600}
+.annot span{color:var(--mid);font-size:15.5px}
+.never{font-size:15.5px;color:var(--mid);max-width:60ch;margin-top:22px}
+.never b{color:var(--ink)}
+.phonecol{display:flex;justify-content:center}
+.founder p{font-size:clamp(18px,1.7vw,20px);line-height:1.5;font-weight:400}
+.founder p a{text-decoration-thickness:1px;text-underline-offset:3px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:15px 30px 15px 0;font-weight:600;font-size:16.5px;position:relative;min-height:48px;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:2px solid var(--mid);border-bottom:2px solid var(--mid);transform:translateY(-70%) rotate(45deg)}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{margin:0 0 16px;color:var(--mid);max-width:64ch;font-size:16px}
+footer{padding:40px 0 56px;margin-top:clamp(48px,7vw,88px);border-top:1px solid var(--line);font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.footlinks{display:flex;flex-wrap:wrap;gap:10px 18px}
+@media (max-width:600px){.btn{width:100%;text-align:center}.navbtn{width:auto}}
+{{MOCK_CSS}}
+/* no motion anywhere in this option */
+.lp-notif{animation:none}
+</style>
+</head>
+<body>
+<div class="wrap">
+  {{NAV}}
+  <header class="hero col">
+    <h1>{{HERO_H1}}</h1>
+    <p class="lead">{{HERO_DECK}}</p>
+    <form class="heroform wl-form" onsubmit="return false">
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="micro">{{HERO_MICRO}}</p>
+  </header>
+  <hr class="rule">
+
+  <section class="problem col">
+    <h2>{{PROBLEM_H}}</h2>
+    <p>{{PROBLEM_P1}}</p>
+    <p>{{PROBLEM_P2}}</p>
+  </section>
+
+  <section class="answer col">
+    <h2>{{ANSWER_H}}</h2>
+    <p>{{ANSWER_LEAD}}</p>
+    <div class="strings"><div>{{ANSWER_S1}}</div><div>{{ANSWER_S2}}</div><div>{{ANSWER_S3}}</div></div>
+    <p class="note">{{ANSWER_N1}}</p>
+    <p class="note">{{ANSWER_N2}}</p>
+  </section>
+
+  <section class="preview" id="preview">
+    <h2>{{PREVIEW_H}}</h2>
+    <p class="lead">{{PREVIEW_LEAD}}</p>
+    {{PARENT_SCREENS}}
+  </section>
+
+  <section class="preview childapp" id="childapp">
+    <h2>{{CHILD_H}}</h2>
+    <p class="lead">{{CHILD_LEAD}}</p>
+    {{CHILD_SCREEN}}
+  </section>
+
+  <section class="signup" id="waitlist">
+    <h2>{{SIGNUP_H}}</h2>
+    <p class="lead">{{SIGNUP_P}}</p>
+    {{WAITLIST_FORM}}
+    <p class="fine">{{SIGNUP_FINE}}</p>
+    <p class="collect">{{SIGNUP_COLLECT}}</p>
+  </section>
+
+  <section class="alerts">
+    <h2>{{ALERTS_H}}</h2>
+    <p class="lead">{{ALERTS_LEAD}}</p>
+    <div class="alertrow">
+      <div>
+        <ul class="annot">
+          <li><b>The child</b><span>Layla, by the name you gave her in the app. Never a photo, never a real name you didn&rsquo;t choose.</span></li>
+          <li><b>The device</b><span>Her iPhone. If she has two, you see which one.</span></li>
+          <li><b>The time</b><span>4:52 pm. The lock screen says what happened and when, and nothing else.</span></li>
+        </ul>
+        <p class="never">{{ALERTS_NEVER}}</p>
+      </div>
+      <div class="phonecol" aria-hidden="true">{{LOCKPHONE}}</div>
+    </div>
+  </section>
+
+  <section class="founder col">
+    <h2>{{FOUNDER_H}}</h2>
+    <p>{{FOUNDER_P1}}</p>
+    <p>{{FOUNDER_P2}}</p>
+  </section>
+
+  <section class="faq col">
+    <h2>{{FAQ_H}}</h2>
+{{FAQ}}
+  </section>
+
+  {{FOOTER}}
+</div>
+{{WAITLIST_JS}}
+</body>
+</html>
