@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en-AU" id="top">
+<head>
+{{META}}
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Option 6: white page, one sans (Inter), centred hero with the product large
+   under it on a soft green wash, tall roomy sections at varied spacing, one
+   deep green band for the alerts, screenshots with one-line captions, no
+   cards, no labels, one motion moment (the hero notifications landing). */
+:root{--deep:#16261F;--green:#348C52;--cream:#F4F2ED;--ink:#16261F;--mid:#5A6761;--line:#E6E3DC;--wash:rgba(52,140,82,.24)}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
+.narrow{max-width:720px;margin-left:auto;margin-right:auto}
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.brand{display:flex;align-items:center;gap:9px;font-weight:600;font-size:16px;text-decoration:none;letter-spacing:-0.01em}
+.mk{width:26px;height:26px;border-radius:7px;background:var(--green);display:grid;place-items:center}
+.mk svg{width:15px;height:15px}
+.btn{display:inline-block;background:var(--deep);color:#fff;text-decoration:none;font-weight:600;font-size:16px;padding:14px 24px;border-radius:12px;border:0;cursor:pointer;min-height:50px}
+.btn:hover{background:#0f1a14}
+.navbtn{padding:10px 16px;min-height:40px;font-size:14.5px;border-radius:10px}
+h1{font-size:36px;line-height:1.08;letter-spacing:-0.03em;font-weight:700;margin:0 0 18px}
+h2{font-size:28px;line-height:1.15;letter-spacing:-0.025em;font-weight:700;margin:0 0 14px}
+h3{font-size:22px;line-height:1.25;letter-spacing:-0.015em;font-weight:600;margin:0 0 8px}
+@media (min-width:900px){h1{font-size:56px}h2{font-size:40px}h3{font-size:28px}}
+p{margin:0 0 16px}
+.lead{font-size:clamp(17px,1.5vw,19px);color:var(--mid)}
+.centre{text-align:center}
+.centre p,.centre h1,.centre h2{margin-left:auto;margin-right:auto}
+.centre .lead{max-width:52ch}
+/* hero: centred words, one row form, the product large beneath on a wash */
+.hero{padding:clamp(56px,9vw,112px) 0 0}
+.hero h1{max-width:14ch}
+.heroform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:26px auto 0}
+.heroform input,.signup input{flex:1 1 220px;padding:14px 16px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:16px;background:#fff;min-height:50px}
+.wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wl-done{color:var(--green);font-weight:600;margin:16px 0 0}
+.wl-error{color:#8C3B23;font-size:14px;margin:10px 0 0}
+.micro{font-size:14.5px;color:var(--mid);margin:14px auto 0;max-width:56ch}
+.micro b{color:var(--ink);font-weight:600}
+.product{position:relative;display:flex;justify-content:center;padding:clamp(48px,7vw,88px) 0 clamp(24px,4vw,48px);isolation:isolate}
+.product::before{content:"";position:absolute;left:50%;top:50%;width:min(92vw,900px);height:min(70vw,560px);transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,var(--wash),rgba(52,140,82,0));z-index:-1}
+/* a larger, framed phone: the lock screen mock-up at hero size */
+.product .lockphone{width:min(340px,84vw);aspect-ratio:9/17.6;border-radius:50px;border:10px solid #0b0f0d;padding:38px 16px 30px;background:#0f1a14;box-shadow:0 40px 80px -30px rgba(22,38,31,.45)}
+.product .lockphone::before{content:"";position:absolute;top:14px;left:50%;transform:translateX(-50%);width:110px;height:32px;border-radius:20px;background:#0b0f0d}
+.product .lp-time{font-size:64px}
+.product .lp-hl{font-size:15.5px}
+/* the problem: short, centred, a rule above */
+.problem{padding:clamp(56px,8vw,96px) 0 0}
+.problem p{max-width:58ch;color:var(--mid);font-size:clamp(17px,1.5vw,19px)}
+/* the one dark band: the three alerts as real notifications */
+.band{background:var(--deep);color:#fff;margin-top:clamp(72px,10vw,128px);padding:clamp(80px,10vw,136px) 0}
+.band .lead{color:#C7D3CB}
+.band h2{color:#fff}
+.stack{display:grid;gap:12px;max-width:440px;margin:clamp(36px,5vw,56px) auto 0}
+.notif{background:#fff;color:var(--ink);border-radius:18px;padding:13px 15px;display:flex;gap:12px;align-items:flex-start;text-align:left}
+.notif:nth-child(2){width:92%;margin-left:4%}
+.notif:nth-child(3){width:84%;margin-left:8%}
+.nic{width:38px;height:38px;border-radius:10px;background:var(--deep);flex:none;display:grid;place-items:center}
+.nic svg{width:24px;height:24px}
+.nbody{min-width:0;flex:1}
+.napp{font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--mid);display:flex;justify-content:space-between}
+.napp span{font-weight:500;letter-spacing:0}
+.nhl{font-size:15.5px;font-weight:600;line-height:1.35;margin-top:3px}
+.band .notes{max-width:60ch;margin:clamp(36px,5vw,56px) auto 0;font-size:15.5px;color:#C7D3CB;text-align:left}
+.band .notes p:last-child{margin-bottom:0}
+/* screenshots with one-line captions */
+.preview{padding:clamp(88px,12vw,152px) 0 0}
+.childapp{padding:clamp(64px,9vw,112px) 0 0}
+.preview .lead{max-width:60ch}
+.screens{margin-top:clamp(40px,6vw,64px)}
+.pscreen figcaption{color:var(--mid);font-size:14.5px}
+/* waitlist: centred, a rule above and below */
+.signup{margin:clamp(88px,12vw,152px) auto 0;padding:clamp(40px,6vw,64px) 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);max-width:720px}
+.signup form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:22px auto 0}
+.fine{font-size:14px;color:var(--mid);margin:12px 0 0}
+.collect{font-size:14px;color:var(--mid);margin:8px auto 0;line-height:1.55;max-width:60ch}
+.collect a{color:var(--deep)}
+/* what an alert tells you: text, with the three named things as a line */
+.alerts{padding:clamp(72px,10vw,128px) 0 0}
+.three{list-style:none;margin:22px auto 26px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;font-weight:600}
+.three li{display:flex;align-items:center;gap:8px}
+.three i{width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block}
+.never{font-size:15.5px;color:var(--mid);max-width:60ch}
+.never b{color:var(--ink)}
+.founder{padding:clamp(72px,10vw,128px) 0 0}
+.founder p{max-width:62ch;font-size:clamp(17px,1.5vw,19px);text-align:left}
+.faq{padding:clamp(64px,9vw,112px) 0 0}
+.faq h2{text-align:center}
+.faqlist{margin-top:28px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:16px 30px 16px 0;font-weight:600;font-size:16.5px;position:relative;min-height:48px;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:2px solid var(--mid);border-bottom:2px solid var(--mid);transform:translateY(-70%) rotate(45deg)}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{margin:0 0 16px;color:var(--mid);max-width:64ch;font-size:16px}
+footer{padding:40px 0 64px;margin-top:clamp(72px,10vw,128px);border-top:1px solid var(--line);font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.footlinks{display:flex;flex-wrap:wrap;gap:10px 18px}
+@media (max-width:600px){.btn{width:100%;text-align:center}.navbtn{width:auto}.heroform .btn{width:100%}}
+{{MOCK_CSS}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  {{NAV}}
+
+  <header class="hero centre">
+    <h1>{{HERO_H1}}</h1>
+    <p class="lead">{{HERO_DECK}}</p>
+    <form class="heroform wl-form" onsubmit="return false">
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="micro">{{HERO_MICRO}}</p>
+    <div class="product" aria-hidden="true">{{LOCKPHONE}}</div>
+  </header>
+
+  <section class="problem centre">
+    <h2>{{PROBLEM_H}}</h2>
+    <p>{{PROBLEM_P1}}</p>
+    <p>{{PROBLEM_P2}}</p>
+  </section>
+</div>
+
+<section class="band">
+  <div class="wrap centre">
+    <h2>{{ANSWER_H}}</h2>
+    <p class="lead">{{ANSWER_LEAD}}</p>
+    <div class="stack" aria-label="Three example alerts">
+      <div class="notif"><span class="nic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="napp">SHIELDORA<span>now</span></span><span class="nhl">{{AL1}}</span></span></div>
+      <div class="notif"><span class="nic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="napp">SHIELDORA<span>9:10 pm</span></span><span class="nhl">{{AL2}}</span></span></div>
+      <div class="notif"><span class="nic"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="napp">SHIELDORA<span>yesterday</span></span><span class="nhl">{{ANSWER_S3}} in 24 hours</span></span></div>
+    </div>
+    <div class="notes">
+      <p>{{ANSWER_N1}}</p>
+      <p>{{ANSWER_N2}}</p>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <section class="preview centre" id="preview">
+    <h2>{{PREVIEW_H}}</h2>
+    <p class="lead">{{PREVIEW_LEAD}}</p>
+    {{PARENT_SCREENS}}
+  </section>
+
+  <section class="preview childapp centre" id="childapp">
+    <h2>{{CHILD_H}}</h2>
+    <p class="lead">{{CHILD_LEAD}}</p>
+    {{CHILD_SCREEN}}
+  </section>
+
+  <section class="signup centre" id="waitlist">
+    <h2>{{SIGNUP_H}}</h2>
+    <p class="lead">{{SIGNUP_P}}</p>
+    {{WAITLIST_FORM}}
+    <p class="fine">{{SIGNUP_FINE}}</p>
+    <p class="collect">{{SIGNUP_COLLECT}}</p>
+  </section>
+
+  <section class="alerts centre narrow">
+    <h2>{{ALERTS_H}}</h2>
+    <p class="lead">{{ALERTS_LEAD}}</p>
+    <ul class="three"><li><i></i>the child</li><li><i></i>the device</li><li><i></i>the time</li></ul>
+    <p class="never">{{ALERTS_NEVER}}</p>
+  </section>
+
+  <section class="founder centre narrow">
+    <h2>{{FOUNDER_H}}</h2>
+    <p>{{FOUNDER_P1}}</p>
+    <p>{{FOUNDER_P2}}</p>
+  </section>
+
+  <section class="faq narrow">
+    <h2>{{FAQ_H}}</h2>
+    <div class="faqlist">
+{{FAQ}}
+    </div>
+  </section>
+
+  {{FOOTER}}
+</div>
+{{WAITLIST_JS}}
+</body>
+</html>
