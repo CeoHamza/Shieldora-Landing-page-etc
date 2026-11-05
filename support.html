@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#EFEFED">
 <title>Support: report a problem with Shieldora</title>
-<meta name="description" content="Report a problem with Shieldora. One person reads every report and usually replies within a day.">
+<meta name="description" content="Report a problem with Shieldora by email. One person reads every report and replies.">
 <meta name="robots" content="index,follow">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -66,46 +66,16 @@ footer a{color:var(--mid)}
 
   <main>
     <h1>Report a problem</h1>
-    <p class="lead">Tell me what happened and I&rsquo;ll look into it. Your email is only used to reply.</p>
+    <p class="lead">Email <a href="mailto:contact@shieldora.app">contact@shieldora.app</a> with what happened, your child&rsquo;s device (iPhone or iPad) and roughly when. You&rsquo;ll get a real reply from the person who builds Shieldora.</p>
+    <p><a class="btn" href="mailto:contact@shieldora.app?subject=Shieldora%20problem%20report">Email contact@shieldora.app</a></p>
 
-    <form id="report" novalidate>
-      <div>
-        <label for="email">Your email</label>
-        <input id="email" name="email" type="email" required autocomplete="email" inputmode="email" placeholder="you@example.com">
-      </div>
-      <fieldset>
-        <legend>Which phone is the problem on?</legend>
-        <div class="radios">
-          <label><input type="radio" name="phone" value="parent" checked> My phone (the parent app)</label>
-          <label><input type="radio" name="phone" value="child"> My child&rsquo;s phone</label>
-        </div>
-      </fieldset>
-      <div>
-        <label for="ios">iOS version <small>Optional. Settings &gt; General &gt; About on that phone.</small></label>
-        <input id="ios" name="ios_version" type="text" maxlength="40" placeholder="e.g. 27.0.1" autocomplete="off">
-      </div>
-      <div>
-        <label for="message">What happened? <small>What you did, what you expected, and what you saw instead.</small></label>
-        <textarea id="message" name="message" required maxlength="2000"></textarea>
-        <div class="count"><span id="count">0</span> / 2000</div>
-      </div>
-      <div class="hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-      <div>
-        <button class="btn" type="submit">Send the report</button>
-        <p class="error" id="error" role="alert"></p>
-      </div>
-    </form>
-    <div class="done" id="done" role="status"><b>Thanks, it&rsquo;s sent.</b>I&rsquo;ll reply to the email you gave, usually within a day.</div>
-
-    <p class="note">Please don&rsquo;t paste or attach screenshots of your child&rsquo;s browsing. We don&rsquo;t need them and we don&rsquo;t want them.</p>
+    <p class="note">Please don&rsquo;t send screenshots of your child&rsquo;s browsing. We don&rsquo;t need them and we don&rsquo;t want them.</p>
 
     <h2>Known issues</h2>
     <div class="issue">
       <b>iOS 27: the web filter can switch itself off after an update</b>
       On iOS 27, after an update the web filter can switch itself off until you re-tick Shieldora under Settings &gt; General &gt; VPN &amp; Device Management &gt; DNS. The app alerts you when this happens.
     </div>
-
-    <p class="person">Shieldora is run by one person. I read every report and usually reply within a day.</p>
   </main>
 
   <footer>
@@ -113,62 +83,12 @@ footer a{color:var(--mid)}
     <nav class="footlinks" aria-label="Footer">
       <a href="/limits/">What Shieldora can&rsquo;t do</a>
       <a href="/screentime/">Set up Screen Time</a>
-      <a href="privacy.html">Privacy policy</a>
+      <a href="/privacy.html">Privacy policy</a>
       <a href="/support">Support</a>
       <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
     </nav>
   </footer>
 </div>
 
-<script>
-// Posts to the Shieldora API the same way the waitlist form does. No
-// dependencies, no redirect: success and error states render in the page.
-// ?api=test points the form at the TEST server for checking the page.
-(function () {
-  var params = new URLSearchParams(location.search);
-  var HOST = params.get("api") === "test" ? "https://shieldora-server-test.fly.dev" : "https://shieldora-server.fly.dev";
-  var ENDPOINT = HOST + "/v1/support/report";
-  var form = document.getElementById("report");
-  var error = document.getElementById("error");
-  var done = document.getElementById("done");
-  var message = document.getElementById("message");
-  var count = document.getElementById("count");
-  message.addEventListener("input", function () { count.textContent = String(message.value.length); });
-
-  function fail(text) { error.textContent = text; error.classList.add("show"); }
-
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-    error.classList.remove("show");
-    var email = (form.email.value || "").trim();
-    var text = (message.value || "").trim();
-    if (!email || email.indexOf("@") < 1) { fail("Enter the email address you want the reply sent to."); return; }
-    if (!text) { fail("Tell me what happened, even briefly."); return; }
-    if (text.length > 2000) { fail("Please keep it under 2000 characters."); return; }
-    var button = form.querySelector('button[type="submit"]');
-    button.disabled = true;
-    fetch(ENDPOINT, {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        email: email,
-        phone: form.phone.value,
-        ios_version: (form.ios_version.value || "").trim(),
-        message: text,
-        website: form.website.value || ""
-      })
-    }).then(function (res) {
-      if (res.ok) { form.hidden = true; done.classList.add("show"); return; }
-      button.disabled = false;
-      if (res.status === 400) { fail("Something in the form doesn’t look right. Check the email and the message and try again."); }
-      else if (res.status === 429) { fail("Too many reports from here for now. Give it an hour and try again, or email contact@shieldora.app."); }
-      else { fail("Something went wrong on our side. Please try again, or email contact@shieldora.app."); }
-    }).catch(function () {
-      button.disabled = false;
-      fail("We couldn’t reach the server. Please try again, or email contact@shieldora.app.");
-    });
-  });
-})();
-</script>
 </body>
 </html>
