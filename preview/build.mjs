@@ -163,7 +163,7 @@ const fragments = { META, NAV, FOOTER, WAITLIST_JS, FAQ, MOCK_CSS, LOCKPHONE: lo
   WAITLIST_FORM: WAITLIST_FORM(), MARK, NOTIFS, NOTIF_LIST, NOTIF_ICON, NOTIF_ICON_SMALL: NOTIF_ICON, PUSH_TITLE, LOCK_STACK, SITE_NAV, ...copy };
 
 const srcDir = join(here, "src");
-for (const name of readdirSync(srcDir).filter((f) => /^(option|mock)-\d\.html$/.test(f))) {
+for (const name of readdirSync(srcDir).filter((f) => /^(option|mock)-\d+\.html$/.test(f))) {
   let html = readFileSync(join(srcDir, name), "utf8");
   html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, key) => {
     if (!(key in fragments)) throw new Error(`${name}: unknown placeholder ${key}`);

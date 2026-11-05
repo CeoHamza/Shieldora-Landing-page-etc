@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en-AU" id="top">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Shieldora: Know when an adult site is blocked. Know when protection breaks.</title>
+<meta name="description" content="Shieldora blocks adult sites on your child's iPhone or iPad, tells you when an adult site is blocked, and tells you if that protection ever stops running.">
+<meta property="og:title" content="Shieldora: Know when an adult site is blocked. Know when protection breaks.">
+<meta property="og:description" content="Shieldora blocks adult sites on your child's iPhone or iPad, tells you when an adult site is blocked, and tells you if that protection ever stops running.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shieldora.app">
+<meta property="og:image" content="https://shieldora.app/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="You get told. That's the whole point. A phone showing Shieldora alerts.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://shieldora.app/og-image.png">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<meta name="theme-color" content="#D9E8DD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Mock 8: the soft green wash runs down the whole page as one continuous background. Text and sections sit on it directly; the cards are translucent white. */
+/* THEME */
+:root{--ink:#16261F;--mid:#5A6761;--soft:#5F6965;--text2:#3C4642;--line:#E6E3DC;--accent:#348C52;--error:#8C3B23;
+  --btn:#16261F;--btn-ink:#fff;--btn-hover:#0f1a14;--pill:#fff;--pill-line:rgba(22,38,31,.12);--pill-hover:#FAFAF8;
+  --input:#fff;--input-line:#D9D5CC;--nic:#16261F;--dev-ring:rgba(0,0,0,.25);--dev-shadow:rgba(22,38,31,.55)}
+:root{--bg:#E6EEE4;--card:rgba(255,255,255,.62);--pillbar:rgba(255,255,255,.5);--pill-on:#fff;--pill-on-ink:#16261F;--line:rgba(22,38,31,.14);--input-line:rgba(22,38,31,.16)}
+body{background:
+  radial-gradient(1100px 820px at 10% 3%,#BFDAC8 0%,rgba(191,218,200,0) 70%),
+  radial-gradient(1000px 800px at 92% 12%,#CBE8CC 0%,rgba(203,232,204,0) 70%),
+  radial-gradient(1200px 900px at 50% 28%,#F2E8CF 0%,rgba(242,232,207,0) 72%),
+  radial-gradient(1100px 900px at 6% 48%,#C6E2CB 0%,rgba(198,226,203,0) 70%),
+  radial-gradient(1100px 900px at 94% 66%,#EFE6D2 0%,rgba(239,230,210,0) 70%),
+  radial-gradient(1200px 900px at 25% 90%,#CBE8CC 0%,rgba(203,232,204,0) 70%),
+  linear-gradient(170deg,#CFE3D4 0%,#ECEADC 34%,#D5EAD3 66%,#E3EFDF 100%)}
+.hero .inner{padding-bottom:clamp(8px,2vw,16px)}
+/* /THEME */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.col{max-width:900px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.narrow{max-width:680px;margin-left:auto;margin-right:auto}
+h1{font-size:34px;line-height:1.12;letter-spacing:-0.02em;font-weight:500;margin:0 0 14px}
+h2{font-size:27px;line-height:1.15;letter-spacing:-0.02em;font-weight:500;margin:0 0 12px}
+h3{font-size:20px;line-height:1.25;letter-spacing:-0.01em;font-weight:600;margin:0 0 8px}
+@media (min-width:900px){h1{font-size:46px}h2{font-size:34px}h3{font-size:24px}}
+p{margin:0 0 16px}
+.lead{font-size:clamp(17px,1.5vw,19px);color:var(--mid)}
+.centre{text-align:center}
+.centre p,.centre h1,.centre h2{margin-left:auto;margin-right:auto}
+.centre .lead{max-width:52ch}
+/* buttons: pills, the main one filled */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--pill);color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px;padding:10px 18px;border-radius:999px;border:1px solid var(--pill-line);cursor:pointer;min-height:44px;box-shadow:0 1px 2px rgba(22,38,31,.06);white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.btn:hover{background:var(--pill-hover)}
+.btn.dark{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.btn.dark:hover{background:var(--btn-hover)}
+/* the menu */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;text-decoration:none;letter-spacing:-0.02em}
+.mk{width:26px;height:26px;border-radius:7px;background:#348C52;display:grid;place-items:center}
+.mk svg{width:15px;height:15px}
+.navright{display:flex;align-items:center;gap:18px}
+.navlink{font-size:14px;color:var(--mid);text-decoration:none;white-space:nowrap}
+.navlink:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.navbtn{padding:8px 16px;min-height:38px;font-size:14px}
+@media (max-width:420px){.brand{font-size:16px}.navright{gap:12px}.navlink{font-size:13px}.navbtn{padding:7px 12px;font-size:13px}}
+/* the hero: words, the whole phone, the pills under it, the price, the first form */
+.hero{position:relative;text-align:center}
+.hero .wrap{position:relative;z-index:1}
+.hero .inner{padding:clamp(28px,5vw,56px) 0 0}
+.hand{font-family:Caveat,"Bradley Hand","Segoe Print",cursive;font-weight:600;font-size:clamp(18px,2vw,22px);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.hero h1{max-width:22ch}
+.hero .lead{max-width:56ch;font-size:clamp(15.5px,1.4vw,18px);margin-bottom:22px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:480px){.btns .btn{width:min(100%,300px)}}
+.phonewrap{display:flex;justify-content:center;margin:clamp(32px,5vw,56px) auto 0}
+.dev{position:relative;flex:none;border-radius:11.5% / 5.3%;background:#0b0c0d;padding:1.7%;box-shadow:0 0 0 1px var(--dev-ring),0 34px 70px -30px var(--dev-shadow)}
+.dev img{display:block;width:100%;height:auto;border-radius:10.4% / 4.8%}
+.dev::after{content:"";position:absolute;top:4.1%;left:50%;transform:translateX(-50%);width:27%;height:3.1%;border-radius:999px;background:#0b0c0d}
+.phonewrap .dev{width:clamp(240px,58vw,330px)}
+@media (prefers-reduced-motion:no-preference){
+  .phonewrap .dev{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+}
+.pills{display:inline-flex;gap:4px;background:var(--pillbar);border-radius:999px;padding:4px;margin:clamp(20px,3vw,28px) auto 0;max-width:100%}
+.pills button{font:inherit;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:999px;color:var(--mid);background:none;border:0;cursor:pointer;white-space:nowrap;min-height:36px}
+.pills button[aria-pressed="true"]{background:var(--pill-on);color:var(--pill-on-ink);box-shadow:0 1px 2px rgba(22,38,31,.08)}
+@media (max-width:420px){.pills button{font-size:12.5px;padding:8px 10px}}
+.micro{font-size:13.5px;color:var(--mid);margin:18px auto 0;max-width:56ch}
+.micro b{color:var(--ink);font-weight:600}
+.heroform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:18px auto 0}
+.heroform input,.signup input{flex:1 1 220px;padding:12px 18px;border:1px solid var(--input-line);border-radius:999px;font:inherit;font-size:16px;background:var(--input);color:var(--ink);min-height:46px}
+.heroform input::placeholder,.signup input::placeholder{color:var(--soft)}
+.heroform .btn,.signup .btn{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
+.heroform .btn:hover,.signup .btn:hover{background:var(--btn-hover)}
+.wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wl-done{color:var(--accent);font-weight:600;margin:16px 0 0}
+.wl-error{color:var(--error);font-size:14px;margin:10px 0 0}
+/* sections, straight on the page */
+section{padding-top:clamp(64px,9vw,112px)}
+/* the eight controls: one icon set, two-line labels */
+.controls h2{font-size:clamp(24px,3vw,30px)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,36px) 12px;max-width:720px;margin:clamp(28px,4vw,40px) auto 0}
+@media (min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+.ctl{text-align:center;font-size:13px;line-height:1.35;color:var(--ink)}
+.ctl svg{width:26px;height:26px;display:block;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ctl span{display:block}
+/* notifications */
+.stack{display:grid;gap:10px;max-width:460px;margin:clamp(28px,4vw,40px) auto 0}
+.notif{background:var(--card);color:var(--ink);border-radius:20px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;text-align:left}
+.nic{width:38px;height:38px;border-radius:10px;background:var(--nic);flex:none;display:grid;place-items:center}
+.nic svg{width:24px;height:24px}
+.nbody{min-width:0;flex:1}
+.nhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:15px;font-weight:600;line-height:1.3}
+.nhead span{font-size:12px;font-weight:400;color:var(--soft);flex:none}
+.ntext{display:block;font-size:14.5px;line-height:1.35;color:var(--text2);margin-top:2px}
+.never{font-size:15.5px;color:var(--mid);margin:clamp(20px,3vw,28px) auto 0;max-width:52ch}
+.notes{max-width:60ch;margin:clamp(24px,3vw,32px) auto 0;font-size:15.5px;color:var(--mid);text-align:left}
+.notes p:last-child{margin-bottom:0}
+/* screens */
+.preview .lead{max-width:60ch}
+.shots{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,3vw,28px);margin:clamp(28px,4vw,44px) auto 0}
+.shots figure{margin:0;width:clamp(180px,42vw,236px)}
+.shots .dev{width:100%;animation:none}
+.shots figcaption{color:var(--mid);font-size:14.5px;margin-top:12px;text-align:center}
+/* waitlist */
+.signup form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:22px auto 0}
+.fine{font-size:14px;color:var(--mid);margin:12px 0 0}
+.collect{font-size:14px;color:var(--mid);margin:8px auto 0;line-height:1.55;max-width:60ch}
+.collect a,.founder a{color:var(--ink)}
+.founder p{max-width:62ch;font-size:clamp(17px,1.5vw,19px);text-align:left}
+/* the FAQ, large and centred */
+.faq h2{text-align:center;font-size:clamp(32px,4.5vw,52px);line-height:1.08;max-width:12ch}
+.faqlist{margin:clamp(28px,4vw,44px) auto 0;max-width:640px;text-align:left}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:18px 30px 18px 0;font-weight:500;font-size:clamp(17px,1.6vw,19px);position:relative;min-height:48px;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:1.5px solid var(--mid);border-bottom:1.5px solid var(--mid);transform:translateY(-70%) rotate(45deg)}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{margin:0 0 18px;color:var(--mid);max-width:64ch;font-size:16px}
+footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16px,4vw,48px) 64px;border-top:1px solid var(--line);font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.footlinks{display:flex;flex-wrap:wrap;gap:10px 18px}
+@media (max-width:600px){.signup .btn,.heroform .btn{width:100%}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <nav class="topnav" aria-label="Site">
+    <a class="brand" href="#top"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#16261F" stroke="#dcb978" stroke-width="1.3"/><path d="M8.2 12.1 10.8 14.7 15.8 9.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Shieldora</a>
+    <div class="navright"><a class="navlink" href="/support">Report a problem</a><a class="btn navbtn" href="#waitlist">Join the waitlist</a></div>
+  </nav>
+    <div class="inner centre">
+      <p class="hand">For your child&rsquo;s iPhone</p>
+      <h1>You get told.<br>That&rsquo;s the whole point.</h1>
+      <p class="lead">Blocks adult sites on your child&rsquo;s iPhone, and tells you when something&rsquo;s blocked or protection stops.</p>
+      <div class="btns">
+        <a class="btn dark" href="#waitlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Join the waitlist</a>
+        <a class="btn" href="#alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v4l2 3H4l2-3Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>See what you get told</a>
+      </div>
+      <div class="phonewrap">
+        <div class="dev"><img id="heroscreen" src="screens/parent-home.png" width="804" height="1748" alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week" loading="eager"></div>
+      </div>
+      <div class="pills" role="group" aria-label="Choose which screen the phone shows">
+        <button type="button" aria-pressed="true" data-screen="parent-home" data-alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week">Home</button>
+        <button type="button" aria-pressed="false" data-screen="parent-activity" data-alt="The parent app's Activity screen: today's and yesterday's alerts">Activity</button>
+        <button type="button" aria-pressed="false" data-screen="parent-child-layla" data-alt="Layla's page: recent alerts and the controls on her devices">Layla&rsquo;s page</button>
+      </div>
+      <p class="micro"><b>Coming soon.</b> A$14.99 a month for the whole family, or A$119.99 a year. Founding price, locked while you stay subscribed. The waitlist is for early access.</p>
+      <form class="heroform wl-form" onsubmit="return false">
+        <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+        <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="btn" type="submit">Join the waitlist</button>
+      </form>
+    </div>
+  </div>
+</header>
+
+<main class="col">
+  <section class="controls centre">
+    <h2>Eight controls, set once</h2>
+    <div class="grid">
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>Installing</span><span>apps</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span>Account</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Passcode</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Time</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit</span><span>media</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Other</span><span>browsers</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>Safe search</span><span>always on</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social</span><span>apps</span></div>
+    </div>
+  </section>
+
+  <section class="answer centre" id="alerts">
+    <h2>A notification lands on your phone.</h2>
+    <p class="lead">When an adult site is blocked, when a browser is allowed, or when your child&rsquo;s phone goes quiet, a notification lands on your phone with the child, the device and the time. You don&rsquo;t have to go and check.</p>
+    <div class="stack" aria-label="Four example notifications">
+      <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>now</span></span><span class="ntext">A site was blocked on Layla&rsquo;s iPhone</span></span></div>
+      <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>7:52 am</span></span><span class="ntext">Likely pop-ups or redirects were blocked on Layla&rsquo;s iPhone</span></span></div>
+      <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>yesterday</span></span><span class="ntext">Protection was turned off on Layla&rsquo;s iPhone</span></span></div>
+      <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>yesterday</span></span><span class="ntext">Web filtering may be off on Layla&rsquo;s iPhone</span></span></div>
+    </div>
+    <p class="never">Alerts never name the site on your lock screen or in email.</p>
+    <div class="notes">
+      <p>A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks, so that one is a gentle heads-up after 24 hours, not an alarm. Screen Time being turned off is the one that matters. Shieldora tries to tell you straight away. If that alert can&rsquo;t get through, the phone goes quiet, and 24 hours of silence always reaches you.</p>
+      <p>And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password, not the child&rsquo;s passcode, not their Face ID.</p>
+    </div>
+  </section>
+
+  <section class="preview centre" id="preview">
+    <h2>What you&rsquo;ll open on your own phone</h2>
+    <p class="lead">The parent app isn&rsquo;t finished yet. <strong>This is the design we&rsquo;re building to, not a screenshot of working software</strong>, so treat it as where it&rsquo;s heading rather than what you&rsquo;d get today. It shows what Shieldora will do at launch. Some of it works now, and the rest, such as the alert when a site is blocked, lands before we open to families.</p>
+    <div class="shots">
+      <figure><div class="dev"><img src="screens/parent-activity.png" width="804" height="1748" alt="Activity: today's and yesterday's alerts for Layla and Noah" loading="lazy"></div><figcaption>Activity, today and yesterday, across both children.</figcaption></figure>
+      <figure><div class="dev"><img src="screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page: recent alerts and the controls on her devices" loading="lazy"></div><figcaption>Each child's page: recent alerts, then the controls.</figcaption></figure>
+      <figure><div class="dev"><img src="screens/parent-social-apps.png" width="804" height="1748" alt="Social apps on Layla's devices: Instagram and TikTok blocked" loading="lazy"></div><figcaption>Social apps, blocked per child, app and website.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="preview centre" id="childapp">
+    <h2>What your child sees on their phone</h2>
+    <p class="lead">No login, no dashboard, nothing to switch off. Just what a parent has set, and who to ask if something stops working.</p>
+    <div class="shots">
+      <figure><div class="dev"><img src="screens/child-set-up.png" width="804" height="1748" alt="The child's phone: This phone is set up, and what is on" loading="lazy"></div><figcaption>The whole child app. Nothing to log into, nothing to switch off.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="signup centre" id="waitlist">
+    <h2>Be the first to protect your family</h2>
+    <p class="lead">Join the waitlist and we&rsquo;ll email you when Shieldora is ready for your family&rsquo;s devices.</p>
+    <form class="wl-form " onsubmit="return false">
+      <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Join the waitlist</button>
+    </form>
+    <p class="fine">No spam. We&rsquo;ll only email you about Shieldora.</p>
+    <p class="collect">We collect your email address, the date, and the page and link you arrived from. We use it for one thing: to email you when Shieldora is ready. We don&rsquo;t sell it or pass it on. <a href="privacy.html">How we handle your information</a>.</p>
+  </section>
+
+  <section class="founder centre narrow" id="founder">
+    <h2>Who&rsquo;s behind this</h2>
+    <p>Most parental controls fail the same way. The filter gets switched off, or a kid gets around it, and the parent is the last to know. Sometimes that&rsquo;s weeks later, and by then the conversation they should have had is long overdue. Shieldora exists to fix that one problem: block adult sites, and make sure you get told when something is blocked or protection stops.</p>
+    <p>Shieldora is built by one person in Perth. No outsourced support, no data sold to anyone. If you have a question, email <a href="mailto:contact@shieldora.app">contact@shieldora.app</a> and you&rsquo;ll get a real reply.</p>
+  </section>
+
+  <section class="faq centre" id="faq">
+    <h2>Questions parents ask</h2>
+    <div class="faqlist">
+    <details><summary>What exactly do the alerts tell me?</summary><p>The exceptions that matter: a site being blocked, Screen Time being turned off, the phone going quiet for 24 hours, or you allowing a non-Safari browser. Each comes with the child, the device and the time. Nothing about what your child searched or typed.</p></details>
+    <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages, or a history of sites that weren't blocked. That's a deliberate line, not a feature we haven't built yet.</p></details>
+    <details><summary>Can my child just turn it off?</summary><p>No. There is no Shieldora screen that turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password, not the child's device passcode or Face ID. And if protection is switched off, Shieldora tries to alert you straight away. If that signal does not get through, the phone falls silent, and silence that lasts 24 hours reaches you on its own, so a switch-off does not stay hidden.</p></details>
+    <details><summary>Will you tell me what my child tried to visit?</summary><p>Only if you turn on more detail for that child, with your second factor. Then the app shows the website address of each blocked site and whether it was classed adult or harmful content, kept for 30 days and deleted at once if you turn it off. Your child&rsquo;s phone shows that this is on. Off, which is the default, a block alert names the child, the device and the time, never the site. Either way we never record searches, pages or messages, and never build a browsing history of the sites your child visits.</p></details>
+    <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. What we focus on is different and, we think, more useful: if the filtering stops running, Shieldora tries to tell you, and a phone that goes quiet for 24 hours will reach you on its own. That is the failure that actually leaves a child exposed, and the one most filters never mention.</p></details>
+    <details><summary>How does the blocking actually work?</summary><p>Shieldora uses filtering built into iOS, on your child's iPhone or iPad. The filtering happens on the device itself.</p></details>
+    <details><summary>Which browsers does it cover?</summary><p>Safari, including private browsing. Other browsers are blocked by default. You can allow one if your child needs it, and we'll warn you that content inside it isn't filtered.</p></details>
+    <details><summary>What do I need to use it?</summary><p>Your child&rsquo;s iPhone or iPad needs to be on iOS 26.5 or later. That&rsquo;s the version where Shieldora can watch for Screen Time being turned off, on top of noticing when the phone goes quiet. Your own phone can be on an older version. If your child&rsquo;s device is behind, Shieldora asks you to update it before setting it up, rather than guard it in a way it can&rsquo;t stand behind.</p></details>
+    <details><summary>When can I get it?</summary><p>Shieldora isn't released yet. Join the waitlist and you'll be among the first families we let in.</p></details>
+    </div>
+  </section>
+</main>
+
+<footer>
+    <span>&copy; 2026 Shieldora. Built in Perth to help keep kids safer online.</span>
+    <nav class="footlinks" aria-label="Footer">
+      <a href="/limits/">What Shieldora can&rsquo;t do</a>
+      <a href="/screentime/">Set up Screen Time</a>
+      <a href="../privacy.html">Privacy policy</a>
+      <a href="/support">Support</a>
+      <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
+    </nav>
+  </footer>
+<script>
+// The pills under the phone swap which real screen it shows.
+(function () {
+  var img = document.getElementById("heroscreen");
+  var pills = document.querySelectorAll(".pills button");
+  pills.forEach(function (b) {
+    b.addEventListener("click", function () {
+      pills.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      img.src = "screens/" + b.dataset.screen + ".png";
+      img.alt = b.dataset.alt;
+    });
+  });
+})();
+</script>
+<script>
+// Waitlist: POST both forms to the Shieldora API. No dependencies.
+(function () {
+  var ENDPOINT = "https://shieldora-server.fly.dev/v1/waitlist";
+  var ref = new URLSearchParams(location.search).get("ref") || "";
+
+  function message(cls, text) {
+    var p = document.createElement("p");
+    p.className = cls;
+    p.textContent = text;
+    return p;
+  }
+  function showError(form, text) {
+    var box = form.parentNode;
+    var existing = box.querySelector(".wl-error");
+    if (existing) { existing.textContent = text; return; }
+    box.insertBefore(message("wl-error", text), form.nextSibling);
+  }
+
+  function wire(form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var emailField = form.querySelector('input[type="email"]');
+      var honeypot = form.querySelector('input[name="website"]');
+      var email = (emailField && emailField.value || "").trim();
+      if (!email) { showError(form, "Enter your email to join the waitlist."); return; }
+
+      var button = form.querySelector('button[type="submit"]');
+      if (button) { button.disabled = true; }
+      var oldError = form.parentNode.querySelector(".wl-error");
+      if (oldError) { oldError.remove(); }
+
+      fetch(ENDPOINT, {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          email: email,
+          ref: ref,
+          page: location.pathname,
+          website: honeypot ? honeypot.value : ""
+        })
+      }).then(function (res) {
+        if (res.ok) {
+          form.parentNode.replaceChild(
+            message("wl-done", "You’re on the list. We’ll email you when Shieldora is ready."),
+            form
+          );
+          return;
+        }
+        if (button) { button.disabled = false; }
+        if (res.status === 400) { showError(form, "That email doesn’t look right. Check it and try again."); }
+        else if (res.status === 429) { showError(form, "Too many tries from here. Give it a little while and try again."); }
+        else { showError(form, "Something went wrong. Please try again."); }
+      }).catch(function () {
+        if (button) { button.disabled = false; }
+        showError(form, "We couldn’t reach the server. Please try again.");
+      });
+    });
+  }
+
+  document.querySelectorAll("form.wl-form").forEach(wire);
+})();
+</script>
+</body>
+</html>
