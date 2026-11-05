@@ -65,7 +65,7 @@ const copy = {
   AL3: "Screen Time permission was restored on Layla&rsquo;s iPhone", AL3_T: "9:24 pm",
   FOUNDER_H: "Who&rsquo;s behind this",
   FOUNDER_P1: "Most parental controls fail the same way. The filter gets switched off, or a kid gets around it, and the parent is the last to know. Sometimes that&rsquo;s weeks later, and by then the conversation they should have had is long overdue. Shieldora exists to fix that one problem: block adult sites, and make sure you get told when something is blocked or protection stops.",
-  FOUNDER_P2: "It&rsquo;s built by me, Hamza, in Perth. One person, no outsourced support, no data sold to anyone. If you have a question, email <a href=\"mailto:contact@shieldora.app\">contact@shieldora.app</a> and you&rsquo;ll get me.",
+  FOUNDER_P2: "Shieldora is built by one person in Perth. No outsourced support, no data sold to anyone. If you have a question, email <a href=\"mailto:contact@shieldora.app\">contact@shieldora.app</a> and you&rsquo;ll get a real reply.",
   FAQ_H: "Questions parents ask",
   FOOTER_LINE: "&copy; 2026 Shieldora. Built in Perth to help keep kids safer online.",
 };
@@ -152,9 +152,15 @@ const pushes = [
 const notif = ([body, when]) => `<div class="notif">${NOTIF_ICON}<span class="nbody"><span class="nhead">${PUSH_TITLE}<span>${when}</span></span><span class="ntext">${body}</span></span></div>`;
 const NOTIFS = `<div class="stack" aria-label="Four example notifications">\n      ${pushes.map(notif).join("\n      ")}\n    </div>`;
 const NOTIF_LIST = pushes.map(notif).join("\n");
+// The same four as they land on the parent's lock screen (mock 6's hero).
+const LOCK_STACK = `<div class="lp-stack" aria-label="Four notifications arriving">\n          ${pushes.map(notif).join("\n          ")}\n        </div>`;
+const SITE_NAV = `<nav class="topnav" aria-label="Site">
+    <a class="brand" href="#top">${MARK}Shieldora</a>
+    <div class="navright"><a class="navlink" href="/support">Report a problem</a><a class="btn navbtn" href="#waitlist">Join the waitlist</a></div>
+  </nav>`;
 
 const fragments = { META, NAV, FOOTER, WAITLIST_JS, FAQ, MOCK_CSS, LOCKPHONE: lockphone, PARENT_SCREENS: parentScreens, CHILD_SCREEN: childScreen,
-  WAITLIST_FORM: WAITLIST_FORM(), MARK, NOTIFS, NOTIF_LIST, NOTIF_ICON, NOTIF_ICON_SMALL: NOTIF_ICON, PUSH_TITLE, ...copy };
+  WAITLIST_FORM: WAITLIST_FORM(), MARK, NOTIFS, NOTIF_LIST, NOTIF_ICON, NOTIF_ICON_SMALL: NOTIF_ICON, PUSH_TITLE, LOCK_STACK, SITE_NAV, ...copy };
 
 const srcDir = join(here, "src");
 for (const name of readdirSync(srcDir).filter((f) => /^(option|mock)-\d\.html$/.test(f))) {
