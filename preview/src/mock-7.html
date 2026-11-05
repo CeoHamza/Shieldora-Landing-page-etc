@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en-AU" id="top">
+<head>
+{{META}}
+<meta name="theme-color" content="#D9E8DD">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+/* Mock 7, after the smart-notch reference (mock 3 brought back and fixed): a
+   soft pastel wash hero with one hand-written label, a two-line headline and
+   one line of body, two pill buttons, the parent's Home screen bleeding off
+   the hero at a chosen point; one white sheet below it with working pills,
+   the eight controls as one icon set, and the FAQ large and centred. */
+:root{--deep:#16261F;--green:#348C52;--ink:#16261F;--mid:#5A6761;--soft:#5F6965;--line:#E6E3DC;--page:#F3F3F1}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4vw,48px)}
+.narrow{max-width:680px;margin-left:auto;margin-right:auto}
+h1{font-size:34px;line-height:1.12;letter-spacing:-0.02em;font-weight:500;margin:0 0 14px}
+h2{font-size:27px;line-height:1.15;letter-spacing:-0.02em;font-weight:500;margin:0 0 12px}
+h3{font-size:20px;line-height:1.25;letter-spacing:-0.01em;font-weight:600;margin:0 0 8px}
+@media (min-width:900px){h1{font-size:46px}h2{font-size:34px}h3{font-size:24px}}
+p{margin:0 0 16px}
+.lead{font-size:clamp(17px,1.5vw,19px);color:var(--mid)}
+.centre{text-align:center}
+.centre p,.centre h1,.centre h2{margin-left:auto;margin-right:auto}
+.centre .lead{max-width:52ch}
+/* buttons: white pills, the main one dark */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px;padding:10px 18px;border-radius:999px;border:1px solid rgba(22,38,31,.12);cursor:pointer;min-height:44px;box-shadow:0 1px 2px rgba(22,38,31,.06);white-space:nowrap}
+.btn svg{width:16px;height:16px}
+.btn:hover{background:#FAFAF8}
+.btn.dark{background:var(--deep);color:#fff;border-color:var(--deep)}
+.btn.dark:hover{background:#0f1a14}
+/* the menu, on the wash */
+.topnav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:12px}
+.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:17px;text-decoration:none;letter-spacing:-0.02em}
+.mk{width:26px;height:26px;border-radius:7px;background:var(--green);display:grid;place-items:center}
+.mk svg{width:15px;height:15px}
+.navright{display:flex;align-items:center;gap:18px}
+.navlink{font-size:14px;color:var(--mid);text-decoration:none;white-space:nowrap}
+.navlink:hover{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+.navbtn{padding:8px 16px;min-height:38px;font-size:14px}
+@media (max-width:420px){.brand{font-size:16px}.navright{gap:12px}.navlink{font-size:13px}.navbtn{padding:7px 12px;font-size:13px}}
+/* the hero: a cleaner wash, extended under the sheet's top so it shows either side */
+.hero{position:relative;overflow:hidden;text-align:center;padding:0 0 64px;background:
+  radial-gradient(55% 60% at 14% 18%,#C9E0D0 0%,rgba(201,224,208,0) 70%),
+  radial-gradient(45% 55% at 86% 24%,#D3EBD3 0%,rgba(211,235,211,0) 70%),
+  radial-gradient(50% 45% at 50% 62%,#F3EBD6 0%,rgba(243,235,214,0) 72%),
+  radial-gradient(60% 50% at 30% 100%,#CFE6D1 0%,rgba(207,230,209,0) 70%),
+  linear-gradient(160deg,#D6E7DA 0%,#F1EDE1 50%,#D8ECD6 100%)}
+.hero .inner{padding:clamp(28px,5vw,56px) 0 0}
+.hand{font-family:Caveat,"Bradley Hand","Segoe Print",cursive;font-weight:600;font-size:clamp(18px,2vw,22px);letter-spacing:.12em;text-transform:uppercase;color:var(--ink);margin:0 0 10px}
+.hero h1{max-width:22ch}
+.hero .lead{max-width:62ch;font-size:clamp(16px,1.4vw,18px);margin-bottom:22px}
+.btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+@media (max-width:480px){.btns .btn{width:min(100%,300px)}}
+/* the phone, cut just below Noah's card at every width; the sheet overlaps the hero by 64px so the wash shows either side of its top, as on the reference */
+.bleed{display:flex;justify-content:center;margin:clamp(28px,4vw,48px) auto -64px;height:calc(clamp(266px,67vw,400px) + 64px);overflow:hidden}
+.dev{position:relative;flex:none;border-radius:11.5% / 5.3%;background:#0b0c0d;padding:1.7%;box-shadow:0 0 0 1px rgba(0,0,0,.25),0 30px 60px -28px rgba(22,38,31,.55)}
+.dev img{display:block;width:100%;height:auto;border-radius:10.4% / 4.8%}
+.dev::after{content:"";position:absolute;top:4.1%;left:50%;transform:translateX(-50%);width:27%;height:3.1%;border-radius:999px;background:#0b0c0d}
+.bleed .dev{width:clamp(250px,64vw,380px)}
+@media (prefers-reduced-motion:no-preference){
+  .bleed .dev{animation:rise 1s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+}
+/* one white sheet for everything below the hero */
+.sheet{position:relative;z-index:1;background:#fff;max-width:900px;margin:-64px auto 0;padding:0 clamp(20px,4vw,48px) clamp(40px,6vw,64px);border-radius:4px 4px 0 0}
+.sheet section{padding-top:clamp(56px,8vw,96px)}
+.sheet section.first{padding-top:clamp(24px,4vw,40px)}
+.micro{font-size:13.5px;color:var(--mid);margin:0 auto;max-width:56ch}
+.micro b{color:var(--ink);font-weight:600}
+/* pills: switch the hero phone's screen */
+.pills{display:inline-flex;gap:4px;background:var(--page);border-radius:999px;padding:4px;margin:22px auto 0;max-width:100%}
+.pills button{font:inherit;font-size:13.5px;font-weight:500;padding:8px 14px;border-radius:999px;color:var(--mid);background:none;border:0;cursor:pointer;white-space:nowrap;min-height:36px}
+.pills button[aria-pressed="true"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(22,38,31,.08)}
+@media (max-width:420px){.pills button{font-size:12.5px;padding:8px 10px}}
+/* the eight controls: one icon set, two-line labels */
+.controls h2{font-size:clamp(24px,3vw,30px)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,36px) 12px;max-width:720px;margin:clamp(28px,4vw,40px) auto 0}
+@media (min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+.ctl{text-align:center;font-size:13px;line-height:1.35;color:var(--ink)}
+.ctl svg{width:26px;height:26px;display:block;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.ctl span{display:block}
+/* notifications */
+.stack{display:grid;gap:10px;max-width:460px;margin:clamp(28px,4vw,40px) auto 0}
+.notif{background:var(--page);color:var(--ink);border-radius:20px;padding:12px 14px;display:flex;gap:11px;align-items:flex-start;text-align:left}
+.nic{width:38px;height:38px;border-radius:10px;background:var(--deep);flex:none;display:grid;place-items:center}
+.nic svg{width:24px;height:24px}
+.nbody{min-width:0;flex:1}
+.nhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;font-size:15px;font-weight:600;line-height:1.3}
+.nhead span{font-size:12px;font-weight:400;color:var(--soft);flex:none}
+.ntext{display:block;font-size:14.5px;line-height:1.35;color:#3C4642;margin-top:2px}
+.notes{max-width:60ch;margin:clamp(28px,4vw,40px) auto 0;font-size:15.5px;color:var(--mid);text-align:left}
+.notes p:last-child{margin-bottom:0}
+/* screens */
+.preview .lead{max-width:60ch}
+.shots{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,3vw,28px);margin:clamp(28px,4vw,44px) auto 0}
+.shots figure{margin:0;width:clamp(180px,42vw,236px)}
+.shots .dev{width:100%;animation:none}
+.shots figcaption{color:var(--mid);font-size:14.5px;margin-top:12px;text-align:center}
+/* waitlist */
+.signup form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:22px auto 0}
+.signup input{flex:1 1 220px;padding:12px 18px;border:1px solid var(--line);border-radius:999px;font:inherit;font-size:16px;background:#fff;min-height:46px}
+.signup .btn{background:var(--deep);color:#fff;border-color:var(--deep)}
+.wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.wl-done{color:var(--green);font-weight:600;margin:16px 0 0}
+.wl-error{color:#8C3B23;font-size:14px;margin:10px 0 0}
+.fine{font-size:14px;color:var(--mid);margin:12px 0 0}
+.collect{font-size:14px;color:var(--mid);margin:8px auto 0;line-height:1.55;max-width:60ch}
+.collect a{color:var(--deep)}
+.three{list-style:none;margin:22px auto 26px;padding:0;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 28px;font-weight:600}
+.three li{display:flex;align-items:center;gap:8px}
+.three i{width:10px;height:10px;border-radius:50%;background:var(--green);display:inline-block}
+.never{font-size:15.5px;color:var(--mid);max-width:60ch}
+.never b{color:var(--ink)}
+.founder p{max-width:62ch;font-size:clamp(17px,1.5vw,19px);text-align:left}
+/* the FAQ, large and centred */
+.faq h2{text-align:center;font-size:clamp(32px,4.5vw,52px);line-height:1.08;max-width:12ch}
+.faqlist{margin:clamp(28px,4vw,44px) auto 0;max-width:640px;text-align:left}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:18px 30px 18px 0;font-weight:500;font-size:clamp(17px,1.6vw,19px);position:relative;min-height:48px;display:flex;align-items:center}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:9px;height:9px;border-right:1.5px solid var(--mid);border-bottom:1.5px solid var(--mid);transform:translateY(-70%) rotate(45deg)}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{margin:0 0 18px;color:var(--mid);max-width:64ch;font-size:16px}
+footer{max-width:900px;margin:0 auto;padding:36px clamp(20px,4vw,48px) 64px;font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
+.footlinks{display:flex;flex-wrap:wrap;gap:10px 18px}
+@media (max-width:600px){.signup .btn{width:100%}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    {{SITE_NAV}}
+    <div class="inner centre">
+      <p class="hand">For your child&rsquo;s iPhone</p>
+      <h1>{{HERO_H1}}</h1>
+      <p class="lead">{{HERO_DECK}}</p>
+      <div class="btns">
+        <a class="btn dark" href="#waitlist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m3.5 7 8.5 6 8.5-6"/></svg>Join the waitlist</a>
+        <a class="btn" href="#alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v4l2 3H4l2-3Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>See what you get told</a>
+      </div>
+    </div>
+  </div>
+  <div class="bleed">
+    <div class="dev"><img id="heroscreen" src="screens/parent-home.png" width="804" height="1748" alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week" loading="eager"></div>
+  </div>
+</header>
+
+<main class="sheet">
+  <section class="first centre" id="screens">
+    <p class="micro">{{HERO_MICRO}}</p>
+    <div class="pills" role="group" aria-label="Choose which screen the phone above shows">
+      <button type="button" aria-pressed="true" data-screen="parent-home" data-alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week">Home</button>
+      <button type="button" aria-pressed="false" data-screen="parent-activity" data-alt="The parent app's Activity screen: today's and yesterday's alerts">Activity</button>
+      <button type="button" aria-pressed="false" data-screen="parent-child-layla" data-alt="Layla's page: recent alerts and the controls on her devices">Layla&rsquo;s page</button>
+    </div>
+  </section>
+
+  <section class="controls centre">
+    <h2>Eight controls, set once</h2>
+    <div class="grid">
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>Installing</span><span>apps</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span>Account</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Passcode</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Time</span><span>changes</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit</span><span>media</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Other</span><span>browsers</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>SafeSearch</span><span>on</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social</span><span>apps</span></div>
+    </div>
+  </section>
+
+  <section class="answer centre" id="alerts">
+    <h2>{{ANSWER_H}}</h2>
+    <p class="lead">{{ANSWER_LEAD}}</p>
+    {{NOTIFS}}
+    <div class="notes">
+      <p>{{ANSWER_N1}}</p>
+      <p>{{ANSWER_N2}}</p>
+    </div>
+  </section>
+
+  <section class="preview centre" id="preview">
+    <h2>{{PREVIEW_H}}</h2>
+    <p class="lead">{{PREVIEW_LEAD}}</p>
+    <div class="shots">
+      <figure><div class="dev"><img src="screens/parent-activity.png" width="804" height="1748" alt="Activity: today's and yesterday's alerts for Layla and Noah" loading="lazy"></div><figcaption>Activity, today and yesterday, across both children.</figcaption></figure>
+      <figure><div class="dev"><img src="screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page: recent alerts and the controls on her devices" loading="lazy"></div><figcaption>Each child's page: recent alerts, then the controls.</figcaption></figure>
+      <figure><div class="dev"><img src="screens/parent-social-apps.png" width="804" height="1748" alt="Social apps on Layla's devices: Instagram and TikTok blocked" loading="lazy"></div><figcaption>Social apps, blocked per child, app and website.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="preview centre" id="childapp">
+    <h2>{{CHILD_H}}</h2>
+    <p class="lead">{{CHILD_LEAD}}</p>
+    <div class="shots">
+      <figure><div class="dev"><img src="screens/child-set-up.png" width="804" height="1748" alt="The child's phone: This phone is set up, and what is on" loading="lazy"></div><figcaption>The whole child app. Nothing to log into, nothing to switch off.</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="signup centre" id="waitlist">
+    <h2>{{SIGNUP_H}}</h2>
+    <p class="lead">{{SIGNUP_P}}</p>
+    {{WAITLIST_FORM}}
+    <p class="fine">{{SIGNUP_FINE}}</p>
+    <p class="collect">{{SIGNUP_COLLECT}}</p>
+  </section>
+
+  <section class="alerts centre narrow">
+    <h2>{{ALERTS_H}}</h2>
+    <p class="lead">{{ALERTS_LEAD}}</p>
+    <ul class="three"><li><i></i>the child</li><li><i></i>the device</li><li><i></i>the time</li></ul>
+    <p class="never">{{ALERTS_NEVER}}</p>
+  </section>
+
+  <section class="founder centre narrow" id="founder">
+    <h2>{{FOUNDER_H}}</h2>
+    <p>{{FOUNDER_P1}}</p>
+    <p>{{FOUNDER_P2}}</p>
+  </section>
+
+  <section class="faq centre" id="faq">
+    <h2>{{FAQ_H}}</h2>
+    <div class="faqlist">
+{{FAQ}}
+    </div>
+  </section>
+</main>
+
+{{FOOTER}}
+<script>
+// The pills under the hero swap which real screen the phone shows.
+(function () {
+  var img = document.getElementById("heroscreen");
+  var pills = document.querySelectorAll(".pills button");
+  pills.forEach(function (b) {
+    b.addEventListener("click", function () {
+      pills.forEach(function (o) { o.setAttribute("aria-pressed", o === b ? "true" : "false"); });
+      img.src = "screens/" + b.dataset.screen + ".png";
+      img.alt = b.dataset.alt;
+      document.querySelector(".bleed").scrollIntoView({ block: "nearest" });
+    });
+  });
+})();
+</script>
+{{WAITLIST_JS}}
+</body>
+</html>
