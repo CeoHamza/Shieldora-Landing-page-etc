@@ -138,11 +138,26 @@ ${appdemoCss}
 .appdemo .dm-phone{box-shadow:0 30px 60px rgba(0,0,0,.35),inset 0 0 0 2px rgba(255,255,255,.08)}
 `;
 
+// The push notifications as the app sends them: the title is always
+// "Update about <device>" and the body is the server's alertHeadline. Never a
+// site name. Social and streaming blocks don't push, so they are not here.
+const NOTIF_ICON = `<span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>`;
+const PUSH_TITLE = "Update about Layla&rsquo;s iPhone";
+const pushes = [
+  ["A site was blocked on Layla&rsquo;s iPhone", "now"],
+  ["Likely pop-ups or redirects were blocked on Layla&rsquo;s iPhone", "7:52 am"],
+  ["Protection was turned off on Layla&rsquo;s iPhone", "yesterday"],
+  ["Web filtering may be off on Layla&rsquo;s iPhone", "yesterday"],
+];
+const notif = ([body, when]) => `<div class="notif">${NOTIF_ICON}<span class="nbody"><span class="nhead">${PUSH_TITLE}<span>${when}</span></span><span class="ntext">${body}</span></span></div>`;
+const NOTIFS = `<div class="stack" aria-label="Four example notifications">\n      ${pushes.map(notif).join("\n      ")}\n    </div>`;
+const NOTIF_LIST = pushes.map(notif).join("\n");
+
 const fragments = { META, NAV, FOOTER, WAITLIST_JS, FAQ, MOCK_CSS, LOCKPHONE: lockphone, PARENT_SCREENS: parentScreens, CHILD_SCREEN: childScreen,
-  WAITLIST_FORM: WAITLIST_FORM(), ...copy };
+  WAITLIST_FORM: WAITLIST_FORM(), MARK, NOTIFS, NOTIF_LIST, NOTIF_ICON, NOTIF_ICON_SMALL: NOTIF_ICON, PUSH_TITLE, ...copy };
 
 const srcDir = join(here, "src");
-for (const name of readdirSync(srcDir).filter((f) => /^option-\d\.html$/.test(f))) {
+for (const name of readdirSync(srcDir).filter((f) => /^(option|mock)-\d\.html$/.test(f))) {
   let html = readFileSync(join(srcDir, name), "utf8");
   html = html.replace(/\{\{([A-Z0-9_]+)\}\}/g, (m, key) => {
     if (!(key in fragments)) throw new Error(`${name}: unknown placeholder ${key}`);
