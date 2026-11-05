@@ -65,9 +65,9 @@ const copy = {
   AL3: "Screen Time permission was restored on Layla&rsquo;s iPhone", AL3_T: "9:24 pm",
   FOUNDER_H: "Who&rsquo;s behind this",
   FOUNDER_P1: "Most parental controls fail the same way. The filter gets switched off, or a kid gets around it, and the parent is the last to know. Sometimes that&rsquo;s weeks later, and by then the conversation they should have had is long overdue. Shieldora exists to fix that one problem: block adult sites, and make sure you get told when something is blocked or protection stops.",
-  FOUNDER_P2: "Shieldora is built by one person in Perth. No outsourced support, no data sold to anyone. If you have a question, email <a href=\"mailto:contact@shieldora.app\">contact@shieldora.app</a> and you&rsquo;ll get a real reply.",
+  FOUNDER_P2: "Shieldora is built by one person. No outsourced support, no data sold to anyone. If you have a question, email <a href=\"mailto:contact@shieldora.app\">contact@shieldora.app</a> and you&rsquo;ll get a real reply.",
   FAQ_H: "Questions parents ask",
-  FOOTER_LINE: "&copy; 2026 Shieldora. Built in Perth to help keep kids safer online.",
+  FOOTER_LINE: "&copy; 2026 Shieldora. Built to help keep kids safer online.",
 };
 
 const faq = [
