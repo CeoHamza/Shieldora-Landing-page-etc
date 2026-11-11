@@ -95,6 +95,8 @@ p{margin:0 0 16px}
 .heroform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:18px auto 0}
 .heroform input,.signup input{flex:1 1 220px;padding:12px 18px;border:1px solid var(--input-line);border-radius:999px;font:inherit;font-size:16px;background:var(--input);color:var(--ink);min-height:46px}
 .heroform input::placeholder,.signup input::placeholder{color:var(--soft)}
+.heroform select,.signup select{flex:1 1 220px;padding:12px 40px 12px 18px;border:1px solid var(--input-line);border-radius:999px;font:inherit;font-size:16px;background:var(--input) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;color:var(--ink);min-height:46px;appearance:none;-webkit-appearance:none;cursor:pointer}
+.heroform select:invalid,.signup select:invalid,.heroform select.wl-blank,.signup select.wl-blank{color:var(--soft)}
 .heroform .btn,.signup .btn{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
 .heroform .btn:hover,.signup .btn:hover{background:var(--btn-hover)}
 .wl-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
@@ -174,6 +176,17 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
       <p class="micro"><b>Coming soon.</b> The waitlist is for early access.</p>
       <form class="heroform wl-form" onsubmit="return false">
         <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+        <select name="heard" aria-label="How did you hear about us?">
+          <option value="">How did you hear about us? (optional)</option>
+          <option value="instagram">Instagram</option>
+          <option value="tiktok">TikTok</option>
+          <option value="facebook">Facebook</option>
+          <option value="friend">A friend or family member</option>
+          <option value="school">School or a parent group</option>
+          <option value="search">Google or another search</option>
+          <option value="news">News, a podcast or an article</option>
+          <option value="other">Somewhere else</option>
+        </select>
         <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
         <button class="btn" type="submit">Join the waitlist</button>
       </form>
@@ -235,13 +248,24 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   <section class="signup centre" id="waitlist">
     <h2>Be one of the first families on Shieldora</h2>
     <p class="lead">Join the waitlist and we&rsquo;ll email you when Shieldora is ready for your family&rsquo;s devices.</p>
-    <form class="wl-form " onsubmit="return false">
+    <form class="wl-form" onsubmit="return false">
       <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <select name="heard" aria-label="How did you hear about us?">
+        <option value="">How did you hear about us? (optional)</option>
+        <option value="instagram">Instagram</option>
+        <option value="tiktok">TikTok</option>
+        <option value="facebook">Facebook</option>
+        <option value="friend">A friend or family member</option>
+        <option value="school">School or a parent group</option>
+        <option value="search">Google or another search</option>
+        <option value="news">News, a podcast or an article</option>
+        <option value="other">Somewhere else</option>
+      </select>
       <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn" type="submit">Join the waitlist</button>
     </form>
     <p class="fine">No spam. We&rsquo;ll only email you about Shieldora.</p>
-    <p class="collect">We collect your email address, the date, and the page and link you arrived from. We use it for one thing: to email you when Shieldora is ready. We don&rsquo;t sell it or pass it on. <a href="/privacy.html">How we handle your information</a>.</p>
+    <p class="collect">We collect your email address, the date, the page and link you arrived from (including any tracking tags in the link), and your answer to &ldquo;How did you hear about us?&rdquo; if you give one. We use it for one thing: to email you when Shieldora is ready. We don&rsquo;t sell it or pass it on. <a href="/privacy.html">How we handle your information</a>.</p>
   </section>
 
   <section class="founder centre narrow" id="founder">
@@ -294,7 +318,27 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
 // Waitlist: POST both forms to the Shieldora API. No dependencies.
 (function () {
   var ENDPOINT = "https://shieldora-server.fly.dev/v1/waitlist";
-  var ref = new URLSearchParams(location.search).get("ref") || "";
+
+  // Attribution: ?ref= and the standard utm_* tags from the link the visitor
+  // arrived on. Kept for the visit (sessionStorage, first link wins) so a
+  // visitor who lands on another page and then joins from the home page still
+  // carries the tags. Nothing here identifies a person; it names the link.
+  var KEYS = ["ref", "utm_source", "utm_medium", "utm_campaign", "utm_content"];
+  var attribution = {};
+  try {
+    var params = new URLSearchParams(location.search);
+    var fresh = false;
+    KEYS.forEach(function (k) {
+      var v = params.get(k);
+      if (v) { attribution[k] = v.slice(0, 128); fresh = true; }
+    });
+    if (fresh) {
+      sessionStorage.setItem("wl-attribution", JSON.stringify(attribution));
+    } else {
+      attribution = JSON.parse(sessionStorage.getItem("wl-attribution") || "{}") || {};
+    }
+  } catch (err) { /* private mode or storage blocked: the current URL is all we have */ }
+  KEYS.forEach(function (k) { if (typeof attribution[k] !== "string") { attribution[k] = ""; } });
 
   function message(cls, text) {
     var p = document.createElement("p");
@@ -314,6 +358,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
       e.preventDefault();
       var emailField = form.querySelector('input[type="email"]');
       var honeypot = form.querySelector('input[name="website"]');
+      var heardField = form.querySelector('select[name="heard"]');
       var email = (emailField && emailField.value || "").trim();
       if (!email) { showError(form, "Enter your email to join the waitlist."); return; }
 
@@ -327,7 +372,12 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           email: email,
-          ref: ref,
+          ref: attribution.ref,
+          utm_source: attribution.utm_source,
+          utm_medium: attribution.utm_medium,
+          utm_campaign: attribution.utm_campaign,
+          utm_content: attribution.utm_content,
+          heard: heardField ? heardField.value : "",
           page: location.pathname,
           website: honeypot ? honeypot.value : ""
         })
@@ -351,6 +401,14 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   }
 
   document.querySelectorAll("form.wl-form").forEach(wire);
+
+  // The placeholder option reads in the softer placeholder colour until a
+  // choice is made, like the email field next to it.
+  document.querySelectorAll("form.wl-form select").forEach(function (select) {
+    function tint() { select.classList.toggle("wl-blank", select.value === ""); }
+    select.addEventListener("change", tint);
+    tint();
+  });
 })();
 </script>
 </body>
