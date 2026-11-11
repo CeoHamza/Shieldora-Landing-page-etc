@@ -125,5 +125,18 @@ footer a{color:var(--mid)}
     <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>
   </footer>
 </div>
+<script>
+// Remember ?ref= and utm_* tags from the link that brought the visitor here, so
+// the waitlist form on the home page can report them (first link of the visit wins).
+(function () {
+  try {
+    var p = new URLSearchParams(location.search), a = {}, any = false;
+    ["ref", "utm_source", "utm_medium", "utm_campaign", "utm_content"].forEach(function (k) {
+      var v = p.get(k); if (v) { a[k] = v.slice(0, 128); any = true; }
+    });
+    if (any) { sessionStorage.setItem("wl-attribution", JSON.stringify(a)); }
+  } catch (err) {}
+})();
+</script>
 </body>
 </html>
