@@ -95,7 +95,8 @@ p{margin:0 0 16px}
 .heroform{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:18px auto 0}
 .heroform input,.signup input{flex:1 1 220px;padding:12px 18px;border:1px solid var(--input-line);border-radius:999px;font:inherit;font-size:16px;background:var(--input);color:var(--ink);min-height:46px}
 .heroform input::placeholder,.signup input::placeholder{color:var(--soft)}
-.heroform select,.signup select{flex:1 1 220px;padding:12px 40px 12px 18px;border:1px solid var(--input-line);border-radius:999px;font:inherit;font-size:16px;background:var(--input) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;color:var(--ink);min-height:46px;appearance:none;-webkit-appearance:none;cursor:pointer}
+.heroform select,.signup select{flex:1 1 100%;max-width:340px;margin:2px auto 0;padding:8px 34px 8px 14px;border:1px solid transparent;border-radius:999px;font:inherit;font-size:14px;background:var(--input) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23888' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right 16px center;color:var(--mid);min-height:38px;appearance:none;-webkit-appearance:none;cursor:pointer}
+.heroform select:hover,.signup select:hover,.heroform select:focus,.signup select:focus{border-color:var(--input-line)}
 .heroform select:invalid,.signup select:invalid,.heroform select.wl-blank,.signup select.wl-blank{color:var(--soft)}
 .heroform .btn,.signup .btn{background:var(--btn);color:var(--btn-ink);border-color:var(--btn)}
 .heroform .btn:hover,.signup .btn:hover{background:var(--btn-hover)}
@@ -176,6 +177,8 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
       <p class="micro"><b>Coming soon.</b> The waitlist is for early access.</p>
       <form class="heroform wl-form" onsubmit="return false">
         <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+        <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="btn" type="submit">Join the waitlist</button>
         <select name="heard" aria-label="How did you hear about us?">
           <option value="">How did you hear about us? (optional)</option>
           <option value="instagram">Instagram</option>
@@ -187,8 +190,6 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
           <option value="news">News, a podcast or an article</option>
           <option value="other">Somewhere else</option>
         </select>
-        <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-        <button class="btn" type="submit">Join the waitlist</button>
       </form>
     </div>
   </div>
@@ -250,6 +251,8 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
     <p class="lead">Join the waitlist and we&rsquo;ll email you when Shieldora is ready for your family&rsquo;s devices.</p>
     <form class="wl-form" onsubmit="return false">
       <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
+      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit">Join the waitlist</button>
       <select name="heard" aria-label="How did you hear about us?">
         <option value="">How did you hear about us? (optional)</option>
         <option value="instagram">Instagram</option>
@@ -261,8 +264,6 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
         <option value="news">News, a podcast or an article</option>
         <option value="other">Somewhere else</option>
       </select>
-      <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn" type="submit">Join the waitlist</button>
     </form>
     <p class="fine">No spam. We&rsquo;ll only email you about Shieldora.</p>
     <p class="collect">We collect your email address, the date, the page and link you arrived from (including any tracking tags in the link), and your answer to &ldquo;How did you hear about us?&rdquo; if you give one. We use it for one thing: to email you when Shieldora is ready. We don&rsquo;t sell it or pass it on. <a href="/privacy.html">How we handle your information</a>.</p>
