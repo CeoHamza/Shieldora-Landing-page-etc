@@ -105,7 +105,7 @@ section{padding-top:clamp(64px,9vw,112px)}
 /* the eight controls: one icon set, two-line labels */
 .controls h2{font-size:clamp(24px,3vw,30px)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,36px) 12px;max-width:720px;margin:clamp(28px,4vw,40px) auto 0}
-@media (min-width:700px){.grid{grid-template-columns:repeat(4,1fr)}}
+@media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr);max-width:560px}}
 .ctl{text-align:center;font-size:13px;line-height:1.35;color:var(--ink)}
 .ctl svg{width:26px;height:26px;display:block;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ctl span{display:block}
@@ -171,7 +171,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
         <button type="button" aria-pressed="false" data-screen="parent-activity" data-alt="The parent app's Activity screen: today's and yesterday's alerts">Activity</button>
         <button type="button" aria-pressed="false" data-screen="parent-child-layla" data-alt="Layla's page: recent alerts and the controls on her devices">Layla&rsquo;s page</button>
       </div>
-      <p class="micro"><b>Coming soon.</b> A$14.99 a month for the whole family, or A$119.99 a year. Founding price, locked while you stay subscribed. The waitlist is for early access.</p>
+      <p class="micro"><b>Coming soon.</b> The waitlist is for early access.</p>
       <form class="heroform wl-form" onsubmit="return false">
         <input type="email" name="email" placeholder="you@example.com" aria-label="Email address" autocomplete="email" inputmode="email">
         <div class="wl-hp" aria-hidden="true"><label>Leave this empty<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
@@ -183,22 +183,23 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
 
 <main class="col">
   <section class="controls centre">
-    <h2>Eight controls, set once</h2>
+    <h2>Nine controls, set once</h2>
     <div class="grid">
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>SafeSearch</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M9 20h6M10.5 8.8v4.4l3.8-2.2z"/><path d="m4.5 4 15 15"/></svg><span>Block piracy</span><span>streaming sites</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social apps</span><span>and schedules</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Browsers</span></div>
       <div class="ctl"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>Installing</span><span>apps</span></div>
       <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span>Account</span><span>changes</span></div>
       <div class="ctl"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Passcode</span><span>changes</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Time</span><span>changes</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit</span><span>media</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Other</span><span>browsers</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>Safe search</span><span>always on</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social</span><span>apps</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Automatic</span><span>date and time</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit music,</span><span>podcasts and news</span></div>
     </div>
   </section>
 
   <section class="answer centre" id="alerts">
     <h2>A notification lands on your phone.</h2>
-    <p class="lead">When an adult site is blocked, protection is turned off, web filtering stops, a browser is allowed, or your child&rsquo;s phone goes quiet, a notification lands on your phone with the child, the device and the time. You don&rsquo;t have to go and check.</p>
+    <p class="lead">When an adult site is blocked, protection is turned off, web filtering may be off, a browser is allowed, or your child&rsquo;s phone goes quiet, a notification lands on your phone with the child, the device and the time. You don&rsquo;t have to go and check.</p>
     <div class="stack" aria-label="Four example notifications">
       <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>now</span></span><span class="ntext">A site was blocked on Layla&rsquo;s iPhone</span></span></div>
       <div class="notif"><span class="nic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.6 4.6 5.3v6c0 4.3 3 7.4 7.4 8.8 4.4-1.4 7.4-4.5 7.4-8.8v-6L12 2.6Z" fill="#348C52" stroke="#dcb978" stroke-width="1.2"/><path d="M8.4 12 10.9 14.6 15.8 9.3" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span class="nbody"><span class="nhead">Update about Layla&rsquo;s iPhone<span>7:52 am</span></span><span class="ntext">Likely pop-ups or redirects were blocked on Layla&rsquo;s iPhone</span></span></div>
@@ -207,8 +208,9 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
     </div>
     <p class="never">Alerts never name the site.</p>
     <div class="notes">
-      <p>A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks, so that one is a gentle heads-up after 24 hours, not an alarm. Screen Time being turned off is the one that matters. Shieldora tries to tell you as soon as the phone reports it. If that alert can&rsquo;t get through, the phone goes quiet, and 24 hours of silence always reaches you.</p>
-      <p>And it can&rsquo;t be quietly removed first: there is no Shieldora screen that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password, not the child&rsquo;s passcode, not their Face ID.</p>
+      <p>A phone going quiet usually just means it&rsquo;s switched off, flat, out of signal, or that iOS has paused Shieldora&rsquo;s background checks, so that one is a gentle heads-up after 24 hours, not an alarm. Screen Time being turned off is the one that matters. Shieldora tries to tell you, usually within 20 minutes. If that alert can&rsquo;t get through, the phone goes quiet, and 24 hours of silence always reaches you.</p>
+      <p>And it can&rsquo;t be quietly removed first: there is nothing in Shieldora on your child&rsquo;s phone that turns protection off, and lifting it in iOS Settings needs the parent&rsquo;s Apple Account password, not the child&rsquo;s passcode, not their Face ID.</p>
+      <p>To make sure alerts get through, <strong>Check alerts reach you</strong> in Settings sends you a test alert and asks you to confirm it arrived.</p>
     </div>
   </section>
 
@@ -218,7 +220,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
     <div class="shots">
       <figure><div class="dev"><img src="/screens/parent-activity.png" width="804" height="1748" alt="Activity: today's and yesterday's alerts for Layla and Noah" loading="lazy"></div><figcaption>Activity, today and yesterday, across both children.</figcaption></figure>
       <figure><div class="dev"><img src="/screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page: recent alerts and the controls on her devices" loading="lazy"></div><figcaption>Each child's page: recent alerts, then the controls.</figcaption></figure>
-      <figure><div class="dev"><img src="/screens/parent-social-apps.png" width="804" height="1748" alt="Social apps on Layla's devices: Instagram and TikTok blocked" loading="lazy"></div><figcaption>Social apps, blocked per child, app and website.</figcaption></figure>
+      <figure><div class="dev"><img src="/screens/parent-social-apps.png" width="804" height="1748" alt="Social apps on Layla's devices: Instagram and TikTok blocked" loading="lazy"></div><figcaption>Social apps and schedules, set per child.</figcaption></figure>
     </div>
   </section>
 
@@ -251,9 +253,9 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   <section class="faq centre" id="faq">
     <h2>Questions parents ask</h2>
     <div class="faqlist">
-    <details><summary>What exactly do the alerts tell me?</summary><p>The exceptions that matter: a site being blocked (including likely pop-ups or redirects), Screen Time being turned off, web filtering stopping, the phone going quiet for 24 hours, or you allowing a non-Safari browser. Each comes with the child, the device and the time. Nothing about what your child searched or typed.</p></details>
-    <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages, or a history of sites that weren't blocked. That's a deliberate line, not a feature we haven't built yet.</p></details>
-    <details><summary>Can my child just turn it off?</summary><p>No. There is no Shieldora screen that turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password, not the child's device passcode or Face ID. And if protection is switched off, Shieldora tries to alert you as soon as the phone reports it. If that signal does not get through, the phone falls silent, and silence that lasts 24 hours reaches you on its own, so a switch-off does not stay hidden.</p></details>
+    <details><summary>What exactly do the alerts tell me?</summary><p>The exceptions that matter: a site being blocked (including likely pop-ups or redirects), Screen Time being turned off, web filtering possibly being off, the phone going quiet for 24 hours, or you allowing a non-Safari browser. Each comes with the child, the device and the time. Nothing about what your child searched or typed.</p></details>
+    <details><summary>Do you see my child's browsing history or messages?</summary><p>No. We don't collect search terms, typed text, messages, or a history of sites that weren't blocked. That's a deliberate line, not a feature we haven't built yet. In the app, Settings has a screen called <strong>What Shieldora can't see</strong> that lists it all.</p></details>
+    <details><summary>Can my child just turn it off?</summary><p>No. Nothing in Shieldora on your child's phone turns protection off, and the app can't be deleted. Lifting it means going into iOS Settings, where iOS asks for the parent's Apple Account password, not the child's device passcode or Face ID. And if protection is switched off, Shieldora tries to alert you, usually within 20 minutes. If that signal does not get through, the phone falls silent, and silence that lasts 24 hours reaches you on its own, so a switch-off does not stay hidden.</p></details>
     <details><summary>Will you tell me what my child tried to visit?</summary><p>No. A block alert names the child, the device and the time, never the site. We never record searches, pages or messages.</p></details>
     <details><summary>Will it catch everything?</summary><p>No filter is perfect, and some content will get through. What we focus on is different and, we think, more useful: if the filtering stops running, Shieldora tries to tell you, and a phone that goes quiet for 24 hours will reach you on its own. That is the failure that actually leaves a child exposed, and the one most filters never mention.</p></details>
     <details><summary>How does the blocking actually work?</summary><p>Two layers. Your child's iPhone sends its website lookups through Shieldora's filter in Sydney, which blocks adult and harmful sites. The adult filter built into iOS stays on as a backup. We don't keep a list of the sites your child visits.</p></details>
