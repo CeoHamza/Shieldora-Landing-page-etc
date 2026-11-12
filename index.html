@@ -109,6 +109,8 @@ section{padding-top:clamp(64px,9vw,112px)}
 .controls h2{font-size:clamp(24px,3vw,30px)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,36px) 12px;max-width:720px;margin:clamp(28px,4vw,40px) auto 0}
 @media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr);max-width:560px}}
+/* two columns on a phone: a lone last tile sits in the middle, not under the left column */
+@media (max-width:699.98px){.grid .ctl:last-child:nth-child(odd){grid-column:1 / -1}}
 .ctl{text-align:center;font-size:13px;line-height:1.35;color:var(--ink)}
 .ctl svg{width:26px;height:26px;display:block;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ctl span{display:block}
@@ -167,10 +169,10 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
         <a class="btn" href="#alerts"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9a6 6 0 0 1 12 0v4l2 3H4l2-3Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg>See what you get told</a>
       </div>
       <div class="phonewrap">
-        <div class="dev"><img id="heroscreen" src="/screens/parent-home.png" width="804" height="1748" alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week" loading="eager"></div>
+        <div class="dev"><img id="heroscreen" src="/screens/parent-home.png" width="804" height="1748" alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, seven alerts this week" loading="eager"></div>
       </div>
       <div class="pills" role="group" aria-label="Choose which screen the phone shows">
-        <button type="button" aria-pressed="true" data-screen="parent-home" data-alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, ten alerts this week">Home</button>
+        <button type="button" aria-pressed="true" data-screen="parent-home" data-alt="The parent app's Home screen: Layla and Noah, last heard from minutes ago, seven alerts this week">Home</button>
         <button type="button" aria-pressed="false" data-screen="parent-activity" data-alt="The parent app's Activity screen: today's and yesterday's alerts">Activity</button>
         <button type="button" aria-pressed="false" data-screen="parent-child-layla" data-alt="Layla's page: recent alerts and the controls on her devices">Layla&rsquo;s page</button>
       </div>
