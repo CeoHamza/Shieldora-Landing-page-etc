@@ -254,6 +254,7 @@ logs nothing. What each does with them:</p>
 </ul>
 <p>Shieldora is <strong>not a VPN</strong>. Only DNS lookups go through our resolver; the child's
 web pages, messages and other traffic do not, and we never see them.</p>
+<p><strong>iCloud Private Relay.</strong> If iCloud Private Relay is on, Safari can send its lookups through Apple's relay instead of our resolver, which would go around the filter. So our resolver answers Apple's Private Relay setup lookups with &quot;not available&quot;, which is Apple's own way for a network to switch Private Relay off. While Shieldora's web filtering is on, Private Relay does not run on the child's phone, and iOS may not show the child any notice about it. Once the phone is unlinked from Shieldora, Private Relay works as normal.</p>
 <h3>3.4 Protection records</h3>
 <p>We record <strong>whether protection is running and what a parent has set</strong>, not what
 a child does.</p>
