@@ -109,6 +109,8 @@ section{padding-top:clamp(64px,9vw,112px)}
 .controls h2{font-size:clamp(24px,3vw,30px)}
 .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(24px,4vw,36px) 12px;max-width:720px;margin:clamp(28px,4vw,40px) auto 0}
 @media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr);max-width:560px}}
+/* two columns on a phone: a lone last tile sits in the middle, not under the left column */
+@media (max-width:699.98px){.grid .ctl:last-child:nth-child(odd){grid-column:1 / -1}}
 .ctl{text-align:center;font-size:13px;line-height:1.35;color:var(--ink)}
 .ctl svg{width:26px;height:26px;display:block;margin:0 auto 10px;stroke:var(--ink);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
 .ctl span{display:block}
