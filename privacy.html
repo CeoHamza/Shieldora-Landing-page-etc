@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex">
-<title>Privacy Policy — Shieldora</title>
+<title>Privacy Policy | Shieldora</title>
 <meta name="description" content="How Shieldora handles personal information. Draft v0.1, pending legal review.">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -45,7 +45,7 @@ td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
 tr td:first-child{width:34%;color:var(--mid)}
 footer{padding:0 0 60px;font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:8px 20px}
 footer a{color:var(--mid)}
-@media (max-width:640px){article{padding:22px 20px;border-radius:12px}tr td:first-child{width:auto}td{display:block;border-bottom:0;padding:4px 0}tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}}
+@media (max-width:640px){thead{display:none}article{padding:22px 20px;border-radius:12px}tr td:first-child{width:auto}td{display:block;border-bottom:0;padding:4px 0}tr{display:block;border-bottom:1px solid var(--line);padding:8px 0}}
 </style>
 </head>
 <body>
@@ -56,105 +56,565 @@ footer a{color:var(--mid)}
   </nav>
 
   <h1>Privacy Policy</h1>
-  <p class="status">Version 0.1 · Australia · Last updated 11 November 2026</p>
+  <p class="status">Version 0.5 · Australia · Last updated 14 November 2026</p>
 
   <div class="draftbox">
     <h2>This is a draft, and we would rather say so</h2>
-    <p>It has not yet been reviewed by a lawyer. We are publishing it because Shieldora is collecting email addresses for the waitlist now, and collecting them with no policy at all would be worse than publishing one that is still being worked on.</p>
-    <p>Some details — our registered legal entity and address — are not filled in yet and are marked where they appear. The sections on children's data and consent are the ones most likely to change after review.</p>
+    <p>This version describes how Shieldora works now, including our filtering resolver and the block alerts it makes possible. It has not yet been reviewed by a lawyer. That review is under way, and the reviewed version will replace this page.</p>
+    <p>Shieldora is in early testing and is not yet available to the public. The sections on children's data and consent are the ones most likely to change after review. If they change in a way that matters, we will email account holders before it takes effect.</p>
   </div>
 
   <article>
-<hr>
 <h2>Version and scope</h2>
-<table><tr><td><strong>Policy version</strong></td><td><code>v0.1-draft</code></td></tr><tr><td><strong>Applies to</strong></td><td>Users in <strong>Australia</strong></td></tr><tr><td><strong>Not yet covered</strong></td><td>United States (COPPA), EU/UK (GDPR), all other markets</td></tr></table>
+<table><tr><td><strong>Policy version</strong></td><td><code>v0.5-draft</code></td></tr><tr><td><strong>Applies to</strong></td><td>Users in <strong>Australia</strong></td></tr><tr><td><strong>Not yet covered</strong></td><td>United States (COPPA), EU/UK (GDPR), all other markets</td></tr></table>
 <hr>
 <h2>1. Who we are</h2>
-<p>Shieldora is an iOS content-protection app operated by <strong>Shieldora Pty Ltd (ABN 82 703 127 977)</strong>, registered in <strong>Western Australia, Australia</strong>.</p>
-<p>For privacy law purposes, <strong>Shieldora Pty Ltd (ABN 82 703 127 977)</strong> is the <strong>data controller</strong> for the information described in this policy.</p>
-<p>Contact: <a href="mailto:contact@shieldora.app">contact@shieldora.app</a></p>
-<hr>
+<p>Shieldora is an iOS content-protection app for families. It is operated by:</p>
+<p><strong>Shieldora Pty Ltd</strong>
+ACN 703 127 977
+ABN 82 703 127 977
+Contact: <a href="mailto:contact@shieldora.app">contact@shieldora.app</a></p>
+<p>Shieldora Pty Ltd is responsible for the personal information described in this
+policy and for answering your questions about it.</p>
+<hr />
 <h2>2. The short version</h2>
-<p>We built Shieldora to protect children, and collecting more data than we need would work against that. So:</p>
-<ul><li><strong>We do not record what your child looks at.</strong> Filtering happens on the device, applied by Apple. Individual blocks are not reported to us — not the address, not the page, not the fact of a block at all.</li><li><strong>We do not keep a browsing history.</strong> We could not show you one if you asked.</li><li><strong>We never sell your data</strong>, and we never share it for anyone else&#x27;s advertising or marketing.</li><li><strong>We collect the minimum</strong> needed to run accounts, keep protection working, and tell you when something happens.</li></ul>
-<p>This summary is written for humans. The detail below governs.</p>
-<hr>
+<p>We built Shieldora to protect children, and collecting more than we need would
+work against that. So:</p>
+<ul>
+<li><strong>We do not keep a history of what your child looks at.</strong> We could not show
+  you one if you asked, because we do not store it.</li>
+<li><strong>We never record the website, the page, the search or the message.</strong> Our
+  filtering resolver has to look up an address to decide whether to allow it,
+  but it does not write the address down. It is held in the resolver's memory
+  only for as long as the answer stays valid, tied to no device, and never
+  stored or logged.</li>
+<li><strong>When a site is blocked, all we record is which device, when, how many, and
+  whether it was a family filter block or a security risk</strong>, so we
+  can tell you a block happened. Never what the site was, unless you have
+  turned on the optional detailed alerts described in 3.4, where that feature
+  is available.</li>
+<li><strong>If you block an app or a type of site, we record your choice and count the
+  blocks.</strong> Nothing about how the app was used.</li>
+<li><strong>We never sell your data</strong>, and we never share it for anyone's advertising
+  or marketing.</li>
+<li><strong>We collect the least</strong> we can to run accounts, keep protection working, and
+  tell you when something needs you.</li>
+</ul>
+<p>This summary is for reading. The detail below is what governs.</p>
+<hr />
 <h2>3. What we collect</h2>
-<h3>3.1 Parent account information</h3>
-<table><tr><td>Data</td><td>Why we need it</td></tr><tr><td>Email address</td><td>Sign-in, two-factor codes, alert emails, account recovery</td></tr><tr><td>Password (stored only as a cryptographic hash)</td><td>Sign-in</td></tr><tr><td>Two-factor details — phone number and/or authenticator setup</td><td>Verifying changes that reduce protection settings</td></tr><tr><td>Account timestamps — created, last sign-in</td><td>Security and abuse detection</td></tr></table>
-<h3>3.2 Device information</h3>
-<p>Collected from both parent and child devices:</p>
-<table><tr><td>Data</td><td>Why we need it</td></tr><tr><td>A device identifier generated by us</td><td>Linking a device to the right account</td></tr><tr><td>Device model and iOS version</td><td>Support, and knowing which OS features are available</td></tr><tr><td>Role — parent device or child device</td><td>Deciding what the device is allowed to do</td></tr><tr><td>Last-seen timestamp (heartbeat)</td><td>Detecting that protection has gone offline</td></tr><tr><td>App version</td><td>Support and diagnosing faults</td></tr></table>
-<h3>3.3 Child profile information</h3>
-<table><tr><td>Data</td><td>Why we need it</td></tr><tr><td>A display name or nickname chosen by the parent</td><td>So the parent can tell devices apart</td></tr><tr><td>Age or age range — <strong>optional</strong>, and left blank if a parent does not provide it</td><td>Age-appropriate filtering defaults</td></tr></table>
+<h3>3.1 From the parent</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Email address</td>
+<td>Signing in, two-factor codes, alert emails, account recovery</td>
+</tr>
+<tr>
+<td>Password, stored only as a cryptographic hash</td>
+<td>Signing in</td>
+</tr>
+<tr>
+<td>Two-factor details (an authenticator app, and/or a phone number)</td>
+<td>Approving changes that reduce protection, and account deletion</td>
+</tr>
+<tr>
+<td>A display name, if you give one</td>
+<td>So a second parent on the account is named; optional, left blank if you do not provide it</td>
+</tr>
+<tr>
+<td>Account timestamps (created, last signed in)</td>
+<td>Security and spotting abuse</td>
+</tr>
+<tr>
+<td>Subscription status from Apple, once subscriptions start (see 3.6)</td>
+<td>Knowing whether protection is paid for</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>If you (or anyone else) send us a problem report, we
+  collect your email, which phone the problem is on, optionally its iOS
+  version, and what you wrote, and keep them for up to 90 days after the
+  problem is resolved. We do not collect your IP address or browser details
+  with it. The report form takes no attachments, and
+  we ask you not to paste anything from your child's browsing into it.</li>
+</ul>
+<h3>3.2 From a device (parent's or child's)</h3>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A device identifier we generate</td>
+<td>Linking a device to the right account</td>
+</tr>
+<tr>
+<td>Device type and iOS version</td>
+<td>Support, and knowing which iOS features are available</td>
+</tr>
+<tr>
+<td>Role (parent device or child device)</td>
+<td>Deciding what a device may do</td>
+</tr>
+<tr>
+<td>A last-seen time (a regular check-in)</td>
+<td>Noticing when protection has gone offline</td>
+</tr>
+<tr>
+<td>App version, and when the device last started up</td>
+<td>Support, and telling a gap where the phone was switched off apart from one where it was quiet. We keep only the most recent start-up time, overwritten at each check-in, and compare it with the previous check-in; no history of restarts is kept</td>
+</tr>
+<tr>
+<td>The battery level at the last check-in, as a percentage</td>
+<td>So that when a phone goes quiet and comes back we can say it probably ran out of battery, if the last check-in showed 5% or less. We keep only the latest reading, overwritten at each check-in; never a history of battery levels</td>
+</tr>
+</tbody>
+</table>
+<p>The device identifier is <strong>generated by us</strong>. It is not Apple's advertising
+identifier and not a hardware serial, and Shieldora does no advertising tracking
+of any kind.</p>
+<h3>3.3 From the child's device, for filtering</h3>
+<p>Filtering works in two layers, and both matter for what is and is not collected.</p>
+<p><strong>On the device.</strong> Apple's Family Controls apply a web-content filter in Safari
+and enforce the protections a parent has set (see 3.4). This runs on the phone.
+Apple reports individual blocks to nobody, including us.</p>
+<p><strong>Through our resolver.</strong> The child's phone is set to send its DNS lookups (the
+step that turns a web address into a network address) to <strong>a resolver we run</strong>,
+which forwards them to <strong>Cloudflare's 1.1.1.1 for Families</strong> for the filtering
+decision. This is how category filtering and forced safe search work. It means
+the child's DNS lookups pass through our resolver and Cloudflare's. The
+phone reaches our resolver through <strong>a small relay we run on Cloudflare's
+network</strong> (so that if our resolver is ever unreachable the lookup is still
+answered, by Cloudflare's family resolver directly, and the child is not cut
+off the internet). The relay passes the lookup on as it is, keeps nothing and
+logs nothing. What each does with them:</p>
+<ul>
+<li><strong>Our resolver does not store the address looked up.</strong> It reads the address
+  to get an answer and keeps no log of it. Like any DNS resolver it holds
+  recent answers in memory for the short time they stay valid (usually minutes,
+  at most a few hours), so a second phone asking the same question gets a fast
+  answer; that memory is shared across every device, is tied to none of them,
+  and is never written to disk or a log. It does not store the child's IP
+  address. The only thing it reports, and only when a lookup is <strong>blocked</strong>, is
+  a one-way hashed form of the device's filtering token, the time, and the
+  class of the block (see 3.4). Never the address, never the page, unless the
+  optional detailed alerts in 3.4 are on for that child.</li>
+<li><strong>A blocked lookup is classed.</strong> When Cloudflare's family resolver blocks a
+  name, our resolver asks Cloudflare's <strong>malware-only resolver</strong> (1.1.1.2) about
+  the same name, once, after the block has already been answered, so the block
+  can be described to you as a <strong>security risk</strong> (malware or phishing) or a
+  <strong>family filter</strong> block (anything else Cloudflare's family filter blocks,
+  which is mostly adult content; we are not told the reason). Only blocked names are asked about, never allowed ones; no
+  client identifier is sent; the answer is remembered in the resolver's memory
+  for the time Cloudflare says it is valid (at most six hours) so the same name
+  is not asked about again.</li>
+<li><strong>Piracy streaming sites.</strong> If a parent turns on "Block piracy streaming
+  sites" for a child, our resolver also blocks names on a public,
+  community-maintained list of piracy and illegal streaming domains (HaGeZi's
+  Anti-Piracy list, about 58,000 domains, licensed GPL-3.0, a copy of which
+  ships with our resolver and is refreshed by us after review). The decision
+  is made inside our resolver; Cloudflare is not asked about these names.</li>
+<li><strong>A short reviewed allow list.</strong> A small number of domains we have checked
+  and found wrongly classed as adult by Cloudflare's family resolver (at the
+  time of writing, one: a TikTok service domain) are sent to Cloudflare's
+  malware-only resolver instead, so malware and phishing blocking still
+  applies to them but the adult classification does not. The list ships with
+  our resolver and is published in our source repository with the date and
+  the reason for each entry; nothing is added without review.</li>
+<li><strong>Social app websites.</strong> If a parent blocks a social app for a child (see
+  3.4), our resolver also blocks that service's own website domains for that
+  child's devices only. The decision is made inside our resolver from a short
+  list we publish in the app (for example instagram.com for Instagram).</li>
+<li>Shieldora's app makes periodic test lookups to confirm web filtering is working, and records only a time per device, never a website.</li>
+<li>Our resolver keeps hourly totals of how many lookups it answered, served from cache, blocked, or failed, for 90 days. These are counts only, with no website, device or address.</li>
+<li><strong>Cloudflare</strong> receives the lookup in order to answer it. Cloudflare states
+  that it <strong>deletes resolver logs within 25 hours</strong>, truncates IP addresses (it
+  drops the last part of the address so it does not identify a single
+  connection), and does not sell this data. We send Cloudflare <strong>no information
+  about which client made a lookup</strong> (no EDNS Client Subnet), so a lookup
+  reaching Cloudflare is not tied by us to a particular child.</li>
+<li><strong>The relay on Cloudflare's network</strong> sees what our resolver sees: the
+  device's filtering token (the address the phone was given) and the lookup.
+  It is code we wrote and control, running on Cloudflare's edge; it stores
+  nothing, keeps no log (logging is switched off), and holds no state between
+  lookups. When our resolver is unreachable it sends the lookup to
+  Cloudflare's family resolver with no device identifier, so filtering
+  continues but the block reporting in 3.4 pauses until our resolver is back.</li>
+</ul>
+<p>Shieldora is <strong>not a VPN</strong>. Only DNS lookups go through our resolver; the child's
+web pages, messages and other traffic do not, and we never see them.</p>
+<p><strong>iCloud Private Relay.</strong> If iCloud Private Relay is on, Safari can send its lookups through Apple's relay instead of our resolver, which would go around the filter. So our resolver answers Apple's Private Relay setup lookups with &quot;not available&quot;, which is Apple's own way for a network to switch Private Relay off. While Shieldora's web filtering is on, Private Relay does not run on the child's phone, and iOS may not show the child any notice about it. Once the phone is unlinked from Shieldora, Private Relay works as normal.</p>
 <h3>3.4 Protection records</h3>
-<p>Shieldora records <strong>whether protection is running</strong>, not what your child does with the device.</p>
-<p>Filtering is performed on the device by Apple&#x27;s Family Controls. Apple&#x27;s web content filter enforces silently: it reports individual blocks to nobody, including us. So there is no record of a block anywhere in Shieldora — we are not withholding it or protecting it, we never receive it.</p>
-<p>We do <strong>not</strong> record the URL, the search term, the page, or any browsing history. Those are not stored in a form we could read back later, because they are never sent to us at all. See section 4.</p>
-<p>We also store the state of the protections a parent has set:</p>
-<ul><li>The five device restrictions — app installation, account modification, passcode change, automatic date and time, and explicit media — and whether each is on or off</li><li>The web content filter setting</li><li>The browser allowlist: which third-party browsers are blocked, and which a parent has chosen to allow</li></ul>
-<p>And we record protection-status events:</p>
-<ul><li>The device&#x27;s regular check-in, which is how we can tell protection is still running</li><li>Protection going offline — the check-ins stopping, whether because the device is off, has no network, or the authorisation has been removed</li><li>Protection coming back — the device checking in again</li><li>A parent allowing a third-party browser, which changes what is filtered</li><li>Alerts generated from any of the above, and whether each was delivered</li></ul>
-<p>Filtering uses Apple&#x27;s Family Controls, applied on the device. Shieldora is not a VPN, does not route your child&#x27;s traffic through our servers, and does not inspect traffic in transit.</p>
+<p>We record <strong>whether protection is running and what a parent has set</strong>, not what
+a child does.</p>
+<p>The settings a parent controls, and their current value:</p>
+<ul>
+<li>The five device restrictions: app installation, account changes, passcode
+  changes, automatic date and time, and explicit media.</li>
+<li>The web-content filter (on or off).</li>
+<li>Safe search, forced on by default for Google, Bing and DuckDuckGo, which a
+  parent may turn off per child.</li>
+<li>The browser list: which third-party browsers are blocked, and which a parent
+  has allowed.</li>
+<li><strong>Social apps:</strong> which of Instagram, TikTok, Snapchat, Discord and Reddit a
+  parent has blocked for a child (all allowed unless the parent blocks them).
+  Blocking one blocks the app on the child's phone and its website through our
+  resolver. We store <strong>only the parent's choice</strong>. We do not record whether,
+  when or how long the app was used, and we are not told when the child tries
+  to open a blocked app.</li>
+<li><strong>Social app schedules:</strong> if a parent sets times when a social app is
+  blocked (for example a bedtime or school hours), we store the days and times
+  the parent set and which app each one applies to. We do not record whether
+  the child tried to open the app during a schedule.</li>
+<li><strong>Piracy streaming sites:</strong> whether a parent has turned on blocking of
+  piracy streaming sites for a child (off unless turned on).</li>
+<li><strong>Detailed block alerts:</strong> whether a parent has turned on the optional
+  detailed alerts described below (off unless turned on, and only where the
+  feature is available).</li>
+</ul>
+<p>The protection-status events we record:</p>
+<ul>
+<li>A device's regular check-in, which is how we can tell protection is still
+  running.</li>
+<li>Protection going offline (check-ins stopping, whether the device is off, has
+  no signal, or the permission was removed), and coming back.</li>
+<li><strong>Why a phone was quiet, where we can tell.</strong> When a phone checks in after a
+  gap of an hour or more, and its start-up time shows it was switched off or
+  restarted in the gap, or its last check-in before the gap showed a battery
+  of 5% or less, we record one note saying so ("switched off from 9:15 pm to
+  7:05 am", or "probably ran out of battery"), shown in the app only; we do
+  not send a notification or email for it. Where neither applies, nothing new
+  is recorded.</li>
+<li><strong>A site was blocked.</strong> When the resolver blocks one or more lookups on a
+  device, we record <strong>which device</strong>, the <strong>time</strong> of the first block, a
+  <strong>count</strong> of how many distinct sites were blocked in a short burst (about 30
+  seconds), and <strong>how many of those were family filter blocks and
+  how many a security risk</strong>. We never record the address or the search. The
+  parent is told "a site was blocked on this device", never which site. Where
+  three or more different sites are blocked within about ten seconds, the one
+  record is marked as a likely burst of pop-ups or advertising, and the parent
+  is told that this is usually caused by another website, not by the child
+  visiting the sites directly.</li>
+<li><strong>A piracy streaming site was blocked</strong>, for a child whose parent turned that
+  setting on: which device, the time of the first block, and a count. No
+  address. The parent sees this in the app only; <strong>we do not send a
+  notification or email</strong> for it, because the parent asked for the block.</li>
+<li><strong>A blocked social app's website was blocked</strong>, for a child whose parent
+  blocked that app: which device, <strong>which app</strong> (for example "Instagram"), the
+  time of the first block, and a count. No address. In the app only; <strong>no
+  notification or email</strong>. We are not told, and do not record, attempts to open
+  the blocked app itself.</li>
+<li><strong>Detailed block alerts, an optional feature that may
+  not be available yet.</strong> Shieldora includes an optional setting, "more detail
+  on block alerts", which <strong>may not be offered in your version of the app</strong>.
+  Where it is offered and a parent switches it on for a child (which needs the
+  parent's second factor), we also record the blocked site's <strong>domain</strong> (never
+  the page, path or search) and whether it was a family filter block
+  or a security risk. This is stored encrypted, shown only in the parent's app,
+  never in a notification or email, deleted after 30 days, and deleted at once
+  if the parent turns the setting off. The child's phone shows that it is on.
+  It is off unless the parent turns it on, and while the feature is not offered
+  nothing is recorded under it for anyone.</li>
+<li><strong>Web filtering may be off.</strong> If a child's phone keeps checking in but stops
+  sending DNS through our resolver for about two hours, we note it and tell the
+  parent that filtering may not be running (for example because a VPN or iCloud
+  Private Relay is on, or the DNS setting was changed). This is a status, not an
+  accusation, and the alert says so.</li>
+<li>A parent allowing a third-party browser, or turning safe search off, which
+  change what is filtered.</li>
+<li>The alerts raised from any of the above, and whether each was delivered.</li>
+</ul>
+<p><strong>How a block reaches your dashboard.</strong> The child's phone carries a secret
+filtering token. Our resolver only ever sees and handles a <strong>one-way hash</strong> of
+that token (a fingerprint it cannot be turned back into), and reports a block
+to our server as that hash, a time and a class. The server matches the hash to
+the right device on your account and stores the block against that device.
+The token itself is never written to a log. This is so a resolver record cannot
+be replayed as a working credential, and so the record is the minimum that
+still lets us attribute a block to the right child on the parent's dashboard.</p>
 <h3>3.5 Waitlist sign-ups</h3>
-<p>If you join the waitlist on our website, we store your <strong>email address</strong>, the <strong>date and time</strong> you joined, the <strong>page you were on</strong>, and <strong>source tags</strong> from the link you followed (for example <code>?ref=instagram</code>, or the standard <code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code> and <code>utm_content</code> tags that tell us which of our posts, ads or emails the link was in). If you answer the optional <strong>&ldquo;How did you hear about us?&rdquo;</strong> question, we store that answer too. Submitting the form is your consent to be emailed about Shieldora, and the date and page are the record of it.</p>
-<p>The tags and your answer tell us which channels are worth our time. They name a link or a channel, not you: we do not combine them with anything else about you, and we do not use advertising cookies or pixels on this site.</p>
-<p>We use this for one thing: to email you once, when Shieldora is ready. We do not send a confirmation email in the meantime, we do not sell the address, and we do not pass it on. It is stored in our database in Sydney, Australia, alongside everything else. A summary we send ourselves carries counts only, never addresses.</p>
-<p>We delete waitlist sign-ups <strong>three months after the launch email is sent</strong>, or sooner if you ask. To be removed at any time, email <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>.</p>
-<hr>
+<p>If you join the waitlist on our website, we store your <strong>email address</strong>, the
+<strong>date and time</strong> you joined, the <strong>page you were on</strong>, and <strong>source tags</strong> from
+the link you followed (for example <code>?ref=instagram</code>, or the standard
+<code>utm_source</code>, <code>utm_medium</code>, <code>utm_campaign</code> and <code>utm_content</code> tags that tell us
+which of our posts, ads or emails the link was in). If you answer the optional
+<strong>"How did you hear about us?"</strong> question, we store that answer too. Submitting
+the form is your consent to be emailed about Shieldora, and the date and page
+are the record of it. To be removed at any time, email <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>.</p>
+<h3>3.6 Payment</h3>
+<p>Shieldora is free during early access, and nothing is charged. When
+subscriptions start, they will be sold <strong>through Apple's in-app purchase</strong>. Apple handles the
+payment. We <strong>never see or store your card details</strong>. From Apple we receive and
+store only what tells us whether protection is paid for: an Apple-issued
+transaction identifier, the product, the subscription state (active, in a
+grace period, expired or revoked), and whether it is a test or a real purchase.</p>
+<hr />
 <h2>4. What we deliberately do not collect</h2>
-<p>This section states what the software does <strong>not</strong> do, and it is written to be held to.</p>
-<ul><li><strong>No browsing history.</strong> We do not build, store or have access to a record of the sites a child visits.</li><li><strong>No URLs or web addresses.</strong> The filter evaluates addresses <strong>on the device</strong> to decide whether to block. That evaluation happens locally and the address is <strong>not transmitted to us and not stored</strong>.</li><li><strong>No page content.</strong> We never see or store what was on a page.</li><li><strong>No message content.</strong> We do not read, collect or have access to messages, emails or chats in any app.</li><li><strong>No search terms, and no search detection at all.</strong> We do not see, record or detect what a child searches for. There is no search-detection layer in Shieldora. Filtering is applied by iOS on the device, and nothing about what was filtered reaches us — not the search, not the page, not the block.</li><li><strong>No location data.</strong></li><li><strong>No contacts, photos, camera or microphone access.</strong></li><li><strong>No advertising identifiers, and no tracking across other apps or websites.</strong></li></ul>
-<h3>A limitation we want to be honest about</h3>
-<p>Filtering uses Apple&#x27;s Family Controls and applies to <strong>web content</strong>: Safari, including private browsing. Other browsers are blocked by default, and a parent may choose to allow one — content inside a browser allowed that way is <strong>not filtered</strong>, and the app says so at the moment you allow it.</p>
-<p><strong>Content inside other apps is not filtered.</strong> Apps such as TikTok, Instagram or YouTube serve their own content inside the app, and neither iOS web filtering nor Shieldora reaches inside them. We do not see what is shown there, we cannot block it, and no alert will be raised about it.</p>
-<p><strong>No filter catches everything</strong>, and some material will get through even in Safari. What Shieldora offers is not a guarantee that nothing is seen, and not a report of what was blocked — Apple&#x27;s filter does not provide one. It is that you are told when a child&#x27;s phone stops checking in, or reports that protection has been turned off — the failure that would otherwise leave a child unprotected without anyone noticing.</p>
-<p>We say this because a parent who assumes we cover everything on the device has been misled, even if no single sentence here is untrue.</p>
-<hr>
-<h2>5. Children&#x27;s data</h2>
-<p>Shieldora is used by children, on children&#x27;s devices, at a parent&#x27;s direction. We know children&#x27;s information is involved and that stricter rules apply.</p>
-<p><strong>The parent holds the account.</strong> Children do not have their own accounts, do not sign in, and cannot sign out. A child device holds limited credentials that let it report events and receive settings — nothing more.</p>
-<hr>
-<h2>6. Parental consent</h2>
-<p>The parent sets up the account, links each child device, and must approve every change to protection settings with a two-factor code.</p>
-<p>Each time a parent consents, we record <strong>when</strong> they consented, <strong>how</strong>, and <strong>which version of this notice</strong> they were shown.</p>
-<hr>
-<h2>7. How we use data</h2>
-<p>We use the information described above only to:</p>
-<ul><li>Operate accounts and sign parents in securely</li><li>Verify changes to protection settings with two-factor authentication</li><li>Apply and update filtering settings on child devices</li><li>Detect that protection has stopped working and alert the parent</li><li>Send alert emails about the events listed in section 3.4</li><li>Provide support when a parent contacts us</li><li>Keep the service secure and investigate abuse</li><li>Meet our legal obligations</li></ul>
-<p><strong>We do not</strong> use this data for advertising, profiling for marketing, training machine-learning models, or any purpose unrelated to protecting the child.</p>
-<hr>
-<h2>8. Who we share data with</h2>
-<p><strong>We do not sell your data. We do not share it for anyone else&#x27;s advertising or marketing. We do not disclose it to data brokers.</strong></p>
-<p>We do use a small number of service providers to run Shieldora. They process data <strong>on our behalf, under contract, and only for the purposes we set</strong>:</p>
-<table><tr><td>Provider</td><td>Purpose</td><td>Data involved</td></tr><tr><td><strong>Fly.io</strong> (Sydney region)</td><td>Running the service</td><td>All service data in transit through the application</td></tr><tr><td><strong>Supabase</strong> (Postgres, Sydney region)</td><td>Database and account authentication</td><td>Account and event data</td></tr><tr><td><strong>Resend</strong></td><td>Sending alert and account emails</td><td>Parent email address, alert content</td></tr></table>
-<p>We may also disclose information where legally required — for example a valid court order — or to protect someone&#x27;s safety.</p>
-<hr>
-<h2>9. Where data is stored, and international transfers</h2>
-<p>Data is stored in <strong>Australia</strong> (Sydney) — the database on <strong>Supabase</strong> (Postgres, Sydney region), and the application on <strong>Fly.io</strong>&#x27;s Sydney region.</p>
-<p><strong>One exception, which we would rather state than have you discover.</strong> Fly.io stores the operational logs and metrics its machines produce in the <strong>United States</strong>, not in Australia, regardless of where the machine itself runs. Fly has confirmed this to us in writing. Logs are kept <strong>7 days</strong> and metrics <strong>15 days</strong>, the storage region <strong>cannot be changed</strong>, and the log sink cannot be switched off. These are operational records — request timing, errors, IP addresses — not the database, and they do not contain alert history or account contents. But they are personal information leaving Australia, and this policy would be wrong not to say so.</p>
-<p><strong>Resend</strong>, which sends our alert and account emails, keeps a log of each message — the recipient&#x27;s email address and the message content — for <strong>30 days</strong>, and offers no way to delete a sent message early. An alert email names the child (the name the parent set) and the device type, such as &quot;Emma&#x27;s iPhone&quot;, so a parent can tell their children&#x27;s devices apart; it never carries what was blocked, browsed or searched, which stay in the app behind the login. So a child&#x27;s first name and device type sit in Resend&#x27;s logs for up to 30 days from when a message was sent. That is personal information, and after an account is deleted it is the longest-lived copy of anything about that account — the live data goes at deletion, and a Resend message clears 30 days after it was sent, on Resend&#x27;s own clock, which we cannot bring forward.</p>
-<hr>
-<h2>10. How we protect data</h2>
-<ul><li>All data is encrypted in transit.</li><li>Data is encrypted at rest by our infrastructure providers.</li><li>Passwords are stored only as cryptographic hashes, never in readable form.</li><li>Parent accounts require two-factor authentication, and every change that <strong>reduces</strong> protection — turning protection off, unblocking a category, unlinking a device — requires a fresh two-factor code. Changes that increase protection do not, so that a parent who cannot reach their authenticator can always restore it.</li><li>Child devices hold limited credentials that cannot read the parent dashboard or change settings.</li><li>Access to production data is restricted to <strong>one person — the founder, who operates the service</strong> — and is logged. Shieldora is run by one person, and we would rather say that plainly than imply a team and an approval process that do not exist. If that changes, this section changes with it.</li></ul>
+<p>Written to be held to.</p>
+<ul>
+<li><strong>No browsing history.</strong> We do not build, store or have any way to read a
+  record of the sites a child visits. Where the optional
+  detailed block alerts are offered and turned on by the parent for a child, we
+  keep the domains of <strong>blocked</strong> sites for 30 days (see 3.4). We still never
+  record the sites a child visits that are not blocked.</li>
+<li><strong>No web addresses stored, unless a parent turns on detailed alerts.</strong> Our
+  resolver looks up an address to filter it and does not write it down; Apple's
+  on-device filter reports nothing to us. By default, no address a child visited
+  is stored by Shieldora. With detailed alerts on, the
+  domain of a blocked site is stored, encrypted, for 30 days.</li>
+<li><strong>No app usage.</strong> When a parent blocks a social app we record the parent's
+  choice and count blocked attempts to reach the app's website. We do not
+  record which apps a child uses, for how long, or when.</li>
+<li><strong>No page content.</strong> We never see or store what was on a page.</li>
+<li><strong>No message content.</strong> We do not read or collect messages, emails or chats in
+  any app.</li>
+<li><strong>No search terms.</strong> We do not record or detect what a child searches for.
+  Forced safe search changes the result a search engine returns; it does not
+  report the search to us.</li>
+<li><strong>No location data.</strong></li>
+<li><strong>No contacts, photos, camera or microphone.</strong></li>
+<li><strong>No advertising identifiers, and no tracking across other apps or sites.</strong></li>
+</ul>
+<h3>A limit we want to be honest about</h3>
+<p>Filtering covers <strong>web content</strong>, mainly in Safari. Other browsers are blocked
+by default; if a parent allows one, content inside that browser is <strong>not
+filtered</strong>, and the app says so when they allow it. <strong>Content inside other apps</strong>
+(for example YouTube) is served by those apps and is not reached by web
+filtering; we do not see it and cannot block it. A parent can block five named
+social apps outright (3.4), which blocks the app by its identifier and its
+website; an app that is not on that list is not blocked, and a child who is
+allowed to install apps may install one that is not listed. The piracy list
+and the social app domain lists are maintained by people, and a list can be
+wrong about a site; the app describes such a block as "Streaming site blocked
+(piracy list)" so it is clear the description comes from the list, and the
+setting says the list will not catch every piracy site. In the same way, a
+block from Cloudflare's family filter is shown as "Family filter", not
+"Adult", because we are not told why Cloudflare blocked it and its filter can
+be wrong (for example, it has classed some anime streaming sites as adult). <strong>No filter
+catches everything.</strong> What Shieldora offers is not a promise that nothing is
+ever seen, and not a report of what was blocked, but filtering plus a clear
+signal to the parent when protection stops running.</p>
+<hr />
+<h2>5. Children's data</h2>
+<p>Shieldora is used by children, on children's devices, at a parent's direction,
+and stricter rules apply.</p>
+<p><strong>The parent holds the account.</strong> Children do not have their own accounts, do
+not sign in, and cannot sign out. A child device holds only a limited credential
+that lets it report status and receive settings. A child cannot read the parent
+dashboard or change anything.</p>
+<p>We collect, about a child: a display name or nickname the parent chooses. We
+encourage a nickname over a real name. We do not ask for or store a child's
+age or date of birth.</p>
+<hr />
+<h2>6. Parental consent, and how we use data</h2>
+<p>The parent sets up the account, links each child's device, and must approve
+every change that <strong>reduces</strong> protection with a fresh two-factor code (turning
+protection off, allowing a browser, turning safe search off, unlinking a device,
+deleting or shortening a social app schedule, deleting the account). Changes that <strong>increase</strong> protection need no code, so a
+parent who cannot reach their authenticator can always restore it. Each time a
+parent consents we record <strong>when</strong>, <strong>how</strong>, and <strong>which version of this notice</strong>
+they were shown.</p>
+<p>We use the information above only to: run accounts and sign parents in; verify
+protection changes with two-factor; apply and update filtering on a child's
+device; detect that protection has stopped and alert the parent; send those
+alerts by push notification and email; manage the subscription; provide support;
+keep the service secure and investigate abuse; and meet our legal obligations.</p>
+<p><strong>We do not</strong> use any of it for advertising, marketing profiles, or training
+machine-learning models.</p>
+<hr />
+<h2>7. How long we keep it</h2>
+<p>The service enforces these against each account's own settings, not a single
+global constant:</p>
+<table>
+<thead>
+<tr>
+<th>Data</th>
+<th>Kept for</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Parent account, child profiles, device records</td>
+<td>While the account is open</td>
+</tr>
+<tr>
+<td>"A site was blocked", "streaming site blocked", "app's website blocked" and other protection-status events</td>
+<td><strong>90 days</strong>, then deleted</td>
+</tr>
+<tr>
+<td>Blocked-site domains, where detailed alerts are offered and a parent turned them on</td>
+<td><strong>30 days</strong>, then deleted; deleted at once if the setting is turned off</td>
+</tr>
+<tr>
+<td>Hourly totals from our resolver and of the app's test lookups (counts only, no device)</td>
+<td><strong>90 days</strong></td>
+</tr>
+<tr>
+<td>The running count for a block burst in progress (per device, and per blocked app)</td>
+<td>Removed 24 hours after the burst closes</td>
+</tr>
+<tr>
+<td>Which social apps, streaming blocking and other settings a parent chose</td>
+<td>While the child profile exists</td>
+</tr>
+<tr>
+<td>The device's latest start-up time and latest battery level</td>
+<td>Overwritten at each check-in; deleted with the device</td>
+</tr>
+<tr>
+<td>Alert history (which alerts fired, and that they were sent)</td>
+<td><strong>365 days</strong></td>
+</tr>
+<tr>
+<td>Delivery checks ("check alerts reach you")</td>
+<td><strong>365 days</strong></td>
+</tr>
+<tr>
+<td>Social app schedules</td>
+<td>While the child profile exists, or until the parent deletes the schedule</td>
+</tr>
+<tr>
+<td>Waitlist sign-ups</td>
+<td><strong>Three months</strong> after the launch email is sent, or sooner if you ask</td>
+</tr>
+<tr>
+<td>Database backups</td>
+<td>Cleared within <strong>7 days</strong></td>
+</tr>
+<tr>
+<td>Pairing codes and used two-factor challenges</td>
+<td>Cleared on a short credential-hygiene schedule, not a retention promise</td>
+</tr>
+</tbody>
+</table>
+<p>When an account or a single child is <strong>deleted</strong>, the data is erased after a
+<strong>30-day grace period</strong>, which the parent can cancel within those 30 days to
+undo the deletion. After erasure, copies linger only in backups and in
+providers' logs and clear as those expire (see section 8), and we keep something
+longer only where a specific legal obligation requires it (for example, minimal
+evidence that a consent or a deletion occurred).</p>
+<hr />
+<h2>8. Who we share it with, and where it is</h2>
+<p><strong>We do not sell your data. We do not share it for anyone's advertising or
+marketing. We do not give it to data brokers.</strong> We use a small number of service
+providers who process data only on our instructions, under contract, to run
+Shieldora:</p>
+<table>
+<thead>
+<tr>
+<th>Provider</th>
+<th>What they do</th>
+<th>Data involved</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Fly.io</strong></td>
+<td>Runs the application</td>
+<td>Service data in transit; see the log note below</td>
+<td>App in <strong>Sydney</strong>; operational logs in the <strong>United States</strong></td>
+</tr>
+<tr>
+<td><strong>Supabase</strong></td>
+<td>Database and parent sign-in</td>
+<td>Account and event data, and waitlist sign-ups</td>
+<td><strong>Sydney</strong></td>
+</tr>
+<tr>
+<td><strong>Resend</strong></td>
+<td>Sends alert and account emails, and forwards problem reports to us</td>
+<td>Parent email address, email content (which names the child's device, such as "Emma's iPhone"); for a problem report, the sender's email and message</td>
+<td><strong>United States</strong></td>
+</tr>
+<tr>
+<td><strong>Apple</strong></td>
+<td>Delivers push notifications, and sells and processes subscriptions</td>
+<td>Device push token; the push text, which names the child's device the same way under a generic title; subscription transaction data</td>
+<td><strong>United States</strong></td>
+</tr>
+<tr>
+<td><strong>Cloudflare</strong></td>
+<td>Runs our relay (a Cloudflare Worker, our code, no logging, no storage) that the phone's lookups pass through; answers and filters DNS lookups (1.1.1.1 for Families, the family resolver); and its malware-only resolver (1.1.1.2, security.cloudflare-dns.com) is asked once about each name the family resolver blocked, to class the block as a family filter block or a security risk</td>
+<td>DNS lookups (see 3.3), IP-truncated, logs deleted within 25 hours; no client identifier is sent to either resolver; the malware-only resolver sees only names that were already blocked</td>
+<td>Answered from Cloudflare's nearest data centre, in practice <strong>Australia</strong> for a child in Australia; logs and the company are <strong>United States</strong></td>
+</tr>
+</tbody>
+</table>
+<p>We may also disclose information where the law requires it (for example a valid
+court order) or to protect someone's safety.</p>
+<p><strong>Things that cross the border, stated plainly rather than buried:</strong></p>
+<ul>
+<li><strong>Fly.io</strong> runs our application in Sydney, but stores the <strong>operational logs</strong>
+  its machines produce in the <strong>United States</strong>, for about 7 days, and the
+  region cannot be changed. Our application removes every device, child and
+  account identifier, token and IP address from a log line before it is
+  written, so those logs hold the route, the status and the timing of a
+  request and no personal information.</li>
+<li><strong>Resend</strong> is United States based, so a parent's email address and the content
+  of each alert email leave Australia. An alert email names the child (the name
+  the parent set) and the device type, such as "Emma's iPhone", so a parent can
+  tell devices apart; it never carries what was blocked, browsed or searched.
+  Resend keeps a copy of each sent message for about 30 days.</li>
+<li><strong>Apple</strong> receives the device's push token and the push text, which names
+  the child's device ("Emma's iPhone") under a generic title and never a site,
+  and handles subscription payment from the United States.</li>
+<li><strong>Cloudflare</strong> answers DNS lookups from a global network as a United States
+  company, under the terms in 3.3. A lookup from a phone in Australia is
+  answered by Cloudflare's nearest data centre, normally in Australia, but
+  Cloudflare's logs and the company itself are in the United States, so this is
+  treated here as a cross-border disclosure even though the address is never
+  tied to a child by us.</li>
+</ul>
+<hr />
+<h2>9. How we protect it</h2>
+<ul>
+<li>Encrypted in transit, and encrypted at rest by our providers.</li>
+<li>Passwords stored only as cryptographic hashes.</li>
+<li>Two-factor on parent accounts, required for every protection-reducing change
+  and for account deletion.</li>
+<li>Child devices hold only a limited credential, and the filtering token is
+  stored by our resolver only as a one-way hash. On our server the filtering
+  token is stored encrypted, and opened only to tell the child's own phone its
+  filtering address.</li>
+<li>Access to production data is restricted to <strong>one person, the founder, who
+  operates the service</strong>, and is logged. Shieldora is run by one person, and we
+  would rather say so than imply a team and an approval process that do not
+  exist.</li>
+</ul>
 <p>No service can promise perfect security, and we do not.</p>
-<hr>
-<h2>11. How long we keep data</h2>
-<table><tr><td>Data</td><td>Retention</td></tr><tr><td>Parent account</td><td>While the account is open</td></tr><tr><td>Child profiles and device records</td><td>While linked to an open account</td></tr><tr><td>Protection events (offline, restored, browser allowed)</td><td><strong>90 days</strong> (provisional, pending legal review), then deleted</td></tr><tr><td>Alert history (which alerts fired, and that they were sent)</td><td><strong>365 days</strong> (provisional, pending legal review)</td></tr><tr><td>Backups</td><td>Cleared within 7 days, once database backups are enabled</td></tr></table>
-<p>When an account is deleted, we delete the associated data within <strong>30 days</strong> (the cancellable grace period). Copies then persist in backups and provider logs and clear as those expire: database backups within 7 days, and our email provider&#x27;s message logs within 30 days, which is the longest-lived copy of any personal data after deletion. We keep something beyond this only where a legal obligation requires it.</p>
-<hr>
-<h2>12. Your rights, and how to use them</h2>
-<p>A parent may:</p>
-<ul><li><strong>Access</strong> the information held about their account and their children</li><li><strong>Correct</strong> inaccurate information</li><li><strong>Delete a specific child&#x27;s</strong> information, while keeping their own account</li><li><strong>Delete</strong> their whole account and all associated data</li><li><strong>Export</strong> their data in a portable format</li><li><strong>Withdraw consent</strong> and stop using the service</li><li><strong>Complain</strong> to a privacy regulator</li></ul>
-<p>To do any of these, contact <a href="mailto:contact@shieldora.app">contact@shieldora.app</a>. We respond within <strong>30 days</strong>.</p>
-<p>Australian users may complain to the <strong>Office of the Australian Information Commissioner (OAIC)</strong>.</p>
-<hr>
-<h2>13. Changes to this policy</h2>
-<p>If we make material changes we will notify account holders by email before the changes take effect.</p>
-<hr>
-<h2>14. Contact</h2>
-<p><strong>Shieldora Pty Ltd (ABN 82 703 127 977)</strong> <a href="mailto:contact@shieldora.app">contact@shieldora.app</a></p>
-<hr>
+<hr />
+<h2>10. Your rights</h2>
+<p>A parent may: <strong>access</strong> the information held about their account and children;
+<strong>correct</strong> it; <strong>delete a single child's</strong> information while keeping their
+account; <strong>delete</strong> the whole account and everything with it; ask for a
+<strong>copy</strong> of their data, which we email to them; <strong>withdraw consent</strong> and stop using the service; and <strong>complain</strong> to a
+regulator.</p>
+<p>To do any of these, email <strong><a href="mailto:contact@shieldora.app">contact@shieldora.app</a></strong>. We respond within <strong>30
+days</strong>.</p>
+<p>Australian users may complain to the <strong>Office of the Australian Information
+Commissioner (OAIC)</strong>, oaic.gov.au, after raising it with us first.</p>
+<hr />
+<h2>11. Changes to this policy</h2>
+<p>If we make a material change we will tell account holders by email before it
+takes effect.</p>
+<hr />
+<h2>12. Contact</h2>
+<p>Shieldora Pty Ltd (ACN 703 127 977, ABN 82 703 127 977)
+<a href="mailto:contact@shieldora.app">contact@shieldora.app</a></p>
+<p>Please contact us by email. If you need a postal address for a formal notice,
+email us and we will provide one.</p>
 
   </article>
 
