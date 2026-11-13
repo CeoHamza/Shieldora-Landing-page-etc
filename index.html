@@ -131,6 +131,7 @@ section{padding-top:clamp(64px,9vw,112px)}
 .shots{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(16px,3vw,28px);margin:clamp(28px,4vw,44px) auto 0}
 .shots figure{margin:0;width:clamp(180px,42vw,236px)}
 .shots .dev{width:100%;animation:none}
+.shots.four{max-width:calc(2 * 236px + 28px)}
 .shots figcaption{color:var(--mid);font-size:14.5px;margin-top:12px;text-align:center}
 /* waitlist */
 .signup form{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;max-width:520px;margin:22px auto 0}
@@ -233,9 +234,10 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   <section class="preview centre" id="preview">
     <h2>What you&rsquo;ll open on your own phone</h2>
     <p class="lead">Real screens from our test build, shown with a demo family. Some details may change before launch.</p>
-    <div class="shots">
+    <div class="shots four">
+      <figure><div class="dev"><img src="/screens/parent-home.png" width="804" height="1748" alt="Home: Layla and Noah, when each phone was last heard from, and their alerts today and this week" loading="lazy"></div><figcaption>Home: each child, when their phone was last heard from, and today&rsquo;s alerts.</figcaption></figure>
       <figure><div class="dev"><img src="/screens/parent-activity.png" width="804" height="1748" alt="Activity: today's and yesterday's alerts for Layla and Noah" loading="lazy"></div><figcaption>Activity, today and yesterday, across both children.</figcaption></figure>
-      <figure><div class="dev"><img src="/screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page: when her phone was last heard from, her settings, then recent alerts" loading="lazy"></div><figcaption>Each child's page: recent alerts, then the controls.</figcaption></figure>
+      <figure><div class="dev"><img src="/screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page: when her phone was last heard from, her settings, her recent alerts, then the controls" loading="lazy"></div><figcaption>Each child's page: recent alerts, then the controls.</figcaption></figure>
       <figure><div class="dev"><img src="/screens/parent-social-apps.png" width="804" height="1748" alt="Social apps on Layla's devices: Instagram and TikTok blocked" loading="lazy"></div><figcaption>Social apps and schedules, set per child.</figcaption></figure>
     </div>
   </section>
