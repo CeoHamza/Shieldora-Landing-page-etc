@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en-AU" class="ok">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#EFEFED">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Email confirmed: Shieldora</title>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<script>
+// The confirmation link lands here with sign-in tokens or an error in the URL
+// fragment. This page never reads or sends the tokens: it only checks whether
+// the fragment says the link failed, then wipes the fragment from the address
+// bar and history so the tokens are not left sitting in Safari.
+(function () {
+  var hash = window.location.hash || "";
+  var search = window.location.search || "";
+  var failed = /(^|[#&?])error(_code|_description)?=/.test(hash + "&" + search);
+  if (hash || search) {
+    try { history.replaceState(null, "", window.location.pathname); } catch (e) {}
+  }
+  document.documentElement.className = failed ? "failed" : "ok";
+})();
+</script>
+<style>
+:root{--slate:#EFEFED;--panel:#FFFFFF;--ink:#16191D;--mid:#5B6570;--line:#D6D6D1;--green:#2F7A47;--alarm:#8C3B23}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--slate);color:var(--ink);font-family:Inter,-apple-system,system-ui,sans-serif;line-height:1.58;-webkit-font-smoothing:antialiased;min-height:100vh;display:grid;place-items:center;padding:24px 16px}
+main{width:100%;max-width:440px;background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:32px 24px;text-align:center}
+.mk{width:52px;height:52px;border-radius:15px;background:var(--green);display:grid;place-items:center;margin:0 auto 18px}
+.mk svg{width:30px;height:30px}
+h1{font-size:26px;line-height:1.15;letter-spacing:-0.02em;font-weight:800;margin:0 0 10px}
+p{margin:0 0 14px;color:var(--mid)}
+p:last-child{margin-bottom:0}
+a{color:var(--ink)}
+.small{font-size:14px}
+.failed .ok-only,.ok .failed-only{display:none}
+.failed .mk{background:var(--alarm)}
+</style>
+</head>
+<body>
+<main>
+  <div class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#1c5334" stroke="#dcb978" stroke-width="1.3"/><path d="M8.2 12.1 10.8 14.7 15.8 9.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+  <div class="ok-only">
+    <h1>Your email is confirmed</h1>
+    <p>Go back to the Shieldora app and sign in with your email and password.</p>
+    <p class="small">You can close this page.</p>
+  </div>
+
+  <div class="failed-only">
+    <h1>That link didn&rsquo;t work</h1>
+    <p>Confirmation links only work once and expire after a day. If you&rsquo;ve already confirmed, you can sign in as normal.</p>
+    <p>If not, open Shieldora, try to sign in, and tap <strong>Send the confirmation email again</strong>.</p>
+    <p class="small">Still stuck? <a href="/support">Report a problem</a>.</p>
+  </div>
+</main>
+</body>
+</html>
