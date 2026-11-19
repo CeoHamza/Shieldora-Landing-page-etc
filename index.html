@@ -160,6 +160,75 @@ details p{margin:0 0 18px;color:var(--mid);max-width:64ch;font-size:16px}
 footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16px,4vw,48px) 64px;border-top:1px solid var(--line);font-size:14px;color:var(--mid);display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between}
 .footlinks{display:flex;flex-wrap:wrap;gap:10px 18px}
 @media (max-width:600px){.signup .btn,.heroform .btn{width:100%}}
+/* ===== Tablet and desktop layout (768px and wider) =====
+   Phones keep the single centred column above, unchanged. From 768px the
+   sections below the hero use one 1120px box with a shared left edge, two
+   columns where it helps, a deep green band behind the alerts and a mint band
+   behind the app screens, and equal space above and below each section.
+   The bands are drawn with a box-shadow clipped to the sides, so the page
+   never gets wider than the window. Founder and FAQ stay narrow and centred. */
+@media (min-width:768px){
+  main.col,footer{max-width:1120px}
+  main.col > section{padding:clamp(64px,8vw,96px) 0}
+  #waitlist,#founder,#faq{padding-top:0}
+  #faq{padding-bottom:0}
+  .controls,.answer,#preview,#childapp,.signup{text-align:left}
+  .controls h2,.answer h2,#preview h2,#childapp h2,.signup h2,
+  .answer p,#preview p,#childapp p,.signup p{margin-left:0;margin-right:0}
+  .controls h2,.answer h2,#preview h2,#childapp h2,.signup h2{max-width:22ch}
+
+  /* the controls in one wide row */
+  .controls .grid{max-width:none;margin:clamp(28px,4vw,40px) 0 0;grid-template-columns:repeat(5,1fr);gap:28px 12px}
+  .ctl{text-align:left}
+  .ctl svg{margin:0 0 10px}
+
+  /* alerts: deep green band, words left, notifications right, notes below */
+  .answer{background:#16261F;box-shadow:0 0 0 100vmax #16261F;clip-path:inset(0 -100vmax);
+    --ink:#fff;--mid:#C7D3CB;--soft:#AEBBB3;--text2:#E3E8E5;--line:rgba(255,255,255,.16);--card:rgba(255,255,255,.08);--nic:#348C52;color:var(--ink);
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,80px);align-items:center;
+    grid-template-areas:"h stack" "lead stack" "never stack" "notes notes"}
+  .answer > h2{grid-area:h;align-self:end}
+  .answer > .lead{grid-area:lead;max-width:none}
+  .answer > .never{grid-area:never;align-self:start;margin:4px 0 0;max-width:none}
+  .answer > .stack{grid-area:stack;margin:0;max-width:none}
+  .answer > .notes{grid-area:notes;max-width:64ch;margin:clamp(40px,5vw,64px) 0 0;padding-top:clamp(28px,4vw,40px);border-top:1px solid var(--line);display:grid;gap:12px 40px}
+  .answer .notes p{margin:0}
+  .answer .notes strong{color:var(--ink)}
+
+  /* app screens: mint band, heading and lead side by side, screens below */
+  #preview{background:#E9F2EC;box-shadow:0 0 0 100vmax #E9F2EC;clip-path:inset(0 -100vmax);--card:#fff;
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,80px);align-items:end}
+  #preview > h2{margin-bottom:0}
+  #preview > .lead{margin:0;max-width:52ch}
+  #preview > .shots{grid-column:1 / -1}
+  #preview .hint span{color:#256437}
+  #preview .hint svg{stroke:#256437}
+
+  /* child's screen beside its words */
+  #childapp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,80px);
+    grid-template-rows:1fr auto auto 1fr;grid-template-areas:". shot" "h shot" "lead shot" ". shot"}
+  #childapp > h2{grid-area:h}
+  #childapp > .lead{grid-area:lead;margin-bottom:0}
+  #childapp > .shots{grid-area:shot;margin:0}
+
+  /* waitlist: heading left, form right */
+  .signup{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(32px,5vw,80px);
+    grid-template-areas:"h form" "lead fine" "lead collect";align-items:start}
+  .signup > h2{grid-area:h}
+  .signup > .lead{grid-area:lead}
+  .signup > form{grid-area:form;margin:0;justify-content:flex-start;max-width:none}
+  .signup > .fine{grid-area:fine}
+  .signup > .collect{grid-area:collect}
+}
+@media (min-width:1024px){
+  .controls .grid{grid-template-columns:repeat(9,1fr)}
+  .answer > .notes{grid-template-columns:repeat(3,1fr);max-width:none}
+  /* the four app screens in one row, "tap Layla" between the first two */
+  #preview .shots.four{max-width:none;flex-wrap:nowrap;justify-content:space-between;gap:72px;column-gap:72px}
+  #preview .shots.four figure{width:auto;flex:1 1 0;max-width:260px}
+  #preview .shots.four figcaption{text-align:left}
+  #preview .shots.four .hint{left:calc((100% - 216px) / 4 + 36px)}
+}
 </style>
 </head>
 <body>
