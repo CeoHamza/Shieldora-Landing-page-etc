@@ -281,6 +281,85 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   footer{margin-top:clamp(104px,13vw,160px)}
 }
 @media (min-width:1024px){.navmid{display:flex}}
+/* ===== Phone layout in the same style (under 768px) =====
+   Optional layer: delete this block and phones go back to the live layout.
+   Same ideas as the desktop layer in one column: one green wash that fades
+   out, serif headings, the form above the phone, the controls straight after
+   the hero with a line on each, and each screen cropped in a soft panel with
+   its words underneath. The FAQ stays an accordion on phones. */
+@media (max-width:767.98px){
+  :root{--panel:#F1F5F1;--serif:"Source Serif 4","Iowan Old Style",Georgia,serif}
+  h1,h2,.cap-d strong{font-family:var(--serif);font-weight:400;letter-spacing:-0.02em}
+  h1{font-size:clamp(28px,8.4vw,36px);line-height:1.1}
+  h2{font-size:clamp(27px,7.6vw,31px);line-height:1.12;margin-bottom:14px}
+
+  /* hero */
+  .hero{background:linear-gradient(180deg,#DDEBE1 0,#E4EFE7 38%,#EEF5F0 72%,#fff 100%)}
+  .hero::after{display:none}
+  .hero .inner{display:flex;flex-direction:column;align-items:center;padding-top:36px}
+  .hand{order:1;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--text2);
+    background:rgba(255,255,255,.7);border:1px solid var(--pill-line);border-radius:999px;padding:5px 12px 5px 10px;margin-bottom:18px;display:inline-flex;align-items:center;gap:8px}
+  .hand::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .hero h1{order:2;max-width:none;margin-bottom:14px}
+  .hero .lead{order:3;font-size:16.5px;margin-bottom:22px}
+  .btns{display:none}
+  .heroform{order:4;margin-top:0;width:100%}
+  .heroform select{margin:2px auto 0}
+  .micro{order:5;margin-top:12px}
+  .phonewrap{order:6;margin-top:40px}
+  .pills{order:7}
+
+  /* the page below: controls first, then alerts, then the app */
+  main.col{display:flex;flex-direction:column}
+  main.col > section{padding-top:88px}
+  #controls{order:1}#alerts{order:2}#preview{order:3}#childapp{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
+  main.col > #controls{padding-top:64px}
+
+  /* nine controls: a ruled list, each with a line saying what it does */
+  .controls h2{font-size:clamp(27px,7.6vw,31px)}
+  .ctl-sub{display:block;font-size:16.5px}
+  .controls .grid{grid-template-columns:1fr;gap:0;max-width:none;margin-top:28px;border-top:1px solid var(--line)}
+  .ctl{position:relative;text-align:left;font-size:16px;font-weight:600;line-height:1.35;padding:18px 0 20px 38px;border-bottom:1px solid var(--line)}
+  .ctl svg{position:absolute;left:0;top:18px;margin:0;width:22px;height:22px}
+  .ctl span{display:inline}
+  .ctl span + span:not(.ctl-d)::before{content:" "}
+  .ctl .ctl-d{display:block;font-weight:400;font-size:14.5px;line-height:1.5;color:var(--mid);margin-top:4px}
+
+  /* alerts: words, then the notifications in a panel, then three ruled notes */
+  .answer,#childapp{text-align:left}
+  .answer h2,.answer p,#childapp h2,#childapp p{margin-left:0;margin-right:0}
+  .answer{--card:#fff}
+  .answer > .lead{font-size:16.5px}
+  .answer > .stack{max-width:none;margin-top:24px;background:var(--panel);border-radius:20px;padding:18px 12px}
+  .answer .notif{box-shadow:0 1px 2px rgba(22,38,31,.06),0 0 0 1px rgba(22,38,31,.05)}
+  .answer > .never{margin:20px 0 0;color:var(--ink);font-weight:500}
+  .answer > .notes{max-width:none;margin-top:28px;border-top:1px solid var(--line);font-size:15px}
+  .answer .notes p{margin:0;padding:18px 0;border-bottom:1px solid var(--line)}
+
+  /* the app: one screen at a time, cropped in a panel, words underneath */
+  .shots.four{display:grid;gap:56px;max-width:none;margin-top:36px}
+  .shots figure{width:auto}
+  .frame{display:flex;justify-content:center;align-items:flex-start;height:340px;overflow:hidden;background:var(--panel);border-radius:20px;padding-top:32px}
+  .frame.low{align-items:flex-end;padding-top:0;padding-bottom:32px}
+  .shots .frame .dev{width:232px;box-shadow:0 0 0 1px var(--dev-ring),0 30px 60px -34px var(--dev-shadow)}
+  .shots figcaption{margin:22px 0 0;text-align:left;font-size:16.5px}
+  .cap-m{display:none}
+  .cap-d{display:block}
+  .cap-d strong{display:block;color:var(--ink);font-size:25px;line-height:1.15;margin-bottom:8px}
+
+  /* the child's phone: panel first, then the words */
+  #childapp{display:flex;flex-direction:column}
+  #childapp > .shots{order:1;display:block;margin:0 0 24px}
+  #childapp > h2{order:2}
+  #childapp > .lead{order:3;font-size:16.5px;margin:0}
+  #childapp figcaption{display:none}
+
+  /* waitlist: one panel */
+  .signup{background:var(--panel);border-radius:24px;margin-top:88px;padding:44px 18px 40px !important}
+  .signup select{margin:2px auto 0}
+
+  .faq h2{font-size:clamp(27px,7.6vw,31px);line-height:1.12;max-width:none}
+}
 </style>
 </head>
 <body>

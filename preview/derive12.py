@@ -26,7 +26,7 @@ sub(r'family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap',
 # drop the old desktop layer, put the new one in its place
 start = s.index('/* ===== Tablet and desktop layout (768px and wider) =====')
 end = s.index('</style>')
-s = s[:start] + open(__file__.rsplit('/', 1)[0] + '/mock-12-desktop.css').read() + s[end:]
+s = s[:start] + open(__file__.rsplit('/', 1)[0] + '/mock-12-desktop.css').read() + open(__file__.rsplit('/', 1)[0] + '/mock-12-phone.css').read() + s[end:]
 
 # page links in the middle of the menu, desktop only
 sub(r'(Shieldora</a>\n)(\s*<div class="navright">)',
