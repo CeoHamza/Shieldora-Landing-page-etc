@@ -19,7 +19,7 @@
 <meta name="theme-color" content="#DDEBE1">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Caveat:wght@600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap" rel="stylesheet">
 <style>
 /* THEME */
 :root{--ink:#16261F;--mid:#5A6761;--soft:#5F6965;--text2:#3C4642;--line:#E6E3DC;--accent:#348C52;--error:#8C3B23;
@@ -135,9 +135,6 @@ section{padding-top:clamp(64px,9vw,112px)}
 .hint{display:none}
 @media (min-width:600px){
   .shots.four{max-width:calc(2 * 236px + 84px);column-gap:84px}
-  .hint{display:block;position:absolute;left:50%;top:128px;transform:translateX(-50%);width:84px;text-align:center;pointer-events:none;z-index:2}
-  .hint span{display:block;font-family:Caveat,"Bradley Hand",cursive;font-size:23px;line-height:1.05;font-weight:600;color:var(--accent);transform:rotate(-5deg)}
-  .hint svg{display:block;margin:4px auto 0}
 }
 .shots figcaption{color:var(--mid);font-size:14.5px;margin-top:12px;text-align:center}
 /* waitlist */
@@ -444,7 +441,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   <section class="preview centre" id="preview">
     <h2>What you&rsquo;ll open on your own phone</h2>
     <p class="lead">Real screens from our test build, shown with a demo family. Some details may change before launch.</p>
-    <div class="shots four"><div class="hint" aria-hidden="true"><span>tap Layla</span><svg width="58" height="30" viewBox="0 0 58 30" fill="none" stroke="#348C52" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6c14 15 30 19 46 12"/><path d="M41 10l10 8-12 5"/></svg></div>
+    <div class="shots four">
       <figure><div class="frame"><div class="dev"><img src="/screens/parent-home.png" width="804" height="1748" alt="Home: Layla and Noah, when each phone was last heard from, and their alerts today and this week" loading="lazy"></div></div><figcaption><span class="cap-m">Home. Tap a child to open their page.</span><span class="cap-d"><strong>Every child on one screen</strong><span>Each card shows when that phone was last heard from, and its alerts today and this week. Tap a child to open their page.</span></span></figcaption></figure>
       <figure><div class="frame"><div class="dev"><img src="/screens/parent-child-layla.png" width="804" height="1748" alt="Layla's page, opened by tapping her card on Home: when her phone was last heard from, her settings, then her recent alerts" loading="lazy"></div></div><figcaption><span class="cap-m">Layla&rsquo;s page, after tapping her on Home: recent alerts, then the controls.</span><span class="cap-d"><strong>One page for each child</strong><span>When their phone was last heard from, what&rsquo;s switched on, then their recent alerts and the controls you&rsquo;ve set.</span></span></figcaption></figure>
       <figure><div class="frame"><div class="dev"><img src="/screens/parent-activity.png" width="804" height="1748" alt="Activity: today's and yesterday's alerts for Layla and Noah" loading="lazy"></div></div><figcaption><span class="cap-m">Activity, today and yesterday, across both children.</span><span class="cap-d"><strong>Today and yesterday, in order</strong><span>Every alert across both children, each with the device and the time.</span></span></figcaption></figure>
