@@ -77,3 +77,5 @@
 
   .faq h2{font-size:clamp(27px,7.6vw,31px);line-height:1.12;max-width:none}
 }
+/* very narrow phones: the menu row was 14px wider than the window */
+@media (max-width:374.98px){.navlink{display:none}}

@@ -16,8 +16,13 @@ def sub(pattern, repl, count=1, flags=re.S):
     if n != count:
         raise SystemExit("expected %d match(es), got %d: %s" % (count, n, pattern[:70]))
 
-# keep the mock out of search results
-sub(r'<link rel="icon"', '<meta name="robots" content="noindex">\n<link rel="icon"')
+# keep the mock out of search results (pass --live to build the real page)
+LIVE = '--live' in sys.argv
+if not LIVE:
+    sub(r'<link rel="icon"', '<meta name="robots" content="noindex">\n<link rel="icon"')
+else:
+    sub(r'<meta name="theme-color" content="#D9E8DD">', '<meta name="theme-color" content="#DDEBE1">')
+    sub(r'/\* Mock 9: [^\n]*\*/\n', '')
 
 # the serif used for desktop headings (phones never use it, so never fetch it)
 sub(r'family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap',
@@ -45,7 +50,7 @@ descs = [
     ("<span>apps</span>", "Stops new apps being installed, including a second browser to get around the filter."),
     ("<span>Account</span><span>changes</span>", "Stops the Apple Account being signed out of or changed, and stops leaving Family Sharing."),
     ("<span>Passcode</span><span>changes</span>", "Stops the phone&rsquo;s passcode being changed or removed."),
-    ("date and time</span>", "Keeps the clock set automatically, so a schedule can&rsquo;t be stepped around by changing the time."),
+    ("date and time</span>", "Keeps the clock set automatically where iOS allows it, so a schedule can&rsquo;t be stepped around by changing the time."),
     ("podcasts and news</span>", "Blocks material marked explicit in Apple Music, Podcasts and News."),
 ]
 for key, d in descs:
