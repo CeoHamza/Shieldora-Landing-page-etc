@@ -4,7 +4,7 @@
    serif headings, and the product shown in soft panels: alerts and app screens
    as alternating rows (words one side, a cropped screen the other), the nine
    controls as a ruled grid, the waitlist in one panel, the FAQ written out. */
-.navmid,.cap-d{display:none}
+.navmid,.cap-d,.ctl-sub,.ctl .ctl-d{display:none}
 .frame{display:contents}
 @media (min-width:768px){
   :root{--panel:#F1F5F1;--serif:"Source Serif 4","Iowan Old Style",Georgia,serif}
@@ -20,7 +20,7 @@
   .topnav{position:relative}
 
   /* hero: one wash that fades to white, then badge, headline, form, phone */
-  .hero{background:linear-gradient(180deg,#DDEBE1 0,#EDF4EE 260px,#fff 640px)}
+  .hero{background:linear-gradient(180deg,#DDEBE1 0,#E4EFE7 38%,#EEF5F0 72%,#fff 100%)}
   .hero::after{display:none}
   .hero .inner{display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,7vw,96px)}
   .hand{order:1;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--text2);
@@ -36,11 +36,11 @@
   .phonewrap .dev{width:340px}
   .pills{order:7}
 
-  /* the page below: one 1120px box, alerts first, then the app, then the controls */
+  /* the page below: one 1120px box, the controls first, then alerts, then the app */
   main.col,footer{max-width:1120px}
   main.col{display:flex;flex-direction:column}
   main.col > section{padding:clamp(104px,13vw,160px) 0 0}
-  #alerts{order:1}#preview{order:2}#childapp{order:3}#controls{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
+  #controls{order:1}#alerts{order:2}#preview{order:3}#childapp{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
 
   /* a row: words one side, a soft panel the other */
   .answer,#childapp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:clamp(40px,7vw,104px);align-items:center;text-align:left}
@@ -84,16 +84,20 @@
   #childapp figure{display:block}
   #childapp figcaption{display:none}
 
-  /* nine controls: a ruled grid */
+  /* nine controls, straight under the hero: a ruled grid, each with a line saying what it does */
+  main.col > #controls{padding-top:clamp(72px,9vw,112px)}
   .controls h2{font-size:clamp(32px,3.6vw,41px)}
-  .controls .grid{max-width:960px;margin:clamp(36px,5vw,56px) auto 0;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
-  .ctl{position:relative;text-align:left;font-size:15px;padding:22px 20px 22px 60px;border-bottom:1px solid var(--line)}
+  .ctl-sub{display:block;max-width:56ch}
+  .controls .grid{max-width:none;margin:clamp(36px,5vw,56px) 0 0;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+  .ctl{position:relative;text-align:left;font-size:16px;font-weight:600;line-height:1.35;padding:26px 28px 28px 64px;border-bottom:1px solid var(--line)}
   .ctl:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
   .ctl:nth-child(3n+1){padding-left:36px}
-  .ctl svg{position:absolute;left:24px;top:22px;margin:0;width:22px;height:22px}
+  .ctl:nth-child(3n){padding-right:0}
+  .ctl svg{position:absolute;left:28px;top:26px;margin:0;width:22px;height:22px}
   .ctl:nth-child(3n+1) svg{left:0}
   .ctl span{display:inline}
-  .ctl span + span::before{content:" "}
+  .ctl span + span:not(.ctl-d)::before{content:" "}
+  .ctl .ctl-d{display:block;font-weight:400;font-size:14.5px;line-height:1.5;color:var(--mid);margin-top:6px}
 
   /* waitlist: one panel */
   .signup{background:var(--panel);border-radius:28px;margin-top:clamp(104px,13vw,160px);padding:clamp(56px,7vw,88px) clamp(24px,5vw,72px) !important}

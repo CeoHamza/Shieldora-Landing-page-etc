@@ -167,7 +167,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
    serif headings, and the product shown in soft panels: alerts and app screens
    as alternating rows (words one side, a cropped screen the other), the nine
    controls as a ruled grid, the waitlist in one panel, the FAQ written out. */
-.navmid,.cap-d{display:none}
+.navmid,.cap-d,.ctl-sub,.ctl .ctl-d{display:none}
 .frame{display:contents}
 @media (min-width:768px){
   :root{--panel:#F1F5F1;--serif:"Source Serif 4","Iowan Old Style",Georgia,serif}
@@ -183,7 +183,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   .topnav{position:relative}
 
   /* hero: one wash that fades to white, then badge, headline, form, phone */
-  .hero{background:linear-gradient(180deg,#DDEBE1 0,#EDF4EE 260px,#fff 640px)}
+  .hero{background:linear-gradient(180deg,#DDEBE1 0,#E4EFE7 38%,#EEF5F0 72%,#fff 100%)}
   .hero::after{display:none}
   .hero .inner{display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,7vw,96px)}
   .hand{order:1;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--text2);
@@ -199,11 +199,11 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   .phonewrap .dev{width:340px}
   .pills{order:7}
 
-  /* the page below: one 1120px box, alerts first, then the app, then the controls */
+  /* the page below: one 1120px box, the controls first, then alerts, then the app */
   main.col,footer{max-width:1120px}
   main.col{display:flex;flex-direction:column}
   main.col > section{padding:clamp(104px,13vw,160px) 0 0}
-  #alerts{order:1}#preview{order:2}#childapp{order:3}#controls{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
+  #controls{order:1}#alerts{order:2}#preview{order:3}#childapp{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
 
   /* a row: words one side, a soft panel the other */
   .answer,#childapp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:clamp(40px,7vw,104px);align-items:center;text-align:left}
@@ -247,16 +247,20 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   #childapp figure{display:block}
   #childapp figcaption{display:none}
 
-  /* nine controls: a ruled grid */
+  /* nine controls, straight under the hero: a ruled grid, each with a line saying what it does */
+  main.col > #controls{padding-top:clamp(72px,9vw,112px)}
   .controls h2{font-size:clamp(32px,3.6vw,41px)}
-  .controls .grid{max-width:960px;margin:clamp(36px,5vw,56px) auto 0;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
-  .ctl{position:relative;text-align:left;font-size:15px;padding:22px 20px 22px 60px;border-bottom:1px solid var(--line)}
+  .ctl-sub{display:block;max-width:56ch}
+  .controls .grid{max-width:none;margin:clamp(36px,5vw,56px) 0 0;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+  .ctl{position:relative;text-align:left;font-size:16px;font-weight:600;line-height:1.35;padding:26px 28px 28px 64px;border-bottom:1px solid var(--line)}
   .ctl:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
   .ctl:nth-child(3n+1){padding-left:36px}
-  .ctl svg{position:absolute;left:24px;top:22px;margin:0;width:22px;height:22px}
+  .ctl:nth-child(3n){padding-right:0}
+  .ctl svg{position:absolute;left:28px;top:26px;margin:0;width:22px;height:22px}
   .ctl:nth-child(3n+1) svg{left:0}
   .ctl span{display:inline}
-  .ctl span + span::before{content:" "}
+  .ctl span + span:not(.ctl-d)::before{content:" "}
+  .ctl .ctl-d{display:block;font-weight:400;font-size:14.5px;line-height:1.5;color:var(--mid);margin-top:6px}
 
   /* waitlist: one panel */
   .signup{background:var(--panel);border-radius:28px;margin-top:clamp(104px,13vw,160px);padding:clamp(56px,7vw,88px) clamp(24px,5vw,72px) !important}
@@ -284,7 +288,7 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
   <div class="wrap">
     <nav class="topnav" aria-label="Site">
     <a class="brand" href="#top"><span class="mk" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2.2 3.8 5.4v6c0 4.6 3.2 7.9 8.2 9.4 5-1.5 8.2-4.8 8.2-9.4v-6L12 2.2Z" fill="#16261F" stroke="#dcb978" stroke-width="1.3"/><path d="M8.2 12.1 10.8 14.7 15.8 9.5" stroke="#fff" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Shieldora</a>
-    <div class="navmid"><a href="#alerts">Alerts</a><a href="#preview">The app</a><a href="#controls">Controls</a><a href="#faq">FAQ</a></div>
+    <div class="navmid"><a href="#controls">Controls</a><a href="#alerts">Alerts</a><a href="#preview">The app</a><a href="#faq">FAQ</a></div>
     <div class="navright"><a class="navlink" href="/support">Report a problem</a><a class="btn navbtn" href="#waitlist">Join the waitlist</a></div>
   </nav>
     <div class="inner centre">
@@ -327,16 +331,17 @@ footer{max-width:900px;margin:clamp(56px,8vw,96px) auto 0;padding:32px clamp(16p
 <main class="col">
   <section class="controls centre" id="controls">
     <h2>Nine controls, set once</h2>
+    <p class="lead ctl-sub">This is what Shieldora switches on for your child&rsquo;s iPhone. You set them once from your own phone, and nothing on your child&rsquo;s phone turns them off.</p>
     <div class="grid">
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>SafeSearch</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M9 20h6M10.5 8.8v4.4l3.8-2.2z"/><path d="m4.5 4 15 15"/></svg><span>Block piracy</span><span>streaming sites</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social apps</span><span>and schedules</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Browsers</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>Installing</span><span>apps</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span>Account</span><span>changes</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Passcode</span><span>changes</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Automatic</span><span>date and time</span></div>
-      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit music,</span><span>podcasts and news</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg><span>SafeSearch</span><span class="ctl-d">Safe results on Google, Bing and DuckDuckGo.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="12" rx="2.5"/><path d="M9 20h6M10.5 8.8v4.4l3.8-2.2z"/><path d="m4.5 4 15 15"/></svg><span>Block piracy</span><span>streaming sites</span><span class="ctl-d">Blocks known piracy streaming sites. New ones appear all the time, so it won&rsquo;t catch every one.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.5"/><path d="M16.8 7.2h.01"/></svg><span>Social apps</span><span>and schedules</span><span class="ctl-d">Block apps like Instagram, TikTok and Snapchat all the time, or only at set times such as bedtime.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.8 3 2.8 14 0 17M12 3.5c-2.8 3-2.8 14 0 17"/></svg><span>Browsers</span><span class="ctl-d">Safari is filtered. Other browsers are blocked unless you allow one.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg><span>Installing</span><span>apps</span><span class="ctl-d">Stops new apps being installed, including a second browser to get around the filter.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5.5 20a6.5 6.5 0 0 1 13 0"/></svg><span>Account</span><span>changes</span><span class="ctl-d">Stops the Apple Account being signed out of or changed, and stops leaving Family Sharing.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10.5" rx="2.5"/><path d="M8.5 10.5V7.5a3.5 3.5 0 0 1 7 0v3"/></svg><span>Passcode</span><span>changes</span><span class="ctl-d">Stops the phone&rsquo;s passcode being changed or removed.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Automatic</span><span>date and time</span><span class="ctl-d">Keeps the clock set automatically, so a schedule can&rsquo;t be stepped around by changing the time.</span></div>
+      <div class="ctl"><svg viewBox="0 0 24 24"><path d="M9 18V6.5l10-2V16"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg><span>Explicit music,</span><span>podcasts and news</span><span class="ctl-d">Blocks material marked explicit in Apple Music, Podcasts and News.</span></div>
     </div>
   </section>
 

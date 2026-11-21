@@ -30,8 +30,26 @@ s = s[:start] + open(__file__.rsplit('/', 1)[0] + '/mock-12-desktop.css').read()
 
 # page links in the middle of the menu, desktop only
 sub(r'(Shieldora</a>\n)(\s*<div class="navright">)',
-    r'\1    <div class="navmid"><a href="#alerts">Alerts</a><a href="#preview">The app</a><a href="#controls">Controls</a><a href="#faq">FAQ</a></div>\n\2')
+    r'\1    <div class="navmid"><a href="#controls">Controls</a><a href="#alerts">Alerts</a><a href="#preview">The app</a><a href="#faq">FAQ</a></div>\n\2')
 sub(r'<section class="controls centre">', '<section class="controls centre" id="controls">')
+
+# the nine controls: a plain sentence under the heading and under each control
+# (desktop only; phones keep the icon and label)
+sub(r'(<h2>Nine controls, set once</h2>)',
+    r'\1\n    <p class="lead ctl-sub">This is what Shieldora switches on for your child&rsquo;s iPhone. You set them once from your own phone, and nothing on your child&rsquo;s phone turns them off.</p>')
+descs = [
+    ("SafeSearch</span>", "Safe results on Google, Bing and DuckDuckGo."),
+    ("streaming sites</span>", "Blocks known piracy streaming sites. New ones appear all the time, so it won&rsquo;t catch every one."),
+    ("and schedules</span>", "Block apps like Instagram, TikTok and Snapchat all the time, or only at set times such as bedtime."),
+    ("Browsers</span>", "Safari is filtered. Other browsers are blocked unless you allow one."),
+    ("<span>apps</span>", "Stops new apps being installed, including a second browser to get around the filter."),
+    ("<span>Account</span><span>changes</span>", "Stops the Apple Account being signed out of or changed, and stops leaving Family Sharing."),
+    ("<span>Passcode</span><span>changes</span>", "Stops the phone&rsquo;s passcode being changed or removed."),
+    ("date and time</span>", "Keeps the clock set automatically, so a schedule can&rsquo;t be stepped around by changing the time."),
+    ("podcasts and news</span>", "Blocks material marked explicit in Apple Music, Podcasts and News."),
+]
+for key, d in descs:
+    sub(re.escape(key) + r'</div>', key.replace('\\', '') + '<span class="ctl-d">%s</span></div>' % d)
 
 # each screen gets a frame (invisible on phones) and a longer desktop caption
 caps = {
