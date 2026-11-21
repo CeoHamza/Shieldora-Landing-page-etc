@@ -1,0 +1,116 @@
+/* ===== Tablet and desktop layout (768px and wider) =====
+   Phones keep the single centred column above, unchanged. From 768px the page
+   is one white sheet with a single pale green wash at the top that fades out,
+   serif headings, and the product shown in soft panels: alerts and app screens
+   as alternating rows (words one side, a cropped screen the other), the nine
+   controls as a ruled grid, the waitlist in one panel, the FAQ written out. */
+.navmid,.cap-d{display:none}
+.frame{display:contents}
+@media (min-width:768px){
+  :root{--panel:#F1F5F1;--serif:"Source Serif 4","Iowan Old Style",Georgia,serif}
+  h1,h2,.cap-d strong{font-family:var(--serif);font-weight:400;letter-spacing:-0.022em}
+  h1{font-size:clamp(44px,5.2vw,58px);line-height:1.06}
+  h2{font-size:clamp(32px,3.6vw,41px);line-height:1.1;margin-bottom:16px}
+
+  /* the menu: page links in the middle */
+  .topnav{padding:20px 0}
+  .navmid{gap:28px;position:absolute;left:50%;transform:translateX(-50%);font-size:14px}
+  .navmid a{color:var(--mid);text-decoration:none}
+  .navmid a:hover{color:var(--ink)}
+  .topnav{position:relative}
+
+  /* hero: one wash that fades to white, then badge, headline, form, phone */
+  .hero{background:linear-gradient(180deg,#DDEBE1 0,#EDF4EE 260px,#fff 640px)}
+  .hero::after{display:none}
+  .hero .inner{display:flex;flex-direction:column;align-items:center;padding-top:clamp(56px,7vw,96px)}
+  .hand{order:1;font-family:inherit;font-size:13px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--text2);
+    background:rgba(255,255,255,.7);border:1px solid var(--pill-line);border-radius:999px;padding:5px 12px 5px 10px;margin-bottom:22px;display:inline-flex;align-items:center;gap:8px}
+  .hand::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent)}
+  .hero h1{order:2;max-width:none;margin-bottom:18px}
+  .hero .lead{order:3;max-width:50ch;font-size:18px;margin-bottom:28px}
+  .btns{display:none}
+  .heroform{order:4;margin-top:0;width:100%}
+  .heroform select{margin:2px auto 0}
+  .micro{order:5;margin-top:14px}
+  .phonewrap{order:6;margin-top:clamp(56px,7vw,88px)}
+  .phonewrap .dev{width:340px}
+  .pills{order:7}
+
+  /* the page below: one 1120px box, alerts first, then the app, then the controls */
+  main.col,footer{max-width:1120px}
+  main.col{display:flex;flex-direction:column}
+  main.col > section{padding:clamp(104px,13vw,160px) 0 0}
+  #alerts{order:1}#preview{order:2}#childapp{order:3}#controls{order:4}#waitlist{order:5}#founder{order:6}#faq{order:7}
+
+  /* a row: words one side, a soft panel the other */
+  .answer,#childapp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);column-gap:clamp(40px,7vw,104px);align-items:center;text-align:left}
+  .answer h2,#childapp h2,.answer p,#childapp p{margin-left:0;margin-right:0}
+  .answer > h2,#childapp > h2,.cap-d strong{font-size:clamp(27px,2.8vw,32px);line-height:1.15}
+
+  /* alerts: words left, the four notifications in a panel on the right, three notes ruled off below */
+  .answer{--card:#fff;grid-template-rows:1fr auto auto auto 1fr auto;grid-template-areas:". stack" "h stack" "lead stack" "never stack" ". stack" "notes notes"}
+  .answer > h2{grid-area:h}
+  .answer > .lead{grid-area:lead;max-width:none;font-size:17px}
+  .answer > .never{grid-area:never;align-self:start;margin:0;max-width:none;color:var(--ink);font-weight:500}
+  .answer > .stack{grid-area:stack;margin:0;max-width:none;background:var(--panel);border-radius:24px;padding:clamp(28px,4vw,48px) clamp(20px,3.4vw,44px)}
+  .answer .notif{box-shadow:0 1px 2px rgba(22,38,31,.06),0 0 0 1px rgba(22,38,31,.05)}
+  .answer > .notes{grid-area:notes;max-width:none;margin:clamp(56px,7vw,88px) 0 0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:15px}
+  .answer .notes p{margin:0;padding:24px 28px}
+  .answer .notes p:first-child{padding-left:0}
+  .answer .notes p:last-child{padding-right:0}
+  .answer .notes p + p{border-left:1px solid var(--line)}
+  .answer .notes strong{color:var(--ink)}
+
+  /* the app: a centred heading, then one row per screen, sides alternating */
+  #preview > .lead{max-width:48ch}
+  .hint{display:none}
+  .shots.four{display:grid;gap:clamp(64px,8vw,104px);max-width:none;margin-top:clamp(56px,7vw,88px)}
+  .shots figure{width:auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);column-gap:clamp(40px,7vw,104px);align-items:center}
+  .shots.four figure:nth-of-type(even){grid-template-columns:minmax(0,1fr) minmax(0,1.15fr)}
+  .shots.four figure:nth-of-type(even) .frame{order:2}
+  .frame{display:flex;justify-content:center;align-items:flex-start;height:clamp(380px,40vw,460px);overflow:hidden;background:var(--panel);border-radius:24px;padding-top:clamp(36px,4.4vw,52px)}
+  .frame.low{align-items:flex-end;padding-top:0;padding-bottom:clamp(36px,4.4vw,52px)}
+  .shots .frame .dev{width:min(300px,72%);box-shadow:0 0 0 1px var(--dev-ring),0 30px 60px -34px var(--dev-shadow)}
+  .shots figcaption{margin:0;text-align:left;font-size:17px;color:var(--mid);max-width:40ch}
+  .cap-m{display:none}
+  .cap-d{display:block}
+  .cap-d strong{display:block;color:var(--ink);margin-bottom:12px}
+
+  /* the child's phone: same row, panel on the left */
+  #childapp{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);grid-template-areas:"shot ." "shot h" "shot lead" "shot .";grid-template-rows:1fr auto auto 1fr}
+  #childapp > h2{grid-area:h}
+  #childapp > .lead{grid-area:lead;margin:0;font-size:17px}
+  #childapp > .shots{grid-area:shot;margin:0;display:block}
+  #childapp figure{display:block}
+  #childapp figcaption{display:none}
+
+  /* nine controls: a ruled grid */
+  .controls h2{font-size:clamp(32px,3.6vw,41px)}
+  .controls .grid{max-width:960px;margin:clamp(36px,5vw,56px) auto 0;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line)}
+  .ctl{position:relative;text-align:left;font-size:15px;padding:22px 20px 22px 60px;border-bottom:1px solid var(--line)}
+  .ctl:not(:nth-child(3n+1)){border-left:1px solid var(--line)}
+  .ctl:nth-child(3n+1){padding-left:36px}
+  .ctl svg{position:absolute;left:24px;top:22px;margin:0;width:22px;height:22px}
+  .ctl:nth-child(3n+1) svg{left:0}
+  .ctl span{display:inline}
+  .ctl span + span::before{content:" "}
+
+  /* waitlist: one panel */
+  .signup{background:var(--panel);border-radius:28px;margin-top:clamp(104px,13vw,160px);padding:clamp(56px,7vw,88px) clamp(24px,5vw,72px) !important}
+  .signup .lead{max-width:44ch}
+  .signup form{margin-top:28px}
+  .signup select{margin:2px auto 0}
+  .signup .collect{max-width:64ch;margin-top:10px}
+
+  /* who's behind this, and the FAQ written out */
+  .founder h2,.faq h2{max-width:none}
+  .founder p{font-size:17px}
+  .faq h2{font-size:clamp(32px,3.6vw,41px);line-height:1.1}
+  .faqlist{max-width:660px}
+  #faq details,#faq details:last-of-type{border:0}
+  #faq summary{padding:0;min-height:0;margin:0 0 8px;font-size:17px;font-weight:600;cursor:default;pointer-events:none}
+  #faq summary::after{display:none}
+  #faq details p{margin:0 0 30px;font-size:16.5px;max-width:none}
+  footer{margin-top:clamp(104px,13vw,160px)}
+}
+@media (min-width:1024px){.navmid{display:flex}}
